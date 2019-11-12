@@ -15,16 +15,16 @@ typedef struct
 {
   int numberOfParticles;
   double cutoff;
-  int_ptr Nneighbors;
-  int_ptr neighborList;
-  int_ptr beginIndex;
+  int* Nneighbors;
+  int* neighborList;
+  int* beginIndex;
 } NeighListOne;
 
 // neighbor list structure
 typedef struct
 {
   int numberOfNeighborLists;
-  std::unique_ptr<NeighListOne> lists;
+  NeighListOne* lists;
 } NeighList;
 
 

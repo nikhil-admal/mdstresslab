@@ -15,6 +15,8 @@ typedef std::unique_ptr<int> int_ptr;
 typedef Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> MatrixXd;
 typedef Eigen::Matrix<double,DIM,DIM,Eigen::RowMajor> Matrix3d;
 typedef Eigen::VectorXi VectorXi;
+typedef Eigen::VectorXd VectorXd;
+typedef Eigen::Vector3d Vector3d;
 
 
 

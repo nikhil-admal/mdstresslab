@@ -13,11 +13,12 @@
 
 class AtomisticSystem {
 public:
-	AtomisticSystem();
+	AtomisticSystem(int);
 	virtual ~AtomisticSystem();
 	int numberOfParticles;
 	VectorXi speciesCode;
-	MatrixXd coordinates;
+	Vector3d sampleSize;
+	MatrixXd coordinates, reference_coordinates;
 };
 
 #endif /* ATOMISTICSYSTEM_H_ */
