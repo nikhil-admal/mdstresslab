@@ -254,7 +254,8 @@ int calculateStress(const Configuration* pconfig,
 		neighborListsOfGridsOne.push_back(pgrid->getGridNeighborLists(subconfig,domainSize+influenceDistance));
 		neighborListsOfGridsTwo.push_back(pgrid->getGridNeighborLists(subconfig,domainSize+2*influenceDistance));
 	}
-	assert(neighborListsOfGridsOne.size() == neighborListsOfGridsTwo.size() == numberOfPiolaStresses + numberOfCauchyStresses);
+	assert(neighborListsOfGridsOne.size() == numberOfPiolaStresses + numberOfCauchyStresses &&
+		   neighborListsOfGridsTwo.size() == numberOfPiolaStresses + numberOfCauchyStresses);
 
 	std::vector<GridBase*> pgridListPiola= getBaseGridList(piolaStress);
 	std::vector<GridBase*> pgridListCauchy= getBaseGridList(cauchyStress);
