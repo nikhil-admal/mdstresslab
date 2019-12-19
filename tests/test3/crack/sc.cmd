@@ -1,0 +1,17 @@
+read
+spec,species
+conf,config
+end
+grid
+gfile,grid
+end
+potential
+modl,SW_BalamaneHauchShi_2017Brittle_Si__MO_381114941873_002
+end
+uniqueness
+project,F
+end
+stress
+hardy,pk1,slmo,20
+end
+stop

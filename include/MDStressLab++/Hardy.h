@@ -8,16 +8,24 @@
 #ifndef HARDY_H_
 #define HARDY_H_
 
-#include <array>
-#include "Stress.h"
 #include "typedef.h"
 
-class Hardy : public Stress{
+class Hardy
+{
 public:
-	Hardy(const bool&,const bool&);
+	Hardy(double);
+	Hardy(const Hardy&);
 	virtual ~Hardy();
-	double avgDomainRadius;
-	virtual double bondFunction(const std::array<double,DIM>& , const std::array<double,DIM>& );
+
+	double averagingDomainSize;
+	double operator()(const Vector3d& vec1, const Vector3d& array2);
+
+
+
+	double normalizer;
+	double integrateConstant(const double&,const double&,const double&,const double&);
+	double integrateLinear(const double&,const double&,const double&,const double&);
+	double integrate(const double&,const double&,const double&,const double&);
 };
 
 #endif /* HARDY_H_ */

@@ -1,0 +1,209 @@
+LAMMPS (5 Jun 2019)
+# in.uniaxialstrain
+# Verify MDStressLab work properly
+# Min Shi
+# Version 1.0
+
+clear
+
+variable lattice_constant equal 5.43094977840521 #Lattice parameter
+variable unit_cells_x     equal 10
+variable unit_cells_y     equal 10 #Must be even
+variable unit_cells_z     equal 10
+
+units           metal
+boundary        p p p
+atom_style      atomic
+atom_modify	map array
+atom_modify     sort 0 0 # Must have in every simulation to prevent atom id changing
+
+#create lattice
+lattice         custom 1.0 a1              5.43094977840521 0 0 a2              0 5.43094977840521 0 a3              0 0 5.43094977840521 basis           0 0 0 basis           0 0.5 0.5 basis           0.5 0 0.5 basis           0.5 0.5 0 basis           0.25 0.25 0.25 basis           0.25 0.75 0.75 basis           0.75 0.25 0.75 basis           0.75 0.75 0.25
+Lattice spacing in x,y,z = 5.43095 5.43095 5.43095
+
+region          box block 0 ${unit_cells_x} 0 ${unit_cells_y} 0 ${unit_cells_z} units lattice
+region          box block 0 10 0 ${unit_cells_y} 0 ${unit_cells_z} units lattice
+region          box block 0 10 0 10 0 ${unit_cells_z} units lattice
+region          box block 0 10 0 10 0 10 units lattice
+create_box      1 box
+Created orthogonal box = (0 0 0) to (54.3095 54.3095 54.3095)
+  1 by 1 by 1 MPI processor grid
+create_atoms    1 box
+Created 8000 atoms
+  create_atoms CPU = 0.00109898 secs
+
+pair_style kim SW_StillingerWeber_1985_Si__MO_405512056662_005
+pair_coeff * * Si
+mass 1 28.0855
+
+compute spatom all stress/atom NULL
+variable p1 atom "c_spatom[1]/10000/160.21766208"
+variable p2 atom "c_spatom[2]/10000/160.21766208"
+variable p3 atom "c_spatom[3]/10000/160.21766208"
+variable p4 atom "c_spatom[4]/10000/160.21766208"
+variable p5 atom "c_spatom[5]/10000/160.21766208"
+variable p6 atom "c_spatom[6]/10000/160.21766208"
+variable p7 equal "-pxx/10000/160.21766208"
+variable p8 equal "-pyy/10000/160.21766208"
+variable p9 equal "-pzz/10000/160.21766208"
+
+compute        p all reduce sum c_spatom[1] c_spatom[2] c_spatom[3]
+variable       press equal -(c_p[1]+c_p[2]+c_p[3])/(3*vol)
+variable       press1 equal (c_p[1])/(vol)/10000/160.21766208
+variable       press2 equal (c_p[2])/(vol)/10000/160.21766208
+variable       press3 equal (c_p[3])/(vol)/10000/160.21766208
+thermo_style   custom step temp etotal press v_press v_press1 v_press2 v_press3
+
+reset_timestep 0
+
+dump          1 all custom 1 dump.initial.* id type x y z v_p1 v_p2 v_p3 v_p4 v_p5 v_p6
+dump_modify   1 element Si format line "%d %d %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf"
+
+run		      0	#to update thermo data
+WARNING: No fixes defined, atoms won't move (../verlet.cpp:55)
+Neighbor list info ...
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.77118
+  ghost atom cutoff = 5.77118
+  binsize = 2.88559, bins = 19 19 19
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair kim, perpetual
+      attributes: full, newton off, cut 5.77118
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 8.696 | 8.696 | 8.696 Mbytes
+Step Temp TotEng Press v_press v_press1 v_press2 v_press3 
+       0            0     -34691.2 2.0971057e-09 2.0971057e-09 -1.3087038e-15 -1.3087038e-15 -1.3093238e-15 
+Loop time of 3.593e-06 on 1 procs for 0 steps with 8000 atoms
+
+167.0% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 3.593e-06  |            |       |100.00
+
+Nlocal:    8000 ave 8000 max 8000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    6725 ave 6725 max 6725 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    0 ave 0 max 0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:  272000 ave 272000 max 272000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 272000
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+
+undump 1
+
+clear
+
+variable lattice_constant equal 5.43094977840521 #Lattice parameter
+variable unit_cells_x     equal 10
+variable unit_cells_y     equal 10 #Must be even
+variable unit_cells_z     equal 10
+
+units           metal
+boundary        p p p
+atom_style      atomic
+atom_modify	map array
+atom_modify     sort 0 0 # Must have in every simulation to prevent atom id changing
+
+#create lattice
+lattice         custom 1.0 a1              5.43094977840521 0 0 a2              0 5.4852592761892621 0 a3              0 0 5.43094977840521 basis           0 0 0 basis           0 0.5 0.5 basis           0.5 0 0.5 basis           0.5 0.5 0 basis           0.25 0.25 0.25 basis           0.25 0.75 0.75 basis           0.75 0.25 0.75 basis           0.75 0.75 0.25
+Lattice spacing in x,y,z = 5.43095 5.48526 5.43095
+
+region          box block 0 ${unit_cells_x} 0 ${unit_cells_y} 0 ${unit_cells_z} units lattice
+region          box block 0 10 0 ${unit_cells_y} 0 ${unit_cells_z} units lattice
+region          box block 0 10 0 10 0 ${unit_cells_z} units lattice
+region          box block 0 10 0 10 0 10 units lattice
+create_box      1 box
+Created orthogonal box = (0 0 0) to (54.3095 54.8526 54.3095)
+  1 by 1 by 1 MPI processor grid
+create_atoms    1 box
+Created 8000 atoms
+  create_atoms CPU = 0.00276274 secs
+
+pair_style kim SW_StillingerWeber_1985_Si__MO_405512056662_005
+pair_coeff * * Si
+mass 1 28.0855
+
+compute spatom all stress/atom NULL
+variable p1 atom "c_spatom[1]/10000/160.21766208"
+variable p2 atom "c_spatom[2]/10000/160.21766208"
+variable p3 atom "c_spatom[3]/10000/160.21766208"
+variable p4 atom "c_spatom[4]/10000/160.21766208"
+variable p5 atom "c_spatom[5]/10000/160.21766208"
+variable p6 atom "c_spatom[6]/10000/160.21766208"
+variable p7 equal "-pxx/10000/160.21766208"
+variable p8 equal "-pyy/10000/160.21766208"
+variable p9 equal "-pzz/10000/160.21766208"
+
+compute        p all reduce sum c_spatom[1] c_spatom[2] c_spatom[3]
+variable       press equal -(c_p[1]+c_p[2]+c_p[3])/(3*vol)
+variable       press1 equal (c_p[1])/(vol)/10000/160.21766208
+variable       press2 equal (c_p[2])/(vol)/10000/160.21766208
+variable       press3 equal (c_p[3])/(vol)/10000/160.21766208
+thermo_style   custom step temp etotal press v_press v_press1 v_press2 v_press3
+
+reset_timestep 1
+
+dump           2 all custom 1 dump.final.* id type x y z v_p1 v_p2 v_p3 v_p4 v_p5 v_p6
+dump_modify    2 element Si format line "%d %d %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf"
+
+run 0
+WARNING: No fixes defined, atoms won't move (../verlet.cpp:55)
+Neighbor list info ...
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 5.77118
+  ghost atom cutoff = 5.77118
+  binsize = 2.88559, bins = 19 20 19
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair kim, perpetual
+      attributes: full, newton off, cut 5.77118
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 8.699 | 8.699 | 8.699 Mbytes
+Step Temp TotEng Press v_press v_press1 v_press2 v_press3 
+       1            0   -34683.687   -9963.4684   -9963.4684 0.0046552322 0.0093456594 0.0046552322 
+Loop time of 2.784e-06 on 1 procs for 0 steps with 8000 atoms
+
+143.7% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 2.784e-06  |            |       |100.00
+
+Nlocal:    8000 ave 8000 max 8000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    6725 ave 6725 max 6725 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    0 ave 0 max 0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:  272000 ave 272000 max 272000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 272000
+Ave neighs/atom = 34
+Neighbor list builds = 0
+Dangerous builds = 0
+undump 2
+Total wall time: 0:00:00

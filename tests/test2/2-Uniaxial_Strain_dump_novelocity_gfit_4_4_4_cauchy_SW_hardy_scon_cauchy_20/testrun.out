@@ -1,0 +1,159 @@
+   
+   ----------------------------------------------------------------------------
+   
+   M D S t r e s s L a b
+   
+   
+   This code is distributed under the CDDL open source license
+   
+   Authors: N. C. Admal, Min Shi and E. B. Tadmor (University of Minnesota)
+   
+   Version 2.0.0 MPI
+   
+   For more information contact tadmor@umn.edu
+   
+   ----------------------------------------------------------------------------
+   
+   Number of processor(s) used: 1
+
+ **Reading species data**
+   Species on file:
+     Si          0.0028085000000000
+   Total number of species in file = 1
+   Total number of species in the configuration file = 1
+   Species list in configuration:
+   Si
+
+ **Reading grid data**
+   Fit the grid Cauchy                        =     T
+   Number of divs : x-dir Cauchy              = 4
+                    y-dir Cauchy              = 4
+                    z-dir Cauchy              = 4
+   Write to grid file Cauchy                  = grid_cauchy.data
+
+ **Reading interatomic potential**
+   Model name is: SW_StillingerWeber_1985_Si__MO_405512056662_005
+
+ **Reading rigidity settings**
+   Projection =          T
+
+ **Reading stress settings**
+   Calculating Hardy stress:     T
+   Calculating Hardy stress directly on deformed configuration:     T
+   Cauchy-Hardy average domain: sphere_constant
+   Using shperical averaging domain on deformed configuration:     T
+
+ **Start calculating the stress tensor**
+   Starting force calculation :
+   Cutoff radius from model =        3.7711800000000002
+   Turning off pbc
+   Total number of atoms = 12167
+   number of model routine names = 8
+   Constructing atom neighbor list
+   Building bins in this region MAX:       57.0249726733547035      57.5952224000872519      57.0249726733547035
+   Building bins in this region MIN:       -4.0732123339039088      -4.1139444572419475      -4.0732123339039088
+   nxbin: 8; dxbin:        7.6372731259073268
+   nybin: 8; dybin:        7.7136458571661501
+   nzbin: 8; dzbin:        7.6372731259073268
+   nbin: 512
+   max_pairs_per_atom: 86
+   Allocating array size of total_neigh, which is the total # of neighbors =     677200
+   Neighbor List Construction Finish!
+   Starting projected interatomic force calculation
+   
+   Recasting the projection problem as a Linear Least Squares problem (LSQR) :
+   min ||Ax-b||, where Cayley-Menger vectors are the columns of A, and b = fij_scalar
+   
+   Starting the LSQR solver
+   ========================================================
+
+
+ Enter Acheck.
+ Aprod1, Aprod2 seem OK.  Relative error =   7.9E-15
+
+
+ Enter LSQR.       Least-squares solution of  Ax = b
+ The matrix  A  has 677200 rows   and  24003 columns
+ damp   =  0.00000000000000E+00   wantse =         T
+ atol   =  3.18E-16               conlim =  1.00E+07
+ btol   =  3.18E-16               itnlim =     96012
+
+   Itn       x(1)           Function     Compatible   LS        Norm A    Cond A
+     0  0.000000000E+00  1.037500385E+01  1.00E+00  4.44E-01
+     1  1.588847903E-18  1.036794083E+01  9.99E-01  1.55E-03  1.25E+02  1.00E+00  6.5E+02
+     2 -4.290510000E-06  1.036789371E+01  9.99E-01  2.18E-03  1.41E+02  2.47E+00  4.4E+02
+     3 -1.400983357E-03  1.035646780E+01  9.98E-01  8.46E-04  1.74E+02  5.00E+01  1.6E+01
+     4 -3.011569724E-03  1.034741480E+01  9.97E-01  7.67E-04  1.74E+02  8.31E+01  8.8E+00
+     5 -3.626435114E-03  1.033909346E+01  9.97E-01  7.38E-04  1.74E+02  1.17E+02  5.9E+00
+     6 -3.781501749E-03  1.033256845E+01  9.96E-01  6.95E-03  1.74E+02  1.46E+02  4.6E+00
+     7 -3.793734927E-03  1.033204548E+01  9.96E-01  5.63E-04  2.14E+02  1.83E+02  4.5E+00
+     8 -3.920727304E-03  1.033055132E+01  9.96E-01  8.10E-03  2.15E+02  1.93E+02  4.2E+00
+     9 -4.260096813E-03  1.032659467E+01  9.95E-01  1.75E-04  2.46E+02  2.47E+02  3.7E+00
+    10 -4.309665288E-03  1.032635870E+01  9.95E-01  1.83E-03  2.46E+02  2.52E+02  3.6E+00
+    20 -2.529685079E-03  1.032465412E+01  9.95E-01  3.58E-06  3.46E+02  5.67E+02  2.8E+00
+    30 -2.517292643E-03  1.032465369E+01  9.95E-01  1.14E-07  4.24E+02  7.54E+02  2.6E+00
+    40 -2.517440216E-03  1.032465369E+01  9.95E-01  6.17E-09  4.76E+02  9.24E+02  2.5E+00
+    50 -2.517440338E-03  1.032465369E+01  9.95E-01  1.48E-10  5.47E+02  1.18E+03  2.4E+00
+    60 -2.517440451E-03  1.032465369E+01  9.95E-01  3.07E-12  5.86E+02  1.36E+03  2.3E+00
+    70 -2.517440433E-03  1.032465369E+01  9.95E-01  3.40E-13  6.36E+02  1.58E+03  2.2E+00
+    80 -2.517440434E-03  1.032465369E+01  9.95E-01  3.94E-14  6.80E+02  1.80E+03  2.2E+00
+    88 -2.517440434E-03  1.032465369E+01  9.95E-01  2.00E-15  7.12E+02  1.96E+03  2.1E+00
+    89 -2.517440434E-03  1.032465369E+01  9.95E-01  1.37E-15  7.13E+02  1.97E+03  2.1E+00
+    90 -2.517440434E-03  1.032465369E+01  9.95E-01  3.16E-15  7.14E+02  1.97E+03  2.1E+00
+    91 -2.517440434E-03  1.032465369E+01  9.95E-01  1.11E-15  7.24E+02  2.01E+03  2.1E+00
+    92 -2.517440434E-03  1.032465369E+01  9.95E-01  6.87E-16  7.31E+02  2.03E+03  2.1E+00
+    93 -2.517440434E-03  1.032465369E+01  9.95E-01  2.07E-16  7.34E+02  2.05E+03  2.1E+00
+
+ Exit  LSQR.       istop  = 2               itn    =      93
+ Exit  LSQR.       Anorm  = 7.33555E+02     Acond  = 2.04574E+03
+ Exit  LSQR.       bnorm  = 1.03750E+01     xnorm  = 8.32513E-01
+ Exit  LSQR.       rnorm  = 1.03247E+01     Arnorm = 1.56430E-12
+ Exit  LSQR.       max dx = 2.0E-01 occurred at itn        5
+ Exit  LSQR.              = 2.4E-01*xnorm
+ Exit  LSQR.       A least-squares solution was found, given atol       
+   ========================================================
+
+ **Calculating the Cauchy stress tensor**
+   
+   Looping over all bonds to calculate the Cauchy stress tensors.
+
+ **Setting the Cauchy stress grid**
+   Writing grid points to file grid_cauchy.data
+   Number of grid points = 125
+   Grid points set finished!
+   Constructing grid neighbor list
+   Building bins in this region MAX:       57.0249726733547035      57.5952224000872519      57.0249726733547035
+   Building bins in this region MIN:       -4.0732123339039088      -4.1139444572419475      -4.0732123339039088
+   nxbin: 1; dxbin:       61.0981850072586141
+   nybin: 1; dybin:       61.7091668573292012
+   nzbin: 1; dzbin:       61.0981850072586141
+   nbin: 1
+   Performance alert: Maximum # of Neighbors per grid increased to 800
+   Performance alert: Maximum # of Neighbors per grid increased to 1600
+   Performance alert: Maximum # of Neighbors per grid increased to 3200
+   Performance alert: Maximum # of Neighbors per grid increased to 6400
+   Performance alert: Maximum # of Neighbors per grid increased to 12800
+   Grid Neighbor List Construction Finish!
+   Grid Neighbor List Construction cost:        0.7775250000000007
+   Dividing grid points. 1 processor(s) has(have) 125 grid points.
+   Dividing grid points. 0 processor(s) has(have) 124 grid points.
+   
+   Looping over all bonds to calculate the Cauchy-Hardy stress tensors.
+   Grid point Cauchy-Hardy: 100
+   Grid point Cauchy-Hardy: 125
+   
+   Looping over all bonds to calculate the projected Cauchy-Hardy stress tensors.
+   Grid point projected Cauchy-Hardy: 100
+   Grid point projected Cauchy-Hardy: 125
+
+ **Writing Cauchy-Hardy stress tensor**
+   
+   Writing potential part of Cauchy-Hardy stress tensor (direct) to file hardy_cauchy_direct.str
+   Writing kinetic part of Cauchy-Hardy stress tensor (direct) to file hardy_kin_cauchy_direct.str
+   Writing projected irrotational Cauchy-Hardy stress tensor (direct) to file hardy_i_cauchy_direct.str
+   Writing projected solenoidal Cauchy-Hardy stress tensor (direct) to file hardy_s_cauchy_direct.str
+   Calculating hardy Cauchy stress runs in       15.2401859999999978 s.
+   Stress computation finished!
+
+ **Deallocating data**
+   MDStressLab runs in       39.8243409350002366 s.

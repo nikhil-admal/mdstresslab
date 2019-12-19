@@ -2,11 +2,10 @@
  * neighbor_list.cpp
  *
  *  Created on: Nov 9, 2019
- *      Author: Nikhil
+ *      Author: Nikhil; Adapted from Mingjian Wen's kimpy code
  */
 
 
-// Author: Mingjian Wen (wenxx151@umn.edu)
 
 #include "neighbor_list.h"
 #include "helper.hpp"
@@ -96,6 +95,7 @@ int nbl_build(NeighList * const nl,
   {
     min[k] = coordinates[k];
     max[k] = coordinates[k] + 1.0;  // +1 to prevent max==min for 1D and 2D case
+//    max[k] = coordinates[k] + TOL;  // +1 to prevent max==min for 1D and 2D case
   }
   for (int i = 0; i < numberOfParticles; i++)
   {
@@ -275,29 +275,49 @@ int nbl_get_neigh(void const * const dataObject,
 
 int nbl_create_paddings(int const numberOfParticles,
                         double const cutoff,
+                        double const * reference_cell,
                         double const * cell,
                         int const * PBC,
+                        double const * reference_coordinates,
                         double const * coordinates,
-                        int const * speciesCode,
+                        const std::vector<std::string>& speciesCode,
                         int & numberOfPaddings,
+                        std::vector<double> & reference_coordinatesOfPaddings,
                         std::vector<double> & coordinatesOfPaddings,
-                        std::vector<int> & speciesCodeOfPaddings,
-                        std::vector<int> & masterOfPaddings)
+                        std::vector<std::string> & speciesCodeOfPaddings,
+                        std::vector<int> & masterOfPaddings,
+						int referenceAndFinal)
 {
   // transform coordinates into fractional coordinates
   double tcell[9];
   double fcell[9];
-
   transpose(cell, tcell);
+  {
   int error = inverse(tcell, fcell);
   if (error) { return error; }
+  }
 
-  double frac_coords[DIM * numberOfParticles];
+
+  double reference_tcell[9];
+  double reference_fcell[9];
+  if (referenceAndFinal)
+  {
+	  transpose(reference_cell, reference_tcell);
+	  {
+	  int error = inverse(reference_tcell, reference_fcell);
+	  if (error) { return error; }
+	  }
+  }
+
+  double* frac_coords= new double[DIM * numberOfParticles];
+  double* reference_frac_coords= nullptr;
+  if (referenceAndFinal) reference_frac_coords= new double[DIM * numberOfParticles];
   double min[DIM] = {1e10, 1e10, 1e10};
   double max[DIM] = {-1e10, -1e10, -1e10};
   for (int i = 0; i < numberOfParticles; i++)
   {
     const double * atom_coords = coordinates + (DIM * i);
+    const double * reference_atom_coords = reference_coordinates + (DIM * i);
     double x = dot(fcell, atom_coords);
     double y = dot(fcell + 3, atom_coords);
     double z = dot(fcell + 6, atom_coords);
@@ -310,8 +330,16 @@ int nbl_create_paddings(int const numberOfParticles,
     if (x > max[0]) { max[0] = x; }
     if (y > max[1]) { max[1] = y; }
     if (z > max[2]) { max[2] = z; }
+    if(referenceAndFinal)
+    {
+		double reference_x = dot(reference_fcell,     reference_atom_coords);
+		double reference_y = dot(reference_fcell + 3, reference_atom_coords);
+		double reference_z = dot(reference_fcell + 6, reference_atom_coords);
+		reference_frac_coords[DIM * i + 0]= reference_x;
+		reference_frac_coords[DIM * i + 1]= reference_y;
+		reference_frac_coords[DIM * i + 2]= reference_z;
+    }
   }
-
   // add some extra value to deal with edge case
   for (int i = 0; i < DIM; i++)
   {
@@ -362,8 +390,14 @@ int nbl_create_paddings(int const numberOfParticles,
           double x = frac_coords[DIM * at + 0];
           double y = frac_coords[DIM * at + 1];
           double z = frac_coords[DIM * at + 2];
-
-          // select the necessary atoms to repeate for the most outside bins
+		  double reference_x, reference_y, reference_z;
+		  if(referenceAndFinal)
+		  {
+			  reference_x= reference_frac_coords[DIM * at + 0];
+			  reference_y= reference_frac_coords[DIM * at + 1];
+			  reference_z= reference_frac_coords[DIM * at + 2];
+		  }
+		  // select the necessary atoms to repeate for the most outside bins
           // the follwing few lines can be easily understood when assuming
           // size=1
           if (i == -size[0]
@@ -387,11 +421,24 @@ int nbl_create_paddings(int const numberOfParticles,
 
           // fractional coordinates of padding atom at
           double atom_coords[3] = {i + x, j + y, k + z};
+          double reference_atom_coords[3];
+          if (referenceAndFinal)
+		  {
+        	  reference_atom_coords[0]= i + reference_x;
+        	  reference_atom_coords[1]= j + reference_y;
+        	  reference_atom_coords[2]= k + reference_z;
+		  }
 
           // absolute coordinates of padding atoms
           coordinatesOfPaddings.push_back(dot(tcell, atom_coords));
-          coordinatesOfPaddings.push_back(dot(tcell + 3, atom_coords));
-          coordinatesOfPaddings.push_back(dot(tcell + 6, atom_coords));
+		  coordinatesOfPaddings.push_back(dot(tcell + 3, atom_coords));
+		  coordinatesOfPaddings.push_back(dot(tcell + 6, atom_coords));
+          if (referenceAndFinal)
+          {
+			  reference_coordinatesOfPaddings.push_back(dot(reference_tcell, reference_atom_coords));
+			  reference_coordinatesOfPaddings.push_back(dot(reference_tcell + 3, reference_atom_coords));
+			  reference_coordinatesOfPaddings.push_back(dot(reference_tcell + 6, reference_atom_coords));
+          }
 
           // padding speciesCode code and image
           speciesCodeOfPaddings.push_back(speciesCode[at]);
@@ -400,6 +447,8 @@ int nbl_create_paddings(int const numberOfParticles,
       }
     }
   }
+  delete[] frac_coords;
+  if(reference_frac_coords!= nullptr) delete[] reference_frac_coords;
 
   numberOfPaddings = masterOfPaddings.size();
 

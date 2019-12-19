@@ -1,0 +1,136 @@
+2019-12-13:11:38:38CST * 0 * information * 0x562129085770 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:38:38CST * 0 * information * 0x56212906b420 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:38:38CST * 1 * information * 0x56212906b420 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x562129085770_Collections'.
+2019-12-13:11:38:38CST * 2 * information * 0x562129085770_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x56212906b420'.
+2019-12-13:11:38:38CST * 3 * error * 0x562129085770_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:38:38CST * 4 * error * 0x562129085770_Collections * KIM_CollectionsImplementation.cpp:823 * Unable to find item.
+2019-12-13:11:38:38CST * 1 * error * 0x562129085770 * KIM_ModelImplementation.cpp:2112 * Could not find model shared library.
+2019-12-13:11:38:38CST * 2 * error * 0x562129085770 * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-12-13:11:38:38CST * 5 * information * 0x562129085770_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:38:38CST * 3 * information * 0x562129085770 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:39:35CST * 0 * information * 0x560ffe91e7e0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:39:35CST * 0 * information * 0x560ffe904480 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:39:35CST * 1 * information * 0x560ffe904480 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x560ffe91e7e0_Collections'.
+2019-12-13:11:39:35CST * 2 * information * 0x560ffe91e7e0_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x560ffe904480'.
+2019-12-13:11:39:35CST * 3 * error * 0x560ffe91e7e0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:39:35CST * 4 * error * 0x560ffe91e7e0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:39:35CST * 0 * information * 0x560ffe8fb920 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:39:35CST * 1 * information * 0x560ffe8fb920 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x560ffe91e7e0_0x560ffe8fb920'.
+2019-12-13:11:39:35CST * 2 * information * 0x560ffe91e7e0_0x560ffe8fb920 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x560ffe8fb920'.
+2019-12-13:11:39:35CST * 3 * information * 0x560ffe91e7e0_0x560ffe8fb920 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-13:11:39:35CST * 4 * information * 0x560ffe91e7e0_0x560ffe8fb920 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-13:11:40:13CST * 0 * information * 0x560ffe91e7e0_0x560ffe8fb920 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:40:13CST * 0 * information * 0x560ffe91e7e0_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:40:13CST * 0 * information * 0x560ffe91e7e0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:41:22CST * 0 * information * 0x56077cc9b7a0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:41:22CST * 0 * information * 0x56077cc81440 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:41:22CST * 1 * information * 0x56077cc81440 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x56077cc9b7a0_Collections'.
+2019-12-13:11:41:22CST * 2 * information * 0x56077cc9b7a0_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x56077cc81440'.
+2019-12-13:11:41:22CST * 3 * error * 0x56077cc9b7a0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:41:22CST * 4 * error * 0x56077cc9b7a0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:41:22CST * 0 * information * 0x56077cc788e0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:41:22CST * 1 * information * 0x56077cc788e0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x56077cc9b7a0_0x56077cc788e0'.
+2019-12-13:11:41:22CST * 2 * information * 0x56077cc9b7a0_0x56077cc788e0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x56077cc788e0'.
+2019-12-13:11:41:22CST * 3 * information * 0x56077cc9b7a0_0x56077cc788e0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-13:11:41:22CST * 4 * information * 0x56077cc9b7a0_0x56077cc788e0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-13:11:41:34CST * 0 * information * 0x56077cc9b7a0_0x56077cc788e0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:41:34CST * 0 * information * 0x56077cc9b7a0_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:41:34CST * 0 * information * 0x56077cc9b7a0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:45:24CST * 0 * information * 0x55c1f5ad8770 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:45:24CST * 0 * information * 0x55c1f5abe420 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:45:24CST * 1 * information * 0x55c1f5abe420 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55c1f5ad8770_Collections'.
+2019-12-13:11:45:24CST * 2 * information * 0x55c1f5ad8770_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55c1f5abe420'.
+2019-12-13:11:45:24CST * 3 * error * 0x55c1f5ad8770_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:45:24CST * 4 * error * 0x55c1f5ad8770_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:45:24CST * 0 * information * 0x55c1f5ab58c0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:45:24CST * 1 * information * 0x55c1f5ab58c0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55c1f5ad8770_0x55c1f5ab58c0'.
+2019-12-13:11:45:24CST * 2 * information * 0x55c1f5ad8770_0x55c1f5ab58c0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55c1f5ab58c0'.
+2019-12-13:11:45:24CST * 3 * information * 0x55c1f5ad8770_0x55c1f5ab58c0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-13:11:45:24CST * 4 * information * 0x55c1f5ad8770_0x55c1f5ab58c0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-13:11:45:40CST * 0 * information * 0x55c1f5ad8770_0x55c1f5ab58c0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:45:40CST * 0 * information * 0x55c1f5ad8770_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:45:40CST * 0 * information * 0x55c1f5ad8770 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:46:26CST * 0 * information * 0x55bcc3a10770 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:46:26CST * 0 * information * 0x55bcc39f6420 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:46:26CST * 1 * information * 0x55bcc39f6420 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55bcc3a10770_Collections'.
+2019-12-13:11:46:26CST * 2 * information * 0x55bcc3a10770_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55bcc39f6420'.
+2019-12-13:11:46:26CST * 3 * error * 0x55bcc3a10770_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:46:26CST * 4 * error * 0x55bcc3a10770_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:46:26CST * 0 * information * 0x55bcc39ed8c0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:46:26CST * 1 * information * 0x55bcc39ed8c0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55bcc3a10770_0x55bcc39ed8c0'.
+2019-12-13:11:46:26CST * 2 * information * 0x55bcc3a10770_0x55bcc39ed8c0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55bcc39ed8c0'.
+2019-12-13:11:46:26CST * 3 * information * 0x55bcc3a10770_0x55bcc39ed8c0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-13:11:46:26CST * 4 * information * 0x55bcc3a10770_0x55bcc39ed8c0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-13:11:46:39CST * 0 * information * 0x55bcc3a10770_0x55bcc39ed8c0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:46:39CST * 0 * information * 0x55bcc3a10770_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:46:39CST * 0 * information * 0x55bcc3a10770 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:47:07CST * 0 * information * 0x561c741b97e0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:47:07CST * 0 * information * 0x561c7419f480 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:47:07CST * 1 * information * 0x561c7419f480 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x561c741b97e0_Collections'.
+2019-12-13:11:47:07CST * 2 * information * 0x561c741b97e0_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x561c7419f480'.
+2019-12-13:11:47:07CST * 3 * error * 0x561c741b97e0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:47:07CST * 4 * error * 0x561c741b97e0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:47:07CST * 0 * information * 0x561c74196920 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:47:07CST * 1 * information * 0x561c74196920 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x561c741b97e0_0x561c74196920'.
+2019-12-13:11:47:07CST * 2 * information * 0x561c741b97e0_0x561c74196920 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x561c74196920'.
+2019-12-13:11:47:07CST * 3 * information * 0x561c741b97e0_0x561c74196920 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-13:11:47:07CST * 4 * information * 0x561c741b97e0_0x561c74196920 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-13:11:47:20CST * 0 * information * 0x561c741b97e0_0x561c74196920 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:47:20CST * 0 * information * 0x561c741b97e0_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:47:20CST * 0 * information * 0x561c741b97e0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:49:53CST * 0 * information * 0x55f31c7a7810 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:49:53CST * 0 * information * 0x55f31c78d4a0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:49:53CST * 1 * information * 0x55f31c78d4a0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55f31c7a7810_Collections'.
+2019-12-13:11:49:53CST * 2 * information * 0x55f31c7a7810_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55f31c78d4a0'.
+2019-12-13:11:49:53CST * 3 * error * 0x55f31c7a7810_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:49:53CST * 4 * error * 0x55f31c7a7810_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:49:53CST * 0 * information * 0x55f31c784940 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:49:53CST * 1 * information * 0x55f31c784940 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55f31c7a7810_0x55f31c784940'.
+2019-12-13:11:49:53CST * 2 * information * 0x55f31c7a7810_0x55f31c784940 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55f31c784940'.
+2019-12-13:11:49:53CST * 3 * information * 0x55f31c7a7810_0x55f31c784940 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-13:11:49:53CST * 4 * information * 0x55f31c7a7810_0x55f31c784940 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-13:11:50:08CST * 0 * information * 0x55f31c7a7810_0x55f31c784940 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:50:08CST * 0 * information * 0x55f31c7a7810_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:50:08CST * 0 * information * 0x55f31c7a7810 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:50:49CST * 0 * information * 0x55d85082a7a0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:50:49CST * 0 * information * 0x55d850810440 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:50:49CST * 1 * information * 0x55d850810440 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55d85082a7a0_Collections'.
+2019-12-13:11:50:49CST * 2 * information * 0x55d85082a7a0_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55d850810440'.
+2019-12-13:11:50:49CST * 3 * error * 0x55d85082a7a0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:50:49CST * 4 * error * 0x55d85082a7a0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:50:49CST * 0 * information * 0x55d8508078e0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:50:49CST * 1 * information * 0x55d8508078e0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55d85082a7a0_0x55d8508078e0'.
+2019-12-13:11:50:49CST * 2 * information * 0x55d85082a7a0_0x55d8508078e0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55d8508078e0'.
+2019-12-13:11:50:49CST * 3 * information * 0x55d85082a7a0_0x55d8508078e0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-13:11:50:49CST * 4 * information * 0x55d85082a7a0_0x55d8508078e0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-13:11:51:03CST * 0 * information * 0x55d85082a7a0_0x55d8508078e0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:51:03CST * 0 * information * 0x55d85082a7a0_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:51:03CST * 0 * information * 0x55d85082a7a0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:56:57CST * 0 * information * 0x559d70c0f770 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:56:57CST * 0 * information * 0x559d70bf5420 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:56:57CST * 1 * information * 0x559d70bf5420 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x559d70c0f770_Collections'.
+2019-12-13:11:56:57CST * 2 * information * 0x559d70c0f770_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x559d70bf5420'.
+2019-12-13:11:56:57CST * 3 * error * 0x559d70c0f770_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:56:57CST * 4 * error * 0x559d70c0f770_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:56:57CST * 0 * information * 0x559d70bec8c0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:56:57CST * 1 * information * 0x559d70bec8c0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x559d70c0f770_0x559d70bec8c0'.
+2019-12-13:11:56:57CST * 2 * information * 0x559d70c0f770_0x559d70bec8c0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x559d70bec8c0'.
+2019-12-13:11:56:57CST * 3 * information * 0x559d70c0f770_0x559d70bec8c0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-13:11:56:57CST * 4 * information * 0x559d70c0f770_0x559d70bec8c0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-13:11:57:09CST * 0 * information * 0x559d70c0f770_0x559d70bec8c0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:57:09CST * 0 * information * 0x559d70c0f770_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:57:09CST * 0 * information * 0x559d70c0f770 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:57:30CST * 0 * information * 0x560664218740 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:57:30CST * 0 * information * 0x5606641fe400 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:57:30CST * 1 * information * 0x5606641fe400 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x560664218740_Collections'.
+2019-12-13:11:57:30CST * 2 * information * 0x560664218740_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5606641fe400'.
+2019-12-13:11:57:30CST * 3 * error * 0x560664218740_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:57:30CST * 4 * error * 0x560664218740_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-13:11:57:30CST * 0 * information * 0x5606641f58a0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-13:11:57:30CST * 1 * information * 0x5606641f58a0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x560664218740_0x5606641f58a0'.
+2019-12-13:11:57:30CST * 2 * information * 0x560664218740_0x5606641f58a0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5606641f58a0'.
+2019-12-13:11:57:30CST * 3 * information * 0x560664218740_0x5606641f58a0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-13:11:57:30CST * 4 * information * 0x560664218740_0x5606641f58a0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-13:11:57:42CST * 0 * information * 0x560664218740_0x5606641f58a0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:57:42CST * 0 * information * 0x560664218740_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-13:11:57:42CST * 0 * information * 0x560664218740 * KIM_LogImplementation.cpp:106 * Log object destroyed.

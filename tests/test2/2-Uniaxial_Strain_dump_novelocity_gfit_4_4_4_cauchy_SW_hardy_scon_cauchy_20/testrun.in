@@ -1,0 +1,27 @@
+% Read in atomic configuration and species information
+read
+    spec
+    dump,dump.initial.0,dump.final.1
+end
+
+% Set up the grid for computing the stress field
+grid
+    gfit,4,4,4,cauchy
+end
+
+% Define the KIM model used to compute the atomic interactions
+potential
+    modl,SW_StillingerWeber_1985_Si__MO_405512056662_005
+end
+
+% Specify whether to decompose stress into unique and non-unique parts
+uniqueness
+    project,T
+end
+
+% Setup and begin stress calculation
+stress
+    hardy,cauchy,scon,20
+end
+
+stop

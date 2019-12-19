@@ -1,0 +1,27 @@
+% Read in atomic configuration and species information
+read
+    spec,species
+    conf,config
+end
+
+% Set up the grid for computing the stress field
+grid
+    gfile,grid
+end
+
+% Define the KIM model used to compute the atomic interactions
+potential
+    modl,SW_BalamaneHauchShi_2017Brittle_Si__MO_381114941873_002
+end
+
+% Specify whether to decompose stress into unique and non-unique parts
+uniqueness
+    project,F
+end
+
+% Setup and begin stress calculation
+stress
+hardy,cauchy,slmo,20
+end
+
+stop

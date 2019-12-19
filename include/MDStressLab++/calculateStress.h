@@ -8,11 +8,9 @@
 #ifndef CALCULATESTRESS_H_
 #define CALCULATESTRESS_H_
 
-#include <vector>
-#include "AtomisticSystem.h"
-#include "Hardy.h"
-#include "typedef.h"
+int process_DEDr(const void* dataObject, const double de, const double r, const double* const dx, const int i, const int j);
+#include "calculateStress.cpp"
 
-void calculateStress(const AtomisticSystem&,const MatrixXd& gridCoordinates,std::vector<Stress*>);
+
 
 #endif /* CALCULATESTRESS_H_ */

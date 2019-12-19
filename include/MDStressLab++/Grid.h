@@ -7,15 +7,37 @@
 
 #ifndef GRID_H_
 #define GRID_H_
-#include <iostream>
 #include "typedef.h"
+#include <vector>
+#include "SubConfiguration.h"
+#include <set>
 
-class Grid {
+class GridBase
+{
 public:
-	Grid(const int&, const int&, const int&);
+	std::vector<Vector3d> coordinates;
+	static int numberOfReferenceGrids;
+	static int numberOfCurrentGrids;
+};
+
+int GridBase::numberOfReferenceGrids= 0;
+int GridBase::numberOfCurrentGrids= 0;
+
+template<ConfigType T>
+class Grid : public GridBase{
+public:
+	Grid(int);
+	Grid(Vector3d lowerLimit,
+		 Vector3d upperLimit,
+		 int _ngrid);
 	virtual ~Grid();
 	int ngrid;
-	MatrixXd coordinates;
+
+	void read(std::string);
+	void write(std::string) const;
+	void setCounter();
+	std::vector<std::set<int>> getGridNeighborLists(const SubConfiguration&, const double&) const;
 };
+#include "Grid.cpp"
 
 #endif /* GRID_H_ */

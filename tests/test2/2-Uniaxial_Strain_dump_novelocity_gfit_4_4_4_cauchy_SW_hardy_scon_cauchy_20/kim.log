@@ -1,0 +1,280 @@
+2019-08-21:14:48:59CDT * 0 * information * 0x557d0539a090 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-21:14:48:59CDT * 0 * information * 0x557d0539b540 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-21:14:48:59CDT * 1 * information * 0x557d0539b540 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x557d0539a090_Collections'.
+2019-08-21:14:48:59CDT * 2 * information * 0x557d0539a090_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x557d0539b540'.
+2019-08-21:14:48:59CDT * 3 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open './SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so'.
+2019-08-21:14:48:59CDT * 4 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:119 * ./SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so: cannot open shared object file: No such file or directory
+2019-08-21:14:48:59CDT * 5 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:14:48:59CDT * 6 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:14:48:59CDT * 7 * error * 0x557d0539a090_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-08-21:14:48:59CDT * 8 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open '/home/min/.kim-api/models-dir/SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so'.
+2019-08-21:14:48:59CDT * 9 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:119 * /home/min/.kim-api/models-dir/SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so: cannot open shared object file: No such file or directory
+2019-08-21:14:48:59CDT * 10 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:14:48:59CDT * 11 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open './SW__MD_335816936951_004/libkim-api-model-driver.so'.
+2019-08-21:14:48:59CDT * 12 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:119 * ./SW__MD_335816936951_004/libkim-api-model-driver.so: cannot open shared object file: No such file or directory
+2019-08-21:14:48:59CDT * 13 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:14:48:59CDT * 14 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:14:48:59CDT * 15 * error * 0x557d0539a090_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-08-21:14:48:59CDT * 16 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open '/home/min/.kim-api/model-drivers-dir/SW__MD_335816936951_004/libkim-api-model-driver.so'.
+2019-08-21:14:48:59CDT * 17 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:119 * /home/min/.kim-api/model-drivers-dir/SW__MD_335816936951_004/libkim-api-model-driver.so: cannot open shared object file: No such file or directory
+2019-08-21:14:48:59CDT * 18 * error * 0x557d0539a090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:14:48:59CDT * 0 * information * 0x557d0539c450 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-21:14:48:59CDT * 1 * information * 0x557d0539c450 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x557d0539a090_0x557d0539c450'.
+2019-08-21:14:48:59CDT * 2 * information * 0x557d0539a090_0x557d0539c450 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x557d0539c450'.
+2019-08-21:14:48:59CDT * 3 * information * 0x557d0539a090_0x557d0539c450 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-08-21:14:48:59CDT * 4 * information * 0x557d0539a090_0x557d0539c450 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-08-21:14:49:02CDT * 0 * information * 0x557d0539a090_0x557d0539c450 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-21:14:49:02CDT * 0 * information * 0x557d0539a090_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-21:14:49:02CDT * 0 * information * 0x557d0539a090 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-21:15:34:23CDT * 0 * information * 0x55dbf1286090 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-21:15:34:23CDT * 0 * information * 0x55dbf1287540 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-21:15:34:23CDT * 1 * information * 0x55dbf1287540 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55dbf1286090_Collections'.
+2019-08-21:15:34:23CDT * 2 * information * 0x55dbf1286090_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55dbf1287540'.
+2019-08-21:15:34:23CDT * 3 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open './SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so'.
+2019-08-21:15:34:23CDT * 4 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:119 * ./SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so: cannot open shared object file: No such file or directory
+2019-08-21:15:34:23CDT * 5 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:15:34:23CDT * 6 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:15:34:23CDT * 7 * error * 0x55dbf1286090_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-08-21:15:34:23CDT * 8 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open '/home/min/.kim-api/models-dir/SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so'.
+2019-08-21:15:34:23CDT * 9 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:119 * /home/min/.kim-api/models-dir/SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so: cannot open shared object file: No such file or directory
+2019-08-21:15:34:23CDT * 10 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:15:34:23CDT * 11 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open './SW__MD_335816936951_004/libkim-api-model-driver.so'.
+2019-08-21:15:34:23CDT * 12 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:119 * ./SW__MD_335816936951_004/libkim-api-model-driver.so: cannot open shared object file: No such file or directory
+2019-08-21:15:34:23CDT * 13 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:15:34:23CDT * 14 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:15:34:23CDT * 15 * error * 0x55dbf1286090_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-08-21:15:34:23CDT * 16 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open '/home/min/.kim-api/model-drivers-dir/SW__MD_335816936951_004/libkim-api-model-driver.so'.
+2019-08-21:15:34:23CDT * 17 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:119 * /home/min/.kim-api/model-drivers-dir/SW__MD_335816936951_004/libkim-api-model-driver.so: cannot open shared object file: No such file or directory
+2019-08-21:15:34:23CDT * 18 * error * 0x55dbf1286090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-21:15:34:24CDT * 0 * information * 0x55dbf1288450 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-21:15:34:24CDT * 1 * information * 0x55dbf1288450 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55dbf1286090_0x55dbf1288450'.
+2019-08-21:15:34:24CDT * 2 * information * 0x55dbf1286090_0x55dbf1288450 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55dbf1288450'.
+2019-08-21:15:34:24CDT * 3 * information * 0x55dbf1286090_0x55dbf1288450 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-08-21:15:34:24CDT * 4 * information * 0x55dbf1286090_0x55dbf1288450 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-08-21:15:34:27CDT * 0 * information * 0x55dbf1286090_0x55dbf1288450 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-21:15:34:27CDT * 0 * information * 0x55dbf1286090_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-21:15:34:27CDT * 0 * information * 0x55dbf1286090 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-27:19:20:49CDT * 0 * information * 0x5607524c3090 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-27:19:20:49CDT * 0 * information * 0x5607524c4540 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-27:19:20:49CDT * 1 * information * 0x5607524c4540 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x5607524c3090_Collections'.
+2019-08-27:19:20:49CDT * 2 * information * 0x5607524c3090_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5607524c4540'.
+2019-08-27:19:20:49CDT * 3 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open './SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so'.
+2019-08-27:19:20:49CDT * 4 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:119 * ./SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so: cannot open shared object file: No such file or directory
+2019-08-27:19:20:49CDT * 5 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-27:19:20:49CDT * 6 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-27:19:20:49CDT * 7 * error * 0x5607524c3090_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-08-27:19:20:49CDT * 8 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open '/home/min/.kim-api/models-dir/SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so'.
+2019-08-27:19:20:49CDT * 9 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:119 * /home/min/.kim-api/models-dir/SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so: cannot open shared object file: No such file or directory
+2019-08-27:19:20:49CDT * 10 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-27:19:20:49CDT * 11 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open './SW__MD_335816936951_004/libkim-api-model-driver.so'.
+2019-08-27:19:20:49CDT * 12 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:119 * ./SW__MD_335816936951_004/libkim-api-model-driver.so: cannot open shared object file: No such file or directory
+2019-08-27:19:20:49CDT * 13 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-27:19:20:49CDT * 14 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-27:19:20:49CDT * 15 * error * 0x5607524c3090_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-08-27:19:20:49CDT * 16 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open '/home/min/.kim-api/model-drivers-dir/SW__MD_335816936951_004/libkim-api-model-driver.so'.
+2019-08-27:19:20:49CDT * 17 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:119 * /home/min/.kim-api/model-drivers-dir/SW__MD_335816936951_004/libkim-api-model-driver.so: cannot open shared object file: No such file or directory
+2019-08-27:19:20:49CDT * 18 * error * 0x5607524c3090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-27:19:20:49CDT * 0 * information * 0x5607524c5450 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-27:19:20:49CDT * 1 * information * 0x5607524c5450 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x5607524c3090_0x5607524c5450'.
+2019-08-27:19:20:49CDT * 2 * information * 0x5607524c3090_0x5607524c5450 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5607524c5450'.
+2019-08-27:19:20:49CDT * 3 * information * 0x5607524c3090_0x5607524c5450 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-08-27:19:20:49CDT * 4 * information * 0x5607524c3090_0x5607524c5450 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-08-27:19:20:52CDT * 0 * information * 0x5607524c3090_0x5607524c5450 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-27:19:20:52CDT * 0 * information * 0x5607524c3090_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-27:19:20:52CDT * 0 * information * 0x5607524c3090 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-28:01:35:21CDT * 0 * information * 0x5556d1e24090 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-28:01:35:21CDT * 0 * information * 0x5556d1e25540 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-28:01:35:21CDT * 1 * information * 0x5556d1e25540 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x5556d1e24090_Collections'.
+2019-08-28:01:35:21CDT * 2 * information * 0x5556d1e24090_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5556d1e25540'.
+2019-08-28:01:35:21CDT * 3 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open './SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so'.
+2019-08-28:01:35:21CDT * 4 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:119 * ./SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so: cannot open shared object file: No such file or directory
+2019-08-28:01:35:21CDT * 5 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:01:35:21CDT * 6 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:01:35:21CDT * 7 * error * 0x5556d1e24090_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-08-28:01:35:21CDT * 8 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open '/home/min/.kim-api/models-dir/SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so'.
+2019-08-28:01:35:21CDT * 9 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:119 * /home/min/.kim-api/models-dir/SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so: cannot open shared object file: No such file or directory
+2019-08-28:01:35:21CDT * 10 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:01:35:21CDT * 11 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open './SW__MD_335816936951_004/libkim-api-model-driver.so'.
+2019-08-28:01:35:21CDT * 12 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:119 * ./SW__MD_335816936951_004/libkim-api-model-driver.so: cannot open shared object file: No such file or directory
+2019-08-28:01:35:21CDT * 13 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:01:35:21CDT * 14 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:01:35:21CDT * 15 * error * 0x5556d1e24090_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-08-28:01:35:21CDT * 16 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open '/home/min/.kim-api/model-drivers-dir/SW__MD_335816936951_004/libkim-api-model-driver.so'.
+2019-08-28:01:35:21CDT * 17 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:119 * /home/min/.kim-api/model-drivers-dir/SW__MD_335816936951_004/libkim-api-model-driver.so: cannot open shared object file: No such file or directory
+2019-08-28:01:35:21CDT * 18 * error * 0x5556d1e24090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:01:35:21CDT * 0 * information * 0x5556d1e26450 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-28:01:35:21CDT * 1 * information * 0x5556d1e26450 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x5556d1e24090_0x5556d1e26450'.
+2019-08-28:01:35:21CDT * 2 * information * 0x5556d1e24090_0x5556d1e26450 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5556d1e26450'.
+2019-08-28:01:35:21CDT * 3 * information * 0x5556d1e24090_0x5556d1e26450 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-08-28:01:35:21CDT * 4 * information * 0x5556d1e24090_0x5556d1e26450 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-08-28:01:35:23CDT * 0 * information * 0x5556d1e24090_0x5556d1e26450 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-28:01:35:23CDT * 0 * information * 0x5556d1e24090_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-28:01:35:23CDT * 0 * information * 0x5556d1e24090 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-28:03:50:41CDT * 0 * information * 0x55dfe3f2b090 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-28:03:50:41CDT * 0 * information * 0x55dfe3f2c540 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-28:03:50:41CDT * 1 * information * 0x55dfe3f2c540 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55dfe3f2b090_Collections'.
+2019-08-28:03:50:41CDT * 2 * information * 0x55dfe3f2b090_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55dfe3f2c540'.
+2019-08-28:03:50:41CDT * 3 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open './SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so'.
+2019-08-28:03:50:41CDT * 4 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:119 * ./SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so: cannot open shared object file: No such file or directory
+2019-08-28:03:50:41CDT * 5 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:03:50:41CDT * 6 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:03:50:41CDT * 7 * error * 0x55dfe3f2b090_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-08-28:03:50:41CDT * 8 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open '/home/min/.kim-api/models-dir/SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so'.
+2019-08-28:03:50:41CDT * 9 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:119 * /home/min/.kim-api/models-dir/SW_StillingerWeber_1985_Si__MO_405512056662_005/libkim-api-portable-model.so: cannot open shared object file: No such file or directory
+2019-08-28:03:50:41CDT * 10 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:03:50:41CDT * 11 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open './SW__MD_335816936951_004/libkim-api-model-driver.so'.
+2019-08-28:03:50:41CDT * 12 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:119 * ./SW__MD_335816936951_004/libkim-api-model-driver.so: cannot open shared object file: No such file or directory
+2019-08-28:03:50:41CDT * 13 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:03:50:41CDT * 14 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:03:50:41CDT * 15 * error * 0x55dfe3f2b090_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-08-28:03:50:41CDT * 16 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:118 * Unable to open '/home/min/.kim-api/model-drivers-dir/SW__MD_335816936951_004/libkim-api-model-driver.so'.
+2019-08-28:03:50:41CDT * 17 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:119 * /home/min/.kim-api/model-drivers-dir/SW__MD_335816936951_004/libkim-api-model-driver.so: cannot open shared object file: No such file or directory
+2019-08-28:03:50:41CDT * 18 * error * 0x55dfe3f2b090_Collections * KIM_SharedLibrary.cpp:269 * SharedLibrary not open.
+2019-08-28:03:50:41CDT * 0 * information * 0x55dfe3f2d450 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-08-28:03:50:41CDT * 1 * information * 0x55dfe3f2d450 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55dfe3f2b090_0x55dfe3f2d450'.
+2019-08-28:03:50:41CDT * 2 * information * 0x55dfe3f2b090_0x55dfe3f2d450 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55dfe3f2d450'.
+2019-08-28:03:50:41CDT * 3 * information * 0x55dfe3f2b090_0x55dfe3f2d450 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-08-28:03:50:41CDT * 4 * information * 0x55dfe3f2b090_0x55dfe3f2d450 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-08-28:03:50:44CDT * 0 * information * 0x55dfe3f2b090_0x55dfe3f2d450 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-28:03:50:44CDT * 0 * information * 0x55dfe3f2b090_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-08-28:03:50:44CDT * 0 * information * 0x55dfe3f2b090 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:10:59CDT * 0 * information * 0x56250441a320 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 0 * information * 0x55c2233b2f20 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 0 * information * 0x55c2233821e0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 0 * information * 0x562504423850 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 1 * information * 0x55c2233821e0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55c2233b2f20_Collections'.
+2019-10-09:22:10:59CDT * 1 * information * 0x562504423850 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x56250441a320_Collections'.
+2019-10-09:22:10:59CDT * 2 * information * 0x55c2233b2f20_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55c2233821e0'.
+2019-10-09:22:10:59CDT * 2 * information * 0x56250441a320_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x562504423850'.
+2019-10-09:22:10:59CDT * 3 * error * 0x55c2233b2f20_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-10-09:22:10:59CDT * 3 * error * 0x56250441a320_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-10-09:22:10:59CDT * 4 * error * 0x55c2233b2f20_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-10-09:22:10:59CDT * 4 * error * 0x56250441a320_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-10-09:22:10:59CDT * 0 * information * 0x5569e3a0cf20 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 0 * information * 0x5569e39dc1e0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 1 * information * 0x5569e39dc1e0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x5569e3a0cf20_Collections'.
+2019-10-09:22:10:59CDT * 2 * information * 0x5569e3a0cf20_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5569e39dc1e0'.
+2019-10-09:22:10:59CDT * 0 * information * 0x56124eba7f20 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 0 * information * 0x56124eb771e0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 3 * error * 0x5569e3a0cf20_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-10-09:22:10:59CDT * 1 * information * 0x56124eb771e0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x56124eba7f20_Collections'.
+2019-10-09:22:10:59CDT * 2 * information * 0x56124eba7f20_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x56124eb771e0'.
+2019-10-09:22:10:59CDT * 3 * error * 0x56124eba7f20_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-10-09:22:10:59CDT * 4 * error * 0x5569e3a0cf20_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-10-09:22:10:59CDT * 4 * error * 0x56124eba7f20_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-10-09:22:10:59CDT * 0 * information * 0x562504472e00 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 1 * information * 0x562504472e00 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x56250441a320_0x562504472e00'.
+2019-10-09:22:10:59CDT * 2 * information * 0x56250441a320_0x562504472e00 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x562504472e00'.
+2019-10-09:22:10:59CDT * 3 * information * 0x56250441a320_0x562504472e00 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-10-09:22:10:59CDT * 4 * information * 0x56250441a320_0x562504472e00 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-10-09:22:10:59CDT * 0 * information * 0x55c2233d40e0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 1 * information * 0x55c2233d40e0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55c2233b2f20_0x55c2233d40e0'.
+2019-10-09:22:10:59CDT * 2 * information * 0x55c2233b2f20_0x55c2233d40e0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55c2233d40e0'.
+2019-10-09:22:10:59CDT * 0 * information * 0x5569e3a2e0e0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 1 * information * 0x5569e3a2e0e0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x5569e3a0cf20_0x5569e3a2e0e0'.
+2019-10-09:22:10:59CDT * 2 * information * 0x5569e3a0cf20_0x5569e3a2e0e0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5569e3a2e0e0'.
+2019-10-09:22:10:59CDT * 3 * information * 0x5569e3a0cf20_0x5569e3a2e0e0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-10-09:22:10:59CDT * 4 * information * 0x5569e3a0cf20_0x5569e3a2e0e0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-10-09:22:10:59CDT * 3 * information * 0x55c2233b2f20_0x55c2233d40e0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-10-09:22:10:59CDT * 4 * information * 0x55c2233b2f20_0x55c2233d40e0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-10-09:22:10:59CDT * 0 * information * 0x56124ebc90e0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-10-09:22:10:59CDT * 1 * information * 0x56124ebc90e0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x56124eba7f20_0x56124ebc90e0'.
+2019-10-09:22:10:59CDT * 2 * information * 0x56124eba7f20_0x56124ebc90e0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x56124ebc90e0'.
+2019-10-09:22:10:59CDT * 3 * information * 0x56124eba7f20_0x56124ebc90e0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-10-09:22:10:59CDT * 4 * information * 0x56124eba7f20_0x56124ebc90e0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-10-09:22:11:05CDT * 0 * information * 0x55c2233b2f20_0x55c2233d40e0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:05CDT * 0 * information * 0x55c2233b2f20_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:05CDT * 0 * information * 0x55c2233b2f20 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:05CDT * 0 * information * 0x5569e3a0cf20_0x5569e3a2e0e0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:05CDT * 0 * information * 0x5569e3a0cf20_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:05CDT * 0 * information * 0x5569e3a0cf20 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:07CDT * 0 * information * 0x56250441a320_0x562504472e00 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:07CDT * 0 * information * 0x56250441a320_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:07CDT * 0 * information * 0x56250441a320 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:07CDT * 0 * information * 0x56124eba7f20_0x56124ebc90e0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:07CDT * 0 * information * 0x56124eba7f20_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-10-09:22:11:07CDT * 0 * information * 0x56124eba7f20 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-11-03:17:46:31CST * 0 * information * 0x5626cffb4820 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-11-03:17:46:31CST * 0 * information * 0x5626cff9a4b0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-11-03:17:46:31CST * 1 * information * 0x5626cff9a4b0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x5626cffb4820_Collections'.
+2019-11-03:17:46:31CST * 2 * information * 0x5626cffb4820_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5626cff9a4b0'.
+2019-11-03:17:46:31CST * 3 * error * 0x5626cffb4820_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-11-03:17:46:31CST * 4 * error * 0x5626cffb4820_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-11-03:17:46:31CST * 0 * information * 0x5626cffd8dc0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-11-03:17:46:31CST * 1 * information * 0x5626cffd8dc0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x5626cffb4820_0x5626cffd8dc0'.
+2019-11-03:17:46:31CST * 2 * information * 0x5626cffb4820_0x5626cffd8dc0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5626cffd8dc0'.
+2019-11-03:17:46:31CST * 3 * information * 0x5626cffb4820_0x5626cffd8dc0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-11-03:17:46:31CST * 4 * information * 0x5626cffb4820_0x5626cffd8dc0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-11-03:17:46:32CST * 0 * information * 0x5626cffb4820_0x5626cffd8dc0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-11-03:17:46:32CST * 0 * information * 0x5626cffb4820_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-11-03:17:46:32CST * 0 * information * 0x5626cffb4820 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:42:25CST * 0 * information * 0x55669b40b780 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:42:26CST * 0 * information * 0x55669b3f1430 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:42:26CST * 1 * information * 0x55669b3f1430 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55669b40b780_Collections'.
+2019-12-11:16:42:26CST * 2 * information * 0x55669b40b780_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55669b3f1430'.
+2019-12-11:16:42:26CST * 3 * error * 0x55669b40b780_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-11:16:42:26CST * 4 * error * 0x55669b40b780_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-11:16:42:26CST * 0 * information * 0x55669b42fd20 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:42:26CST * 1 * information * 0x55669b42fd20 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x55669b40b780_0x55669b42fd20'.
+2019-12-11:16:42:26CST * 2 * information * 0x55669b40b780_0x55669b42fd20 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x55669b42fd20'.
+2019-12-11:16:42:26CST * 3 * information * 0x55669b40b780_0x55669b42fd20 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-11:16:42:26CST * 4 * information * 0x55669b40b780_0x55669b42fd20 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-11:16:42:29CST * 0 * information * 0x55669b40b780_0x55669b42fd20 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:42:29CST * 0 * information * 0x55669b40b780_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:42:29CST * 0 * information * 0x55669b40b780 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:51:55CST * 0 * information * 0x559b6a67b780 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:51:55CST * 0 * information * 0x559b6a661430 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:51:55CST * 1 * information * 0x559b6a661430 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x559b6a67b780_Collections'.
+2019-12-11:16:51:55CST * 2 * information * 0x559b6a67b780_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x559b6a661430'.
+2019-12-11:16:51:55CST * 3 * error * 0x559b6a67b780_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-11:16:51:55CST * 4 * error * 0x559b6a67b780_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-11:16:51:55CST * 0 * information * 0x559b6a69fd20 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:51:55CST * 1 * information * 0x559b6a69fd20 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x559b6a67b780_0x559b6a69fd20'.
+2019-12-11:16:51:55CST * 2 * information * 0x559b6a67b780_0x559b6a69fd20 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x559b6a69fd20'.
+2019-12-11:16:51:55CST * 3 * information * 0x559b6a67b780_0x559b6a69fd20 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-11:16:51:55CST * 4 * information * 0x559b6a67b780_0x559b6a69fd20 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-11:16:51:56CST * 0 * information * 0x559b6a67b780_0x559b6a69fd20 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:51:56CST * 0 * information * 0x559b6a67b780_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:51:56CST * 0 * information * 0x559b6a67b780 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:58:51CST * 0 * information * 0x557096d09120 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:58:51CST * 0 * information * 0x557096cf85c0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:58:51CST * 1 * information * 0x557096cf85c0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x557096d09120_Collections'.
+2019-12-11:16:58:51CST * 2 * information * 0x557096d09120_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x557096cf85c0'.
+2019-12-11:16:58:51CST * 3 * error * 0x557096d09120_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-11:16:58:51CST * 4 * error * 0x557096d09120_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-11:16:58:51CST * 0 * information * 0x557096c9fb40 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:58:51CST * 1 * information * 0x557096c9fb40 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x557096d09120_0x557096c9fb40'.
+2019-12-11:16:58:51CST * 2 * information * 0x557096d09120_0x557096c9fb40 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x557096c9fb40'.
+2019-12-11:16:58:51CST * 3 * information * 0x557096d09120_0x557096c9fb40 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-11:16:58:51CST * 4 * information * 0x557096d09120_0x557096c9fb40 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-11:16:58:52CST * 0 * information * 0x557096d09120_0x557096c9fb40 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:58:52CST * 0 * information * 0x557096d09120_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:58:52CST * 0 * information * 0x557096d09120 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:58:52CST * 0 * information * 0x557096d809c0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:58:52CST * 0 * information * 0x557096d09120 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:58:52CST * 1 * information * 0x557096d09120 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x557096d809c0_Collections'.
+2019-12-11:16:58:52CST * 2 * information * 0x557096d809c0_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x557096d09120'.
+2019-12-11:16:58:52CST * 3 * error * 0x557096d809c0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-11:16:58:52CST * 4 * error * 0x557096d809c0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-11:16:58:52CST * 0 * information * 0x557096ca86a0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:16:58:52CST * 1 * information * 0x557096ca86a0 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x557096d809c0_0x557096ca86a0'.
+2019-12-11:16:58:52CST * 2 * information * 0x557096d809c0_0x557096ca86a0 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x557096ca86a0'.
+2019-12-11:16:58:52CST * 3 * information * 0x557096d809c0_0x557096ca86a0 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-11:16:58:52CST * 4 * information * 0x557096d809c0_0x557096ca86a0 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-11:16:58:52CST * 5 * information * 0x557096d809c0_0x557096ca86a0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:58:52CST * 5 * information * 0x557096d809c0_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:16:58:52CST * 1 * information * 0x557096d809c0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:17:00:17CST * 0 * information * 0x5589160cb7d0 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:17:00:17CST * 0 * information * 0x5589160b1470 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:17:00:17CST * 1 * information * 0x5589160b1470 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x5589160cb7d0_Collections'.
+2019-12-11:17:00:17CST * 2 * information * 0x5589160cb7d0_Collections * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5589160b1470'.
+2019-12-11:17:00:17CST * 3 * error * 0x5589160cb7d0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-11:17:00:17CST * 4 * error * 0x5589160cb7d0_Collections * KIM_CollectionsImplementation.cpp:224 * Unknown line in /home/min/.kim-api/config file: models-dir
+2019-12-11:17:00:17CST * 0 * information * 0x5589160eff00 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-11:17:00:17CST * 1 * information * 0x5589160eff00 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x5589160cb7d0_0x5589160eff00'.
+2019-12-11:17:00:17CST * 2 * information * 0x5589160cb7d0_0x5589160eff00 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x5589160eff00'.
+2019-12-11:17:00:17CST * 3 * information * 0x5589160cb7d0_0x5589160eff00 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-11:17:00:17CST * 4 * information * 0x5589160cb7d0_0x5589160eff00 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-11:17:00:17CST * 5 * information * 0x5589160cb7d0_0x5589160eff00 * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:17:00:17CST * 5 * information * 0x5589160cb7d0_Collections * KIM_LogImplementation.cpp:106 * Log object destroyed.
+2019-12-11:17:00:17CST * 1 * information * 0x5589160cb7d0 * KIM_LogImplementation.cpp:106 * Log object destroyed.
