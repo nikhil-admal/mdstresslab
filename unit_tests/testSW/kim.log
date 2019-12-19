@@ -1,0 +1,7 @@
+2019-12-19:11:04:48CST * 0 * information * 0x7f961e600110 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-19:11:04:48CST * 0 * information * 0x7f961e600830 * KIM_LogImplementation.cpp:96 * Log object created.  Default verbosity level is 'information'.
+2019-12-19:11:04:48CST * 1 * information * 0x7f961e600830 * KIM_LogImplementation.cpp:156 * Log object renamed.  ID changed to '0x7f961e600110_0x7f961e600830'.
+2019-12-19:11:04:48CST * 2 * information * 0x7f961e600110_0x7f961e600830 * KIM_LogImplementation.cpp:160 * Log object renamed.  ID changed from '0x7f961e600830'.
+2019-12-19:11:04:48CST * 3 * information * 0x7f961e600110_0x7f961e600830 * StillingerWeberImplementation.cpp:727 * Register argument supportStatus
+2019-12-19:11:04:48CST * 4 * information * 0x7f961e600110_0x7f961e600830 * StillingerWeberImplementation.cpp:746 * Register callback supportStatus
+2019-12-19:11:04:51CST * 0 * information * 0x7f961e600110 * KIM_LogImplementation.cpp:106 * Log object destroyed.

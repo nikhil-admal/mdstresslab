@@ -1,0 +1,7 @@
+Test1 8 0.00684175
+Test2 7 0.0236453
+TestGrid 1 0.0702059
+TestSpatialHash 1 0.198789
+TestLJ 1 10.6756
+TestSW 1 2.75929
+---

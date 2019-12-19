@@ -1,0 +1,870 @@
+Start testing: Dec 19 11:04 CST
+----------------------------------------------------------
+1/4 Testing: TestGrid
+1/4 Test: TestGrid
+Command: "/Users/Nikhil/Documents/Academic/Numerics/MDStressLab++/unit_tests/testGrid/testGrid"
+Directory: /Users/Nikhil/Documents/Academic/Numerics/MDStressLab++/unit_tests/testGrid
+"TestGrid" start time: Dec 19 11:04 CST
+Output:
+----------------------------------------------------------
+
+Creating Grids
+--------------
+1. Creating 1000 random grid points between (1 2 3) and (2 4 6)
+
+2. Initializing a grid of size 1000 to the origin.Reading grid from file random.dat
+
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"TestGrid" end time: Dec 19 11:04 CST
+"TestGrid" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/4 Testing: TestSpatialHash
+2/4 Test: TestSpatialHash
+Command: "/Users/Nikhil/Documents/Academic/Numerics/MDStressLab++/unit_tests/testSpatialHash/testSpatialHash"
+Directory: /Users/Nikhil/Documents/Academic/Numerics/MDStressLab++/unit_tests/testSpatialHash
+"TestSpatialHash" start time: Dec 19 11:04 CST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.20 sec
+----------------------------------------------------------
+Test Passed.
+"TestSpatialHash" end time: Dec 19 11:04 CST
+"TestSpatialHash" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/4 Testing: TestLJ
+3/4 Test: TestLJ
+Command: "/Users/Nikhil/Documents/Academic/Numerics/MDStressLab++/unit_tests/testLJ/testLJ"
+Directory: /Users/Nikhil/Documents/Academic/Numerics/MDStressLab++/unit_tests/testLJ
+"TestLJ" start time: Dec 19 11:04 CST
+Output:
+----------------------------------------------------------
+
+Initializing a box configuration
+--------------------------------
+Creating a configuration of 4000 particles along with reference coordinates in a box of size zero
+Reading the box configuration from file config.data
+
+Box size = 
+52.9216       0       0
+      0 53.4508       0
+      0       0 52.9216
+
+Reference box size = 
+52.9216       0       0
+      0 52.9216       0
+      0       0 52.9216
+
+Periodic boundary conditions = 1 1 1
+
+Connecting to model: LJ_Smoothed_Bernardes_1958_Ar__MO_764178710049_001
+-----------------------------------------------------------------------
+Influence distance = 8.5
+
+Creating Grids
+--------------
+1. Creating 100 random grid points between (0 0 0) and (60 60 60)
+
+2. Creating 100 random grid points between (0 0 0) and (60 60 60)
+
+3. Creating 20 random grid points between (0 0 0) and (60 60 60)
+
+4. Initializing a grid of size 125 to the origin.Reading grid from file grid_cauchy.data
+
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Thu Dec 19 11:04:37 2019
+
+Number of Cauchy stresses requested: 1
+
+                     Grid    Averaging domain size
+           0x7ffee3fdb038                        9
+
+Maximum averaging domain size across all stresses = 9
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 26
+Total number of atoms including padding atoms = 27436
+
+Folding grid points in grid: 0x7ffee3fdb038 if necessary....
+Folding point 3: 56.0816 23.0101  31.165 ---> 3.15997 23.0101  31.165
+Folding point 7: 41.2064 35.3386 55.8262 ---> 41.2064 35.3386 2.90459
+Folding point 10: 54.6192 45.7319 15.7472 ---> 1.69765 45.7319 15.7472
+Folding point 12: 37.9583 45.3846 59.4622 ---> 37.9583 45.3846 6.54064
+Folding point 13: 21.9203 14.8223  58.953 ---> 21.9203 14.8223 6.03141
+Folding point 15: 4.36115 37.8981 53.0824 --->  4.36115  37.8981 0.160824
+Folding point 19: 53.8594 54.5525 3.63386 ---> 0.937774  1.10167  3.63386
+Folding point 20: 54.2792 30.2714 30.9775 ---> 1.35758 30.2714 30.9775
+Folding point 21:  19.142 59.1985 29.6386 --->  19.142 5.74771 29.6386
+Folding point 22: 15.9687 5.44397 56.8659 ---> 15.9687 5.44397 3.94425
+Folding point 24: 16.6249  54.829 31.7848 ---> 16.6249 1.37823 31.7848
+Folding point 25: 27.8667 56.4588 3.00504 ---> 27.8667 3.00798 3.00504
+Folding point 29: 43.5247 59.9675 53.3143 --->  43.5247  6.51665 0.392729
+Folding point 36:  32.067 29.9088 57.3216 --->  32.067 29.9088 4.40004
+Folding point 37: 44.8976  33.275 53.4442 --->  44.8976   33.275 0.522645
+Folding point 42: 56.2738 14.3946 10.8538 ---> 3.35223 14.3946 10.8538
+Folding point 47: 57.3245 33.3688 8.88909 ---> 4.40293 33.3688 8.88909
+Folding point 48: 58.9983  24.526 8.50919 --->  6.0767  24.526 8.50919
+Folding point 50: 27.8418 57.6657 7.56185 ---> 27.8418 4.21489 7.56185
+Folding point 55: 54.1004 25.5898 8.52126 ---> 1.17881 25.5898 8.52126
+Folding point 56: 56.8492 24.6188 7.87131 --->  3.9276 24.6188 7.87131
+Folding point 57: 53.1389 5.53042 9.73191 ---> 0.217299  5.53042  9.73191
+Folding point 61: 55.9005 39.0988 12.9149 ---> 2.97886 39.0988 12.9149
+Folding point 62: 40.7755 54.5353 15.0075 ---> 40.7755 1.08449 15.0075
+Folding point 65: 27.7347  57.082 37.9643 ---> 27.7347 3.63123 37.9643
+Folding point 67: 42.1324 59.2287 57.2649 ---> 42.1324 5.77791 4.34329
+Folding point 76: 11.9733  54.998  51.953 ---> 11.9733 1.54721  51.953
+Folding point 77: 53.4011 32.6369  8.3517 ---> 0.479517  32.6369   8.3517
+Folding point 78: 27.0208 59.3617 12.9319 ---> 27.0208 5.91093 12.9319
+Folding point 82:  59.947 9.21627 37.8293 --->  7.0254 9.21627 37.8293
+Folding point 90: 57.1296 56.8527 23.3912 ---> 4.20798 3.40188 23.3912
+Folding point 94: 11.5094 58.9941 14.6433 ---> 11.5094 5.54333 14.6433
+Folding point 97: 9.46387 59.2762 15.4301 ---> 9.46387  5.8254 15.4301
+
+
+Building a local configuration
+------------------------------
+Cauchy Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffee3fdb038                        9
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 19465
+Number of contributing particles = 11228
+
+Building neighbor list
+----------------------
+Size of neighbor list = 875596
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 100
+[=======>                                                              ] 10
+[==============>                                                       ] 20
+[=====================>                                                ] 30
+[============================>                                         ] 40
+[===================================>                                  ] 50
+[==========================================>                           ] 60
+[=================================================>                    ] 70
+[========================================================>             ] 80
+[===============================================================>      ] 90
+
+Done with grid 0x7ffee3fdb040
+
+Writing stress and grid of hardyRandomCauchy
+
+
+
+
+Elapsed time: 1.7041 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Thu Dec 19 11:04:39 2019
+
+Number of Piola stresses requested : 1
+
+                     Grid    Averaging domain size
+           0x7ffee3fdb060                        9
+
+Maximum averaging domain size across all stresses = 9
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 26
+Total number of atoms including padding atoms = 27436
+
+Folding grid points in grid: 0x7ffee3fdb060 if necessary....
+Folding point 15: 56.6852 27.6418 56.4098 ---> 3.76357 27.6418 3.48818
+Folding point 18: 59.1902 9.02363 40.2059 ---> 6.26856 9.02363 40.2059
+Folding point 21: 38.5787 32.7682 55.0709 ---> 38.5787 32.7682 2.14926
+Folding point 22: 15.9968 58.2052  14.804 ---> 15.9968 4.75438  14.804
+Folding point 26: 34.9453 45.1026  59.492 ---> 34.9453 45.1026 6.57038
+Folding point 29: 4.79501 9.78486 54.1981 ---> 4.79501 9.78486 1.27647
+Folding point 44: 3.44852  59.213 32.5436 ---> 3.44852 5.76216 32.5436
+Folding point 48: 2.13526 7.35041 58.4013 ---> 2.13526 7.35041 5.47973
+Folding point 51: 57.2417 21.4155 50.2861 ---> 4.32011 21.4155 50.2861
+Folding point 52: 58.4551 15.5409 15.0917 ---> 5.53354 15.5409 15.0917
+Folding point 53: 25.4602 48.7829 53.8749 --->  25.4602  48.7829 0.953251
+Folding point 60: 7.41824 58.4008 1.77812 ---> 7.41824 4.94995 1.77812
+Folding point 62: 56.0418 15.0093 21.5795 ---> 3.12022 15.0093 21.5795
+Folding point 70: 7.49669 56.9494 29.0508 ---> 7.49669 3.49861 29.0508
+Folding point 71: 37.2627 54.8415 1.07667 ---> 37.2627 1.39068 1.07667
+Folding point 75: 58.6308 28.0645 19.7434 ---> 5.70921 28.0645 19.7434
+Folding point 77: 10.2828 22.3512 56.3835 ---> 10.2828 22.3512 3.46192
+Folding point 78: 57.8911 15.2974 4.22011 ---> 4.96947 15.2974 4.22011
+Folding point 84: 23.3436 56.1145 36.3362 ---> 23.3436 2.66368 36.3362
+Folding point 94: 25.5115 11.2095 57.8085 ---> 25.5115 11.2095 4.88693
+Folding point 95: 8.04235 47.7513 56.7627 ---> 8.04235 47.7513 3.84107
+
+
+Building a local configuration
+------------------------------
+Piola Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffee3fdb060                        9
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 18562
+Number of contributing particles = 10558
+
+Building neighbor list
+----------------------
+Size of neighbor list = 820941
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 100
+[=======>                                                              ] 10
+[==============>                                                       ] 20
+[=====================>                                                ] 30
+[============================>                                         ] 40
+[===================================>                                  ] 50
+[==========================================>                           ] 60
+[=================================================>                    ] 70
+[========================================================>             ] 80
+[===============================================================>      ] 90
+
+Done with grid 0x7ffee3fdb068
+
+Writing stress and grid of hardyRandomPiola
+
+
+
+
+Elapsed time: 1.64383 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+* Warning : "No stress calculation requested. Returning to caller." : 67:/Users/Nikhil/Documents/Academic/Numerics/MDStressLab++/include/MDStressLab++/calculateStress.cpp
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Thu Dec 19 11:04:41 2019
+
+Number of Piola stresses requested : 2
+
+                     Grid    Averaging domain size
+           0x7ffee3fdb2c8                        5
+           0x7ffee3fdb2c8                        7
+Number of Cauchy stresses requested: 1
+
+                     Grid    Averaging domain size
+           0x7ffee3fdb2f0                  5.29216
+
+Maximum averaging domain size across all stresses = 7
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 24
+Total number of atoms including padding atoms = 25992
+
+Folding grid points in grid: 0x7ffee3fdb2c8 if necessary....
+Folding point 2:  55.749 13.2309 12.2738 ---> 2.82738 13.2309 12.2738
+Folding point 7: 58.6343 26.6712 2.05459 --->  5.7127 26.6712 2.05459
+Folding point 11: 24.2149 59.2395 58.0146 ---> 24.2149 5.78866 5.09298
+Folding point 13: 8.90342 59.8559 38.3714 ---> 8.90342  6.4051 38.3714
+Folding point 14: 28.0845 55.9149 41.4464 ---> 28.0845 2.46406 41.4464
+Folding point 16: 9.55297  56.715   49.28 ---> 9.55297  3.2642   49.28
+
+Folding grid points in grid: 0x7ffee3fdb2c8 if necessary....
+
+Folding grid points in grid: 0x7ffee3fdb2f0 if necessary....
+
+
+Building a local configuration
+------------------------------
+Piola Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffee3fdb2c8                        7
+Cauchy Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffee3fdb2f0                  5.29216
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 15106
+Number of contributing particles = 8135
+
+Building neighbor list
+----------------------
+Size of neighbor list = 633709
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 20
+[=======>                                                              ] 10
+[==============>                                                       ] 20
+[=====================>                                                ] 30
+[============================>                                         ] 40
+[===================================>                                  ] 50
+[==========================================>                           ] 60
+[=================================================>                    ] 70
+[========================================================>             ] 80
+[===============================================================>      ] 90
+
+Done with grid 0x7ffee3fdb2d0
+
+2. Number of grid points: 20
+[=======>                                                              ] 10
+[==============>                                                       ] 20
+[=====================>                                                ] 30
+[============================>                                         ] 40
+[===================================>                                  ] 50
+[==========================================>                           ] 60
+[=================================================>                    ] 70
+[========================================================>             ] 80
+[===============================================================>      ] 90
+
+Done with grid 0x7ffee3fdb2d0
+
+3. Number of grid points: 125
+[======>                                                               ] 9
+[=============>                                                        ] 19
+[====================>                                                 ] 28
+[==========================>                                           ] 38
+[=================================>                                    ] 48
+[========================================>                             ] 57
+[===============================================>                      ] 67
+[=====================================================>                ] 76
+[============================================================>         ] 86
+[===================================================================>  ] 96
+Done with grid 0x7ffee3fdb2f8
+
+Writing stress and grid of hardy3
+Writing stress and grid of hardy4
+Writing stress and grid of hardy1
+
+
+
+
+Elapsed time: 1.22096 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Thu Dec 19 11:04:42 2019
+
+Number of Cauchy stresses requested: 1
+
+                     Grid    Averaging domain size
+           0x7ffee3fdb2f0                       20
+
+Maximum averaging domain size across all stresses = 20
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 37
+Total number of atoms including padding atoms = 48668
+
+Folding grid points in grid: 0x7ffee3fdb2f0 if necessary....
+
+
+Building a local configuration
+------------------------------
+Cauchy Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffee3fdb2f0                       20
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 29996
+Number of contributing particles = 19368
+
+Building neighbor list
+----------------------
+Size of neighbor list = 1510704
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 125
+[======>                                                               ] 9
+[=============>                                                        ] 19
+[====================>                                                 ] 28
+[==========================>                                           ] 38
+[=================================>                                    ] 48
+[========================================>                             ] 57
+[===============================================>                      ] 67
+[=====================================================>                ] 76
+[============================================================>         ] 86
+[===================================================================>  ] 96
+Done with grid 0x7ffee3fdb2f8
+
+Writing stress and grid of hardy2
+
+
+
+
+Elapsed time: 5.98981 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+<end of output>
+Test time =  10.68 sec
+----------------------------------------------------------
+Test Passed.
+"TestLJ" end time: Dec 19 11:04 CST
+"TestLJ" time elapsed: 00:00:10
+----------------------------------------------------------
+
+4/4 Testing: TestSW
+4/4 Test: TestSW
+Command: "/Users/Nikhil/Documents/Academic/Numerics/MDStressLab++/unit_tests/testSW/testSW"
+Directory: /Users/Nikhil/Documents/Academic/Numerics/MDStressLab++/unit_tests/testSW
+"TestSW" start time: Dec 19 11:04 CST
+Output:
+----------------------------------------------------------
+
+Initializing a box configuration
+--------------------------------
+Creating a configuration of 8000 particles along with reference coordinates in a box of size zero
+Reading the box configuration from file config.data
+
+Box size = 
+54.3095       0       0
+      0 54.8526       0
+      0       0 54.3095
+
+Reference box size = 
+54.3095       0       0
+      0 54.3095       0
+      0       0 54.3095
+
+Periodic boundary conditions = 1 1 1
+
+Connecting to model: SW_StillingerWeber_1985_Si__MO_405512056662_005
+--------------------------------------------------------------------
+Influence distance = 3.77118
+
+Creating Grids
+--------------
+1. Creating 100 random grid points between (0 0 0) and (60 60 60)
+
+2. Creating 100 random grid points between (0 0 0) and (60 60 60)
+
+3. Creating 20 random grid points between (0 0 0) and (60 60 60)
+
+4. Initializing a grid of size 125 to the origin.Reading grid from file grid_cauchy.data
+
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Thu Dec 19 11:04:48 2019
+
+Number of Cauchy stresses requested: 1
+
+                     Grid    Averaging domain size
+           0x7ffee80bf038                        9
+
+Maximum averaging domain size across all stresses = 9
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 16.5424
+Total number of atoms including padding atoms = 32768
+
+Folding grid points in grid: 0x7ffee80bf038 if necessary....
+Folding point 3: 56.0816 23.0101  31.165 ---> 1.77208 23.0101  31.165
+Folding point 7: 41.2064 35.3386 55.8262 ---> 41.2064 35.3386 1.51669
+Folding point 10: 54.6192 45.7319 15.7472 ---> 0.309752  45.7319  15.7472
+Folding point 12: 37.9583 45.3846 59.4622 ---> 37.9583 45.3846 5.15275
+Folding point 13: 21.9203 14.8223  58.953 ---> 21.9203 14.8223 4.64352
+Folding point 21:  19.142 59.1985 29.6386 --->  19.142 4.34593 29.6386
+Folding point 22: 15.9687 5.44397 56.8659 ---> 15.9687 5.44397 2.55636
+Folding point 25: 27.8667 56.4588 3.00504 ---> 27.8667  1.6062 3.00504
+Folding point 29: 43.5247 59.9675 53.3143 ---> 43.5247 5.11488 53.3143
+Folding point 36:  32.067 29.9088 57.3216 --->  32.067 29.9088 3.01215
+Folding point 42: 56.2738 14.3946 10.8538 ---> 1.96434 14.3946 10.8538
+Folding point 47: 57.3245 33.3688 8.88909 ---> 3.01503 33.3688 8.88909
+Folding point 48: 58.9983  24.526 8.50919 ---> 4.68881  24.526 8.50919
+Folding point 50: 27.8418 57.6657 7.56185 ---> 27.8418 2.81312 7.56185
+Folding point 56: 56.8492 24.6188 7.87131 ---> 2.53971 24.6188 7.87131
+Folding point 61: 55.9005 39.0988 12.9149 ---> 1.59097 39.0988 12.9149
+Folding point 65: 27.7347  57.082 37.9643 ---> 27.7347 2.22945 37.9643
+Folding point 67: 42.1324 59.2287 57.2649 ---> 42.1324 4.37614  2.9554
+Folding point 76: 11.9733  54.998  51.953 --->  11.9733 0.145441   51.953
+Folding point 78: 27.0208 59.3617 12.9319 ---> 27.0208 4.50916 12.9319
+Folding point 82:  59.947 9.21627 37.8293 --->  5.6375 9.21627 37.8293
+Folding point 90: 57.1296 56.8527 23.3912 ---> 2.82008 2.00011 23.3912
+Folding point 94: 11.5094 58.9941 14.6433 ---> 11.5094 4.14156 14.6433
+Folding point 97: 9.46387 59.2762 15.4301 ---> 9.46387 4.42363 15.4301
+
+
+Building a local configuration
+------------------------------
+Cauchy Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffee80bf038                        9
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 20446
+Number of contributing particles = 14752
+
+Building neighbor list
+----------------------
+Size of neighbor list = 59008
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 100
+[=======>                                                              ] 10
+[==============>                                                       ] 20
+[=====================>                                                ] 30
+[============================>                                         ] 40
+[===================================>                                  ] 50
+[==========================================>                           ] 60
+[=================================================>                    ] 70
+[========================================================>             ] 80
+[===============================================================>      ] 90
+
+Done with grid 0x7ffee80bf040
+
+Writing stress and grid of hardyRandomCauchy
+
+
+
+
+Elapsed time: 0.420461 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Thu Dec 19 11:04:48 2019
+
+Number of Piola stresses requested : 1
+
+                     Grid    Averaging domain size
+           0x7ffee80bf060                        9
+
+Maximum averaging domain size across all stresses = 9
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 16.5424
+Total number of atoms including padding atoms = 32768
+
+Folding grid points in grid: 0x7ffee80bf060 if necessary....
+Folding point 15: 56.6852 27.6418 56.4098 ---> 2.37567 27.6418 2.10029
+Folding point 18: 59.1902 9.02363 40.2059 ---> 4.88066 9.02363 40.2059
+Folding point 21: 38.5787 32.7682 55.0709 --->  38.5787  32.7682 0.761365
+Folding point 22: 15.9968 58.2052  14.804 ---> 15.9968 3.35261  14.804
+Folding point 26: 34.9453 45.1026  59.492 ---> 34.9453 45.1026 5.18248
+Folding point 44: 3.44852  59.213 32.5436 ---> 3.44852 4.36039 32.5436
+Folding point 48: 2.13526 7.35041 58.4013 ---> 2.13526 7.35041 4.09184
+Folding point 51: 57.2417 21.4155 50.2861 ---> 2.93221 21.4155 50.2861
+Folding point 52: 58.4551 15.5409 15.0917 ---> 4.14564 15.5409 15.0917
+Folding point 60: 7.41824 58.4008 1.77812 ---> 7.41824 3.54818 1.77812
+Folding point 62: 56.0418 15.0093 21.5795 ---> 1.73233 15.0093 21.5795
+Folding point 70: 7.49669 56.9494 29.0508 ---> 7.49669 2.09684 29.0508
+Folding point 75: 58.6308 28.0645 19.7434 ---> 4.32131 28.0645 19.7434
+Folding point 77: 10.2828 22.3512 56.3835 ---> 10.2828 22.3512 2.07403
+Folding point 78: 57.8911 15.2974 4.22011 ---> 3.58158 15.2974 4.22011
+Folding point 84: 23.3436 56.1145 36.3362 ---> 23.3436  1.2619 36.3362
+Folding point 94: 25.5115 11.2095 57.8085 ---> 25.5115 11.2095 3.49904
+Folding point 95: 8.04235 47.7513 56.7627 ---> 8.04235 47.7513 2.45318
+
+
+Building a local configuration
+------------------------------
+Piola Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffee80bf060                        9
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 18780
+Number of contributing particles = 13259
+
+Building neighbor list
+----------------------
+Size of neighbor list = 53036
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 100
+[=======>                                                              ] 10
+[==============>                                                       ] 20
+[=====================>                                                ] 30
+[============================>                                         ] 40
+[===================================>                                  ] 50
+[==========================================>                           ] 60
+[=================================================>                    ] 70
+[========================================================>             ] 80
+[===============================================================>      ] 90
+
+Done with grid 0x7ffee80bf068
+
+Writing stress and grid of hardyRandomPiola
+
+
+
+
+Elapsed time: 0.384312 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+* Warning : "No stress calculation requested. Returning to caller." : 67:/Users/Nikhil/Documents/Academic/Numerics/MDStressLab++/include/MDStressLab++/calculateStress.cpp
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Thu Dec 19 11:04:49 2019
+
+Number of Piola stresses requested : 2
+
+                     Grid    Averaging domain size
+           0x7ffee80bf2c8                        5
+           0x7ffee80bf2c8                        7
+Number of Cauchy stresses requested: 1
+
+                     Grid    Averaging domain size
+           0x7ffee80bf2f0                  5.29216
+
+Maximum averaging domain size across all stresses = 7
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 14.5424
+Total number of atoms including padding atoms = 27000
+
+Folding grid points in grid: 0x7ffee80bf2c8 if necessary....
+Folding point 2:  55.749 13.2309 12.2738 ---> 1.43949 13.2309 12.2738
+Folding point 7: 58.6343 26.6712 2.05459 --->  4.3248 26.6712 2.05459
+Folding point 11: 24.2149 59.2395 58.0146 ---> 24.2149 4.38689 3.70508
+Folding point 13: 8.90342 59.8559 38.3714 ---> 8.90342 5.00332 38.3714
+Folding point 14: 28.0845 55.9149 41.4464 ---> 28.0845 1.06229 41.4464
+Folding point 16: 9.55297  56.715   49.28 ---> 9.55297 1.86242   49.28
+
+Folding grid points in grid: 0x7ffee80bf2c8 if necessary....
+
+Folding grid points in grid: 0x7ffee80bf2f0 if necessary....
+
+
+Building a local configuration
+------------------------------
+Piola Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffee80bf2c8                        7
+Cauchy Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffee80bf2f0                  5.29216
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 9626
+Number of contributing particles = 5219
+
+Building neighbor list
+----------------------
+Size of neighbor list = 20876
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 20
+[=======>                                                              ] 10
+[==============>                                                       ] 20
+[=====================>                                                ] 30
+[============================>                                         ] 40
+[===================================>                                  ] 50
+[==========================================>                           ] 60
+[=================================================>                    ] 70
+[========================================================>             ] 80
+[===============================================================>      ] 90
+
+Done with grid 0x7ffee80bf2d0
+
+2. Number of grid points: 20
+[=======>                                                              ] 10
+[==============>                                                       ] 20
+[=====================>                                                ] 30
+[============================>                                         ] 40
+[===================================>                                  ] 50
+[==========================================>                           ] 60
+[=================================================>                    ] 70
+[========================================================>             ] 80
+[===============================================================>      ] 90
+
+Done with grid 0x7ffee80bf2d0
+
+3. Number of grid points: 125
+[======>                                                               ] 9
+[=============>                                                        ] 19
+[====================>                                                 ] 28
+[==========================>                                           ] 38
+[=================================>                                    ] 48
+[========================================>                             ] 57
+[===============================================>                      ] 67
+[=====================================================>                ] 76
+[============================================================>         ] 86
+[===================================================================>  ] 96
+Done with grid 0x7ffee80bf2f8
+
+Writing stress and grid of hardy3
+Writing stress and grid of hardy4
+Writing stress and grid of hardy1
+
+
+
+
+Elapsed time: 0.213931 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Thu Dec 19 11:04:49 2019
+
+Number of Cauchy stresses requested: 1
+
+                     Grid    Averaging domain size
+           0x7ffee80bf2f0                       20
+
+Maximum averaging domain size across all stresses = 20
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 27.5424
+Total number of atoms including padding atoms = 64000
+
+Folding grid points in grid: 0x7ffee80bf2f0 if necessary....
+
+
+Building a local configuration
+------------------------------
+Cauchy Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffee80bf2f0                       20
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 10510
+Number of contributing particles = 7538
+
+Building neighbor list
+----------------------
+Size of neighbor list = 30152
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 125
+[======>                                                               ] 9
+[=============>                                                        ] 19
+[====================>                                                 ] 28
+[==========================>                                           ] 38
+[=================================>                                    ] 48
+[========================================>                             ] 57
+[===============================================>                      ] 67
+[=====================================================>                ] 76
+[============================================================>         ] 86
+[===================================================================>  ] 96
+Done with grid 0x7ffee80bf2f8
+
+Writing stress and grid of hardy2
+
+
+
+
+Elapsed time: 1.65444 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+<end of output>
+Test time =   2.76 sec
+----------------------------------------------------------
+Test Passed.
+"TestSW" end time: Dec 19 11:04 CST
+"TestSW" time elapsed: 00:00:02
+----------------------------------------------------------
+
+End testing: Dec 19 11:04 CST

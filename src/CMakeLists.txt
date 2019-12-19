@@ -13,6 +13,7 @@ add_library(MDStressLab++ SHARED BoxConfiguration.cpp
                              SubConfiguration.cpp
                              neighbor_list.cpp 
                              Exception.cpp 
+                             Hardy.cpp
                              kim.cpp
                              InteratomicForces.cpp)
 
