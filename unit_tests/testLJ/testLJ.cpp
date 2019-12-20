@@ -13,6 +13,7 @@
 #include "calculateStress.h"
 #include "Grid.h"
 #include "typedef.h"
+#include "../compareStress.cpp"
 
 
 int main()
@@ -101,6 +102,13 @@ int main()
 	calculateStress(body,kim,
 					std::tie(),
 					std::tie(hardyStress2));
+
+	compareStress("hardy1");
+	compareStress("hardy2");
+	compareStress("hardy3");
+	compareStress("hardy4");
+	compareStress("hardyRandomCauchy");
+	compareStress("hardyRandomPiola");
 
 
 	return 0;

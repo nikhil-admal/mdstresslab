@@ -102,6 +102,12 @@ int main()
 					std::tie(),
 					std::tie(hardyStress2));
 
+	compareStress("hardy1");
+	compareStress("hardy2");
+	compareStress("hardy3");
+	compareStress("hardy4");
+	compareStress("hardyRandomCauchy");
+	compareStress("hardyRandomPiola");
 
 	return 0;
 }
