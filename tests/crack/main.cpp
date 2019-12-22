@@ -4,12 +4,12 @@
  *  Created on: Nov 3, 2019
  *      Author: Nikhil Admal
  */
+#include <Sphere.h>
 #include <string>
 #include <iostream>
 #include <tuple>
 #include <fstream>
 #include "BoxConfiguration.h"
-#include "Hardy.h"
 #include "calculateStress.h"
 #include "Grid.h"
 #include "typedef.h"
@@ -52,8 +52,8 @@ int main()
 	// Create hardyStress object
 
 	// Hardy stress
-	Hardy hardy(20);
-	Stress<Hardy,Cauchy> hardyStress("hardy",hardy,&gridFromFile);
+	Sphere hardy(20);
+	Stress<Sphere,Cauchy> hardyStress("hardy",hardy,&gridFromFile);
 
 	calculateStress(body,kim,
 					std::tie(),

@@ -23,12 +23,12 @@ class Stress {
 public:
 	std::vector<Matrix3d> field;
 	TGrid* pgrid;
-	TStress bondFunction;
+	TStress weightFunction;
 	std::string name;
 
 	Stress(std::string name,
-		   const TStress& bondFunction,
-		   TGrid* pgrid): name(name),pgrid(pgrid),bondFunction(bondFunction)
+		   const TStress& weightFunction,
+		   TGrid* pgrid): name(name),pgrid(pgrid),weightFunction(weightFunction)
 	{
 		field.resize(pgrid->ngrid);
 		for(auto& matrix : field)

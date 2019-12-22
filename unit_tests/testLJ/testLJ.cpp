@@ -4,12 +4,12 @@
  *  Created on: Nov 3, 2019
  *      Author: Nikhil Admal
  */
+#include <Sphere.h>
 #include <string>
 #include <iostream>
 #include <tuple>
 #include <fstream>
 #include "BoxConfiguration.h"
-#include "Hardy.h"
 #include "calculateStress.h"
 #include "Grid.h"
 #include "typedef.h"
@@ -58,28 +58,28 @@ int main()
 //	-------------------------------------------------------------------
 	// Create hardyStress object
 
-	// Hardy stress 1
-	Hardy hardy1(5.29216036151419);
+	// Sphere stress 1
+	Sphere hardy1(5.29216036151419);
 
 	//TODO The bond function should be accepted as a reference
-	Stress<Hardy,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
+	Stress<Sphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
 
-	// Hardy stress 2
-	Hardy hardy2(20);
-	Stress<Hardy,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
+	// Sphere stress 2
+	Sphere hardy2(20);
+	Stress<Sphere,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
 
-	// Hardy stress 3
-	Hardy hardy3(5);
-	Stress<Hardy,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
+	// Sphere stress 3
+	Sphere hardy3(5);
+	Stress<Sphere,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
 
-	// Hardy stress 4
-	Hardy hardy4(7);
-	Stress<Hardy,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
+	// Sphere stress 4
+	Sphere hardy4(7);
+	Stress<Sphere,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
 
-	Hardy hardyRandom(9);
-	Stress<Hardy,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
+	Sphere hardyRandom(9);
+	Stress<Sphere,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
 
-	Stress<Hardy,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
+	Stress<Sphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
 
 //	Calculate only  Piola
 	calculateStress(body,kim,
