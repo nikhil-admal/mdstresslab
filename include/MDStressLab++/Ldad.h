@@ -5,12 +5,13 @@
  *      Author: Nikhil
  */
 
-#ifndef LDAD_H_
-#define LDAD_H_
+#ifndef LDADBASE_H_
+#define LDADBASE_H_
 
 #include "typedef.h"
 #include <map>
 
+template<typename T>
 class Ldad
 {
 public:
@@ -23,9 +24,10 @@ public:
 	double bondFunction(const Vector3d& vec1, const Vector3d& vec2);
 
 
-private:
+protected:
 	double normalizer;
+	T oneDFunction;
 	Matrix3d ldadVectors;
 };
 
-#endif /* LDAD_H_ */
+#endif /* LDADBASE_H_ */
