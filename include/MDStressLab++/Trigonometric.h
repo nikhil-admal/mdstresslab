@@ -14,14 +14,8 @@ public:
 	Trigonometric();
 	virtual ~Trigonometric();
 
-	double operator()(const double& t)
-	{
-		return 0;
-	}
-	double integrate(const double& t1, const double& t2)
-	{
-		return 0;
-	}
+	double operator()(const double& t);
+	double integrate(const double& t1, const double& t2);
 };
 
 

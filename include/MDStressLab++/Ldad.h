@@ -30,4 +30,5 @@ protected:
 	Matrix3d ldadVectors;
 };
 
+#include "Ldad.cpp"
 #endif /* LDADBASE_H_ */
