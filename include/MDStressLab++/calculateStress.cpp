@@ -342,7 +342,7 @@ int calculateStress(const Configuration* pconfig,
 		std::cout << i_grid+1 << ". Number of grid points: " << numberOfGridPoints << std::endl;
 		for (const auto& gridPoint : pgrid->coordinates)
 		{
-			if ( (i_gridPoint+1)%(numberOfGridPoints/10) == 0 )
+			if ( numberOfGridPoints<10 || (i_gridPoint+1)%(numberOfGridPoints/10) == 0)
 			{
 				progress= (double)(i_gridPoint+1)/numberOfGridPoints;
 				progressBar(progress);
