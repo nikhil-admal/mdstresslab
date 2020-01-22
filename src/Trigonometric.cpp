@@ -19,12 +19,13 @@ double Trigonometric::operator()(const double& t)
     if (t <= -1 || t >= 1)
 	{
 		return 0.0;
-	} else
+	} 
+	else
 	{
 		return 0.5 * (1.0 + cos(t * M_PI));
 	}
-	return 0;
 }
+
 double Trigonometric::integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg)
 {
     Vector3d a, b;

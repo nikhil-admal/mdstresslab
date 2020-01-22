@@ -45,7 +45,7 @@ template<typename T>
 double Ldad<T>::operator()(const Vector3d& vec)
 {
 	Vector3d vec_pull;
-	vec_pull = InverseldadVectors * vec;
+	vec_pull = InverseldadVectors * vec.transpose();
 	// oneDFunction -1 1 
 	return oneDFunction(vec_pull(0))*oneDFunction(vec_pull(1))*oneDFunction(vec_pull(2));
 }
@@ -79,8 +79,8 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 		selected(i) = 0;
 	}
 
-	vec1_pull = InverseldadVectors * vec1;
-	vec2_pull = InverseldadVectors * vec2;
+	vec1_pull = InverseldadVectors * vec1.transpose();
+	vec2_pull = InverseldadVectors * vec2.transpose();
     vec12_pull = vec2_pull - vec1_pull;
     // This is a necessary step to initialization
 	vec1_pull_seg = vec1_pull;
@@ -837,8 +837,8 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 		}
 	}
 
-    vec1_push_seg = ldadVectors * vec1_pull_seg;
-    vec2_push_seg = ldadVectors * vec2_pull_seg;
+    vec1_push_seg = ldadVectors * vec1_pull_seg.transpose();
+    vec2_push_seg = ldadVectors * vec2_pull_seg.transpose();
     vec12_push_seg = vec2_push_seg - vec1_push_seg;
     total_length =  vec12_push_seg.norm();
     // use oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) -> helper function;
