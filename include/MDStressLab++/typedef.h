@@ -53,10 +53,12 @@ typedef std::unique_ptr<double[]> array_dptr;
 typedef std::unique_ptr<int> int_ptr;
 typedef Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> MatrixXd;
 typedef Eigen::Matrix<double,DIM,DIM,Eigen::RowMajor> Matrix3d;
+typedef Eigen::Matrix<int,DIM,DIM,Eigen::RowMajor> Matrix3i;
 typedef Eigen::Matrix<int,1,Eigen::Dynamic,Eigen::RowMajor> VectorXi;
 typedef Eigen::Matrix<double,1,Eigen::Dynamic,Eigen::RowMajor> VectorXd;
 typedef Eigen::Matrix<double,1,DIM,Eigen::RowMajor> Vector3d;
 typedef Eigen::Matrix<int,1,DIM,Eigen::RowMajor> Vector3i;
+typedef Eigen::Array<double,Eigen::Dynamic,Eigen::Dynamic> ArrayXXd;
 enum StressType {
 	Cauchy,
 	Piola

@@ -8,6 +8,7 @@
 #ifndef TRIGONOMETRIC_H_
 #define TRIGONOMETRIC_H_
 
+#include "typedef.h"
 
 class Trigonometric{
 public:
@@ -15,7 +16,7 @@ public:
 	virtual ~Trigonometric();
 
 	double operator()(const double& t);
-	double integrate(const double& t1, const double& t2);
+	double integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg);
 };
 
 

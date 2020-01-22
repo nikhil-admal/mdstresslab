@@ -27,7 +27,7 @@ public:
 protected:
 	double normalizer;
 	T oneDFunction;
-	Matrix3d ldadVectors;
+	Matrix3d ldadVectors, InverseldadVectors;
 };
 
 #include "Ldad.cpp"
