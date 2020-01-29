@@ -12,5 +12,7 @@ add_subdirectory(testGrid)
 add_subdirectory(testSpatialHash)
 add_subdirectory(testLJ)
 add_subdirectory(testSW)
-add_subdirectory(testLDAD)
+add_subdirectory(testLDADSW)
+add_subdirectory(testLDADLJ)
+add_subdirectory(testLDADDEBUG)
 

@@ -35,11 +35,14 @@ double Constant::integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_p
 	Vector3d vec_mid;
 	vec_mid = (vec1_pull_seg + vec2_pull_seg) / 2.0;
 
+	//debug
+	std::cout << "vec_mid: " << vec_mid << std::endl;
+
     for (int i = 0; i <= 2; i++)
 	{
     	if (vec_mid(i) < -1.0 - epsilon || vec_mid(i) > 1.0 + epsilon)
 		{
-       	    result = 0.0;
+		    return 0.0;
 	    } 
 	    else if ((vec_mid(i) >= -1.0 - epsilon && vec_mid(i) <= -1.0 + epsilon) || (vec_mid(i) <= 1.0 + epsilon && vec_mid(i) >= 1.0 - epsilon))
         {
@@ -50,6 +53,7 @@ double Constant::integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_p
 		    result = result * 1.0;
 	    }
 	}
+	std::cout << "result in oneDFunction: " << result << std::endl;
 	return result;
 }
 

@@ -17,14 +17,17 @@ template<typename T>
 Ldad<T>::Ldad(const Matrix3d& ldadVectors):ldadVectors(ldadVectors)
 {
 	// initialize the normalizer here using oneDFunction.integrate(-1,1)
-	normalizer= 1.0/(8.0*fabs(ldadVectors.determinant())) ;
+	normalizer = 1.0/(8.0*fabs(ldadVectors.determinant())) ;
 
     // initialize the averagingDomainSize
     double p1, p2, p3;
 	p1 = fabs(ldadVectors(0,0)) + fabs(ldadVectors(0,1)) + fabs(ldadVectors(0,2));
     p2 = fabs(ldadVectors(1,0)) + fabs(ldadVectors(1,1)) + fabs(ldadVectors(1,2));
 	p3 = fabs(ldadVectors(2,0)) + fabs(ldadVectors(2,1)) + fabs(ldadVectors(2,2));
-	averagingDomainSize = sqrt(p1 * p1 + p2 * p2 + p3 * p3);
+	//averagingDomainSize = sqrt(p1 * p1 + p2 * p2 + p3 * p3);
+
+    averagingDomainSize = sqrt(p1 * p1 + p2 * p2 + p3 * p3);
+    std::cout << "averagingDomainSize: " << averagingDomainSize << std::endl;
 
     // initialize the InverseldadVectors
     InverseldadVectors = ldadVectors.inverse();
@@ -58,6 +61,7 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
        selecting two points out of eight points.
 	   The eight points composed of two points of vec1 and vec2 themselves,
 	   and the intersection of x = +-1, y = +-1, z = +-1.	*/   
+	 	
     Vector3d vec1_pull, vec2_pull, vec12_pull;
 	Vector3d vec1_pull_seg, vec2_pull_seg;
 	Vector3d vec1_push_seg, vec2_push_seg, vec12_push_seg;
@@ -841,8 +845,22 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
     vec2_push_seg = ldadVectors * vec2_pull_seg.transpose();
     vec12_push_seg = vec2_push_seg - vec1_push_seg;
     total_length =  vec12_push_seg.norm();
+	
+    // debug
+	std::cout << "vec1: " << vec1 << std::endl;
+	std::cout << "vec2: " << vec2 << std::endl;
+
+    std::cout << "vec1_pull_seg: " << vec1_pull_seg << std::endl;
+    std::cout << "vec2_pull_seg: " << vec2_pull_seg << std::endl;
+
+    std::cout << "vec1_push_seg: " << vec1_push_seg << std::endl;
+    std::cout << "vec2_push_seg: " << vec2_push_seg << std::endl;
+
+    std::cout << "Total_length: " << total_length << std::endl;
+	std::cout << "OneDFunction: " << oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) << std::endl;
+    std::cout << "Result: " << total_length * oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) * normalizer << std::endl;
     // use oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) -> helper function;
-	return total_length * oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg);
+	return total_length * oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) * normalizer;
 }
 
 int PointLineRelationship(const double& p)
