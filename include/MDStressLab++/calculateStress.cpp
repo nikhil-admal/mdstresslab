@@ -361,12 +361,17 @@ int calculateStress(const Configuration* pconfig,
 				{
 					index= bonds.nlOne_ptr->beginIndex[particle1]+i_neighborOf1;
 					double fij= bonds.fij[index];
+                    //std::cout << "fij = " << fij << std::endl;
 					if (fij == 0) continue;
 
 //					At this point, the force in the bond connecting particles 1 and 2 is nonzero
 					int particle2= bonds.nlOne_ptr->neighborList[index];
 					if(numberOfPiolaStresses>0) rB= subconfig.coordinates.at(Reference).row(particle2) - gridPoint;
 					rb= subconfig.coordinates.at(Current).row(particle2) - gridPoint;
+                    //std::cout << "ra = " << ra << std::endl;
+                    //std::cout << "rA = " << rA << std::endl;
+                    //std::cout << "rb = " << rb << std::endl;
+                    //std::cout << "rB = " << rB << std::endl;
 
 //					Ignore if (particle2 is in neighborListOne and particle 1 > particle 2) as this pair
 //					is encountered twice
@@ -382,6 +387,8 @@ int calculateStress(const Configuration* pconfig,
 					{
 						if(numberOfPiolaStresses>0) rAB= subconfig.coordinates.at(Reference).row(particle1)-subconfig.coordinates.at(Reference).row(particle2);
 						rab= subconfig.coordinates.at(Current).row(particle1)-subconfig.coordinates.at(Current).row(particle2);
+                    //std::cout << "rab = " << rab << std::endl;
+                    //std::cout << "rAB = " << rAB << std::endl;
 						if (i_grid<numberOfPiolaStresses)
 							recursiveBuildStress(fij,ra,rA,rb,rB,rab,rAB,i_gridPoint,i_grid,piolaStress);
 						else
