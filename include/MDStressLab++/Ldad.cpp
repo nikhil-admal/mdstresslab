@@ -73,6 +73,7 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 
     ArrayXXd r_pull_intersect(8,3);
 	double total_length = 0.0;
+    double distance = (vec2 - vec1).norm();
 
     for (int i = 0; i < 8;i++)
     {
@@ -91,11 +92,11 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 	vec2_pull_seg = vec2_pull;
 
     // debug
-	std::cout << "vec1: " << vec1 << std::endl;
-	std::cout << "vec2: " << vec2 << std::endl;
+	//std::cout << "vec1: " << vec1 << std::endl;
+	//std::cout << "vec2: " << vec2 << std::endl;
 
-    std::cout << "vec1_pull: " << vec1_pull << std::endl;
-    std::cout << "vec2_pull: " << vec2_pull << std::endl;
+    //std::cout << "vec1_pull: " << vec1_pull << std::endl;
+    //std::cout << "vec2_pull: " << vec2_pull << std::endl;
 
     for (int i = 0; i <= 2; i++)
     {
@@ -867,17 +868,17 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 	
     // debug
 
-    std::cout << "vec1_pull_seg: " << vec1_pull_seg << std::endl;
-    std::cout << "vec2_pull_seg: " << vec2_pull_seg << std::endl;
+    //std::cout << "vec1_pull_seg: " << vec1_pull_seg << std::endl;
+    //std::cout << "vec2_pull_seg: " << vec2_pull_seg << std::endl;
 
-    std::cout << "vec1_push_seg: " << vec1_push_seg << std::endl;
-    std::cout << "vec2_push_seg: " << vec2_push_seg << std::endl;
+    //std::cout << "vec1_push_seg: " << vec1_push_seg << std::endl;
+    //std::cout << "vec2_push_seg: " << vec2_push_seg << std::endl;
 
-    std::cout << "Total_length: " << total_length << std::endl;
-	std::cout << "OneDFunction: " << oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) << std::endl;
-    std::cout << "Result: " << total_length * oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) << std::endl;
+    //std::cout << "Total_length: " << total_length << std::endl;
+	//std::cout << "OneDFunction: " << oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) << std::endl;
+    //std::cout << "Result: " << total_length * oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) << std::endl;
     // use oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) -> helper function;
-	return total_length * oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) * normalizer;
+	return total_length * oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) * normalizer / distance;
 }
 
 int PointLineRelationship(const double& p)

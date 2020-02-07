@@ -47,11 +47,8 @@ inline typename std::enable_if<I < sizeof...(BF), void>::type
 	else if (I == i_stress && stressType == Piola)
 	{
 		assert(rab.squaredNorm()>epsilon);
-        //std::cout << "Calling Bond function before." << std::endl;
 		std::get<I>(t).field[i_gridPoint]= std::get<I>(t).field[i_gridPoint] +
 				std::get<I>(t).weightFunction.bondFunction(rA,rB)*fij*rAB.transpose()*rab/rab.norm();
-        //std::cout << "BondFunction: " << std::get<I>(t).weightFunction.bondFunction(rA,rB) << std::endl;
-        //std::cout << "Calling Bond function after." << std::endl;
 	}
 	else
 		recursiveBuildStress<I+1>(fij,ra,rA,rb,rB,rab,rAB,i_gridPoint,i_stress,t);
