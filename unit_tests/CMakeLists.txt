@@ -14,5 +14,3 @@ add_subdirectory(testLJ)
 add_subdirectory(testSW)
 add_subdirectory(testLDADSW)
 add_subdirectory(testLDADLJ)
-add_subdirectory(testLDADDEBUG)
-

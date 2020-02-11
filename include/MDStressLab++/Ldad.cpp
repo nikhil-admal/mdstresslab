@@ -24,11 +24,9 @@ Ldad<T>::Ldad(const Matrix3d& ldadVectors):ldadVectors(ldadVectors)
 	p1 = fabs(ldadVectors(0,0)) + fabs(ldadVectors(0,1)) + fabs(ldadVectors(0,2));
     p2 = fabs(ldadVectors(1,0)) + fabs(ldadVectors(1,1)) + fabs(ldadVectors(1,2));
 	p3 = fabs(ldadVectors(2,0)) + fabs(ldadVectors(2,1)) + fabs(ldadVectors(2,2));
-	//averagingDomainSize = sqrt(p1 * p1 + p2 * p2 + p3 * p3);
 
     averagingDomainSize = sqrt(p1 * p1 + p2 * p2 + p3 * p3);
-    std::cout << "averagingDomainSize: " << averagingDomainSize << std::endl;
-
+	
     // initialize the InverseldadVectors
     InverseldadVectors = ldadVectors.inverse();
 }
@@ -61,7 +59,7 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
        selecting two points out of eight points.
 	   The eight points composed of two points of vec1 and vec2 themselves,
 	   and the intersection of x = +-1, y = +-1, z = +-1.	*/   
-	//std::cout << "Anything." << std::endl;	
+
     Vector3d vec1_pull, vec2_pull, vec12_pull;
 	Vector3d vec1_pull_seg, vec2_pull_seg;
 	Vector3d vec1_push_seg, vec2_push_seg, vec12_push_seg;
@@ -91,13 +89,6 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 	vec1_pull_seg = vec1_pull;
 	vec2_pull_seg = vec2_pull;
 
-    // debug
-	//std::cout << "vec1: " << vec1 << std::endl;
-	//std::cout << "vec2: " << vec2 << std::endl;
-
-    //std::cout << "vec1_pull: " << vec1_pull << std::endl;
-    //std::cout << "vec2_pull: " << vec2_pull << std::endl;
-
     for (int i = 0; i <= 2; i++)
     {
 		if (fabs(vec12_pull(i)) < epsilon)
@@ -109,8 +100,6 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 			degenerate(i) = 0;
 		}
 	}
-
-	//std::cout << "degenerate: " << degenerate << std::endl;
 
     relative_position(0,0) = PointLineRelationship(vec1_pull(0));
 	relative_position(1,0) = PointLineRelationship(vec1_pull(1));
@@ -571,12 +560,10 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
     // degenerate to 2D yz
     else if (degenerate(0) && !degenerate(1) && !degenerate(2))
 	{
-		//std::cout << "yz bond: " << std::endl;
 		relative_position(0,2) = PointLineRelationship((vec1_pull(0) + vec2_pull(0)) / 2.0);
 		if (relative_position(0,2) == 1 || relative_position(0,2) == 5)
 		{
 
-			//std::cout << "Returned Here?" << std::endl;
 			return 0.0;
 		}
 
@@ -611,8 +598,6 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 		r_pull_intersect(7,0) = vec2_pull(0);
 		r_pull_intersect(7,1) = vec2_pull(1);
 		r_pull_intersect(7,2) = vec2_pull(2);
-
-		//std::cout << "r_pull_intersect: " << r_pull_intersect << std::endl;
 
         // if the point is inside, then it is the point selected.
         if ((relative_position(1,0) == 2 || relative_position(1,0) == 3 || relative_position(1,0) == 4) && \
@@ -651,14 +636,11 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 			}
 		}
 
-		//std::cout << "selected: " << selected << std::endl;
-
 		selected_count = 0;
 		for (int i = 0; i < 8; i++)
 		{      
             if (selected(i) && selected_count == 0)
 			{
-				//std::cout << "Should called here 1!" << std::endl;
                 vec1_pull_seg(1) = r_pull_intersect(i,1);
 				vec1_pull_seg(2) = r_pull_intersect(i,2);
 				selected_count = 1;
@@ -673,7 +655,6 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 				}
 				else
 				{   
-					//std::cout << "Should called here 2!" << std::endl;
 					vec2_pull_seg(1) = r_pull_intersect(i,1);
 				    vec2_pull_seg(2) = r_pull_intersect(i,2);
 				    selected_count = 2;
@@ -699,14 +680,10 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 			}
 		}
 
-		//std::cout << "vec1_pull_seg: " << vec1_pull_seg << std::endl;
-		//std::cout << "vec2_pull_seg: " << vec2_pull_seg << std::endl;
-
 		// No intersection .or. one point on the parallelepiped but another point is outside
 		if (selected_count == 0 || selected_count == 1)
 		{
 
-			//std::cout << "Returned Here???" << std::endl;
 			return 0.0;
 		}
 	}
@@ -866,17 +843,6 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
     vec12_push_seg = vec2_push_seg - vec1_push_seg;
     total_length =  vec12_push_seg.norm();
 	
-    // debug
-
-    //std::cout << "vec1_pull_seg: " << vec1_pull_seg << std::endl;
-    //std::cout << "vec2_pull_seg: " << vec2_pull_seg << std::endl;
-
-    //std::cout << "vec1_push_seg: " << vec1_push_seg << std::endl;
-    //std::cout << "vec2_push_seg: " << vec2_push_seg << std::endl;
-
-    //std::cout << "Total_length: " << total_length << std::endl;
-	//std::cout << "OneDFunction: " << oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) << std::endl;
-    //std::cout << "Result: " << total_length * oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) << std::endl;
     // use oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) -> helper function;
 	return total_length * oneDFunction.integrate(vec1_pull_seg, vec2_pull_seg) * normalizer / distance;
 }
