@@ -9,7 +9,7 @@
 #define SRC_STENCIL_H_
 
 
-#include <typedef.h>
+#include "typedef.h"
 #include <map>
 
 class Configuration;

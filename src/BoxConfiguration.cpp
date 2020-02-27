@@ -38,7 +38,7 @@ void BoxConfiguration::read(std::string configFileName, int referenceAndFinal)
 	if(!file)
 	{
 	// Print an error and exit
-		std::cerr << "ERROR: config.dat could not be opened for reading!" << std::endl;
+		std::cerr << "ERROR: " << configFileName << " could not be opened for reading!" << std::endl;
 		exit(1);
 	}
 

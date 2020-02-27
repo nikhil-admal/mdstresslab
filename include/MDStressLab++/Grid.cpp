@@ -18,7 +18,7 @@ Grid<T>::Grid(int _ngrid) : ngrid(_ngrid)
 	int numberOfGrids= GridBase::numberOfCurrentGrids + GridBase::numberOfReferenceGrids;
 	if (numberOfGrids == 1) MY_HEADING("Creating Grids");
 
-	std::cout << numberOfGrids << ". Initializing a grid of size " << ngrid << " to the origin.";
+	std::cout << numberOfGrids << ". Initializing a grid of size " << ngrid << " to the origin." << std::endl;
 	this->coordinates.resize(ngrid,Vector3d(0.0,0.0,0.0));
 }
 
@@ -42,7 +42,7 @@ Grid<T>::Grid(Vector3d lowerLimit,
 	for (auto& coordinate : coordinates)
 	{
 		coordinate= Vector3d::Random();
-        coordinate= (coordinate + Vector3d::Constant(1.0))/2;
+        coordinate= (coordinate + Vector3d::Constant(1.0))/2.0;
 		coordinate= (coordinate.array() * (upperLimit-lowerLimit).array()).matrix();
 		coordinate+= lowerLimit;
 	}
@@ -105,8 +105,7 @@ void Grid<T>::write(std::string filename) const
 template<ConfigType T>
 void Grid<T>::read(std::string filename)
 {
-	std::cout << "Reading grid from file " << filename << "\n" ;
-	std::cout << std::endl;
+	std::cout << "Reading grid from file " << filename << "\n" << std::endl;
 
 	std::ifstream file(filename);
 

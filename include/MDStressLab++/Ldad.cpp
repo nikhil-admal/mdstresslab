@@ -27,8 +27,8 @@ Ldad<T>::Ldad(const Matrix3d& ldadVectors):ldadVectors(ldadVectors)
 
     averagingDomainSize = sqrt(p1 * p1 + p2 * p2 + p3 * p3);
 	
-    // initialize the InverseldadVectors
-    InverseldadVectors = ldadVectors.inverse();
+    // initialize the inverseLdadVectors
+    inverseLdadVectors = ldadVectors.inverse();
 }
 
 template<typename T>
@@ -46,7 +46,7 @@ template<typename T>
 double Ldad<T>::operator()(const Vector3d& vec)
 {
 	Vector3d vec_pull;
-	vec_pull = InverseldadVectors * vec.transpose();
+	vec_pull = inverseLdadVectors * vec.transpose();
 	// oneDFunction -1 1 
 	return oneDFunction(vec_pull(0))*oneDFunction(vec_pull(1))*oneDFunction(vec_pull(2));
 }
@@ -82,8 +82,8 @@ double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 		selected(i) = 0;
 	}
 
-	vec1_pull = InverseldadVectors * vec1.transpose();
-	vec2_pull = InverseldadVectors * vec2.transpose();
+	vec1_pull = inverseLdadVectors * vec1.transpose();
+	vec2_pull = inverseLdadVectors * vec2.transpose();
     vec12_pull = vec2_pull - vec1_pull;
     // This is a necessary step to initialization
 	vec1_pull_seg = vec1_pull;
