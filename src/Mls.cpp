@@ -7,6 +7,7 @@
 
 #include <fstream>
 #include <vector>
+#include <math.h>
 #include "BoxConfiguration.h"
 #include "Mls.h"
 #include "neighbor_list.h"
@@ -23,18 +24,37 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
     // need to respect boundary conditions
     for (int i = 0; i != body.coordinates.at(Reference).rows(); i++)
     {
-        for (int j = 0; j < 3; j++)
+
+        if (fabs(body.coordinates.at(Current)(i,0) - body.coordinates.at(Reference)(i,0)) > 0.5 * body.box(0) && body.pbc(0))
         {
-            if (body.coordinates.at(Current)(i,j) - body.coordinates.at(Reference)(i,j) > 0.5 * body.box(j) && body.pbc(j))
-            {
-                displacements(i,j) = body.coordinates.at(Current)(i,j) - body.coordinates.at(Reference)(i,j) - body.box(j);
-            }
-            else
-            {
-                displacements(i,j) = body.coordinates.at(Current)(i,j) - body.coordinates.at(Reference)(i,j);
-            }
+            displacements(i,0) = body.coordinates.at(Current)(i,0) - body.coordinates.at(Reference)(i,0) - body.box(0);
         }
+        else
+        {
+            displacements(i,0) = body.coordinates.at(Current)(i,0) - body.coordinates.at(Reference)(i,0);
+        }
+
+        if (fabs(body.coordinates.at(Current)(i,1) - body.coordinates.at(Reference)(i,1)) > 0.5 * body.box(4) && body.pbc(1))
+        {
+            displacements(i,1) = body.coordinates.at(Current)(i,1) - body.coordinates.at(Reference)(i,1) - body.box(4);
+        }
+        else
+        {
+            displacements(i,1) = body.coordinates.at(Current)(i,1) - body.coordinates.at(Reference)(i,1);
+        }
+
+        if (fabs(body.coordinates.at(Current)(i,2) - body.coordinates.at(Reference)(i,2)) > 0.5 * body.box(8) && body.pbc(2))
+        {
+            displacements(i,2) = body.coordinates.at(Current)(i,2) - body.coordinates.at(Reference)(i,2) - body.box(8);
+        }
+        else
+        {
+            displacements(i,2) = body.coordinates.at(Current)(i,2) - body.coordinates.at(Reference)(i,2);
+        }
+        
     }
+
+    //std::cout << "Box size " << body.box(0) << " " << body.box(4) << " " << body.box(8) << " " << std::endl;
 
     double gridRadiusMls;
     double r2;
