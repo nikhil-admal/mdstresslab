@@ -10,6 +10,7 @@
 
 #include <vector>
 #include "typedef.h"
+#include "BoxConfiguration.h"
 
 class Mls {
     public:
@@ -18,7 +19,8 @@ class Mls {
     std::vector<Matrix3d> deformationGradient;
     std::vector<Vector3d> gridPushed;
 
-    Mls(const MatrixXd& referenceCoordinates, const MatrixXd& currentCoordinates, const std::vector<Vector3d>& gridCoordinates, double radiusMls, const std::string name);
+    //Mls(const MatrixXd& referenceCoordinates, const MatrixXd& currentCoordinates, const std::vector<Vector3d>& gridCoordinates, double radiusMls, const std::string name);
+    Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordinates, double radiusMls, const std::string name);
     ~Mls();
 
     void pushToCauchy(const std::vector<Matrix3d>& piolaStress,std::vector<Matrix3d>& cauchyStress);

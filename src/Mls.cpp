@@ -7,24 +7,34 @@
 
 #include <fstream>
 #include <vector>
+#include "BoxConfiguration.h"
 #include "Mls.h"
+#include "neighbor_list.h"
 #include "typedef.h"
 
-Mls::Mls(const MatrixXd& referenceCoordinates, const MatrixXd& currentCoordinates, const std::vector<Vector3d>& gridCoordinates, \
-double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
+Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordinates, \
+         double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
 {
     MY_BANNER("Constructing Deformation Gradient using the Moving Least Square method!");
     deformationGradient.reserve(gridCoordinates.size());
     gridPushed.reserve(gridCoordinates.size());
-    MatrixXd displacements(currentCoordinates.rows(),currentCoordinates.cols());
-    displacements = currentCoordinates - referenceCoordinates;
+    MatrixXd displacements(body.coordinates.at(Reference).rows(),body.coordinates.at(Reference).cols());
 
-    std::cout << currentCoordinates.rows() << std::endl;
-    std::cout << currentCoordinates.cols() << std::endl;
-    std::cout << "Reference Coordinates." << std::endl;
-    std::cout << referenceCoordinates(0,0) << " " << referenceCoordinates(0,1) << " " << referenceCoordinates(0,2) << std::endl; 
-    std::cout << "Current Coordinates." << std::endl;
-    std::cout << currentCoordinates(0,0) << " " << currentCoordinates(0,1) << " " << currentCoordinates(0,2) << std::endl;
+    // need to respect boundary conditions
+    for (int i = 0; i != body.coordinates.at(Reference).rows(); i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (body.coordinates.at(Current)(i,j) - body.coordinates.at(Reference)(i,j) > 0.5 * body.box(j) && body.pbc(j))
+            {
+                displacements(i,j) = body.coordinates.at(Current)(i,j) - body.coordinates.at(Reference)(i,j) - body.box(j);
+            }
+            else
+            {
+                displacements(i,j) = body.coordinates.at(Current)(i,j) - body.coordinates.at(Reference)(i,j);
+            }
+        }
+    }
 
     double gridRadiusMls;
     double r2;
@@ -48,12 +58,25 @@ double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
     
     std::vector<int> gridMlsAtomList;
     double ngridMLSAtomList;
-    
-    std::cout << referenceCoordinates.rows() << std::endl;
-    std::cout << referenceCoordinates.cols() << std::endl;
-    std::cout << "Displacements." << std::endl;
-    std::cout << displacements(0,0) << " " << displacements(0,1) << " " << displacements(0,2) << std::endl;
-    // debug only calculate one grid point;
+/*
+    //	------------------------------------------------------------------
+    //	Building neighbor list for MLS
+    //	------------------------------------------------------------------
+	double MlsbondCutoff= radiusMls;
+	NeighList* nlForMls;
+	nbl_initialize(&nlForMls);
+	nbl_build(nlForMls,body.numberOfParticles,
+				 body.coordinates.at(Current).data(),
+				 MlsbondCutoff,
+				 1,
+				 &MlsbondCutoff,
+				 body.particleContributing.data());
+	int neighborListSize= 0;
+	for (int i_particle=0; i_particle<body.numberOfParticles; i_particle++)
+		neighborListSize+= nlForMls->lists->Nneighbors[i_particle];
+	std::cout << "Size of neighbor list = " <<neighborListSize << std::endl;
+*/
+
     for (std::vector<Vector3d>::size_type iGrid = 0; iGrid != gridCoordinates.size(); iGrid++)
     //for (std::vector<Vector3d>::size_type iGrid = 0; iGrid != 1; iGrid++) // debug only calculate one point
     {
@@ -69,7 +92,7 @@ double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
                          + ". Starting Cycle " + std::to_string(cycle_count) + ".")
             }
 
-            if (ngridMLSAtomList == referenceCoordinates.rows())
+            if (ngridMLSAtomList == body.coordinates.at(Reference).rows())
             {
                 MY_ERROR("Model degenerate to 2D. Cannot use MLS3D to generate deformation gradient!")
             }
@@ -77,20 +100,16 @@ double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
             gridMlsAtomList.clear();
             ngridMLSAtomList = 0;
 
-            for (int jRefAtoms = 0; jRefAtoms != referenceCoordinates.rows(); jRefAtoms++)
+            for (int jRefAtoms = 0; jRefAtoms != body.coordinates.at(Reference).rows(); jRefAtoms++)
             {
-                r(0) = referenceCoordinates(jRefAtoms,0) - gridCoordinates[iGrid](0);
-                r(1) = referenceCoordinates(jRefAtoms,1) - gridCoordinates[iGrid](1);
-                r(2) = referenceCoordinates(jRefAtoms,2) - gridCoordinates[iGrid](2);
-                /*for (int k = 0; k != DIM; k++)
-                [
-                    r(k) = referenceCoordinates(jRefAtoms,k) - gridCoordinates[iGrid](k);
-                ]
-                */
+                r(0) = body.coordinates.at(Reference)(jRefAtoms,0) - gridCoordinates[iGrid](0);
+                r(1) = body.coordinates.at(Reference)(jRefAtoms,1) - gridCoordinates[iGrid](1);
+                r(2) = body.coordinates.at(Reference)(jRefAtoms,2) - gridCoordinates[iGrid](2);
                 if (r.norm() <= gridRadiusMls)
                 {
                     //std::cout << r.norm() << std::endl;
                     gridMlsAtomList.push_back(jRefAtoms);
+                    //std::cout <<"debug push_back: " << jRefAtoms << std::endl;
                     ngridMLSAtomList++;
                 }
             }
@@ -110,27 +129,27 @@ double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
                 for (int i = 0; i <= ngridMLSAtomList - 4; i++)
                 {
                     sanityI = gridMlsAtomList[i];
-                    rSanityI(0) = referenceCoordinates(sanityI,0) - gridCoordinates[iGrid](0);
-                    rSanityI(1) = referenceCoordinates(sanityI,1) - gridCoordinates[iGrid](1);
-                    rSanityI(2) = referenceCoordinates(sanityI,2) - gridCoordinates[iGrid](2);
+                    rSanityI(0) = body.coordinates.at(Reference)(sanityI,0) - gridCoordinates[iGrid](0);
+                    rSanityI(1) = body.coordinates.at(Reference)(sanityI,1) - gridCoordinates[iGrid](1);
+                    rSanityI(2) = body.coordinates.at(Reference)(sanityI,2) - gridCoordinates[iGrid](2);
                     for(int j = i + 1; j <= ngridMLSAtomList - 3; j++)
                     {
                         sanityJ = gridMlsAtomList[j];
-                        rSanityJ(0) = referenceCoordinates(sanityJ,0) - gridCoordinates[iGrid](0);
-                        rSanityJ(1) = referenceCoordinates(sanityJ,1) - gridCoordinates[iGrid](1);
-                        rSanityJ(2) = referenceCoordinates(sanityJ,2) - gridCoordinates[iGrid](2);
+                        rSanityJ(0) = body.coordinates.at(Reference)(sanityJ,0) - gridCoordinates[iGrid](0);
+                        rSanityJ(1) = body.coordinates.at(Reference)(sanityJ,1) - gridCoordinates[iGrid](1);
+                        rSanityJ(2) = body.coordinates.at(Reference)(sanityJ,2) - gridCoordinates[iGrid](2);
                         for (int k = j + 1; k <= ngridMLSAtomList - 2; k++)
                         {
                             sanityK = gridMlsAtomList[k];
-                            rSanityK(0) = referenceCoordinates(sanityK,0) - gridCoordinates[iGrid](0);
-                            rSanityK(1) = referenceCoordinates(sanityK,1) - gridCoordinates[iGrid](1);
-                            rSanityK(2) = referenceCoordinates(sanityK,2) - gridCoordinates[iGrid](2);
+                            rSanityK(0) = body.coordinates.at(Reference)(sanityK,0) - gridCoordinates[iGrid](0);
+                            rSanityK(1) = body.coordinates.at(Reference)(sanityK,1) - gridCoordinates[iGrid](1);
+                            rSanityK(2) = body.coordinates.at(Reference)(sanityK,2) - gridCoordinates[iGrid](2);
                             for (int q = k + 1; q <= ngridMLSAtomList - 1; q++)
                             {
                                 sanityQ = gridMlsAtomList[q];
-                                rSanityQ(0) = referenceCoordinates(sanityQ,0) - gridCoordinates[iGrid](0);
-                                rSanityQ(1) = referenceCoordinates(sanityQ,1) - gridCoordinates[iGrid](1);
-                                rSanityQ(2) = referenceCoordinates(sanityQ,2) - gridCoordinates[iGrid](2);
+                                rSanityQ(0) = body.coordinates.at(Reference)(sanityQ,0) - gridCoordinates[iGrid](0);
+                                rSanityQ(1) = body.coordinates.at(Reference)(sanityQ,1) - gridCoordinates[iGrid](1);
+                                rSanityQ(2) = body.coordinates.at(Reference)(sanityQ,2) - gridCoordinates[iGrid](2);
 
                                 sanity = Matrix4d::Constant(1.0);
                                 sanity(0,0) = rSanityI(0);
@@ -167,6 +186,14 @@ double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
             }
 
             SanityDone:;
+
+            sort(gridMlsAtomList.begin(), gridMlsAtomList.end()); 
+
+            for (auto it = gridMlsAtomList.begin(); it != gridMlsAtomList.end(); ++it) 
+            {
+                std::cout << ' ' << *it + 1 << ' '; 
+            }
+
             P.resize(ngridMLSAtomList,4);
             W.resize(ngridMLSAtomList);
             dWdx.resize(ngridMLSAtomList,3);
@@ -218,14 +245,14 @@ double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
 
             for (int i = 0; i < ngridMLSAtomList; i++)
             {
-                r(0) = referenceCoordinates(gridMlsAtomList[i],0) - gridCoordinates[iGrid](0);
-                r(1) = referenceCoordinates(gridMlsAtomList[i],1) - gridCoordinates[iGrid](1);
-                r(2) = referenceCoordinates(gridMlsAtomList[i],2) - gridCoordinates[iGrid](2);
+                r(0) = body.coordinates.at(Reference)(gridMlsAtomList[i],0) - gridCoordinates[iGrid](0);
+                r(1) = body.coordinates.at(Reference)(gridMlsAtomList[i],1) - gridCoordinates[iGrid](1);
+                r(2) = body.coordinates.at(Reference)(gridMlsAtomList[i],2) - gridCoordinates[iGrid](2);
                 // Form P
                 P(i,0) = 1.0;
-                P(i,1) = referenceCoordinates(gridMlsAtomList[i],0);
-                P(i,2) = referenceCoordinates(gridMlsAtomList[i],1);
-                P(i,3) = referenceCoordinates(gridMlsAtomList[i],2);
+                P(i,1) = body.coordinates.at(Reference)(gridMlsAtomList[i],0) - gridCoordinates[iGrid](0);
+                P(i,2) = body.coordinates.at(Reference)(gridMlsAtomList[i],1) - gridCoordinates[iGrid](1);
+                P(i,3) = body.coordinates.at(Reference)(gridMlsAtomList[i],2) - gridCoordinates[iGrid](2);
                 // Form W and dWdx
                 r2 = r.norm() / gridRadiusMls;
                 if (r2 <= 0.5)
@@ -284,20 +311,72 @@ double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
 
             inverseA = A.inverse();
             gridRadiusMls = 2.0 * gridRadiusMls;
+
 /*
+            double detmat44;
+            detmat44 =  A(1,1)*(A(2,2)*(A(3,3)*A(4,4)-A(3,4)*A(4,3))+A(2,3)*(A(3,4)*A(4,2)-A(3,2)*A(4,4))+A(2,4)*(A(3,2)*A(4,3)-A(3,3)*A(4,2))) \
+                      - A(1,2)*(A(2,1)*(A(3,3)*A(4,4)-A(3,4)*A(4,3))+A(2,3)*(A(3,4)*A(4,1)-A(3,1)*A(4,4))+A(2,4)*(A(3,1)*A(4,3)-A(3,3)*A(4,1))) \
+                      + A(1,3)*(A(2,1)*(A(3,2)*A(4,4)-A(3,4)*A(4,2))+A(2,2)*(A(3,4)*A(4,1)-A(3,1)*A(4,4))+A(2,4)*(A(3,1)*A(4,2)-A(3,2)*A(4,1))) \
+                      - A(1,4)*(A(2,1)*(A(3,2)*A(4,3)-A(3,3)*A(4,2))+A(2,2)*(A(3,3)*A(4,1)-A(3,1)*A(4,3))+A(2,3)*(A(3,1)*A(4,2)-A(3,2)*A(4,1)));
+
+            inverseA(1,1) = \
+    (A(2,2)*(A(3,3)*A(4,4)-A(3,4)*A(4,3))+A(2,3)*(A(3,4)*A(4,2)-A(3,2)*A(4,4))+A(2,4)*(A(3,2)*A(4,3)-A(3,3)*A(4,2))) / detmat44;
+            inverseA(2,1) = \
+    (A(2,1)*(A(3,4)*A(4,3)-A(3,3)*A(4,4))+A(2,3)*(A(3,1)*A(4,4)-A(3,4)*A(4,1))+A(2,4)*(A(3,3)*A(4,1)-A(3,1)*A(4,3))) / detmat44;
+            inverseA(3,1) = \
+    (A(2,1)*(A(3,2)*A(4,4)-A(3,4)*A(4,2))+A(2,2)*(A(3,4)*A(4,1)-A(3,1)*A(4,4))+A(2,4)*(A(3,1)*A(4,2)-A(3,2)*A(4,1))) / detmat44;
+            inverseA(4,1) = \
+    (A(2,1)*(A(3,3)*A(4,2)-A(3,2)*A(4,3))+A(2,2)*(A(3,1)*A(4,3)-A(3,3)*A(4,1))+A(2,3)*(A(3,2)*A(4,1)-A(3,1)*A(4,2))) / detmat44;
+            inverseA(1,2) = \
+    (A(1,2)*(A(3,4)*A(4,3)-A(3,3)*A(4,4))+A(1,3)*(A(3,2)*A(4,4)-A(3,4)*A(4,2))+A(1,4)*(A(3,3)*A(4,2)-A(3,2)*A(4,3))) / detmat44;
+            inverseA(2,2) = \
+    (A(1,1)*(A(3,3)*A(4,4)-A(3,4)*A(4,3))+A(1,3)*(A(3,4)*A(4,1)-A(3,1)*A(4,4))+A(1,4)*(A(3,1)*A(4,3)-A(3,3)*A(4,1))) / detmat44;
+            inverseA(3,2) = \
+    (A(1,1)*(A(3,4)*A(4,2)-A(3,2)*A(4,4))+A(1,2)*(A(3,1)*A(4,4)-A(3,4)*A(4,1))+A(1,4)*(A(3,2)*A(4,1)-A(3,1)*A(4,2))) / detmat44;
+            inverseA(4,2) = \
+    (A(1,1)*(A(3,2)*A(4,3)-A(3,3)*A(4,2))+A(1,2)*(A(3,3)*A(4,1)-A(3,1)*A(4,3))+A(1,3)*(A(3,1)*A(4,2)-A(3,2)*A(4,1))) / detmat44;
+            inverseA(1,3) = \
+    (A(1,2)*(A(2,3)*A(4,4)-A(2,4)*A(4,3))+A(1,3)*(A(2,4)*A(4,2)-A(2,2)*A(4,4))+A(1,4)*(A(2,2)*A(4,3)-A(2,3)*A(4,2))) / detmat44;
+            inverseA(2,3) = \
+    (A(1,1)*(A(2,4)*A(4,3)-A(2,3)*A(4,4))+A(1,3)*(A(2,1)*A(4,4)-A(2,4)*A(4,1))+A(1,4)*(A(2,3)*A(4,1)-A(2,1)*A(4,3))) / detmat44;
+            inverseA(3,3) = \
+    (A(1,1)*(A(2,2)*A(4,4)-A(2,4)*A(4,2))+A(1,2)*(A(2,4)*A(4,1)-A(2,1)*A(4,4))+A(1,4)*(A(2,1)*A(4,2)-A(2,2)*A(4,1))) / detmat44;
+            inverseA(4,3) = \
+    (A(1,1)*(A(2,3)*A(4,2)-A(2,2)*A(4,3))+A(1,2)*(A(2,1)*A(4,3)-A(2,3)*A(4,1))+A(1,3)*(A(2,2)*A(4,1)-A(2,1)*A(4,2))) / detmat44;
+            inverseA(1,4) = \
+    (A(1,2)*(A(2,4)*A(3,3)-A(2,3)*A(3,4))+A(1,3)*(A(2,2)*A(3,4)-A(2,4)*A(3,2))+A(1,4)*(A(2,3)*A(3,2)-A(2,2)*A(3,3))) / detmat44;
+            inverseA(2,4) = \
+    (A(1,1)*(A(2,3)*A(3,4)-A(2,4)*A(3,3))+A(1,3)*(A(2,4)*A(3,1)-A(2,1)*A(3,4))+A(1,4)*(A(2,1)*A(3,3)-A(2,3)*A(3,1))) / detmat44;
+            inverseA(3,4) = \
+    (A(1,1)*(A(2,4)*A(3,2)-A(2,2)*A(3,4))+A(1,2)*(A(2,1)*A(3,4)-A(2,4)*A(3,1))+A(1,4)*(A(2,2)*A(3,1)-A(2,1)*A(3,2))) / detmat44;
+            inverseA(4,4) = \
+    (A(1,1)*(A(2,2)*A(3,3)-A(2,3)*A(3,2))+A(1,2)*(A(2,3)*A(3,1)-A(2,1)*A(3,3))+A(1,3)*(A(2,1)*A(3,2)-A(2,2)*A(3,1))) / detmat44;
+
+*/
+
+            //std::cout << std::endl << "ngridMLSAtomList: " << ngridMLSAtomList << std::endl;
+
             std::cout << "P" << std::endl;
-            std::cout << P << std::endl;
+            std::cout << (P.transpose()).format(Eigen::FullPrecision) << std::endl;
             std::cout << "W" << std::endl;
-            std::cout << W << std::endl;
+            std::cout << W.format(Eigen::FullPrecision) << std::endl;
 
             std::cout << "B" << std::endl;
-            std::cout << B << std::endl;
-*/
-            std::cout << "A" << std::endl;
-            std::cout << A << std::endl;
+            std::cout << B.transpose().format(Eigen::FullPrecision)  << std::endl;
 
-            std::cout << "inverseA" << std::endl;
-            std::cout << inverseA << std::endl;
+            std::cout << "exactDisplacements: " << std::endl;
+            std::cout << exactDisplacements.format(Eigen::FullPrecision)  << std::endl;
+
+            std::cout << "A: " << std::endl;
+            std::cout << (A.transpose()).format(Eigen::FullPrecision) << std::endl;
+
+            std::cout << "A.determinant: " << A.determinant() << std::endl;
+
+            std::cout << "inverseA: " << std::endl;
+            std::cout << (inverseA.transpose()).format(Eigen::FullPrecision) << std::endl;
+
+            std::cout << "dWdx: " << std::endl;
+            std::cout << (dWdx.transpose()).format(Eigen::FullPrecision) << std::endl;
 
             EndLoop:;
             cycle_count++;
@@ -323,13 +402,13 @@ double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
             {
                 for (int k = 0; k < ngridMLSAtomList; k++)
                 {
-                    MlsDisp(i,j) = MlsDisp(i,j) + inverseAXB(i,k) * exactDisplacements(k,j);
+                    MlsDisp(i,j) = MlsDisp(i,j) + inverseAXB(i,k) * exactDisplacements(k,j);                  
                 }
             }
         }
 
         //std::cout << "MlsDisp: " << std::endl;
-        //std::cout << MlsDisp << std::endl;
+        //std::cout << (MlsDisp.transpose()).format(Eigen::FullPrecision) << std::endl;
 
         for (int i = 0; i < 4; i++)
         {
@@ -429,6 +508,57 @@ double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
             }
         }
 
+        // debug
+/*
+        std::cout << "fintmdx: " << std::endl;
+        std::cout << (fintmdx.transpose()).format(Eigen::FullPrecision) << std::endl;
+        std::cout << "fintmdy: " << std::endl;
+        std::cout << (fintmdy.transpose()).format(Eigen::FullPrecision) << std::endl;
+        std::cout << "fintmdz: " << std::endl;
+        std::cout << (fintmdz.transpose()).format(Eigen::FullPrecision) << std::endl;
+
+        std::cout << "sintmdx: " << std::endl;
+        std::cout << (sintmdx.transpose()).format(Eigen::FullPrecision) << std::endl;
+        std::cout << "sintmdy: " << std::endl;
+        std::cout << (sintmdy.transpose()).format(Eigen::FullPrecision) << std::endl;
+        std::cout << "sintmdz: " << std::endl;
+        std::cout << (sintmdz.transpose()).format(Eigen::FullPrecision) << std::endl;
+
+        std::cout << "dMlsDispdx: " << std::endl;
+        std::cout << (dMlsDispdx.transpose()).format(Eigen::FullPrecision) << std::endl;
+        std::cout << "dMlsDispdy: " << std::endl;
+        std::cout << (dMlsDispdy.transpose()).format(Eigen::FullPrecision) << std::endl;
+        std::cout << "dMlsDispdz: " << std::endl;
+        std::cout << (dMlsDispdz.transpose()).format(Eigen::FullPrecision) << std::endl;
+*/
+
+        tensorF(0,0) = 1.0 + MlsDisp(1,0) \
+                              + 1.0 * dMlsDispdx(0,0);
+        tensorF(0,1) =       MlsDisp(2,0) \
+                              + 1.0 * dMlsDispdy(0,0);
+        tensorF(0,2) =       MlsDisp(3,0) \
+                              + 1.0 * dMlsDispdz(0,0);
+        tensorF(1,0) =       MlsDisp(1,1) \
+                              + 1.0 * dMlsDispdx(0,1);
+        tensorF(1,1) = 1.0 + MlsDisp(2,1) \
+                              + 1.0 * dMlsDispdy(0,1);
+        tensorF(1,2) =       MlsDisp(3,1) \
+                              + 1.0 * dMlsDispdz(0,1);
+        tensorF(2,0) =       MlsDisp(1,2) \
+                              + 1.0 * dMlsDispdx(0,2);
+        tensorF(2,1) =       MlsDisp(2,2) \
+                              + 1.0 * dMlsDispdy(0,2);
+        tensorF(2,2) = 1.0 + MlsDisp(3,2) \
+                              + 1.0 * dMlsDispdz(0,2);
+
+        gptIPushedF(0) = gridCoordinates[iGrid](0) \
+        + MlsDisp(0,0);
+        gptIPushedF(1) = gridCoordinates[iGrid](1) \
+        + MlsDisp(0,1);
+        gptIPushedF(2) = gridCoordinates[iGrid](2) \
+        + MlsDisp(0,2);
+        /*
+
         tensorF(0,0) = 1.0 + MlsDisp(1,0) \
                               + 1.0 * dMlsDispdx(0,0) + gridCoordinates[iGrid](0) * dMlsDispdx(1,0) \
         + gridCoordinates[iGrid](1) * dMlsDispdx(2,0) + gridCoordinates[iGrid](2) * dMlsDispdx(3,0);
@@ -470,12 +600,13 @@ double radiusMls, const std::string name):radiusMls(radiusMls),name(name)
                        + MlsDisp(2,2) * gridCoordinates[iGrid](1) \
                        + MlsDisp(3,2) * gridCoordinates[iGrid](2);
 
-/*
+        */
+
         std::cout << "tensorF: " << std::endl;
-        std::cout << tensorF << std::endl;
+        std::cout << tensorF.transpose().format(Eigen::FullPrecision)  << std::endl;
         std::cout << "gptIPushedF: " << std::endl;
-        std::cout << gptIPushedF << std::endl;
-*/        
+        std::cout << gptIPushedF.format(Eigen::FullPrecision)  << std::endl;
+     
         deformationGradient.push_back(tensorF.transpose());
         gridPushed.push_back(gptIPushedF);
     }   
