@@ -9,6 +9,9 @@
 #include <vector>
 #include <math.h>
 #include "BoxConfiguration.h"
+#include "Configuration.h"
+//#include "SubConfiguration.h"
+//#include "Stencil.h"
 #include "Mls.h"
 #include "neighbor_list.h"
 #include "typedef.h"
@@ -19,8 +22,34 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
     MY_BANNER("Constructing Deformation Gradient using the Moving Least Square method!");
     deformationGradient.reserve(gridCoordinates.size());
     gridPushed.reserve(gridCoordinates.size());
-    MatrixXd displacements(body.coordinates.at(Reference).rows(),body.coordinates.at(Reference).cols());
 
+    std::unique_ptr<const Configuration> pconfigMls;
+	if (body.pbc.any() == 1)
+	{
+		MY_HEADING("Generating padding atoms for periodic boundary conditions of Moving Least Squares.")
+		pconfigMls.reset(body.getConfiguration(radiusMls));
+		std::cout << "Thickness of padding = radiusMls = "
+				  << radiusMls << std::endl;
+		std::cout << "Total number of atoms including padding atoms = " << pconfigMls->numberOfParticles << std::endl;
+		std::cout << std::endl;
+    }
+    else
+    {
+        //pconfigMls.reset(new Configuration);
+        pconfigMls.reset(body.getConfiguration(0.0));
+    }
+    double box_xx, box_yy, box_zz;
+    box_xx = body.box(0);
+    box_yy = body.box(4);
+    box_zz = body.box(8);
+    int pbc_x, pbc_y, pbc_z;
+    pbc_x = body.pbc(0);
+    pbc_y = body.pbc(1);
+    pbc_z = body.pbc(2);
+    //MatrixXd displacements(body.coordinates.at(Reference).rows(),body.coordinates.at(Reference).cols());
+    MatrixXd displacements(pconfigMls->coordinates.at(Reference).rows(),pconfigMls->coordinates.at(Reference).cols());
+    displacements.setZero();
+/*
     // need to respect boundary conditions
     for (int i = 0; i != body.coordinates.at(Reference).rows(); i++)
     {
@@ -51,10 +80,42 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
         {
             displacements(i,2) = body.coordinates.at(Current)(i,2) - body.coordinates.at(Reference)(i,2);
         }
-        
     }
 
     //std::cout << "Box size " << body.box(0) << " " << body.box(4) << " " << body.box(8) << " " << std::endl;
+*/
+
+    // need to respect boundary conditions
+    for (int i = 0; i != pconfigMls->coordinates.at(Reference).rows(); i++)
+    {
+
+        if (fabs(pconfigMls->coordinates.at(Current)(i,0) - pconfigMls->coordinates.at(Reference)(i,0)) > 0.5 * box_xx && pbc_x)
+        {
+            displacements(i,0) = pconfigMls->coordinates.at(Current)(i,0) - pconfigMls->coordinates.at(Reference)(i,0) - box_xx;
+        }
+        else
+        {
+            displacements(i,0) = pconfigMls->coordinates.at(Current)(i,0) - pconfigMls->coordinates.at(Reference)(i,0);
+        }
+
+        if (fabs(pconfigMls->coordinates.at(Current)(i,1) - pconfigMls->coordinates.at(Reference)(i,1)) > 0.5 * box_yy && pbc_y)
+        {
+            displacements(i,1) = pconfigMls->coordinates.at(Current)(i,1) - pconfigMls->coordinates.at(Reference)(i,1) - box_yy;
+        }
+        else
+        {
+            displacements(i,1) = pconfigMls->coordinates.at(Current)(i,1) - pconfigMls->coordinates.at(Reference)(i,1);
+        }
+
+        if (fabs(pconfigMls->coordinates.at(Current)(i,2) - pconfigMls->coordinates.at(Reference)(i,2)) > 0.5 * box_zz && pbc_z)
+        {
+            displacements(i,2) = pconfigMls->coordinates.at(Current)(i,2) - pconfigMls->coordinates.at(Reference)(i,2) - box_zz;
+        }
+        else
+        {
+            displacements(i,2) = pconfigMls->coordinates.at(Current)(i,2) - pconfigMls->coordinates.at(Reference)(i,2);
+        }
+    }
 
     double gridRadiusMls;
     double r2;
@@ -77,25 +138,29 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
     VectorXd W;
     
     std::vector<int> gridMlsAtomList;
-    double ngridMLSAtomList;
+    int ngridMLSAtomList;
+
+    
 /*
+    Stencil stencil(*pconfigMls);
+    SubConfiguration subconfig{stencil};
     //	------------------------------------------------------------------
-    //	Building neighbor list for MLS
+    //	TODO: Trying to build neighbor list for MLS
     //	------------------------------------------------------------------
-	double MlsbondCutoff= radiusMls;
 	NeighList* nlForMls;
 	nbl_initialize(&nlForMls);
-	nbl_build(nlForMls,body.numberOfParticles,
-				 body.coordinates.at(Current).data(),
-				 MlsbondCutoff,
-				 1,
-				 &MlsbondCutoff,
-				 body.particleContributing.data());
+	nbl_build(nlForMls,subconfig.numberOfParticles,
+		      subconfig.coordinates.at(Reference).data(),
+			  radiusMls,
+			  1,
+			  &radiusMls,
+			  subconfig.particleContributing.data());
 	int neighborListSize= 0;
-	for (int i_particle=0; i_particle<body.numberOfParticles; i_particle++)
-		neighborListSize+= nlForMls->lists->Nneighbors[i_particle];
+	for (int i_particle=0; i_particle<pconfigMls->numberOfParticles; i_particle++)
+	    neighborListSize+= nlForMls->lists->Nneighbors[i_particle];
 	std::cout << "Size of neighbor list = " <<neighborListSize << std::endl;
 */
+
 
     for (std::vector<Vector3d>::size_type iGrid = 0; iGrid != gridCoordinates.size(); iGrid++)
     //for (std::vector<Vector3d>::size_type iGrid = 0; iGrid != 1; iGrid++) // debug only calculate one point
@@ -112,7 +177,8 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
                          + ". Starting Cycle " + std::to_string(cycle_count) + ".")
             }
 
-            if (ngridMLSAtomList == body.coordinates.at(Reference).rows())
+            //if (ngridMLSAtomList == body.coordinates.at(Reference).rows())
+            if (ngridMLSAtomList == pconfigMls->coordinates.at(Reference).rows())
             {
                 MY_ERROR("Model degenerate to 2D. Cannot use MLS3D to generate deformation gradient!")
             }
@@ -120,11 +186,16 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
             gridMlsAtomList.clear();
             ngridMLSAtomList = 0;
 
-            for (int jRefAtoms = 0; jRefAtoms != body.coordinates.at(Reference).rows(); jRefAtoms++)
+            //for (int jRefAtoms = 0; jRefAtoms != body.coordinates.at(Reference).rows(); jRefAtoms++)
+            for (int jRefAtoms = 0; jRefAtoms != pconfigMls->coordinates.at(Reference).rows(); jRefAtoms++)
             {
-                r(0) = body.coordinates.at(Reference)(jRefAtoms,0) - gridCoordinates[iGrid](0);
-                r(1) = body.coordinates.at(Reference)(jRefAtoms,1) - gridCoordinates[iGrid](1);
-                r(2) = body.coordinates.at(Reference)(jRefAtoms,2) - gridCoordinates[iGrid](2);
+                //r(0) = body.coordinates.at(Reference)(jRefAtoms,0) - gridCoordinates[iGrid](0);
+                //r(1) = body.coordinates.at(Reference)(jRefAtoms,1) - gridCoordinates[iGrid](1);
+                //r(2) = body.coordinates.at(Reference)(jRefAtoms,2) - gridCoordinates[iGrid](2);
+                r(0) = pconfigMls->coordinates.at(Reference)(jRefAtoms,0) - gridCoordinates[iGrid](0);
+                r(1) = pconfigMls->coordinates.at(Reference)(jRefAtoms,1) - gridCoordinates[iGrid](1);
+                r(2) = pconfigMls->coordinates.at(Reference)(jRefAtoms,2) - gridCoordinates[iGrid](2);
+
                 if (r.norm() <= gridRadiusMls)
                 {
                     //std::cout << r.norm() << std::endl;
@@ -149,27 +220,40 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
                 for (int i = 0; i <= ngridMLSAtomList - 4; i++)
                 {
                     sanityI = gridMlsAtomList[i];
-                    rSanityI(0) = body.coordinates.at(Reference)(sanityI,0) - gridCoordinates[iGrid](0);
-                    rSanityI(1) = body.coordinates.at(Reference)(sanityI,1) - gridCoordinates[iGrid](1);
-                    rSanityI(2) = body.coordinates.at(Reference)(sanityI,2) - gridCoordinates[iGrid](2);
+                    //rSanityI(0) = body.coordinates.at(Reference)(sanityI,0) - gridCoordinates[iGrid](0);
+                    //rSanityI(1) = body.coordinates.at(Reference)(sanityI,1) - gridCoordinates[iGrid](1);
+                    //rSanityI(2) = body.coordinates.at(Reference)(sanityI,2) - gridCoordinates[iGrid](2);
+                    rSanityI(0) = pconfigMls->coordinates.at(Reference)(sanityI,0) - gridCoordinates[iGrid](0);
+                    rSanityI(1) = pconfigMls->coordinates.at(Reference)(sanityI,1) - gridCoordinates[iGrid](1);
+                    rSanityI(2) = pconfigMls->coordinates.at(Reference)(sanityI,2) - gridCoordinates[iGrid](2);                    
                     for(int j = i + 1; j <= ngridMLSAtomList - 3; j++)
                     {
                         sanityJ = gridMlsAtomList[j];
-                        rSanityJ(0) = body.coordinates.at(Reference)(sanityJ,0) - gridCoordinates[iGrid](0);
-                        rSanityJ(1) = body.coordinates.at(Reference)(sanityJ,1) - gridCoordinates[iGrid](1);
-                        rSanityJ(2) = body.coordinates.at(Reference)(sanityJ,2) - gridCoordinates[iGrid](2);
+                        //rSanityJ(0) = body.coordinates.at(Reference)(sanityJ,0) - gridCoordinates[iGrid](0);
+                        //rSanityJ(1) = body.coordinates.at(Reference)(sanityJ,1) - gridCoordinates[iGrid](1);
+                        //rSanityJ(2) = body.coordinates.at(Reference)(sanityJ,2) - gridCoordinates[iGrid](2);
+                        rSanityJ(0) = pconfigMls->coordinates.at(Reference)(sanityJ,0) - gridCoordinates[iGrid](0);
+                        rSanityJ(1) = pconfigMls->coordinates.at(Reference)(sanityJ,1) - gridCoordinates[iGrid](1);
+                        rSanityJ(2) = pconfigMls->coordinates.at(Reference)(sanityJ,2) - gridCoordinates[iGrid](2);                        
                         for (int k = j + 1; k <= ngridMLSAtomList - 2; k++)
                         {
                             sanityK = gridMlsAtomList[k];
-                            rSanityK(0) = body.coordinates.at(Reference)(sanityK,0) - gridCoordinates[iGrid](0);
-                            rSanityK(1) = body.coordinates.at(Reference)(sanityK,1) - gridCoordinates[iGrid](1);
-                            rSanityK(2) = body.coordinates.at(Reference)(sanityK,2) - gridCoordinates[iGrid](2);
+                            //rSanityK(0) = body.coordinates.at(Reference)(sanityK,0) - gridCoordinates[iGrid](0);
+                            //rSanityK(1) = body.coordinates.at(Reference)(sanityK,1) - gridCoordinates[iGrid](1);
+                            //rSanityK(2) = body.coordinates.at(Reference)(sanityK,2) - gridCoordinates[iGrid](2);
+                            rSanityK(0) = pconfigMls->coordinates.at(Reference)(sanityK,0) - gridCoordinates[iGrid](0);
+                            rSanityK(1) = pconfigMls->coordinates.at(Reference)(sanityK,1) - gridCoordinates[iGrid](1);
+                            rSanityK(2) = pconfigMls->coordinates.at(Reference)(sanityK,2) - gridCoordinates[iGrid](2);
                             for (int q = k + 1; q <= ngridMLSAtomList - 1; q++)
                             {
                                 sanityQ = gridMlsAtomList[q];
-                                rSanityQ(0) = body.coordinates.at(Reference)(sanityQ,0) - gridCoordinates[iGrid](0);
-                                rSanityQ(1) = body.coordinates.at(Reference)(sanityQ,1) - gridCoordinates[iGrid](1);
-                                rSanityQ(2) = body.coordinates.at(Reference)(sanityQ,2) - gridCoordinates[iGrid](2);
+                                //rSanityQ(0) = body.coordinates.at(Reference)(sanityQ,0) - gridCoordinates[iGrid](0);
+                                //rSanityQ(1) = body.coordinates.at(Reference)(sanityQ,1) - gridCoordinates[iGrid](1);
+                                //rSanityQ(2) = body.coordinates.at(Reference)(sanityQ,2) - gridCoordinates[iGrid](2);
+                                rSanityQ(0) = pconfigMls->coordinates.at(Reference)(sanityQ,0) - gridCoordinates[iGrid](0);
+                                rSanityQ(1) = pconfigMls->coordinates.at(Reference)(sanityQ,1) - gridCoordinates[iGrid](1);
+                                rSanityQ(2) = pconfigMls->coordinates.at(Reference)(sanityQ,2) - gridCoordinates[iGrid](2);
+
 
                                 sanity = Matrix4d::Constant(1.0);
                                 sanity(0,0) = rSanityI(0);
@@ -213,6 +297,8 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
             {
                 std::cout << ' ' << *it + 1 << ' '; 
             }
+            std::cout << std::endl;
+            std::cout << "ngridMLSAtomList: " << ngridMLSAtomList << std::endl;
 
             P.resize(ngridMLSAtomList,4);
             W.resize(ngridMLSAtomList);
@@ -265,14 +351,20 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
 
             for (int i = 0; i < ngridMLSAtomList; i++)
             {
-                r(0) = body.coordinates.at(Reference)(gridMlsAtomList[i],0) - gridCoordinates[iGrid](0);
-                r(1) = body.coordinates.at(Reference)(gridMlsAtomList[i],1) - gridCoordinates[iGrid](1);
-                r(2) = body.coordinates.at(Reference)(gridMlsAtomList[i],2) - gridCoordinates[iGrid](2);
+                //r(0) = body.coordinates.at(Reference)(gridMlsAtomList[i],0) - gridCoordinates[iGrid](0);
+                //r(1) = body.coordinates.at(Reference)(gridMlsAtomList[i],1) - gridCoordinates[iGrid](1);
+                //r(2) = body.coordinates.at(Reference)(gridMlsAtomList[i],2) - gridCoordinates[iGrid](2);
+                r(0) = pconfigMls->coordinates.at(Reference)(gridMlsAtomList[i],0) - gridCoordinates[iGrid](0);
+                r(1) = pconfigMls->coordinates.at(Reference)(gridMlsAtomList[i],1) - gridCoordinates[iGrid](1);
+                r(2) = pconfigMls->coordinates.at(Reference)(gridMlsAtomList[i],2) - gridCoordinates[iGrid](2);
                 // Form P
                 P(i,0) = 1.0;
-                P(i,1) = body.coordinates.at(Reference)(gridMlsAtomList[i],0) - gridCoordinates[iGrid](0);
-                P(i,2) = body.coordinates.at(Reference)(gridMlsAtomList[i],1) - gridCoordinates[iGrid](1);
-                P(i,3) = body.coordinates.at(Reference)(gridMlsAtomList[i],2) - gridCoordinates[iGrid](2);
+                //(i,1) = body.coordinates.at(Reference)(gridMlsAtomList[i],0) - gridCoordinates[iGrid](0);
+                //P(i,2) = body.coordinates.at(Reference)(gridMlsAtomList[i],1) - gridCoordinates[iGrid](1);
+                //P(i,3) = body.coordinates.at(Reference)(gridMlsAtomList[i],2) - gridCoordinates[iGrid](2);
+                P(i,1) = pconfigMls->coordinates.at(Reference)(gridMlsAtomList[i],0) - gridCoordinates[iGrid](0);
+                P(i,2) = pconfigMls->coordinates.at(Reference)(gridMlsAtomList[i],1) - gridCoordinates[iGrid](1);
+                P(i,3) = pconfigMls->coordinates.at(Reference)(gridMlsAtomList[i],2) - gridCoordinates[iGrid](2);
                 // Form W and dWdx
                 r2 = r.norm() / gridRadiusMls;
                 if (r2 <= 0.5)
