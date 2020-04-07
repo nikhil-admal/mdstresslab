@@ -20,6 +20,7 @@ class Mls {
     std::vector<Vector3d> gridPushed;
 
     //Mls(const MatrixXd& referenceCoordinates, const MatrixXd& currentCoordinates, const std::vector<Vector3d>& gridCoordinates, double radiusMls, const std::string name);
+    //Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordinates, double radiusMls, const std::string name);
     Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordinates, double radiusMls, const std::string name);
     ~Mls();
 

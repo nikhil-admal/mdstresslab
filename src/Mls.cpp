@@ -10,8 +10,7 @@
 #include <math.h>
 #include "BoxConfiguration.h"
 #include "Configuration.h"
-//#include "SubConfiguration.h"
-//#include "Stencil.h"
+#include "SubConfiguration.h"
 #include "Mls.h"
 #include "neighbor_list.h"
 #include "typedef.h"
@@ -35,8 +34,8 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
     }
     else
     {
-        //pconfigMls.reset(new Configuration);
         pconfigMls.reset(body.getConfiguration(0.0));
+        //pconfigMls.reset(&body);
     }
     double box_xx, box_yy, box_zz;
     box_xx = body.box(0);
@@ -140,7 +139,6 @@ Mls::Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordina
     std::vector<int> gridMlsAtomList;
     int ngridMLSAtomList;
 
-    
 /*
     Stencil stencil(*pconfigMls);
     SubConfiguration subconfig{stencil};

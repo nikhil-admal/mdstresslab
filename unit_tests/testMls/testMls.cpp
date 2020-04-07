@@ -121,8 +121,10 @@ int main()
 
     // MLS
 
-    double MlsRadius = 15.87648108454257;
-    Mls testMls(body.coordinates.at(Reference),body.coordinates.at(Current),gridFromFile.coordinates,MlsRadius,"hardyStress3");
+    //double MlsRadius = 15.87648108454257;
+    //Mls testMls(body.coordinates.at(Reference),body.coordinates.at(Current),gridFromFile.coordinates,MlsRadius,"hardyStress3");
+    double MlsRadius = 16.29285;
+    Mls testMls(body,gridFromFile.coordinates,MlsRadius,"hardyStress3");
 	std::vector<Matrix3d> cauchyPushedField3;
     testMls.pushToCauchy(hardyStress3.field,cauchyPushedField3);
     testMls.writeDeformationGradient();
