@@ -11,6 +11,7 @@
 #include <vector>
 #include "typedef.h"
 #include "BoxConfiguration.h"
+#include "Grid.h"
 
 class Mls {
     public:
@@ -21,7 +22,7 @@ class Mls {
 
     //Mls(const MatrixXd& referenceCoordinates, const MatrixXd& currentCoordinates, const std::vector<Vector3d>& gridCoordinates, double radiusMls, const std::string name);
     //Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordinates, double radiusMls, const std::string name);
-    Mls(const BoxConfiguration& body, const std::vector<Vector3d>& gridCoordinates, double radiusMls, const std::string name);
+    Mls(const BoxConfiguration& body, const Grid<Reference>* pgrid, double radiusMls, const std::string name);
     ~Mls();
 
     void pushToCauchy(const std::vector<Matrix3d>& piolaStress,std::vector<Matrix3d>& cauchyStress);

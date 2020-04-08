@@ -24,9 +24,9 @@ int main()
 	std::string configFileName= "config_T.data";
 	std::string modelname= "SW_BalamaneHauchShi_2017Brittle_Si__MO_381114941873_002";
 
-//	-------------------------------------------------------------------
-// Input configuration and potential
-//	-------------------------------------------------------------------
+    //	-------------------------------------------------------------------
+    //  Input configuration and potential
+    //	-------------------------------------------------------------------
 
 	std::ifstream file(configFileName);
 	if(!file) MY_ERROR("ERROR: config_T.data could not be opened for reading!");
@@ -39,9 +39,9 @@ int main()
 
 	Kim kim(modelname);
 
-//	-------------------------------------------------------------------
-// Create grid
-//	-------------------------------------------------------------------
+    //	-------------------------------------------------------------------
+    //  Create grid
+    //	-------------------------------------------------------------------
 	//int ngrid=100;
 	//Grid<Current> randomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
 	//Grid<Reference> referenceRandomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
@@ -50,9 +50,17 @@ int main()
     Grid<Reference> gridFromFile(ngrid);
 	gridFromFile.read("grid_pk1_one.data");
 */
+/*
     int ngrid = 1;
     Grid<Reference> gridFromFile(ngrid);
 	gridFromFile.read("grid_one.data");
+*/
+	int ngrid = 10;
+    Grid<Reference> gridFromFile(ngrid);
+	gridFromFile.read("grid_ten.data");
+
+    //Grid<Current> gridFromFile1(ngrid);
+	//gridFromFile1.read("grid_one.data");
 /*
 	int ngrid = 90601;
     Grid<Reference> gridFromFile(ngrid);
@@ -63,9 +71,9 @@ int main()
 	//gridFromFile.read("grid_cauchy.data");
 
 
-//	-------------------------------------------------------------------
-// Calculate stress on the grid
-//	-------------------------------------------------------------------
+    //	-------------------------------------------------------------------
+    //  Calculate stress on the grid
+    //	-------------------------------------------------------------------
 	// Create hardyStress object
 
 	// Sphere stress 1
@@ -125,9 +133,11 @@ int main()
 
     // MLS
     double MlsRadius = 16.29285;
+	//double MlsRadius = 0.1;
 	//double MlsRadius = 3;
     //Mls testMls(body.coordinates.at(Reference), body.coordinates.at(Current), body.box, body.pbc....)
-	Mls testMls(body,gridFromFile.coordinates,MlsRadius,"hardyStress3");
+	//Mls testMls(body,gridFromFile.coordinates,MlsRadius,"hardyStress3");
+	Mls testMls(body,&gridFromFile,MlsRadius,"hardyStress3");
 	std::vector<Matrix3d> cauchyPushedField3;
     testMls.pushToCauchy(hardyStress3.field,cauchyPushedField3);
     testMls.writeDeformationGradient();
