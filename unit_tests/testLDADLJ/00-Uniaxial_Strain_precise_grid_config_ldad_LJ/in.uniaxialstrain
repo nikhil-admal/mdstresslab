@@ -1,0 +1,120 @@
+# in.uniaxialstrain
+# Verify MDStressLab work properly
+# Min Shi
+# Version 1.0
+
+clear
+
+variable lattice_constant equal 5.29216036151419 #Lattice parameter
+variable unit_cells_x     equal 10
+variable unit_cells_y     equal 10 #Must be even
+variable unit_cells_z     equal 10
+
+units           metal
+boundary        p p p
+atom_style      atomic
+atom_modify	map array
+atom_modify     sort 0 0 # Must have in every simulation to prevent atom id changing
+
+#create lattice
+lattice         custom 1.0 &
+a1              5.29216036151419 0 0 &
+a2              0 5.29216036151419 0 &
+a3              0 0 5.29216036151419 &
+basis           0 0 0 &
+basis           0 0.5 0.5 &
+basis           0.5 0 0.5 &
+basis           0.5 0.5 0
+region          box block 0 ${unit_cells_x} 0 ${unit_cells_y} 0 ${unit_cells_z} units lattice
+create_box      1 box
+create_atoms    1 box
+
+pair_style kim LJ_Smoothed_Bernardes_1958_Ar__MO_764178710049_001
+pair_coeff * * Ar
+mass 1 39.9481
+
+compute spatom all stress/atom NULL
+compute vol_atom all voronoi/atom
+variable p1 atom "c_spatom[1]/c_vol_atom[1]/10000/160.21766208"
+variable p2 atom "c_spatom[2]/c_vol_atom[1]/10000/160.21766208"
+variable p3 atom "c_spatom[3]/c_vol_atom[1]/10000/160.21766208"
+variable p4 atom "c_spatom[4]/c_vol_atom[1]/10000/160.21766208"
+variable p5 atom "c_spatom[5]/c_vol_atom[1]/10000/160.21766208"
+variable p6 atom "c_spatom[6]/c_vol_atom[1]/10000/160.21766208"
+variable p7 equal "-pxx/10000/160.21766208"
+variable p8 equal "-pyy/10000/160.21766208"
+variable p9 equal "-pzz/10000/160.21766208"
+
+compute        p all reduce sum c_spatom[1] c_spatom[2] c_spatom[3]
+variable       press equal -(c_p[1]+c_p[2]+c_p[3])/(3*vol)
+variable       press1 equal (c_p[1])/(vol)/10000/160.21766208
+variable       press2 equal (c_p[2])/(vol)/10000/160.21766208
+variable       press3 equal (c_p[3])/(vol)/10000/160.21766208
+thermo_style   custom step temp etotal press v_press v_press1 v_press2 v_press3
+
+reset_timestep 0
+
+dump          1 all custom 1 dump.initial.* id type x y z v_p1 v_p2 v_p3 v_p4 v_p5 v_p6
+dump_modify   1 element Ar format line "%d %d %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf"
+
+run		      0	#to update thermo data
+
+undump 1
+
+clear
+
+variable lattice_constant equal 5.29216036151419 #Lattice parameter
+variable unit_cells_x     equal 10
+variable unit_cells_y     equal 10 #Must be even
+variable unit_cells_z     equal 10
+
+units           metal
+boundary        p p p
+atom_style      atomic
+atom_modify	map array
+atom_modify     sort 0 0 # Must have in every simulation to prevent atom id changing
+
+#create lattice
+lattice         custom 1.0 &
+a1              5.29216036151419 0 0 &
+a2              0 5.3450819651293319 0 &
+a3              0 0 5.29216036151419 &
+basis           0 0 0 &
+basis           0 0.5 0.5 &
+basis           0.5 0 0.5 &
+basis           0.5 0.5 0
+
+region          box block 0 ${unit_cells_x} 0 ${unit_cells_y} 0 ${unit_cells_z} units lattice
+create_box      1 box
+create_atoms    1 box
+
+pair_style kim LJ_Smoothed_Bernardes_1958_Ar__MO_764178710049_001
+pair_coeff * * Ar
+mass 1 39.9481
+
+compute spatom all stress/atom NULL
+compute vol_atom all voronoi/atom
+variable p1 atom "c_spatom[1]/c_vol_atom[1]/10000/160.21766208"
+variable p2 atom "c_spatom[2]/c_vol_atom[1]/10000/160.21766208"
+variable p3 atom "c_spatom[3]/c_vol_atom[1]/10000/160.21766208"
+variable p4 atom "c_spatom[4]/c_vol_atom[1]/10000/160.21766208"
+variable p5 atom "c_spatom[5]/c_vol_atom[1]/10000/160.21766208"
+variable p6 atom "c_spatom[6]/c_vol_atom[1]/10000/160.21766208"
+variable p7 equal "-pxx/10000/160.21766208"
+variable p8 equal "-pyy/10000/160.21766208"
+variable p9 equal "-pzz/10000/160.21766208"
+
+compute        p all reduce sum c_spatom[1] c_spatom[2] c_spatom[3]
+variable       press equal -(c_p[1]+c_p[2]+c_p[3])/(3*vol)
+variable       press1 equal (c_p[1])/(vol)/10000/160.21766208
+variable       press2 equal (c_p[2])/(vol)/10000/160.21766208
+variable       press3 equal (c_p[3])/(vol)/10000/160.21766208
+thermo_style   custom step temp etotal press v_press v_press1 v_press2 v_press3
+
+reset_timestep 1
+
+dump           2 all custom 1 dump.final.* id type x y z v_p1 v_p2 v_p3 v_p4 v_p5 v_p6
+dump_modify    2 element Ar format line "%d %d %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf %25.16lf"
+
+run 0
+undump 2

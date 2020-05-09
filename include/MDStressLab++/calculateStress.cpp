@@ -367,7 +367,6 @@ int calculateStress(const Configuration* pconfig,
 					int particle2= bonds.nlOne_ptr->neighborList[index];
 					if(numberOfPiolaStresses>0) rB= subconfig.coordinates.at(Reference).row(particle2) - gridPoint;
 					rb= subconfig.coordinates.at(Current).row(particle2) - gridPoint;
-
 //					Ignore if (particle2 is in neighborListOne and particle 1 > particle 2) as this pair
 //					is encountered twice
 					if ( (neighborListOne.find(particle2) != neighborListOne.end() && particle1 < particle2))
@@ -413,7 +412,6 @@ int process_DEDr(const void* dataObject, const double de, const double r, const 
 	int numberOfNeighborsOfj = bonds_ptr->nlOne_ptr->Nneighbors[j];
 	bool iFound= false;
 	bool jFound= false;
-
 
 	// Look for j in the neighbor list of i
 	for(int i_neighborOfi= 0; i_neighborOfi<numberOfNeighborsOfi; i_neighborOfi++)

@@ -28,7 +28,7 @@ int main()
 //	-------------------------------------------------------------------
 
 	std::ifstream file(configFileName);
-	if(!file) MY_ERROR("ERROR: config.dat could not be opened for reading!");
+	if(!file) MY_ERROR("ERROR: config.data could not be opened for reading!\n");
 
 	file >> numberOfParticles;
 	if (numberOfParticles < 0) MY_ERROR("Error: Negative number of particles.\n");

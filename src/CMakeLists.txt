@@ -17,6 +17,8 @@ add_library(MDStressLab++ SHARED BoxConfiguration.cpp
                              Constant.cpp
                              Trigonometric.cpp
                              kim.cpp
-                             InteratomicForces.cpp)
+                             InteratomicForces.cpp
+                             Stencil.cpp
+                             Mls.cpp)
 
 target_link_libraries(MDStressLab++ kim-api)
