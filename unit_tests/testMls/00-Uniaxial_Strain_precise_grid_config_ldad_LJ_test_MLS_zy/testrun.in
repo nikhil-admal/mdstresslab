@@ -24,8 +24,8 @@ end
 % Setup and begin stress calculation
 stress
     %hardy,cauchy,ldad,5.29216036151419,0,0,0,5.3450819651293319,0,0,0,5.29216036151419,trig
-    %hardy,pk1,ldad,5.29216036151419,0,0,0,5.29216036151419,0,0,0,5.29216036151419,trig,mls,sphere,15.87648108454257
-     hardy,pk1,slmo,5,mls,sphere,15.87648108454257
+    hardy,pk1,ldad,5.29216036151419,0,0,0,5.29216036151419,0,0,0,5.29216036151419,trig,mls,sphere,15.87648108454257
+    %hardy,pk1,slmo,5,mls,sphere,15.87648108454257
 end
 
 stop % end the simulation
