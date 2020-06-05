@@ -358,12 +358,12 @@ Mls::Mls(const BoxConfiguration& body, const Grid<Reference>* pgrid, \
 
             sort(gridMlsAtomList.begin(), gridMlsAtomList.end()); 
 
-            for (auto it = gridMlsAtomList.begin(); it != gridMlsAtomList.end(); ++it) 
-            {
-                std::cout << ' ' << *it + 1 << ' '; 
-            }
-            std::cout << std::endl;
-            std::cout << "ngridMLSAtomList: " << ngridMLSAtomList << std::endl;
+            //for (auto it = gridMlsAtomList.begin(); it != gridMlsAtomList.end(); ++it) 
+            //{
+            //    std::cout << ' ' << *it + 1 << ' '; 
+            //}
+            //std::cout << std::endl;
+            //std::cout << "ngridMLSAtomList: " << ngridMLSAtomList << std::endl;
 
             P.resize(ngridMLSAtomList,4);
             W.resize(ngridMLSAtomList);
@@ -530,7 +530,7 @@ Mls::Mls(const BoxConfiguration& body, const Grid<Reference>* pgrid, \
     (A(1,1)*(A(2,2)*A(3,3)-A(2,3)*A(3,2))+A(1,2)*(A(2,3)*A(3,1)-A(2,1)*A(3,3))+A(1,3)*(A(2,1)*A(3,2)-A(2,2)*A(3,1))) / detmat44;
 
 */
-
+/*
             //std::cout << std::endl << "ngridMLSAtomList: " << ngridMLSAtomList << std::endl;
 
             std::cout << "P" << std::endl;
@@ -554,6 +554,7 @@ Mls::Mls(const BoxConfiguration& body, const Grid<Reference>* pgrid, \
 
             std::cout << "dWdx: " << std::endl;
             std::cout << (dWdx.transpose()).format(Eigen::FullPrecision) << std::endl;
+*/
 
             EndLoop:;
             cycle_count++;
@@ -779,12 +780,12 @@ Mls::Mls(const BoxConfiguration& body, const Grid<Reference>* pgrid, \
 
         */
    
-        deformationGradient.push_back(tensorF.transpose());
+        deformationGradient.push_back(tensorF);
         gridPushed.push_back(gptIPushedF);
         GridEnd:;
 
         std::cout << "tensorF: " << std::endl;
-        std::cout << tensorF.transpose().format(Eigen::FullPrecision)  << std::endl;
+        std::cout << tensorF.format(Eigen::FullPrecision)  << std::endl;
         std::cout << "gptIPushedF: " << std::endl;
         std::cout << gptIPushedF.format(Eigen::FullPrecision)  << std::endl;
     }   
