@@ -50,8 +50,8 @@ int main()
 	//Grid<Reference> referenceRandomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
 /*
 	int ngrid = 1;
-    Grid<Reference> gridFromFile(ngrid);
-	gridFromFile.read("grid_pk1_one.data");
+    Grid<Reference> gridFromFile_ref(ngrid);
+	gridFromFile_ref.read("grid_pk1_one.data");
 */
 	int ngrid = 125;
 	Grid<Reference> gridFromFile_ref(ngrid);
@@ -140,15 +140,17 @@ int main()
 
 	// Ldad stress 1
 	Ldad<Constant> ldad_Constant_ref(ldadVectors_ref);
-    Ldad<Trigonometric> ldad_Trigonometric_ref(ldadVectors_ref);
+    //Ldad<Trigonometric> ldad_Trigonometric_ref(ldadVectors_ref);
 
 	//TODO The bond function should be accepted as a reference
 	Stress<Ldad<Constant>,Piola> ldad_Constant_Stress_ref("ldad_Constant_ref",ldad_Constant_ref,&gridFromFile_ref);
-    Stress<Ldad<Trigonometric>,Piola> ldad_Trigonometric_Stress_ref("ldad_Trigonometric_ref",ldad_Trigonometric_ref,&gridFromFile_ref);
+    //Stress<Ldad<Trigonometric>,Piola> ldad_Trigonometric_Stress_ref("ldad_Trigonometric_ref",ldad_Trigonometric_ref,&gridFromFile_ref);
 
 	calculateStress(body,kim,std::tie(ldad_Constant_Stress_ref));
-	calculateStress(body,kim,std::tie(ldad_Trigonometric_Stress_ref));
+	//calculateStress(body,kim,std::tie(ldad_Trigonometric_Stress_ref));
+
 /*
+
     Matrix3d ldadVectors_def;
 
     ldadVectors_def << 5.29216036151419, 0.0, 0.0, 

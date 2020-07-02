@@ -712,29 +712,26 @@ Mls::Mls(const BoxConfiguration& body, const Grid<Reference>* pgrid, \
 
         tensorF(0,0) = 1.0 + MlsDisp(1,0) \
                               + 1.0 * dMlsDispdx(0,0);
-        tensorF(0,1) =       MlsDisp(2,0) \
+        tensorF(1,0) =       MlsDisp(2,0) \
                               + 1.0 * dMlsDispdy(0,0);
-        tensorF(0,2) =       MlsDisp(3,0) \
+        tensorF(2,0) =       MlsDisp(3,0) \
                               + 1.0 * dMlsDispdz(0,0);
-        tensorF(1,0) =       MlsDisp(1,1) \
+        tensorF(0,1) =       MlsDisp(1,1) \
                               + 1.0 * dMlsDispdx(0,1);
         tensorF(1,1) = 1.0 + MlsDisp(2,1) \
                               + 1.0 * dMlsDispdy(0,1);
-        tensorF(1,2) =       MlsDisp(3,1) \
+        tensorF(2,1) =       MlsDisp(3,1) \
                               + 1.0 * dMlsDispdz(0,1);
-        tensorF(2,0) =       MlsDisp(1,2) \
+        tensorF(0,2) =       MlsDisp(1,2) \
                               + 1.0 * dMlsDispdx(0,2);
-        tensorF(2,1) =       MlsDisp(2,2) \
+        tensorF(1,2) =       MlsDisp(2,2) \
                               + 1.0 * dMlsDispdy(0,2);
         tensorF(2,2) = 1.0 + MlsDisp(3,2) \
                               + 1.0 * dMlsDispdz(0,2);
 
-        gptIPushedF(0) = pgrid->coordinates[iGrid](0) \
-        + MlsDisp(0,0);
-        gptIPushedF(1) = pgrid->coordinates[iGrid](1) \
-        + MlsDisp(0,1);
-        gptIPushedF(2) = pgrid->coordinates[iGrid](2) \
-        + MlsDisp(0,2);
+        gptIPushedF(0) = pgrid->coordinates[iGrid](0) + MlsDisp(0,0);
+        gptIPushedF(1) = pgrid->coordinates[iGrid](1) + MlsDisp(0,1);
+        gptIPushedF(2) = pgrid->coordinates[iGrid](2) + MlsDisp(0,2);
         /*
 
         tensorF(0,0) = 1.0 + MlsDisp(1,0) \
@@ -784,10 +781,10 @@ Mls::Mls(const BoxConfiguration& body, const Grid<Reference>* pgrid, \
         gridPushed.push_back(gptIPushedF);
         GridEnd:;
 
-        std::cout << "tensorF: " << std::endl;
-        std::cout << tensorF.format(Eigen::FullPrecision)  << std::endl;
-        std::cout << "gptIPushedF: " << std::endl;
-        std::cout << gptIPushedF.format(Eigen::FullPrecision)  << std::endl;
+        //std::cout << "tensorF: " << std::endl;
+        //std::cout << tensorF.format(Eigen::FullPrecision)  << std::endl;
+        //std::cout << "gptIPushedF: " << std::endl;
+        //std::cout << gptIPushedF.format(Eigen::FullPrecision)  << std::endl;
     }   
 }
 
@@ -801,6 +798,33 @@ void Mls::pushToCauchy(const std::vector<Matrix3d>& piolaStress,std::vector<Matr
     MY_HEADING("Pushing the Piola-Kirchhoff Stress to the Cauchy stress.");
     for (std::vector<Matrix3d>::size_type i = 0; i != piolaStress.size(); i++)
     {
+        /*
+        // debug
+        Matrix3d A, B;
+        A(0,0) = 1;
+        A(1,0) = 2;
+        A(2,0) = 3;
+        A(0,1) = 4;
+        A(1,1) = 5;
+        A(2,1) = 6;    
+        A(0,2) = 7;
+        A(1,2) = 8;
+        A(2,2) = 9;                   
+        std::cout << A << std::endl;
+
+        B(0,0) = 9;
+        B(1,0) = 8;
+        B(2,0) = 7;
+        B(0,1) = 6;
+        B(1,1) = 5;
+        B(2,1) = 4;    
+        B(0,2) = 3;
+        B(1,2) = 2;
+        B(2,2) = 1; 
+        std::cout << B << std::endl;
+        std::cout << A * B.transpose() << std::endl;
+        // debug
+        */
         cauchyStress.push_back(piolaStress[i] * deformationGradient[i].transpose() / deformationGradient[i].determinant()); 
     }
 }
