@@ -70,9 +70,9 @@ int main()
 
 	Matrix3d ldadVectors_ref;
 
-	ldadVectors_ref << 5.43094977840521, 0.0, 0.0, 
-			0.0, 5.43094977840521, 0.0,
-			0.0,  0.0, 5.43094977840521;   
+	ldadVectors_ref << 5.430949777364731, 0.0, 0.0, 
+			0.0, 5.430949777364731, 0.0,
+			0.0,  0.0, 5.430949777364731;   
 
 	// Ldad stress ref
 	Ldad<Constant> ldad_Constant_ref(ldadVectors_ref);
@@ -93,7 +93,7 @@ int main()
 //	Perform MLS
 //	-------------------------------------------------------------------
 
-	double MlsRadius = 16.292849332094193;
+	double MlsRadius = 5.430949777364731 * 3.0;
 	Mls testMls(body,&gridFromFile_ref,MlsRadius,\
 	"ldad_Constant_Stress_ref");
 	std::vector<Matrix3d> cauchyPushedField;
