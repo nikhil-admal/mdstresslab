@@ -1,0 +1,300 @@
+
+Initializing a box configuration
+--------------------------------
+Creating a configuration of 8000 particles along with reference coordinates in a box of size zero
+Reading the box configuration from file config.data
+
+Box size = 
+54.3095       0       0
+      0 54.8526       0
+      0       0 54.3095
+
+Reference box size = 
+54.3095       0       0
+      0 54.3095       0
+      0       0 54.3095
+
+Periodic boundary conditions = 1 1 1
+
+Connecting to model: SW_StillingerWeber_1985_Si__MO_405512056662_005
+--------------------------------------------------------------------
+Influence distance = 3.77118
+
+Creating Grids
+--------------
+1. Initializing a grid of size 125 to the origin.Reading grid from file grid_pk1.data
+
+2. Initializing a grid of size 125 to the origin.Reading grid from file grid_cauchy.data
+
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Tue Feb 11 14:55:17 2020
+
+Number of Piola stresses requested : 1
+
+                     Grid    Averaging domain size
+           0x7ffc1247e600                  9.40668
+
+Maximum averaging domain size across all stresses = 9.40668
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 16.949
+Total number of atoms including padding atoms = 32768
+
+Folding grid points in grid: 0x7ffc1247e600 if necessary....
+
+
+Building a local configuration
+------------------------------
+Piola Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffc1247e600                  9.40668
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 1944
+Number of contributing particles = 1022
+
+Building neighbor list
+----------------------
+Size of neighbor list = 4088
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 125
+[======>                                                               ] 9
+[=============>                                                        ] 19
+[====================>                                                 ] 28
+[==========================>                                           ] 38
+[=================================>                                    ] 48
+[========================================>                             ] 57
+[===============================================>                      ] 67
+[=====================================================>                ] 76
+[============================================================>         ] 86
+[===================================================================>  ] 96
+Done with grid 0x7ffc1247e608
+
+Writing stress and grid of ldad_Constant_ref
+
+
+
+
+Elapsed time: 0.446964 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Tue Feb 11 14:55:17 2020
+
+Number of Piola stresses requested : 1
+
+                     Grid    Averaging domain size
+           0x7ffc1247e600                  9.40668
+
+Maximum averaging domain size across all stresses = 9.40668
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 16.949
+Total number of atoms including padding atoms = 32768
+
+Folding grid points in grid: 0x7ffc1247e600 if necessary....
+
+
+Building a local configuration
+------------------------------
+Piola Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffc1247e600                  9.40668
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 1944
+Number of contributing particles = 1022
+
+Building neighbor list
+----------------------
+Size of neighbor list = 4088
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 125
+[======>                                                               ] 9
+[=============>                                                        ] 19
+[====================>                                                 ] 28
+[==========================>                                           ] 38
+[=================================>                                    ] 48
+[========================================>                             ] 57
+[===============================================>                      ] 67
+[=====================================================>                ] 76
+[============================================================>         ] 86
+[===================================================================>  ] 96
+Done with grid 0x7ffc1247e608
+
+Writing stress and grid of ldad_Trigonometric_ref
+
+
+
+
+Elapsed time: 0.641987 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Tue Feb 11 14:55:18 2020
+
+Number of Cauchy stresses requested: 1
+
+                     Grid    Averaging domain size
+           0x7ffc1247e630                  9.43814
+
+Maximum averaging domain size across all stresses = 9.43814
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 16.9805
+Total number of atoms including padding atoms = 32768
+
+Folding grid points in grid: 0x7ffc1247e630 if necessary....
+
+
+Building a local configuration
+------------------------------
+Cauchy Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffc1247e630                  9.43814
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 1928
+Number of contributing particles = 1022
+
+Building neighbor list
+----------------------
+Size of neighbor list = 4088
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 125
+[======>                                                               ] 9
+[=============>                                                        ] 19
+[====================>                                                 ] 28
+[==========================>                                           ] 38
+[=================================>                                    ] 48
+[========================================>                             ] 57
+[===============================================>                      ] 67
+[=====================================================>                ] 76
+[============================================================>         ] 86
+[===================================================================>  ] 96
+Done with grid 0x7ffc1247e638
+
+Writing stress and grid of ldad_Constant_def
+
+
+
+
+Elapsed time: 0.345782 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+                            Begin stress calculation
+--------------------------------------------------------------------------------
+Time stamp: Tue Feb 11 14:55:18 2020
+
+Number of Cauchy stresses requested: 1
+
+                     Grid    Averaging domain size
+           0x7ffc1247e630                  9.43814
+
+Maximum averaging domain size across all stresses = 9.43814
+
+Generating padding atoms for periodic boundary conditions
+---------------------------------------------------------
+Thickness of padding = 2 influence distance + maximum averaging domain size = 16.9805
+Total number of atoms including padding atoms = 32768
+
+Folding grid points in grid: 0x7ffc1247e630 if necessary....
+
+
+Building a local configuration
+------------------------------
+Cauchy Stress
+              Unique grid    Max. Averaging domain size
+              -----------    --------------------------
+           0x7ffc1247e630                  9.43814
+
+Creating a local configuration using the above grids.
+Number of particle in the local configuration = 1928
+Number of contributing particles = 1022
+
+Building neighbor list
+----------------------
+Size of neighbor list = 4088
+
+Broadcasting to model
+---------------------
+Done
+
+Computing forces
+----------------
+Done
+
+Looping over grids
+------------------
+1. Number of grid points: 125
+[======>                                                               ] 9
+[=============>                                                        ] 19
+[====================>                                                 ] 28
+[==========================>                                           ] 38
+[=================================>                                    ] 48
+[========================================>                             ] 57
+[===============================================>                      ] 67
+[=====================================================>                ] 76
+[============================================================>         ] 86
+[===================================================================>  ] 96
+Done with grid 0x7ffc1247e638
+
+Writing stress and grid of ldad_Trigonometric_def
+
+
+
+
+Elapsed time: 0.505674 seconds
+End of simulation
+--------------------------------------------------------------------------------
+                           End of stress calculation
+--------------------------------------------------------------------------------
