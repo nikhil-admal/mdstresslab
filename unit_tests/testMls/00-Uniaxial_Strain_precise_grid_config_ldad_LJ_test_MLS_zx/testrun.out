@@ -1,0 +1,160 @@
+   
+   ----------------------------------------------------------------------------
+   
+   M D S t r e s s L a b
+   
+   
+   This code is distributed under the CDDL open source license
+   
+   Authors: N. C. Admal, Min Shi and E. B. Tadmor (University of Minnesota)
+   
+   Version 2.0.0 MPI
+   
+   For more information contact tadmor@umn.edu
+   
+   ----------------------------------------------------------------------------
+   
+   Number of processor(s) used: 1
+
+ **Reading species data**
+   Species on file:
+     Ar          0.0039948100000000
+   Total number of species in file = 1
+
+ **Reading configuration data**
+   Dimension        = 3
+   Number of atoms  = 4000
+   Reference sample size     =       52.9216036151418976      52.9216036151418976      52.9216036151418976
+   Deformed sample size      =       52.9216036151418976      52.9216036151418976      52.9216565367455232
+   PBC                       =               T              T              T
+   Total number of species in the configuration file = 1
+   Species list in configuration:
+   Ar
+
+ **Reading grid data**
+   Read grid from file first PK               = grid_pk1.data
+
+ **Reading interatomic potential**
+   Model name is: LJ_Smoothed_Bernardes_1958_Ar__MO_764178710049_001
+
+ **Reading rigidity settings**
+   Projection =          F
+   Null force vector =          F
+
+ **Reading stress settings**
+   Calculating Hardy stress:     T
+   Calculating Hardy stress on reference configuration (First PK/engineering stress):     T
+   First PK-Hardy average domain: ldad,     T
+   First PK-Hardy vectors:
+   1st vector:        5.2921603615141901       0.0000000000000000       0.0000000000000000
+   2nd vector:        0.0000000000000000       5.2921603615141901       0.0000000000000000
+   3rd vector:        0.0000000000000000       0.0000000000000000       5.2921603615141901
+   Using ldad_trigonometry
+   Using trigonometry weighting function for LDAD.
+   Using MLS to push the first PK stress to Cauchy stress:     T
+   Calculating pushed cauchy stress:     T
+   Using shperical MLS-averaging domain for constructing displacement fields:     T
+   Using sphere_cubic_spline for MLS weighting function.
+
+ **Start calculating the stress tensor**
+   Starting force calculation :
+   Cutoff radius from model =        8.5000000000000000
+   radius for add_padding_atoms =       22.2921603615141919
+   Turning off pbc
+   Total number of atoms = 27436
+   number of model routine names = 8
+   Constructing atom neighbor list
+   Building bins in this region MAX:       74.0902450612986598      74.0902450612986598      74.0903482584257205
+   Building bins in this region MIN:      -23.8147216269138546     -23.8147216269138546     -23.8147745485174802
+   nxbin: 5; dxbin:       19.5809933376425036
+   nybin: 5; dybin:       19.5809933376425036
+   nzbin: 5; dzbin:       19.5810245613886380
+   nbin: 125
+   Performance alert: # of Neighbors increased to 400
+   Performance alert: # of Neighbors increased to 800
+   max_pairs_per_atom: 554
+   Allocating array size of total_neigh, which is the total # of neighbors =    1463276
+   Neighbor List Construction Finish!
+
+ **Calculating the first pk stress tensor**
+   
+   Looping over all bonds to calculate the first pk stress tensors.
+
+ **Setting the first PK stress grid**
+
+ **Reading grid data from file**
+   Reading grid points from file grid_pk1.data
+   Number of grid points = 125
+   Grid points set finished!
+   Constructing grid neighbor list
+   Building bins in this region MAX:       74.0902450612986598      74.0902450612986598      74.0902450612986598
+   Building bins in this region MIN:      -23.8147216269138546     -23.8147216269138546     -23.8147216269138546
+   nxbin: 3; dxbin:       32.6349888960708370
+   nybin: 3; dybin:       32.6349888960708370
+   nzbin: 3; dzbin:       32.6349888960708370
+   nbin: 27
+   Performance alert: Maximum # of Neighbors per grid increased to 800
+   Performance alert: Maximum # of Neighbors per grid increased to 1600
+   Performance alert: Maximum # of Neighbors per grid increased to 3200
+   Performance alert: Maximum # of Neighbors per grid increased to 6400
+   Grid Neighbor List Construction Finish!
+   Grid Neighbor List Construction cost:        0.3541689999999997
+   Dividing grid points. 1 processor(s) has(have) 125 grid points.
+   Dividing grid points. 0 processor(s) has(have) 124 grid points.
+   
+   Looping over all bonds to calculate the first pk-Hardy stress tensors.
+   Grid point first pk-Hardy: 100
+   Grid point first pk-Hardy: 125
+
+ **Writing first pk-Hardy stress tensor**
+   
+   Writing potential part of first pk-Hardy stress tensor to file hardy_pk1.str
+   Writing kinetic part of first pk-Hardy stress tensor to file hardy_kin_pk1.str
+   Calculating hardy pk1 stress runs in       33.2817450000000008 s.
+
+ 
+   Start calculating the deformation gradient tensors using MLS method.
+   Constructing grid neighbor list
+   Building bins in this region MAX:       74.0902450612986598      74.0902450612986598      74.0902450612986598
+   Building bins in this region MIN:      -23.8147216269138546     -23.8147216269138546     -23.8147216269138546
+   nxbin: 3; dxbin:       32.6349888960708370
+   nybin: 3; dybin:       32.6349888960708370
+   nzbin: 3; dzbin:       32.6349888960708370
+   nbin: 27
+   Performance alert: Maximum # of Neighbors per grid increased to 800
+   Performance alert: Maximum # of Neighbors per grid increased to 1600
+   Performance alert: Maximum # of Neighbors per grid increased to 3200
+   Performance alert: Maximum # of Neighbors per grid increased to 6400
+   Performance alert: Maximum # of Neighbors per grid increased to 12800
+   Grid Neighbor List Construction Finish!
+   Grid Neighbor List Construction cost:        0.4228149999999999
+   Allocating the deformation gradient tensors.
+   
+   Looping over all atoms to calculate the deformation gradient tensors.
+   Grid point deformation gradient tensors: 100
+   Grid point deformation gradient tensors: 125
+
+ 
+   Writing deformation gradient tensor to file hardy_F.str
+
+ 
+   Writing grid points corresponding to deformed configuration to file gpt_i_pushed_f_MLS.data
+   Construct deformation gradient calculation costs:        0.8009649999999979 s.
+
+ 
+   Start calculating the Cauchy stress tensors using push forward method.
+   Allocating the Cauchy-Hardy stress tensors.
+   
+   Looping over all tensors to calculate the pushed Cauchy-Hardy stress tensors.
+   Grid point pushing: 100
+   Grid point pushing: 125
+
+ **Writing Cauchy-Hardy stress tensor**
+   
+   Writing potential part of Cauchy-Hardy stress tensor (pushed) to file hardy_cauchy_pushed.str
+   Writing kinetic part of Cauchy-Hardy stress tensor (pushed) to file hardy_kin_cauchy_pushed.str
+   Pushing Cauchy-Hardy stress tensors calculation costs:        0.0031120000000016 s.
+   Stress computation finished!
+
+ **Deallocating data**
+   MDStressLab runs in       46.7667600300628692 s.

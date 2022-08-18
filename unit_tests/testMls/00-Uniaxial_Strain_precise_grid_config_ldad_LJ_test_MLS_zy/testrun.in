@@ -1,0 +1,31 @@
+% Read in atomic configuration and species information
+read
+    spec,species
+    conf,config
+end
+
+% Set up the grid for computing the stress field
+grid
+    %gcoor,21.1686414460567605,26.4608018075709523,4,21.1686414460567605,26.4608018075709523,4,21.1686414460567605,26.4608018075709523,4,pk1
+    %gcoor,21.1686414460567605,26.4608018075709523,4,21.3803278605173261,26.7254098256466577,4,21.1686414460567605,26.4608018075709523,4,cauchy
+    gfile,grid_pk1
+end
+
+% Define the KIM model used to compute the atomic interactions
+potential
+    modl,LJ_Smoothed_Bernardes_1958_Ar__MO_764178710049_001 % potential for Ar
+end
+
+% Specify whether to decompose stress into unique and non-unique parts
+uniqueness
+    project,F
+end
+
+% Setup and begin stress calculation
+stress
+    %hardy,cauchy,ldad,5.29216036151419,0,0,0,5.3450819651293319,0,0,0,5.29216036151419,trig
+    hardy,pk1,ldad,5.29216036151419,0,0,0,5.29216036151419,0,0,0,5.29216036151419,trig,mls,sphere,15.87648108454257
+    %hardy,pk1,slmo,5,mls,sphere,15.87648108454257
+end
+
+stop % end the simulation
