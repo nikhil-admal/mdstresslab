@@ -81,13 +81,6 @@ int main()
 
 	Stress<Sphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
 
-//	Calculate only  Piola
-	calculateStress(body,kim,
-					std::tie(hardyStressRandomCauchy));
-
-//	Calculate only Cauchy
-	calculateStress(body,kim,
-					std::tie(hardyStressRandomPiola));
 
 //  Calculate none
 	calculateStress(body,kim,
@@ -96,17 +89,13 @@ int main()
 
 //  Calculate all
 	calculateStress(body,kim,
-					std::tie(hardyStress3,hardyStress4),
-					std::tie(hardyStress1));
-
-	calculateStress(body,kim,
-					std::tie(),
-					std::tie(hardyStress2));
+					std::tie(hardyStress3,hardyStress4,hardyStressRandomPiola),
+					std::tie(hardyStress1,hardyStress2,hardyStressRandomCauchy));
 
 	compareStress("hardy1");
-	compareStress("hardy2");
 	compareStress("hardy3");
 	compareStress("hardy4");
+	compareStress("hardy2");
 	compareStress("hardyRandomCauchy");
 	compareStress("hardyRandomPiola");
 
