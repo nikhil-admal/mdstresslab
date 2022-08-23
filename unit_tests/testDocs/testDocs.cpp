@@ -13,7 +13,7 @@
 #include "Constant.h"
 #include "Trigonometric.h"
 #include "BoxConfiguration.h"
-#include "Sphere.h"
+#include "MethodHardySphere.h"
 #include "calculateStress.h"
 #include "Mls.h"
 #include "Grid.h"
@@ -62,8 +62,8 @@ int main()
 //	Calculate stress on the grid
 //	-------------------------------------------------------------------
 
-	Sphere hardy1(20);
-	Stress<Sphere,Cauchy> \
+	MethodHardySphere hardy1(20);
+	Stress<MethodHardySphere,Cauchy> \
 	hardyStress1("hardy1",hardy1,&gridFromFile_def);
 
 	calculateStress(body,kim,std::tie(),std::tie(hardyStress1));

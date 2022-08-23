@@ -14,9 +14,13 @@
 
 class Sphere
 {
-public:
+protected:
 	Sphere(double);
 	Sphere(const Sphere&);
+	double normalizer;
+	std::map<std::pair<double,double>,Polynomial> piecewisePolynomial;
+
+public:
 	virtual ~Sphere();
 
 	double averagingDomainSize;
@@ -25,8 +29,6 @@ public:
 
 
 private:
-	std::map<std::pair<double,double>,Polynomial> piecewisePolynomial;
-	double normalizer;
 	double integratePolynomial(const int&, const double&,const double&,const double&,const double&);
 	double integrate(const double&,const double&,const double&,const double&);
 };

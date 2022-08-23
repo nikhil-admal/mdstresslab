@@ -13,7 +13,6 @@
 #include "Constant.h"
 #include "Trigonometric.h"
 #include "BoxConfiguration.h"
-#include "Sphere.h"
 #include "calculateStress.h"
 #include "Mls.h"
 #include "Grid.h"

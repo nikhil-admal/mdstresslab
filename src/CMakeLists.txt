@@ -14,6 +14,7 @@ add_library(MDStressLab++ SHARED BoxConfiguration.cpp
                              neighbor_list.cpp 
                              Exception.cpp 
                              Sphere.cpp
+                             MethodHardySphere.cpp
                              Constant.cpp
                              Trigonometric.cpp
                              kim.cpp

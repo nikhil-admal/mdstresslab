@@ -12,27 +12,8 @@
 #include "typedef.h"
 
 
-Sphere::Sphere(double averagingDomainSize):averagingDomainSize(averagingDomainSize),
-										   normalizer(8/(5*M_PI*pow(averagingDomainSize,3)))
-{
-	// constant polynomial
-	std::vector<double> constant{normalizer};
-	Polynomial constantPolynomial{constant};
-	//linear polynomial
-	std::vector<double> linear{2*normalizer,-2*normalizer/averagingDomainSize};
-	Polynomial linearPolynomial{linear};
-
-	std::pair<double,double> interval;
-
-	// construct piecewise polynomial
-	interval.first= 0;
-	interval.second= averagingDomainSize/2;
-	piecewisePolynomial[interval]= constantPolynomial;
-
-	interval.first= averagingDomainSize/2;
-	interval.second= averagingDomainSize;
-	piecewisePolynomial[interval]= linearPolynomial;
-	}
+Sphere::Sphere(double averagingDomainSize):averagingDomainSize(averagingDomainSize)
+{ }
 Sphere::Sphere(const Sphere& _hardy)
 {
 	*this= _hardy;

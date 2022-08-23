@@ -4,7 +4,7 @@
  *  Created on: Nov 3, 2019
  *      Author: Nikhil Admal
  */
-#include "Sphere.h"
+#include "MethodHardySphere.h"
 #include <string>
 #include <iostream>
 #include <tuple>
@@ -58,28 +58,28 @@ int main()
 //	-------------------------------------------------------------------
 	// Create hardyStress object
 
-	// Sphere stress 1
-	Sphere hardy1(5.29216036151419);
+	// MethodHardySphere stress 1
+	MethodHardySphere hardy1(5.29216036151419);
 
 	//TODO The bond function should be accepted as a reference
-	Stress<Sphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
+	Stress<MethodHardySphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
 
-	// Sphere stress 2
-	Sphere hardy2(20);
-	Stress<Sphere,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
+	// MethodHardySphere stress 2
+	MethodHardySphere hardy2(20);
+	Stress<MethodHardySphere,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
 
-	// Sphere stress 3
-	Sphere hardy3(5);
-	Stress<Sphere,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
+	// MethodHardySphere stress 3
+	MethodHardySphere hardy3(5);
+	Stress<MethodHardySphere,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
 
-	// Sphere stress 4
-	Sphere hardy4(7);
-	Stress<Sphere,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
+	// MethodHardySphere stress 4
+	MethodHardySphere hardy4(7);
+	Stress<MethodHardySphere,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
 
-	Sphere hardyRandom(9);
-	Stress<Sphere,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
+	MethodHardySphere hardyRandom(9);
+	Stress<MethodHardySphere,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
 
-	Stress<Sphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
+	Stress<MethodHardySphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
 
 
 //  Calculate none
