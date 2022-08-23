@@ -34,9 +34,18 @@ public:
 		for(auto& matrix : field)
 			matrix= Matrix3d::Zero();
 	}
+	Stress(const TStress& weightFunction,
+		   TGrid* pgrid): pgrid(pgrid),weightFunction(weightFunction)
+	{
+		field.resize(pgrid->ngrid);
+		for(auto& matrix : field)
+			matrix= Matrix3d::Zero();
+	}
 
 	void write()
 	{
+        if (name.empty())
+            MY_ERROR("Stress object created without specifying a name. Use write(filename) instead of write()");
 		std::ofstream file(name+".stress");
 
 		file << field.size() << "\n";
@@ -48,6 +57,15 @@ public:
 			file << stressRow.format(fmt) << std::endl;
 		}
 	}
+
+    void write(const std::string& filename)
+    {
+        if (name.empty())
+            name= filename;
+        else
+            std::cout << "Stress object created with name " << name << ". Ignoring the filename: " << filename << "." << std::endl; 
+        write();
+    }
 
 	~Stress()
 	{

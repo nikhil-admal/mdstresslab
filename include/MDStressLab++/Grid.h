@@ -30,6 +30,7 @@ public:
 	Grid(Vector3d lowerLimit,
 		 Vector3d upperLimit,
 		 int _ngrid);
+    Grid(std::string);
 	virtual ~Grid();
 	int ngrid;
 

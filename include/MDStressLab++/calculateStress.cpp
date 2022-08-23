@@ -146,8 +146,8 @@ int calculateStress(const BoxConfiguration& body,
 		status= calculateStress(&body,kim,piolaStress,cauchyStress);
 	}
 
-	recursiveWriteStressAndGrid(piolaStress);
-	recursiveWriteStressAndGrid(cauchyStress);
+//	recursiveWriteStressAndGrid(piolaStress);
+//	recursiveWriteStressAndGrid(cauchyStress);
 
 	if (status==1)
 	{

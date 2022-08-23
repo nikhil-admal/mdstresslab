@@ -18,7 +18,7 @@ Grid<T>::Grid(int _ngrid) : ngrid(_ngrid)
 	int numberOfGrids= GridBase::numberOfCurrentGrids + GridBase::numberOfReferenceGrids;
 	if (numberOfGrids == 1) MY_HEADING("Creating Grids");
 
-	std::cout << numberOfGrids << ". Initializing a grid of size " << ngrid << " to the origin." << std::endl;
+	std::cout << "Grid " << numberOfGrids << ". Initializing a grid of size " << ngrid << " to the origin." << std::endl;
 	this->coordinates.resize(ngrid,Vector3d(0.0,0.0,0.0));
 }
 
@@ -35,7 +35,7 @@ Grid<T>::Grid(Vector3d lowerLimit,
 	if (numberOfGrids == 1) MY_HEADING("Creating Grids");
 
 
-	std::cout << numberOfGrids << ". Creating " << ngrid << " random grid points between ("  << lowerLimit
+	std::cout << "Grid " << numberOfGrids << ". Creating " << ngrid << " random grid points between ("  << lowerLimit
 			  << ") and (" << upperLimit << ")"<< std::endl;
 	std::cout << std::endl;
 	coordinates.resize(ngrid);
@@ -47,6 +47,24 @@ Grid<T>::Grid(Vector3d lowerLimit,
 		coordinate+= lowerLimit;
 	}
 
+}
+
+template<ConfigType T>
+Grid<T>::Grid(std::string filename)
+{
+	this->setCounter();
+	int numberOfGrids= GridBase::numberOfCurrentGrids + GridBase::numberOfReferenceGrids;
+	if (numberOfGrids == 1) MY_HEADING("Creating Grids");
+	std::cout << "Grid " << numberOfGrids << ". Reading grid from filename: " << filename << std::endl;
+	std::cout << std::endl;
+
+	std::ifstream file(filename);
+
+	file >> ngrid;
+	coordinates.resize(ngrid);
+	for(auto& position : coordinates)
+		for (int i_dim=0; i_dim<DIM; i_dim++)
+			if(!(file >> position(i_dim)))  MY_ERROR("ERROR: Reading grid coordinates");
 }
 
 // Function to calculate neighbor lists of grid points consisting of particles in subconfig within a distance of
