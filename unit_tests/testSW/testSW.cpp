@@ -48,9 +48,7 @@ int main()
 	ngrid= 20;
 	Grid<Reference> reference_grid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
 
-	ngrid= 125;
-	Grid<Current> gridFromFile(ngrid);
-	gridFromFile.read("grid_cauchy.data");
+	Grid<Current> gridFromFile("grid_cauchy.data");
 
 
 //	-------------------------------------------------------------------
@@ -102,6 +100,13 @@ int main()
 	calculateStress(body,kim,
 					std::tie(),
 					std::tie(hardyStress2));
+
+    hardyStress1.write();
+    hardyStress2.write();
+    hardyStress3.write();
+    hardyStress4.write();
+    hardyStressRandomPiola.write();
+    hardyStressRandomCauchy.write();
 
 	compareStress("hardy1");
 	compareStress("hardy2");

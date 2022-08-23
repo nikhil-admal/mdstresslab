@@ -15,7 +15,6 @@
 #include "Mls.h"
 #include "Grid.h"
 #include "typedef.h"
-#include "../compareStress.cpp"
 
 int main()
 {

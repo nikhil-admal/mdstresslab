@@ -92,6 +92,13 @@ int main()
 					std::tie(hardyStress3,hardyStress4,hardyStressRandomPiola),
 					std::tie(hardyStress1,hardyStress2,hardyStressRandomCauchy));
 
+    hardyStress1.write();
+    hardyStress2.write();
+    hardyStress3.write();
+    hardyStress4.write();
+    hardyStressRandomPiola.write();
+    hardyStressRandomCauchy.write();
+
 	compareStress("hardy1");
 	compareStress("hardy3");
 	compareStress("hardy4");
