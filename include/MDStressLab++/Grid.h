@@ -27,9 +27,9 @@ template<ConfigType T>
 class Grid : public GridBase{
 public:
 	Grid(int);
-	Grid(Vector3d lowerLimit,
-		 Vector3d upperLimit,
-		 int _ngrid);
+	Grid(Vector3d,
+		 Vector3d,
+		 int ngridx, int ngridy=1,int ngridz=1);
     Grid(std::string);
 	virtual ~Grid();
 	int ngrid;

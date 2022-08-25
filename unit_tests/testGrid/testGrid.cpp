@@ -13,8 +13,8 @@ int main()
 {
 	Vector3d lowerLimit(1,2,3);
 	Vector3d upperLimit(2,4,6);
-	int ngrid= 1000;
-	Grid<Reference> grid1(lowerLimit,upperLimit,ngrid);
+	int ngrid= 10;
+	Grid<Reference> grid1(lowerLimit,upperLimit,ngrid,ngrid,ngrid);
 
 	// write to file
 	std::ofstream output_file("random.dat");

@@ -81,7 +81,7 @@ int calculateStress(const BoxConfiguration& body,
 		std::cout << std::setw(25) << "Grid" << std::setw(25) << "Averaging domain size" << std::endl;
 		auto referenceGridDomainSizePairs= getTGridDomainSizePairs(piolaStress);
 		for (const auto& pair : referenceGridDomainSizePairs)
-			std::cout <<  std::setw(25) << pair.first << std::setw(25) << pair.second << std::endl;
+			std::cout <<  std::setw(25) << (GridBase*) pair.first << std::setw(25) << pair.second << std::endl;
 
 		if (body.coordinates.at(Reference).rows() == 0)
 		{
@@ -110,7 +110,7 @@ int calculateStress(const BoxConfiguration& body,
 		std::cout << std::setw(25) << "Grid" << std::setw(25) << "Averaging domain size" << std::endl;
 		auto currentGridDomainSizePairs= getTGridDomainSizePairs(cauchyStress);
 		for (const auto& pair : currentGridDomainSizePairs)
-			std::cout <<  std::setw(25) << pair.first << std::setw(25) << pair.second << std::endl;
+			std::cout <<  std::setw(25) << (GridBase*) pair.first << std::setw(25) << pair.second << std::endl;
 
 
 	}
@@ -199,7 +199,7 @@ int calculateStress(const Configuration* pconfig,
 		std::cout << std::setw(25) << "-----------" << std::setw(30) << "--------------------------" << std::endl;
 		for(const auto& [pgrid,domainSize] : referenceGridAveragingDomainSizeMap)
 		{
-			std::cout <<  std::setw(25) << pgrid << std::setw(25) << domainSize << std::endl;
+			std::cout <<  std::setw(25) << (GridBase*)pgrid << std::setw(25) << domainSize << std::endl;
 			stencil.expandStencil(pgrid,domainSize+influenceDistance,influenceDistance);
 		}
 	}
@@ -211,7 +211,7 @@ int calculateStress(const Configuration* pconfig,
 		std::cout << std::setw(25) << "-----------" << std::setw(30) << "--------------------------" << std::endl;
 		for(const auto& [pgrid,domainSize] : currentGridAveragingDomainSizeMap)
 		{
-			std::cout <<  std::setw(25) << pgrid << std::setw(25) << domainSize << std::endl;
+			std::cout <<  std::setw(25) << (GridBase*)pgrid << std::setw(25) << domainSize << std::endl;
 			stencil.expandStencil(pgrid,domainSize+influenceDistance,influenceDistance);
 		}
 	}

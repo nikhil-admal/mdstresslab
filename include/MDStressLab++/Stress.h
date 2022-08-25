@@ -50,11 +50,13 @@ public:
 
 		file << field.size() << "\n";
 		file << "\n";
+        int index= 0;
+        Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
 		for (auto& stress : field)
 		{
 			Eigen::Map<Eigen::Matrix<double,1,DIM*DIM>> stressRow(stress.data(), stress.size());
-			Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "", "");
-			file << stressRow.format(fmt) << std::endl;
+			file << pgrid->coordinates[index].format(fmt) << std::setw(5) << stressRow.format(fmt) << std::endl;
+            index++;
 		}
 	}
 

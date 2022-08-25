@@ -41,12 +41,12 @@ int main()
 //	-------------------------------------------------------------------
 // Create grid
 //	-------------------------------------------------------------------
-	int ngrid=100;
-	Grid<Current> randomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
-	Grid<Reference> referenceRandomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
+	int ngrid=5;
+	Grid<Current> randomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid,ngrid);
+	Grid<Reference> referenceRandomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid,ngrid);
 
-	ngrid= 20;
-	Grid<Reference> reference_grid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
+	ngrid= 3;
+	Grid<Reference> reference_grid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid,ngrid);
 
 	Grid<Current> gridFromFile("grid_cauchy.data");
 

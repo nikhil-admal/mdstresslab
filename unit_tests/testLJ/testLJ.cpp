@@ -41,9 +41,9 @@ int main()
 //	-------------------------------------------------------------------
 // Create grid
 //	-------------------------------------------------------------------
-	int ngrid=100;
-	Grid<Current> randomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
-	Grid<Reference> referenceRandomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
+	int ngrid=10;
+	Grid<Current> randomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid);
+	Grid<Reference> referenceRandomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid);
 
 	ngrid= 20;
 	Grid<Reference> reference_grid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);

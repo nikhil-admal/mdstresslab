@@ -25,7 +25,7 @@ Grid<T>::Grid(int _ngrid) : ngrid(_ngrid)
 template<ConfigType T>
 Grid<T>::Grid(Vector3d lowerLimit,
 	  	   Vector3d upperLimit,
-		   int _ngrid):ngrid(_ngrid)
+		   int ngridx, int ngridy, int ngridz):ngrid(ngridx*ngridy*ngridz)
 {
 	if ( !(lowerLimit.array() < upperLimit.array()).prod() )
 		MY_ERROR("ERROR: The coordinates of lowerLimit are not less than the upperLimit");
@@ -35,18 +35,28 @@ Grid<T>::Grid(Vector3d lowerLimit,
 	if (numberOfGrids == 1) MY_HEADING("Creating Grids");
 
 
-	std::cout << "Grid " << numberOfGrids << ". Creating " << ngrid << " random grid points between ("  << lowerLimit
+	std::cout << "Grid " << numberOfGrids << ". Creating a uniform grid of " << ngrid << " points between ("  << lowerLimit
 			  << ") and (" << upperLimit << ")"<< std::endl;
 	std::cout << std::endl;
 	coordinates.resize(ngrid);
-	for (auto& coordinate : coordinates)
-	{
-		coordinate= Vector3d::Random();
-        coordinate= (coordinate + Vector3d::Constant(1.0))/2.0;
-		coordinate= (coordinate.array() * (upperLimit-lowerLimit).array()).matrix();
-		coordinate+= lowerLimit;
-	}
 
+    int index= 0;
+    Vector3d coordinate;
+    coordinate= lowerLimit;
+    for (auto i : range<int>(0,ngridx))
+	{
+        coordinate(0) = lowerLimit(0) + i*(upperLimit(0)-lowerLimit(0))/ngridx;
+        for (auto j : range<int>(0,ngridy))
+        {
+            coordinate(1) = lowerLimit(1) + j*(upperLimit(1)-lowerLimit(1))/ngridy;
+            for (auto k : range<int>(0,ngridz))
+            {
+                coordinate(2)= lowerLimit(2) + k*(upperLimit(2)-lowerLimit(2))/ngridz;
+                coordinates[index]= coordinate;
+                index++;
+            }
+        }
+    }
 }
 
 template<ConfigType T>
