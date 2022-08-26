@@ -43,7 +43,7 @@ Kim::~Kim()
 	KIM::Model::Destroy(&kim_ptr);
 }
 
-const double* Kim::getCutoffs()
+const double* Kim::getCutoffs() const
 {
 	const double* cutoffs;
 	const int* modelWillNotRequestNeighborsOfNoncontributingParticles;
@@ -54,7 +54,7 @@ const double* Kim::getCutoffs()
 	return cutoffs;
 }
 
-int Kim::getNumberOfNeighborLists()
+int Kim::getNumberOfNeighborLists()  const
 {
 	const double* cutoffs;
 	const int* modelWillNotRequestNeighborsOfNoncontributingParticles;

@@ -33,8 +33,8 @@ public:
 						  InteratomicForces* bonds,
 						  KIM::Function* processDEDr_ptr);
 	void compute();
-	const double* getCutoffs();
-	int getNumberOfNeighborLists();
+	const double* getCutoffs() const;
+	int getNumberOfNeighborLists() const;
 	static void processDEDr(){};
 
 };
