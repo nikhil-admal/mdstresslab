@@ -4,7 +4,7 @@ To install, from mdstresslab/ do:
 
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_BUILD_TYPE=Release .
+$ cmake -DCMAKE_BUILD_TYPE=Release ..
 $ make
 
 To test installation run unit tests, for example from build/ do:
