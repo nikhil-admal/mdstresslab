@@ -12,6 +12,7 @@
 #include "BoxConfiguration.h"
 #include "calculateStress.h"
 #include "Grid.h"
+#include <map>
 #include "typedef.h"
 #include "../compareStress.cpp"
 
@@ -59,22 +60,27 @@ int main()
 	// Create hardyStress object
 
 	// MethodSphere stress 1
-	MethodSphere hardy1(5.29216036151419,"hardy");
+    double averagingDomainSize= 5.29216036151419;
+	MethodSphere hardy1(averagingDomainSize,{{0,1},{1./3,1},{1./3,1},{1./2,1},{1,0}});
 	Stress<MethodSphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
 
 	// MethodSphere stress 2
-	MethodSphere hardy2(20,"hardy");
+    averagingDomainSize= 20;
+	MethodSphere hardy2(averagingDomainSize,{{0,1},{1./2,1},{2./3,2./3},{1,0}});
 	Stress<MethodSphere,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
 
 	// MethodSphere stress 3
-	MethodSphere hardy3(5,"hardy");
+    averagingDomainSize= 5;
+	MethodSphere hardy3(averagingDomainSize,{{0,1},{1./2,1},{1,0}});
 	Stress<MethodSphere,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
 
 	// MethodSphere stress 4
-	MethodSphere hardy4(7,"hardy");
+    averagingDomainSize= 7;
+	MethodSphere hardy4(averagingDomainSize,{{0,1},{1./2,1},{1,0}});
 	Stress<MethodSphere,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
 
-	MethodSphere hardyRandom(9,"hardy");
+    averagingDomainSize= 9;
+	MethodSphere hardyRandom(averagingDomainSize,{{0,1},{1./2,1},{1,0}});
 	Stress<MethodSphere,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
 
 	Stress<MethodSphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);

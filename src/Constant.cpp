@@ -12,7 +12,7 @@ Constant::Constant(){}
 
 Constant::~Constant(){}
 
-double Constant::operator()(const double& t)
+double Constant::operator()(const double& t) const
 {
     // Constant weighting function
     if (t < -1.0 - epsilon || t > 1.0 + epsilon)
@@ -29,7 +29,7 @@ double Constant::operator()(const double& t)
 	}
 
 }
-double Constant::integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg)
+double Constant::integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg) const
 {
 	double result = 1.0;
 	Vector3d vec_mid;

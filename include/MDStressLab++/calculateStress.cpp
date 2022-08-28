@@ -74,6 +74,10 @@ int calculateStress(const BoxConfiguration& body,
 	std::time_t startTime = std::chrono::system_clock::to_time_t(start);
 	std::cout << "Time stamp: " << std::ctime(&startTime) << std::endl;
 
+    // nullify the stress fields before starting
+    recursiveNullifyStress(piolaStress);
+    recursiveNullifyStress(cauchyStress);
+
 	if (numberOfPiolaStresses > 0)
 	{
 		std::cout << "Number of Piola stresses requested : " << numberOfPiolaStresses << std::endl;

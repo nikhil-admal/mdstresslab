@@ -42,18 +42,33 @@ inline typename std::enable_if<I < sizeof...(BF), void>::type
 	{
 		assert(rab.squaredNorm()>epsilon);
 		std::get<I>(t).field[i_gridPoint]= std::get<I>(t).field[i_gridPoint] +
-				std::get<I>(t).weightFunction.bondFunction(ra,rb)*fij*rab.transpose()*rab/rab.norm();
+				std::get<I>(t).method.bondFunction(ra,rb)*fij*rab.transpose()*rab/rab.norm();
 	}
 	else if (I == i_stress && stressType == Piola)
 	{
 		assert(rab.squaredNorm()>epsilon);
 		std::get<I>(t).field[i_gridPoint]= std::get<I>(t).field[i_gridPoint] +
-				std::get<I>(t).weightFunction.bondFunction(rA,rB)*fij*rAB.transpose()*rab/rab.norm();
+				std::get<I>(t).method.bondFunction(rA,rB)*fij*rAB.transpose()*rab/rab.norm();
 	}
 	else
 		recursiveBuildStress<I+1>(fij,ra,rA,rb,rB,rab,rAB,i_gridPoint,i_stress,t);
 }
 
+// Recursively nullify stress of a type sType= Piola/Cauchy
+template<std::size_t I=0, typename ...TStress>
+inline typename std::enable_if<I == sizeof...(TStress), void>::type
+recursiveNullifyStress(std::tuple<TStress&...> t)
+{
+	if (sizeof...(TStress)!=0)
+		assert(0);
+}
+template<std::size_t I=0, StressType stressType, typename ...BF>
+inline typename std::enable_if<I < sizeof...(BF), void>::type
+recursiveNullifyStress(std::tuple<Stress<BF,stressType>&...> t)
+{
+    std::fill(std::get<I>(t).field.begin(), std::get<I>(t).field.end(),Matrix3d::Zero() );
+    recursiveNullifyStress<I+1>(t);
+}
 
 //////////  Get the maximum averaging domain size across all bond functions of stresses of type stressType ////////////
 double averagingDomainSize_max(const std::tuple<> t)
@@ -64,13 +79,13 @@ template<std::size_t I=0, typename ...TStress>
 inline typename std::enable_if<I == sizeof...(TStress)-1, double>::type
 	averagingDomainSize_max(const std::tuple<TStress&...> t)
 {
-	return std::get<I>(t).weightFunction.averagingDomainSize;
+	return std::get<I>(t).method.getAveragingDomainSize();
 }
 template<std::size_t I=0, typename ...TStress>
 inline typename std::enable_if<I < sizeof...(TStress)-1, double>::type
  averagingDomainSize_max(const std::tuple<TStress&...> t)
 {
-	return std::max(std::get<I>(t).weightFunction.averagingDomainSize,averagingDomainSize_max<I+1>(t));
+	return std::max(std::get<I>(t).method.getAveragingDomainSize(),averagingDomainSize_max<I+1>(t));
 }
 
 ///////////////////////////      Get the maximum averaging domain sizes for each grid     //////////////////////////////
@@ -97,7 +112,7 @@ inline typename std::enable_if<I < sizeof...(BF), std::map<TGrid*,double>>::type
 {
 	std::map<TGrid*,double> map;
 	const std::map<TGrid*,double>& rmap= recursiveGridMaxAveragingDomainSizeMap<I+1>(t);
-	map[std::get<I>(t).pgrid]= std::get<I>(t).weightFunction.averagingDomainSize;
+	map[std::get<I>(t).pgrid]= std::get<I>(t).method.getAveragingDomainSize();
 
 	// Loop over rmap
 	for (const auto& pair : rmap)
@@ -127,7 +142,7 @@ inline typename std::enable_if<I == sizeof...(BF)-1, std::vector<std::pair<TGrid
  getTGridDomainSizePairs(const std::tuple<Stress<BF,stressType>&...> t)
 {
 	std::vector<std::pair<TGrid*,double>> vectorPair;
-	vectorPair.push_back({std::get<I>(t).pgrid,std::get<I>(t).weightFunction.averagingDomainSize});
+	vectorPair.push_back({std::get<I>(t).pgrid,std::get<I>(t).method.getAveragingDomainSize()});
 	return vectorPair;
 }
 template<std::size_t I=0, StressType stressType,
@@ -137,7 +152,7 @@ inline typename std::enable_if< I < sizeof...(BF)-1, std::vector<std::pair<TGrid
  getTGridDomainSizePairs(const std::tuple<Stress<BF,stressType>&...> t)
 {
 	std::vector<std::pair<TGrid*,double>> vectorPair;
-	vectorPair.push_back({std::get<I>(t).pgrid,std::get<I>(t).weightFunction.averagingDomainSize});
+	vectorPair.push_back({std::get<I>(t).pgrid,std::get<I>(t).method.getAveragingDomainSize()});
 	std::vector<std::pair<TGrid*,double>> next= getTGridDomainSizePairs<I+1>(t);
 	vectorPair.insert(vectorPair.end(),next.begin(),next.end());
 	return vectorPair;

@@ -9,11 +9,11 @@
 #include <iostream>
 #include <tuple>
 #include <fstream>
-#include "Ldad.h"
+#include "MethodSphere.h"
+#include "MethodLdad.h"
 #include "Constant.h"
 #include "Trigonometric.h"
 #include "BoxConfiguration.h"
-#include "MethodHardySphere.h"
 #include "calculateStress.h"
 #include "Mls.h"
 #include "Grid.h"
@@ -62,8 +62,8 @@ int main()
 //	Calculate stress on the grid
 //	-------------------------------------------------------------------
 
-	MethodHardySphere hardy1(20);
-	Stress<MethodHardySphere,Cauchy> \
+	MethodSphere hardy1(20,"hardy");
+	Stress<MethodSphere,Cauchy> \
 	hardyStress1("hardy1",hardy1,&gridFromFile_def);
 
 	calculateStress(body,kim,std::tie(),std::tie(hardyStress1));
@@ -75,14 +75,14 @@ int main()
 			0.0,  0.0, 5.430949777364731;   
 
 	// Ldad stress ref
-	Ldad<Constant> ldad_Constant_ref(ldadVectors_ref);
-	Ldad<Trigonometric> ldad_Trigonometric_ref(ldadVectors_ref);
+	MethodLdadConstant ldad_Constant_ref(ldadVectors_ref);
+	MethodLdadTrigonometric ldad_Trigonometric_ref(ldadVectors_ref);
 
 	//TODO The bond function should be accepted as a reference
-	Stress<Ldad<Constant>,Piola> \
+	Stress<MethodLdadConstant,Piola> \
 	ldad_Constant_Stress_ref("ldad_Constant_ref",\
 	ldad_Constant_ref,&gridFromFile_ref);
-	Stress<Ldad<Trigonometric>,Piola> \
+	Stress<MethodLdadTrigonometric,Piola> \
 	ldad_Trigonometric_Stress_ref("ldad_Trigonometric_ref",\
 	ldad_Trigonometric_ref,&gridFromFile_ref);
 

@@ -1,39 +1,41 @@
-/*
- * Sphere.cpp
- *
- *  Created on: Nov 5, 2019
- *      Author: Nikhil
- */
-
-#include <math.h>
-#include <Sphere.h>
-#include <iostream>
-#include <limits>
-#include "typedef.h"
+#include "Custom.h"
 
 
-Sphere::Sphere(double averagingDomainSize):averagingDomainSize(averagingDomainSize)
-{ }
-Sphere::Sphere(const Sphere& _hardy)
-{
-	*this= _hardy;
+Custom::Custom(double averagingDomainSize) : MethodUser(averagingDomainSize)
+{ 
+    
+    // weighting function:
+
+    //w(r)= c if r<= R/2,
+    //	= 2c(1-r/R) if R/2<=r<=R
+    //where c= 8/(5\pi R^3)
+
+    normalizer= 8/(5*M_PI*pow(averagingDomainSize,3));
+    // constant polynomial
+    std::deque<double> constant{normalizer};
+    Polynomial constantPolynomial{constant};
+    //linear polynomial
+    std::deque<double> linear{2*normalizer,-2*normalizer/averagingDomainSize};
+    Polynomial linearPolynomial{linear};
+
+
+    // construct piecewise polynomial
+    std::pair<double,double> interval;
+    interval.first= 0;
+    interval.second= averagingDomainSize/2;
+    piecewisePolynomial[interval]= constantPolynomial;
+
+    interval.first= averagingDomainSize/2;
+    interval.second= averagingDomainSize;
+    piecewisePolynomial[interval]= linearPolynomial;
 }
 
-Sphere::~Sphere() {
-	// TODO Auto-generated destructor stub
-}
 
-// weighting function:
-
-//w(r)= c if r<= R/2,
-//	= 2c(1-r/R) if R/2<=r<=R
-//where c= 8/(5\pi R^3)
-
-double Sphere::integratePolynomial(const int& degree,
+double Custom::integratePolynomial(const int& degree,
 								   const double& a,
 								   const double& b,
 								   const double& r1,
-								   const double& r2)
+								   const double& r2) const
 {
 	assert(r1<=r2);
 	switch(degree)
@@ -59,7 +61,7 @@ double Sphere::integratePolynomial(const int& degree,
 
 }
 
-double Sphere::operator()(const Vector3d& vec)
+double Custom::operator()(const Vector3d& vec) const
 {
 	double r= vec.norm();
 
@@ -73,7 +75,7 @@ double Sphere::operator()(const Vector3d& vec)
     return (iter->second)(r);
 }
 
-double Sphere::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
+double Custom::bondFunction(const Vector3d& vec1, const Vector3d& vec2) const
 {
 	double r1= vec1.norm();
 	double r2= vec2.norm();
@@ -88,6 +90,7 @@ double Sphere::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 	double rPerp= vecPerp.norm();
 	assert(rPerp<std::min(r1,r2)+epsilon);
 
+    double averagingDomainSize= getAveragingDomainSize();
 	if (rPerp>=averagingDomainSize) return 0;
 
 	r1= std::min(r1,averagingDomainSize);
@@ -115,11 +118,12 @@ double Sphere::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
 	assert(0);
 }
 
-double Sphere::integrate(const double& a,
+double Custom::integrate(const double& a,
 					    const double& b,
 					    const double& rmin,
-					    const double& rmax)
+					    const double& rmax) const
 {
+    double averagingDomainSize= getAveragingDomainSize();
 	assert(rmin<=rmax && rmax<=averagingDomainSize);
 	double result= 0;
     auto iterMin = std::find_if(piecewisePolynomial.cbegin(), piecewisePolynomial.cend(),
@@ -153,3 +157,5 @@ double Sphere::integrate(const double& a,
 	}
 	return result;
 }
+
+

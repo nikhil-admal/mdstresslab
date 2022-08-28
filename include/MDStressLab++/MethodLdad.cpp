@@ -1,11 +1,10 @@
 /*
- * Ldad.cpp
+ * MethodLdad.cpp
  *
  *  Created on: Nov 5, 2019
  *      Author: Nikhil
  */
 
-#include <Ldad.h>
 #include <math.h>
 #include <iostream>
 #include <limits>
@@ -14,7 +13,7 @@
 int PointLineRelationship(const double& p);
 
 template<typename T>
-Ldad<T>::Ldad(const Matrix3d& ldadVectors):ldadVectors(ldadVectors)
+MethodLdad<T>::MethodLdad(const Matrix3d& ldadVectors): ldadVectors(ldadVectors)
 {
 	// initialize the normalizer here using oneDFunction.integrate(-1,1)
 	normalizer = 1.0/(8.0*fabs(ldadVectors.determinant())) ;
@@ -25,25 +24,26 @@ Ldad<T>::Ldad(const Matrix3d& ldadVectors):ldadVectors(ldadVectors)
     p2 = fabs(ldadVectors(1,0)) + fabs(ldadVectors(1,1)) + fabs(ldadVectors(1,2));
 	p3 = fabs(ldadVectors(2,0)) + fabs(ldadVectors(2,1)) + fabs(ldadVectors(2,2));
 
-    averagingDomainSize = sqrt(p1 * p1 + p2 * p2 + p3 * p3);
+    
+    this->averagingDomainSize = sqrt(p1 * p1 + p2 * p2 + p3 * p3);
 	
     // initialize the inverseLdadVectors
     inverseLdadVectors = ldadVectors.inverse();
 }
 
-template<typename T>
-Ldad<T>::Ldad(const Ldad& _Ldad)
-{
-	*this= _Ldad;
-}
+// template<typename T>
+// MethodLdad<T>::MethodLdad(const MethodLdad<T>& _MethodLdad)
+// {
+// 	*this= _MethodLdad;
+// }
 
 template<typename T>
-Ldad<T>::~Ldad() {
+MethodLdad<T>::~MethodLdad() {
 	// TODO Auto-generated destructor stub
 }
 
 template<typename T>
-double Ldad<T>::operator()(const Vector3d& vec)
+double MethodLdad<T>::operator()(const Vector3d& vec) const
 {
 	Vector3d vec_pull;
 	vec_pull = inverseLdadVectors * vec.transpose();
@@ -52,7 +52,7 @@ double Ldad<T>::operator()(const Vector3d& vec)
 }
 
 template<typename T>
-double Ldad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2)
+double MethodLdad<T>::bondFunction(const Vector3d& vec1, const Vector3d& vec2) const
 {
 	/* copy from fortran 
 	   The algorithm is:

@@ -10,7 +10,7 @@
 #include <tuple>
 #include <fstream>
 #include "BoxConfiguration.h"
-#include "MethodHardySphere.h"
+#include "MethodSphere.h"
 #include "calculateStress.h"
 #include "Mls.h"
 #include "Grid.h"
@@ -44,8 +44,8 @@ int main()
 
 
 	// MethodHardySphere stress 3
-	MethodHardySphere hardy3(5);
-	Stress<MethodHardySphere,Piola> hardyStress3("hardy3",hardy3,&gridFromFile);
+	MethodSphere hardy3(5,"hardy");
+	Stress<MethodSphere,Piola> hardyStress3("hardy3",hardy3,&gridFromFile);
 
     calculateStress(body,kim,
 					std::tie(hardyStress3));

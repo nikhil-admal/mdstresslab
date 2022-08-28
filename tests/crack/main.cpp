@@ -4,8 +4,7 @@
  *  Created on: Nov 3, 2019
  *      Author: Nikhil Admal
  */
-#include "MethodHardySphere.h"
-#include "Ldad.h"
+#include "MethodSphere.h"
 #include <string>
 #include <iostream>
 #include <tuple>
@@ -53,12 +52,23 @@ int main()
 	// Create hardyStress object
 
 	// Hardy stress
-	MethodHardySphere hardy(20);
-	Stress<MethodHardySphere,Cauchy> hardyStress("hardy",hardy,&gridFromFile);
+	MethodSphere hardy5(5,"hardy");
+	MethodSphere hardy10(10,"hardy");
+	MethodSphere hardy15(15,"hardy");
+	MethodSphere hardy20(20,"hardy");
+
+	Stress<MethodSphere,Cauchy> hardyStress5("hardy5",hardy5,&gridFromFile);
+	Stress<MethodSphere,Cauchy> hardyStress10("hardy10",hardy10,&gridFromFile);
+	Stress<MethodSphere,Cauchy> hardyStress15("hardy15",hardy15,&gridFromFile);
+	Stress<MethodSphere,Cauchy> hardyStress20("hardy20",hardy20,&gridFromFile);
 
 	calculateStress(body,kim,
 					std::tie(),
-					std::tie(hardyStress));
+					std::tie(hardyStress5,hardyStress10,hardyStress15,hardyStress20));
+    hardyStress5.write();
+    hardyStress10.write();
+    hardyStress15.write();
+    hardyStress20.write();
 
 
 	return 0;

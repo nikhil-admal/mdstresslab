@@ -9,9 +9,7 @@
 #include <iostream>
 #include <tuple>
 #include <fstream>
-#include "Ldad.h"
-#include "Constant.h"
-#include "Trigonometric.h"
+#include "MethodLdad.h"
 #include "BoxConfiguration.h"
 #include "calculateStress.h"
 #include "Mls.h"
@@ -55,20 +53,20 @@ int main()
                        0.0, 0.0, 5.29216036151419;   
 
 	// Ldad stress 1
-	Ldad<Constant> ldad_Constant_ref(ldadVectors_ref);
+	MethodLdadConstant ldad_constant_ref(ldadVectors_ref);
 
 	//TODO The bond function should be accepted as a reference
-	Stress<Ldad<Constant>,Piola> ldad_Constant_Stress_ref("ldad_Constant_ref",ldad_Constant_ref,&gridFromFile_ref);
+	Stress<MethodLdadConstant,Piola> ldad_constant_stress_ref("ldad_constant_ref",ldad_constant_ref,&gridFromFile_ref);
 
-	calculateStress(body,kim,std::tie(ldad_Constant_Stress_ref));
+	calculateStress(body,kim,std::tie(ldad_constant_stress_ref));
 
 
     double MlsRadius = 15.87648108454257;
     //Mls testMls(body.coordinates.at(Reference),body.coordinates.at(Current),gridFromFile.coordinates,MlsRadius,"hardyStress3");
     //double MlsRadius = 16.29285;
-	Mls testMls(body,&gridFromFile_ref,MlsRadius,"ldad_Constant_Stress_ref");
+	Mls testMls(body,&gridFromFile_ref,MlsRadius,"ldad_constant_stress_ref");
 	std::vector<Matrix3d> cauchyPushedField;
-    testMls.pushToCauchy(ldad_Constant_Stress_ref.field,cauchyPushedField);
+    testMls.pushToCauchy(ldad_constant_stress_ref.field,cauchyPushedField);
     testMls.writeDeformationGradient();
 	testMls.writeGridPushed();
 	testMls.writePushedCauchyStress(cauchyPushedField);

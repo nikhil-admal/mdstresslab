@@ -4,7 +4,7 @@
  *  Created on: Nov 3, 2019
  *      Author: Nikhil Admal
  */
-#include "MethodHardySphere.h"
+#include "MethodSphere.h"
 #include <string>
 #include <iostream>
 #include <tuple>
@@ -56,28 +56,27 @@ int main()
 //	-------------------------------------------------------------------
 	// Create hardyStress object
 
-	// MethodHardySphere stress 1
-	MethodHardySphere hardy1(5.29216036151419);
+	// MethodSphere stress 1
+	MethodSphere hardy1(5.29216036151419,"hardy");
 
-	//TODO The bond function should be accepted as a reference
-	Stress<MethodHardySphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
+	Stress<MethodSphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
 
-	// MethodHardySphere stress 2
-	MethodHardySphere hardy2(20);
-	Stress<MethodHardySphere,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
+	// MethodSphere stress 2
+	MethodSphere hardy2(20,"hardy");
+	Stress<MethodSphere,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
 
-	// MethodHardySphere stress 3
-	MethodHardySphere hardy3(5);
-	Stress<MethodHardySphere,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
+	// MethodSphere stress 3
+	MethodSphere hardy3(5,"hardy");
+	Stress<MethodSphere,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
 
-	// MethodHardySphere stress 4
-	MethodHardySphere hardy4(7);
-	Stress<MethodHardySphere,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
+	// MethodSphere stress 4
+	MethodSphere hardy4(7,"hardy");
+	Stress<MethodSphere,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
 
-	MethodHardySphere hardyRandom(9);
-	Stress<MethodHardySphere,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
+	MethodSphere hardyRandom(9,"hardy");
+	Stress<MethodSphere,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
 
-	Stress<MethodHardySphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
+	Stress<MethodSphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
 
 //	Calculate only  Piola
 	calculateStress(body,kim,

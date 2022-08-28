@@ -13,7 +13,7 @@ Trigonometric::Trigonometric(){}
 
 Trigonometric::~Trigonometric(){}
 
-double Trigonometric::operator()(const double& t)
+double Trigonometric::operator()(const double& t)  const
 {
     // Trigonometric weighting function
     if (t <= -1 || t >= 1)
@@ -26,7 +26,7 @@ double Trigonometric::operator()(const double& t)
 	}
 }
 
-double Trigonometric::integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg)
+double Trigonometric::integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg) const
 {
     Vector3d a, b;
 	double result = 1.0;

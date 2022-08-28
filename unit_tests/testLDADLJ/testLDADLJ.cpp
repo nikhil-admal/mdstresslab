@@ -4,9 +4,7 @@
  *  Created on: Nov 3, 2019
  *      Author: Nikhil Admal
  */
-#include "Ldad.h"
-#include "Constant.h"
-#include "Trigonometric.h"
+#include "MethodLdad.h"
 #include <string>
 #include <iostream>
 #include <tuple>
@@ -63,15 +61,17 @@ int main()
                        0.0, 0.0, 5.29216036151419;   
 
 	// Ldad stress 1
-	Ldad<Constant> ldad_Constant_ref(ldadVectors_ref);
-    Ldad<Trigonometric> ldad_Trigonometric_ref(ldadVectors_ref);
+	MethodLdadConstant ldad_constant_ref(ldadVectors_ref);
+    MethodLdadTrigonometric ldad_trigonometric_ref(ldadVectors_ref);
 
 	//TODO The bond function should be accepted as a reference
-	Stress<Ldad<Constant>,Piola> ldad_Constant_Stress_ref("ldad_Constant_ref",ldad_Constant_ref,&gridFromFile_ref);
-    Stress<Ldad<Trigonometric>,Piola> ldad_Trigonometric_Stress_ref("ldad_Trigonometric_ref",ldad_Trigonometric_ref,&gridFromFile_ref);
+	Stress<MethodLdadConstant,Piola> ldad_constant_stress_ref("ldad_constant_ref",ldad_constant_ref,&gridFromFile_ref);
+    Stress<MethodLdadTrigonometric,Piola> ldad_trigonometric_stress_ref("ldad_trigonometric_ref",ldad_trigonometric_ref,&gridFromFile_ref);
 
-	calculateStress(body,kim,std::tie(ldad_Constant_Stress_ref));
-	calculateStress(body,kim,std::tie(ldad_Trigonometric_Stress_ref));
+	calculateStress(body,kim,std::tie(ldad_constant_stress_ref));
+    ldad_constant_stress_ref.write();
+	calculateStress(body,kim,std::tie(ldad_trigonometric_stress_ref));
+    ldad_trigonometric_stress_ref.write();
 
     Matrix3d ldadVectors_def;
 
@@ -80,16 +80,21 @@ int main()
                        0.0, 0.0, 5.29216036151419;   
 
 	// Ldad stress 1
-	Ldad<Constant> ldad_Constant_def(ldadVectors_def);
-    Ldad<Trigonometric> ldad_Trigonometric_def(ldadVectors_def);
+	MethodLdadConstant ldad_constant_def(ldadVectors_def);
+    MethodLdadTrigonometric ldad_trigonometric_def(ldadVectors_def);
 
-	//TODO The bond function should be accepted as a reference
-	Stress<Ldad<Constant>,Cauchy> ldad_Constant_Stress_def("ldad_Constant_def",ldad_Constant_def,&gridFromFile_def);
-    Stress<Ldad<Trigonometric>,Cauchy> ldad_Trigonometric_Stress_def("ldad_Trigonometric_def",ldad_Trigonometric_def,&gridFromFile_def);
+	Stress<MethodLdadConstant,Cauchy> ldad_constant_stress_def("ldad_constant_def",ldad_constant_def,&gridFromFile_def);
+    Stress<MethodLdadTrigonometric,Cauchy> ldad_trigonometric_stress_def("ldad_trigonometric_def",ldad_trigonometric_def,&gridFromFile_def);
 
-	calculateStress(body,kim,std::tie(ldad_Constant_Stress_def));
-	calculateStress(body,kim,std::tie(ldad_Trigonometric_Stress_def));
+	calculateStress(body,kim,std::tie(ldad_constant_stress_def));
+    ldad_constant_stress_def.write();
+	calculateStress(body,kim,std::tie(ldad_trigonometric_stress_def));
+    ldad_trigonometric_stress_def.write();
 
+	compareStress("ldad_constant_ref");
+	compareStress("ldad_constant_def");
+	compareStress("ldad_trigonometric_ref");
+	compareStress("ldad_trigonometric_def");
 	return 0;
 }
 

@@ -14,8 +14,8 @@ class Constant {
 public:
 	Constant();
 	virtual ~Constant();
-	double operator()(const double& t);
-	double integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg);
+	double operator()(const double& t) const;
+	double integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg) const;
 };
 
 #endif /* CONSTANT_H_ */

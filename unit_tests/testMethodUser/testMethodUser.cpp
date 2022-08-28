@@ -4,7 +4,8 @@
  *  Created on: Nov 3, 2019
  *      Author: Nikhil Admal
  */
-#include "MethodSphere.h"
+#include "Custom.h"
+#include "MethodUser.h"
 #include <string>
 #include <iostream>
 #include <tuple>
@@ -58,26 +59,27 @@ int main()
 //	-------------------------------------------------------------------
 	// Create hardyStress object
 
-	// MethodSphere stress 1
-	MethodSphere hardy1(5.29216036151419,"hardy");
-	Stress<MethodSphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
+	// MethodUser stress 1
+	Custom hardy1(5.29216036151419);
+	Stress<MethodUser,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
+    //std::cout << hardy1.getNormalizer() << std::endl;
 
-	// MethodSphere stress 2
-	MethodSphere hardy2(20,"hardy");
-	Stress<MethodSphere,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
+	// MethodUser stress 2
+	Custom hardy2(20);
+	Stress<MethodUser,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
 
-	// MethodSphere stress 3
-	MethodSphere hardy3(5,"hardy");
-	Stress<MethodSphere,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
+	// MethodUser stress 3
+	Custom hardy3(5);
+	Stress<MethodUser,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
 
-	// MethodSphere stress 4
-	MethodSphere hardy4(7,"hardy");
-	Stress<MethodSphere,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
+	// MethodUser stress 4
+	Custom hardy4(7);
+	Stress<MethodUser,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
 
-	MethodSphere hardyRandom(9,"hardy");
-	Stress<MethodSphere,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
+	Custom hardyRandom(9);
+	Stress<MethodUser,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
 
-	Stress<MethodSphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
+	Stress<MethodUser,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
 
 
 //  Calculate none
