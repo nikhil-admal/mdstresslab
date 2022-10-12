@@ -59,8 +59,6 @@ template<std::size_t I=0, typename ...TStress>
 inline typename std::enable_if<I == sizeof...(TStress), void>::type
 recursiveNullifyStress(std::tuple<TStress&...> t)
 {
-	if (sizeof...(TStress)!=0)
-		assert(0);
 }
 template<std::size_t I=0, StressType stressType, typename ...BF>
 inline typename std::enable_if<I < sizeof...(BF), void>::type

@@ -14,9 +14,6 @@ template<typename TMethod>
 class Method
 {
 public:
-    Method();
-    Method(double);
-    Method(const Method<TMethod>& method);
 	virtual ~Method();
 
 	double operator()(const Vector3d& vec) const;
@@ -25,6 +22,11 @@ public:
 
 protected:
 	double averagingDomainSize;
+private:
+    Method();
+    Method(double);
+    Method(const Method<TMethod>& method);
+    friend TMethod;
 };
 
 #include "Method.cpp"
