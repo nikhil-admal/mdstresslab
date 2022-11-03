@@ -15,6 +15,12 @@
 #include "range.h"
 #include "typedef.h"
 
+/*!
+ * A Triplet object is a triplet of integers provided with a \f$<\f$ relation
+ * and  a member function to enumerates its neighbors. The \f$<\f$ relation
+ * allows us to use Triplets as keys to an std::map, which is used to spatially hash
+ * a configuration of particles (see the SpatialHash class)
+ */
 class Triplet: public Vector3i
 {
 public:
@@ -22,7 +28,7 @@ public:
     Triplet(int i,int j,int k): Vector3i(i,j,k) {}
     Triplet(const Vector3i& base) : Vector3i(base){}
 
-	// Define < operator to use std::map<Treiplet,std::vector<int>>
+	// Define < operator to use std::map<Triplet,std::vector<int>>
     bool operator <(const Triplet& rhs)  const
     {
         if (this->operator()(0) < rhs(0))   return true;
@@ -50,15 +56,31 @@ public:
 };
 
 
+/*!
+ * A class to conditionally select a typename. If flag==true, select typename T. Otherwise, select
+ * typename U.
+ * @tparam flag boolean
+ * @tparam T typename
+ * @tparam U typename
+ */
 template<bool flag, typename T, typename U>
-struct Select { typedef T Result; };
+struct Select
+{
+    /*!
+     * @typedef Result the chosen typename
+     */
+    typedef T Result;
+};
 
 template<typename T, typename U>
 struct Select<false, T, U> { typedef U Result; };
 
+/*!
+ * A class to spatially hash a collection of points to a given 3D grid.
+ * @tparam isConst A boolean template parameter to specify whether the coordinates will be
+ * altered or not.
+ */
 
-// hashTable: A map that maps a bin number to a list of particle numbers
-// hasFunction: Maps a particle number to a bin number
 
 template<bool isConst>
 class SpatialHash {
@@ -67,8 +89,21 @@ public:
 	typedef typename Select<isConst, const Vector3d, Vector3d>::Result B;
 	typedef typename Select<isConst, const std::vector<Vector3d>, std::vector<Vector3d>>::Result C;
 
-	Vector3d origin,step;
+    /*!
+     * Origin of the grid used for hashing
+     */
+	Vector3d origin;
+    /*!
+     * Size of the grid used for hashing
+     */
+    Vector3d step;
+    /*!
+     * Coordinates of the points
+     */
 	std::vector<Eigen::Map<B>> coordinates;
+    /*!
+     *  hashTable: A map that maps a bin (Triplet) to an ordered list of particle numbers
+     */
 	std::map<Triplet,std::vector<int>> hashTable;
 
 	SpatialHash();
@@ -98,6 +133,9 @@ public:
 
 	}
 
+    /*!
+     * hashFunction: A map that maps a particle \f$i\f$ to a bin (Triplet)
+     */
 	Triplet hashFunction(const int& i)
 	{
 		assert(!(i<0));
@@ -115,6 +153,10 @@ public:
 };
 typedef SpatialHash<true> ConstSpatialHash;
 
+/*!
+ * @class BoxPoints
+ * @details A class to fold a collection of points back into a given orthogonal box
+ */
 class BoxPoints : public SpatialHash<false>
 {
 public:
