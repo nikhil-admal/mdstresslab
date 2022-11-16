@@ -169,6 +169,10 @@ public:
 
 	virtual ~BoxPoints(){}
 
+    /*!
+     * Folds the points into the box using spatial hashing
+     * @param[in] pbc A binary triplet to describe periodic boundary conditions
+     */
 	void fold(const Vector3i& pbc)
 	{
 		int size= coordinates.size();

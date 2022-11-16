@@ -34,6 +34,10 @@ private:
 	Matrix3d ldadVectors, inverseLdadVectors;
 };
 
+/*!
+ * @example TestLdadLJ.cpp
+ * @example TestLdadSW.cpp
+ */
 #include "MethodLdad.cpp"
 
 // instantiate MethodLdad templates

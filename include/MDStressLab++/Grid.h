@@ -23,6 +23,10 @@ public:
 int GridBase::numberOfReferenceGrids= 0;
 int GridBase::numberOfCurrentGrids= 0;
 
+/*!
+ * Describes a grid on which stress is computed.
+ * @tparam T - StressType (Cauchy/Piola)
+ */
 template<ConfigType T>
 class Grid : public GridBase{
 public:
@@ -39,6 +43,11 @@ public:
 	void setCounter();
 	std::vector<std::set<int>> getGridNeighborLists(const SubConfiguration&, const double&) const;
 };
+
+/*!
+ * \example testGrid.cpp
+ * This is an example of how to use the Grid class
+ */
 #include "Grid.cpp"
 
 #endif /* GRID_H_ */

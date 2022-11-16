@@ -15,32 +15,57 @@
 #include "typedef.h"
 #include "../compareStress.cpp"
 
+/*!
+ * @example testLJ.cpp
+ * An example demonstrating the computation of Piola and Cauchy stress tensors
+ * using various spherical averaging domains and grids
+ *
+ * Read the configuration of particles
+ * @snippet{lineno} testLJ.cpp Read
+ *
+ * Link to the Kim model
+ * @snippet{lineno} testLJ.cpp Model
+ *
+ * Create grids
+ * @snippet{lineno} testLJ.cpp Grid
+ *
+ * Create Stress objects
+ * @snippet{lineno} testLJ.cpp Stress
+ *
+ * Stresses can be calculated all at once or with any combinations
+ * @snippet{lineno} testLJ.cpp Calculate
+ *
+ * Write stresses
+ * @snippet{lineno} testLJ.cpp Write
+ *
+ * Compare stresses
+ * @snippet{lineno} testLJ.cpp Compare
+ *
+ * Full code:
+ */
 
 int main()
 {
+    /*! [Read] */
 	int numberOfParticles;
-	int referenceAndFinal= true;
+	int referenceAndFinal= true; // Does the input file include reference and final configurations
 	std::string configFileName= "config.data";
-	std::string modelname= "LJ_Smoothed_Bernardes_1958_Ar__MO_764178710049_001";
+    std::ifstream file(configFileName);
+    if(!file) MY_ERROR("ERROR: config.data could not be opened for reading!\n");
 
-//	-------------------------------------------------------------------
-// Input configuration and potential
-//	-------------------------------------------------------------------
-
-	std::ifstream file(configFileName);
-	if(!file) MY_ERROR("ERROR: config.data could not be opened for reading!\n");
-
-	file >> numberOfParticles;
-	if (numberOfParticles < 0) MY_ERROR("Error: Negative number of particles.\n");
+    file >> numberOfParticles;
+    if (numberOfParticles < 0) MY_ERROR("Error: Negative number of particles.\n");
 
 	BoxConfiguration body{numberOfParticles,referenceAndFinal};
 	body.read(configFileName,referenceAndFinal);
+    /*! [Read] */
 
+    /*! [Model] */
+    std::string modelname= "LJ_Smoothed_Bernardes_1958_Ar__MO_764178710049_001";
 	Kim kim(modelname);
+    /*! [Model] */
 
-//	-------------------------------------------------------------------
-// Create grid
-//	-------------------------------------------------------------------
+    /*! [Grid] */
 	int ngrid=10;
 	Grid<Current> randomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid);
 	Grid<Reference> referenceRandomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid);
@@ -51,13 +76,9 @@ int main()
 	ngrid= 125;
 	Grid<Current> gridFromFile(ngrid);
 	gridFromFile.read("grid_cauchy.data");
+    /*! [Grid] */
 
-
-//	-------------------------------------------------------------------
-// Calculate stress on the grid
-//	-------------------------------------------------------------------
-	// Create hardyStress object
-
+    /*! [Stress] */
 	// MethodSphere stress 1
 	MethodSphere hardy1(5.29216036151419,"hardy");
 	Stress<MethodSphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
@@ -78,8 +99,10 @@ int main()
 	Stress<MethodSphere,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
 
 	Stress<MethodSphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
+    /*! [Stress] */
 
 
+    /*! [Calculate] */
 //  Calculate none
 	calculateStress(body,kim,
 					std::tie(),
@@ -96,20 +119,25 @@ int main()
 	calculateStress(body,kim,
                     std::tie(hardyStress3),
 					std::tie(hardyStress1));
+    /*! [Calculate] */
 
+    /*! [Write] */
     hardyStress1.write();
     hardyStress2.write();
     hardyStress3.write();
     hardyStress4.write();
     hardyStressRandomPiola.write();
     hardyStressRandomCauchy.write();
+    /*! [Write] */
 
+    /*! [Compare] */
 	compareStress("hardy1");
 	compareStress("hardy3");
 	compareStress("hardy4");
 	compareStress("hardy2");
 	compareStress("hardyRandomCauchy");
 	compareStress("hardyRandomPiola");
+    /*! [Compare] */
 
 
 	return 0;
