@@ -1,9 +1,19 @@
 MDSTRESSLAB
 ===========
+Installation Instructions
 
-Generate Documentation using Doxygen:
-Requirements -
- - doxygen
- - graphviz
+To install, from mdstresslab/ do:
 
-After giving `cmake ..` ins the build folder, `make` will automatically generate documentation in `build/doc_doxygen` folder. To exclusively build docs, give `make doc_doxygen` command instead. To view documentation open in your browser `build/doc_doxygen/html/index.html` file. 
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_BUILD_TYPE=Release ..
+$ make
+
+To test installation run unit tests, for example from build/ do:
+
+$ cd unit_tests/testSW
+$ ./testSW
+
+If you want to run all the unit tests, from the unit_tests directory, do:
+
+$ ctest all  
