@@ -41,6 +41,8 @@ open(unit=2,file=SampOut(1:lis),status='unknown', &
 
 ! Read number of atoms
 read(1,*,end=800,err=900) N
+write(2,*,err=1000) N
+write(2,'(A)')
 
 !  read the coordinates (one line per atom) and write the deformed coordinate
 !
