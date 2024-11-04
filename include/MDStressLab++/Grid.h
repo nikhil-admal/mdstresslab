@@ -44,6 +44,19 @@ public:
 	std::vector<std::set<int>> getGridNeighborLists(const SubConfiguration&, const double&) const;
 };
 
+template<ConfigType T>
+class GridSubConfiguration
+{
+private:
+    const Grid<T>& grid;
+    const SubConfiguration& subconfig;
+    const double padding;
+    std::pair<ConstSpatialHash,ConstSpatialHash> hashGridSubconfig;
+public:
+    GridSubConfiguration(const Grid<T>&, const SubConfiguration&, const double& );
+    std::set<int> getGridPointNeighbors(const int& );
+
+};
 /*!
  * \example testGrid.cpp
  * This is an example of how to use the Grid class

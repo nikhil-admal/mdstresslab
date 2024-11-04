@@ -128,10 +128,15 @@ inline typename std::enable_if<I < sizeof...(BF), std::map<TGrid*,double>>::type
 
 ///// Returns a vector of pairs, where pair = (grid pointer, averaging domain size) for a given type= Reference/Current /////////////
 
-inline std::vector<std::pair<Grid<Reference>*,double>> getTGridDomainSizePairs(const std::tuple<> emptyTuple)
+inline std::vector<std::pair<Grid<Current>*,double>> getTGridDomainSizePairs(const std::tuple<>& emptyTuple)
 {
-	std::vector<std::pair<Grid<Reference>*,double>> emptyVectorPair;
-	return emptyVectorPair;
+    std::vector<std::pair<Grid<Current>*,double>> emptyVectorPair;
+    return emptyVectorPair;
+}
+inline std::vector<std::pair<Grid<Reference>*,double>> getTGridDomainSizePairs(std::tuple<>&& emptyTuple)
+{
+    std::vector<std::pair<Grid<Reference>*,double>> emptyVectorPair;
+    return emptyVectorPair;
 }
 template<std::size_t I=0, StressType stressType,
 		 typename TGrid= typename std::conditional<stressType == Piola,Grid<Reference>,Grid<Current>>::type,

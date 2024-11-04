@@ -118,7 +118,6 @@ std::vector<std::set<int>> Grid<T>::getGridNeighborLists(const SubConfiguration&
 	return gridNeighborLists;
 }
 
-
 template<ConfigType T>
 void Grid<T>::write(std::string filename) const
 {
@@ -162,3 +161,35 @@ Grid<T>::~Grid() {
 	// TODO Auto-generated destructor stub
 }
 
+template<ConfigType T>
+GridSubConfiguration<T>::GridSubConfiguration(const Grid<T>& grid, const SubConfiguration& subconfig, const double& padding) :
+grid(grid),
+subconfig(subconfig),
+padding(padding),
+hashGridSubconfig(std::make_pair(ConstSpatialHash(Vector3d::Zero(),Vector3d::Constant(padding),grid.coordinates),
+                                 ConstSpatialHash(Vector3d::Zero(),Vector3d::Constant(padding),subconfig.coordinates.at(T))))
+{}
+
+template<ConfigType T>
+std::set<int> GridSubConfiguration<T>::getGridPointNeighbors(const int& i_gridPoint)
+{
+    ConstSpatialHash& hashGrid= hashGridSubconfig.first;
+    ConstSpatialHash& hashParticles= hashGridSubconfig.second;
+
+    std::set<int> gridContributingList;
+    Triplet bin= hashGrid.hashFunction(i_gridPoint);
+    Triplet neighborBin;
+    // for each neighboring bin of a grid point's bin
+    for (const auto& neighborBin : bin.neighborList())
+    {
+        const std::vector<int>& particleList= hashParticles.hashTable[neighborBin];
+        // for each particle in a neighboring bin
+        for(const auto& particle : particleList)
+        {
+            double distance= (subconfig.coordinates.at(T).row(particle)-grid.coordinates[i_gridPoint]).squaredNorm();
+            if (distance<=pow(padding,2))
+                gridContributingList.insert(particle);
+        }
+    }
+    return gridContributingList;
+}

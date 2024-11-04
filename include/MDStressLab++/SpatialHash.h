@@ -136,7 +136,7 @@ public:
     /*!
      * hashFunction: A map that maps a particle \f$i\f$ to a bin (Triplet)
      */
-	Triplet hashFunction(const int& i)
+	Triplet hashFunction(const int& i) const
 	{
 		assert(!(i<0));
 		Triplet triple;

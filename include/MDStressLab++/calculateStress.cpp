@@ -30,12 +30,18 @@ int calculateStress(const BoxConfiguration& body,
 	return 1;
 
 }
-template<typename ...BF, StressType stressType>
+
+template<typename ...BF>
 int calculateStress(const BoxConfiguration& body,
 		             Kim& kim,
-					 std::tuple<Stress<BF,stressType>&...> stress)
+					 std::tuple<Stress<BF,Cauchy>&...> stress)
 {
 	std::tuple<> emptyTuple;
+    return calculateStress(body,
+                           kim,
+                           emptyTuple,
+                           stress);
+    /*
 	if (stressType == Piola)
 		return calculateStress(body,
 							   kim,
@@ -48,6 +54,18 @@ int calculateStress(const BoxConfiguration& body,
 							   stress);
 	else
 		MY_ERROR("Unrecognized stress type " + std::to_string(stressType));
+     */
+}
+template<typename ...BF>
+int calculateStress(const BoxConfiguration& body,
+                    Kim& kim,
+                    std::tuple<Stress<BF,Piola>&...> stress)
+{
+    std::tuple<> emptyTuple;
+    return calculateStress(body,
+                           kim,
+                           stress,
+                           emptyTuple);
 }
 
 // This is the main driver of stress calculation
@@ -83,7 +101,7 @@ int calculateStress(const BoxConfiguration& body,
 		std::cout << "Number of Piola stresses requested : " << numberOfPiolaStresses << std::endl;
 		std::cout << std::endl;
 		std::cout << std::setw(25) << "Grid" << std::setw(25) << "Averaging domain size" << std::endl;
-		auto referenceGridDomainSizePairs= getTGridDomainSizePairs(piolaStress);
+		auto referenceGridDomainSizePairs= getTGridDomainSizePairs(std::move(piolaStress));
 		for (const auto& pair : referenceGridDomainSizePairs)
 			std::cout <<  std::setw(25) << (GridBase*) pair.first << std::setw(25) << pair.second << std::endl;
 
@@ -236,9 +254,12 @@ int calculateStress(const Configuration* pconfig,
 //	------------------------------------------------------------------
 //		Generate neighbor lists for all the grids
 //	------------------------------------------------------------------
-	std::vector<std::vector<std::set<int>>> neighborListsOfGridsOne,neighborListsOfGridsTwo;
+    std::vector<GridSubConfiguration<Reference>> neighborListsOfReferenceGridsOne;
+    std::vector<GridSubConfiguration<Reference>> neighborListsOfReferenceGridsTwo;
+    std::vector<GridSubConfiguration<Current>> neighborListsOfCurrentGridsOne;
+    std::vector<GridSubConfiguration<Current>> neighborListsOfCurrentGridsTwo;
 
-	auto referenceGridDomainSizePairs= getTGridDomainSizePairs(piolaStress);
+	auto referenceGridDomainSizePairs= getTGridDomainSizePairs(std::move(piolaStress));
 	assert(numberOfPiolaStresses==referenceGridDomainSizePairs.size());
 
 	auto currentGridDomainSizePairs= getTGridDomainSizePairs(cauchyStress);
@@ -248,18 +269,20 @@ int calculateStress(const Configuration* pconfig,
 	{
 		const auto& pgrid= gridDomainSizePair.first;
 		const auto& domainSize= gridDomainSizePair.second;
-		neighborListsOfGridsOne.push_back(pgrid->getGridNeighborLists(subconfig,domainSize+influenceDistance));
-		neighborListsOfGridsTwo.push_back(pgrid->getGridNeighborLists(subconfig,domainSize+2*influenceDistance));
+        neighborListsOfReferenceGridsOne.emplace_back( *pgrid,subconfig,domainSize+influenceDistance);
+        neighborListsOfReferenceGridsTwo.emplace_back( *pgrid,subconfig,domainSize+2*influenceDistance);
 	}
 	for(const auto& gridDomainSizePair : currentGridDomainSizePairs)
 	{
 		const auto& pgrid= gridDomainSizePair.first;
 		const auto& domainSize= gridDomainSizePair.second;
-		neighborListsOfGridsOne.push_back(pgrid->getGridNeighborLists(subconfig,domainSize+influenceDistance));
-		neighborListsOfGridsTwo.push_back(pgrid->getGridNeighborLists(subconfig,domainSize+2*influenceDistance));
+        neighborListsOfCurrentGridsOne.emplace_back(*pgrid,subconfig,domainSize+influenceDistance);
+        neighborListsOfCurrentGridsTwo.emplace_back(*pgrid,subconfig,domainSize+2*influenceDistance);
 	}
-	assert(neighborListsOfGridsOne.size() == numberOfPiolaStresses + numberOfCauchyStresses &&
-		   neighborListsOfGridsTwo.size() == numberOfPiolaStresses + numberOfCauchyStresses);
+    assert(neighborListsOfCurrentGridsOne.size() == numberOfCauchyStresses &&
+           neighborListsOfCurrentGridsTwo.size() == numberOfCauchyStresses &&
+           neighborListsOfReferenceGridsOne.size() ==  numberOfPiolaStresses &&
+           neighborListsOfReferenceGridsTwo.size() ==  numberOfPiolaStresses);
 
 	std::vector<GridBase*> pgridListPiola= getBaseGridList(piolaStress);
 	std::vector<GridBase*> pgridListCauchy= getBaseGridList(cauchyStress);
@@ -337,9 +360,6 @@ int calculateStress(const Configuration* pconfig,
 	int i_grid= 0;
 	for(const auto& pgrid : pgridList)
 	{
-		const std::vector<std::set<int>>& neighborListsOne= neighborListsOfGridsOne[i_grid];
-		const std::vector<std::set<int>>& neighborListsTwo= neighborListsOfGridsTwo[i_grid];
-
 		int i_gridPoint= 0;
 		double progress= 0;
 		int numberOfGridPoints= pgrid->coordinates.size();
@@ -351,8 +371,17 @@ int calculateStress(const Configuration* pconfig,
 				progress= (double)(i_gridPoint+1)/numberOfGridPoints;
 				progressBar(progress);
 			}
-			const std::set<int>& neighborListOne= neighborListsOne[i_gridPoint];
-			const std::set<int>& neighborListTwo= neighborListsTwo[i_gridPoint];
+            std::set<int> neighborListOne, neighborListTwo;
+            if (i_grid<numberOfPiolaStresses)
+            {
+                neighborListOne= neighborListsOfReferenceGridsOne[i_grid].getGridPointNeighbors(i_gridPoint);
+                neighborListTwo= neighborListsOfReferenceGridsTwo[i_grid].getGridPointNeighbors(i_gridPoint);
+            }
+            else
+            {
+                neighborListOne= neighborListsOfCurrentGridsOne[i_grid-numberOfPiolaStresses].getGridPointNeighbors(i_gridPoint);
+                neighborListTwo= neighborListsOfCurrentGridsTwo[i_grid-numberOfPiolaStresses].getGridPointNeighbors(i_gridPoint);
+            }
 			for (const auto& particle1 : neighborListOne)
 			{
 				if(numberOfPiolaStresses>0) rA= subconfig.coordinates.at(Reference).row(particle1) - gridPoint;

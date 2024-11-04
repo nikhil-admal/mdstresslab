@@ -159,7 +159,7 @@ Mls::Mls(const BoxConfiguration& body, const Grid<Reference>* pgrid, \
     }
 */
 
-    std::vector<std::set<int>> neighborListsOfGridsMls=pgrid->getGridNeighborLists(subconfig,radiusMls);
+    GridSubConfiguration<Reference> neighborListsOfReferenceGridsMls(*pgrid,subconfig,radiusMls);
 
     // need to respect boundary conditions
     for (int i = 0; i != subconfig.coordinates.at(Reference).rows(); i++)
@@ -239,7 +239,7 @@ Mls::Mls(const BoxConfiguration& body, const Grid<Reference>* pgrid, \
 
             gridMlsAtomList.clear();
             ngridMLSAtomList = 0;
-            const std::set<int>& neighborListOfGridsMls = neighborListsOfGridsMls[iGrid];
+            const std::set<int>& neighborListOfGridsMls = neighborListsOfReferenceGridsMls.getGridPointNeighbors(iGrid);
             //for (int jRefAtoms = 0; jRefAtoms != body.coordinates.at(Reference).rows(); jRefAtoms++)
             //for (int jRefAtoms = 0; jRefAtoms != pconfigMls->coordinates.at(Reference).rows(); jRefAtoms++)
             //for (auto jRefAtoms = neighborListsOfGridsMls[iGrid].cbegin(); jRefAtoms != neighborListsOfGridsMls[iGrid].cend(); jRefAtoms++)
