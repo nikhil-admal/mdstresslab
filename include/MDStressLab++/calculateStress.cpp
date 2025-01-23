@@ -20,6 +20,7 @@
 #include "helper.hpp"
 #include <tuple>
 #include <chrono>
+#include <omp.h>
 
 int calculateStress(const BoxConfiguration& body,
 		             Kim& kim,
@@ -356,17 +357,19 @@ int calculateStress(const Configuration* pconfig,
 //	------------------------------------------------------------------
 	MY_HEADING("Looping over grids");
 
-	Vector3d ra,rA,rb,rB,rab,rAB;
-	ra= rA= rb= rB= rab= rAB= Vector3d::Zero();
 	int i_grid= 0;
 	for(const auto& pgrid : pgridList)
 	{
-		int i_gridPoint= 0;
+		//int i_gridPoint= 0;
 		double progress= 0;
 		int numberOfGridPoints= pgrid->coordinates.size();
 		std::cout << i_grid+1 << ". Number of grid points: " << numberOfGridPoints << std::endl;
-		for (const auto& gridPoint : pgrid->coordinates)
+
+        #pragma omp parallel for
+		//for (const auto& gridPoint : pgrid->coordinates)
+        for(int i_gridPoint=0; i_gridPoint<numberOfGridPoints; i_gridPoint++)
 		{
+            const auto& gridPoint= pgrid->coordinates[i_gridPoint];
 			if ( numberOfGridPoints<10 || (i_gridPoint+1)%(numberOfGridPoints/10) == 0)
 			{
 				progress= (double)(i_gridPoint+1)/numberOfGridPoints;
@@ -385,6 +388,9 @@ int calculateStress(const Configuration* pconfig,
             }
 			for (const auto& particle1 : neighborListOne)
 			{
+                Vector3d ra,rA,rb,rB,rab,rAB;
+                ra= rA= rb= rB= rab= rAB= Vector3d::Zero();
+
 				if(numberOfPiolaStresses>0) rA= subconfig.coordinates.at(Reference).row(particle1) - gridPoint;
 				ra= subconfig.coordinates.at(Current).row(particle1) - gridPoint;
 				int index;
@@ -422,7 +428,7 @@ int calculateStress(const Configuration* pconfig,
 					}
 				}
 			}
-			i_gridPoint++;
+			//i_gridpoint++;
 		}
 		std::cout << "Done with grid " << pgrid << std::endl;
 		std::cout << std::endl;
