@@ -140,11 +140,19 @@ struct SparseSelfAdjointShape { static std::string debugName() { return "SparseS
 template<> struct glue_shapes<SparseShape,SelfAdjointShape> { typedef SparseSelfAdjointShape type;  };
 template<> struct glue_shapes<SparseShape,TriangularShape > { typedef SparseTriangularShape  type;  };
 
+// return type of SparseCompressedBase::lower_bound;
+struct LowerBoundIndex {
+  LowerBoundIndex() : value(-1), found(false) {}
+  LowerBoundIndex(Index val, bool ok) : value(val), found(ok) {}
+  Index value;
+  bool found;
+};
+
 } // end namespace internal
 
 /** \ingroup SparseCore_Module
   *
-  * \class Triplet
+  * \class OrderedTuplet
   *
   * \brief A small structure to hold a non zero as a triplet (i,j,value).
   *
