@@ -244,8 +244,9 @@ int calculateStress(const Configuration* pconfig,
 	int numberOfParticles= subconfig.numberOfParticles;
 	if (numberOfParticles == 0)
 	{
-		MY_ERROR("All grids away from the current material. Stresses are identically zero. Returning to the caller.")
-		return 1;
+        std::string message= "All grids away from the current material. Stresses are identically zero. Returning to the caller.";
+		//MY_ERROR(message);
+		throw(std::runtime_error(message));
 	}
 	std::cout << "Number of particle in the local configuration = " << numberOfParticles << std::endl;
 	std::cout << "Number of contributing particles = " << subconfig.particleContributing.sum() << std::endl;
