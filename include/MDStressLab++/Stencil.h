@@ -41,29 +41,45 @@ public:
 		// Hash the grid points
 		ConstSpatialHash hashGrid(origin,step,pgrid->coordinates);
 
-		int i_gridPoint= 0;
-		// for each grid point
-		for(const auto& gridPoint : pgrid->coordinates)
-		{
-			Triplet bin= hashGrid.hashFunction(i_gridPoint);
-			// for each neighboring bin of a grid point's bin
-			for (const auto& neighborBin : bin.neighborList())
-			{
-				std::vector<int>& particleList= hashParticles.hashTable[neighborBin];
-				// for each particle in a neighboring bin
-				for(const auto& particle : particleList)
-				{
-					double distanceSquared= (parent.coordinates.at(configType).row(particle)-gridPoint).squaredNorm();
+#pragma omp parallel
+        {
+            std::map<int, int> particleContributingMapLocal;
+            //int i_gridPoint= 0;
+            // for each grid point
+#pragma omp for
+            //for(const auto& gridPoint : pgrid->coordinates)
+            //{
+            for (int i_gridPoint = 0; i_gridPoint < pgrid->coordinates.size(); i_gridPoint++) {
+                const auto &gridPoint = pgrid->coordinates[i_gridPoint];
+                Triplet bin = hashGrid.hashFunction(i_gridPoint);
+                // for each neighboring bin of a grid point's bin
+                for (const auto &neighborBin: bin.neighborList()) {
+                    std::vector<int> &particleList = hashParticles.hashTable[neighborBin];
+                    // for each particle in a neighboring bin
+                    for (const auto &particle: particleList) {
+                        double distanceSquared = (parent.coordinates.at(configType).row(particle) -
+                                                  gridPoint).squaredNorm();
 
-					if (distanceSquared <= pow(contributingNeighborhoodSize,2))
-						//particleContributingMap.insert_or_assign({particle,1});
-						particleContributingMap[particle]= 1;
-					else if (distanceSquared<=pow(padding,2))
-						particleContributingMap.insert({particle,0});
-				}
-			}
-			i_gridPoint++;
-		}
+                        if (distanceSquared <= pow(contributingNeighborhoodSize, 2))
+                            //particleContributingMap.insert_or_assign({particle,1});
+                            particleContributingMapLocal[particle] = 1;
+                        else if (distanceSquared <= pow(padding, 2))
+                            particleContributingMapLocal.insert({particle, 0});
+                    }
+                }
+                //i_gridPoint++;
+            }
+#pragma omp critical
+            {
+                for(const auto& [particle,contributing] : particleContributingMapLocal) {
+                    if (contributing == 1)
+                        particleContributingMap[particle] = 1;
+                    else
+                        particleContributingMap.insert({particle,0});
+                }
+
+            }
+        }
     }
 
 
