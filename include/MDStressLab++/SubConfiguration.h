@@ -15,7 +15,7 @@ class SubConfiguration : public Configuration
 {
 public:
 	const Configuration& parent;
-	std::map<int,int> globalLocalMap;
+	std::map<int,int> globalLocalMap,localGlobalMap;
 	VectorXi particleContributing;
 	SubConfiguration(const Stencil& stencil);
 	~SubConfiguration();

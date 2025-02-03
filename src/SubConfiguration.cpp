@@ -27,6 +27,8 @@ SubConfiguration::SubConfiguration(const Stencil& stencil) :
 
 		auto result= globalLocalMap.insert({particle,i_localParticle});
 		assert(result.second && "Insertion failed in the creation of a glocalLocalMap");
+        result= localGlobalMap.insert({i_localParticle,particle});
+        assert(result.second && "Insertion failed in the creation of a localGlobalMap");
 		particleContributing[i_localParticle]= contributing;
 
 		this->coordinates.at(Current).row(i_localParticle)= parent.coordinates.at(Current).row(particle);

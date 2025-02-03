@@ -42,9 +42,10 @@ int main()
 //	-------------------------------------------------------------------
 	int ngrid;
 	ngrid= 90601;
-	Grid<Current> gridFromFile(ngrid);
-	gridFromFile.read("grid_cauchy.data");
+	//Grid<Current> gridFromFile(ngrid);
+	//gridFromFile.read("grid_cauchy.data");
 
+    Grid<Current> gridFromFile({9950,1920,13.577375}, {10050,1920.0001,13.577376},5000);
 
 //	-------------------------------------------------------------------
 // Calculate stress on the grid
@@ -52,10 +53,10 @@ int main()
 	// Create hardyStress object
 
 	// Hardy stress
-	MethodSphere hardy5(5,"hardy");
-	MethodSphere hardy10(10,"hardy");
-	MethodSphere hardy15(15,"hardy");
-	MethodSphere hardy20(20,"hardy");
+	MethodSphere hardy5(2,"hardy");
+	MethodSphere hardy10(4,"hardy");
+	MethodSphere hardy15(6,"hardy");
+	MethodSphere hardy20(8,"hardy");
 
 	Stress<MethodSphere,Cauchy> hardyStress5("hardy5",hardy5,&gridFromFile);
 	Stress<MethodSphere,Cauchy> hardyStress10("hardy10",hardy10,&gridFromFile);
@@ -64,7 +65,7 @@ int main()
 
 	calculateStress(body,kim,
 					std::tie(),
-					std::tie(hardyStress5,hardyStress10,hardyStress15,hardyStress20));
+					std::tie(hardyStress5,hardyStress10,hardyStress15,hardyStress20),true);
     hardyStress5.write();
     hardyStress10.write();
     hardyStress15.write();

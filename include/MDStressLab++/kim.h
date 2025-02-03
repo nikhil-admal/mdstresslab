@@ -28,6 +28,7 @@ public:
 	void queryModel();
 	void broadcastToModel(const Configuration* config_ptr,
 						  const VectorXi& particleContributing,
+                          const MatrixXd* forces_ptr,
 						  NeighList* nl_ptr,
 						  KIM::Function* get_neigh_ptr,
 						  InteratomicForces* bonds,

@@ -27,19 +27,18 @@ public:
 	//template<ConfigType configType>
 	//void expandStencil(const Grid<configType>* pgrid, const double&, const double&);
 
-    template<ConfigType configType>
-    void expandStencil(const Grid<configType>* pgrid, const double& contributingNeighborhoodSize, const double& noncontributingNeighborhoodSize)
+    void expandStencil(const std::vector<Vector3d>& gridCoordinates, const MatrixXd& coordinates, const double& contributingNeighborhoodSize, const double& noncontributingNeighborhoodSize)
     {
-		double padding= contributingNeighborhoodSize + noncontributingNeighborhoodSize;
+        double padding= contributingNeighborhoodSize + noncontributingNeighborhoodSize;
 
-		Vector3d origin,step;
-		origin.setConstant(0.0);
-		step.setConstant(padding);
+        Vector3d origin,step;
+        origin.setConstant(0.0);
+        step.setConstant(padding);
 
-		// Hash the coordinates
-		ConstSpatialHash hashParticles(origin,step,parent.coordinates.at(configType));
-		// Hash the grid points
-		ConstSpatialHash hashGrid(origin,step,pgrid->coordinates);
+        // Hash the coordinates
+        ConstSpatialHash hashParticles(origin,step,coordinates);
+        // Hash the grid points
+        ConstSpatialHash hashGrid(origin,step,gridCoordinates);
 
 #pragma omp parallel
         {
@@ -49,15 +48,15 @@ public:
 #pragma omp for
             //for(const auto& gridPoint : pgrid->coordinates)
             //{
-            for (int i_gridPoint = 0; i_gridPoint < pgrid->coordinates.size(); i_gridPoint++) {
-                const auto &gridPoint = pgrid->coordinates[i_gridPoint];
+            for (int i_gridPoint = 0; i_gridPoint < gridCoordinates.size(); i_gridPoint++) {
+                const auto &gridPoint = gridCoordinates[i_gridPoint];
                 Triplet bin = hashGrid.hashFunction(i_gridPoint);
                 // for each neighboring bin of a grid point's bin
                 for (const auto &neighborBin: bin.neighborList()) {
                     std::vector<int> &particleList = hashParticles.hashTable[neighborBin];
                     // for each particle in a neighboring bin
                     for (const auto &particle: particleList) {
-                        double distanceSquared = (parent.coordinates.at(configType).row(particle) -
+                        double distanceSquared = (coordinates.row(particle) -
                                                   gridPoint).squaredNorm();
 
                         if (distanceSquared <= pow(contributingNeighborhoodSize, 2))
@@ -80,8 +79,13 @@ public:
 
             }
         }
-    }
 
+    }
+    template<ConfigType configType>
+    void expandStencil(const Grid<configType>* pgrid, const double& contributingNeighborhoodSize, const double& noncontributingNeighborhoodSize)
+    {
+        expandStencil(pgrid->coordinates, parent.coordinates.at(configType), contributingNeighborhoodSize,noncontributingNeighborhoodSize);
+    }
 
 	void emptyStencil();
 	Stencil(const Configuration&);

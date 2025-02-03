@@ -251,6 +251,7 @@ void Kim::queryModel()
 
 void Kim::broadcastToModel(const Configuration* config_ptr,
 						   const VectorXi& particleContributing,
+                           const MatrixXd* forces_ptr,
 					       NeighList* nl_ptr,
 					       KIM::Function* get_neigh_ptr,
 						   InteratomicForces* bonds,
@@ -275,14 +276,20 @@ void Kim::broadcastToModel(const Configuration* config_ptr,
 	        ||
 			computeArguments->SetArgumentPointer(KIM::COMPUTE_ARGUMENT_NAME::particleContributing,particleContributing.data())
 	        ||
-			computeArguments->SetArgumentPointer(KIM::COMPUTE_ARGUMENT_NAME::coordinates, config_ptr->coordinates.at(Current).data());
+			computeArguments->SetArgumentPointer(KIM::COMPUTE_ARGUMENT_NAME::coordinates, config_ptr->coordinates.at(Current).data())
+            ||
+            (forces_ptr == nullptr ? 0 :
+             computeArguments->SetArgumentPointer(KIM::COMPUTE_ARGUMENT_NAME::partialForces, (*forces_ptr).data())
+            );
 
 	if (error) MY_ERROR("KIM_API_set_data");
 	error = computeArguments->SetCallbackPointer(KIM::COMPUTE_CALLBACK_NAME::GetNeighborList,
 												 KIM::LANGUAGE_NAME::cpp, get_neigh_ptr, nl_ptr)
 			||
-			computeArguments->SetCallbackPointer(KIM::COMPUTE_CALLBACK_NAME::ProcessDEDrTerm,
-												 KIM::LANGUAGE_NAME::cpp, processDEDr_ptr, bonds);
+
+            (processDEDr_ptr== nullptr ? 0 :
+                computeArguments->SetCallbackPointer(KIM::COMPUTE_CALLBACK_NAME::ProcessDEDrTerm,
+                                                     KIM::LANGUAGE_NAME::cpp, processDEDr_ptr, bonds));
 	if (error) MY_ERROR("set_call_back");
 
 }
