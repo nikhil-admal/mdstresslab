@@ -38,7 +38,6 @@ public:
 	const double* getCutoffs() const;
 	int getNumberOfNeighborLists() const;
 	static void processDEDr(){};
-    void destroy();
 
 };
 #endif /* KIM_H_ */

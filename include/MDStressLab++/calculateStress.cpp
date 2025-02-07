@@ -455,7 +455,6 @@ int calculateStress(const Configuration* pconfig,
                 }
                 nbl_clean(&nlOfParticle);
             }
-            kimLocal.destroy();
             #pragma omp critical
             {
                 int i_dVidxj= 0;

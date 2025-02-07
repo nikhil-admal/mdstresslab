@@ -20,56 +20,101 @@ int main()
 	int numberOfParticles;
 	int referenceAndFinal= true;
 	std::string configFileName= "config.data";
-	std::string modelname= "SW_BalamaneHauchShi_2017Brittle_Si__MO_381114941873_002";
+    std::vector<std::string> modelnames={
+            "SW_BalamaneHauchShi_2017Brittle_Si__MO_381114941873_002",// - has processdEdr
+            "MEAM_LAMMPS_DuLenoskyHennig_2011_Si__MO_883726743759_002",
+            "SNAP_ZuoChenLi_2019quadratic_Si__MO_721469752060_000",
+            "SNAP_ZuoChenLi_2019_Si__MO_869330304805_000",
+            "ThreeBodyBondOrder_PPM_PurjaPunMishin_2017_Si__MO_566683736730_000",
+            "EDIP_JustoBazantKaxiras_1998_Si__MO_958932894036_002",
+            "EDIP_LAMMPS_JustoBazantKaxiras_1998_Si__MO_315965276297_000",
+            "Tersoff_LAMMPS_Tersoff_1988T2_Si__MO_245095684871_004",   //  - has processdEdr
+            "Tersoff_LAMMPS_Tersoff_1988T3_Si__MO_186459956893_004",   //  - has processdEdr
+            "ThreeBodyBondOrder_KDS_KhorDasSarma_1988_Si__MO_722489435928_000",
+            "ThreeBodyBondOrder_PPM_PurjaPunMishin_2017_Si__MO_566683736730_000",
+            "ThreeBodyBondOrder_WR_WangRockett_1991_Si__MO_081872846741_000",
+            "ThreeBodyCluster_BH_BiswasHamann_1987_Si__MO_019616213550_000",
+            "ThreeBodyCluster_Gong_Gong_1993_Si__MO_407755720412_000",
+            "ThreeBodyCluster_KP_KaxirasPandey_1988_Si__MO_072486242437_000",
+            "ThreeBodyCluster_SRS_StephensonRadnySmith_1996_Si__MO_604248666067_000"};
 
 //	-------------------------------------------------------------------
 // Input configuration and potential
 //	-------------------------------------------------------------------
 
-	std::ifstream file(configFileName);
-	if(!file) MY_ERROR("ERROR: config.dat could not be opened for reading!");
+    std::ifstream file(configFileName);
+    if(!file) MY_ERROR("ERROR: config.dat could not be opened for reading!");
 
-	file >> numberOfParticles;
-	if (numberOfParticles < 0) MY_ERROR("Error: Negative number of particles.\n");
+    file >> numberOfParticles;
+    if (numberOfParticles < 0) MY_ERROR("Error: Negative number of particles.\n");
 
-	BoxConfiguration body{numberOfParticles,referenceAndFinal};
-	body.read(configFileName,referenceAndFinal);
-
-	Kim kim(modelname);
+    BoxConfiguration body{numberOfParticles,referenceAndFinal};
+    body.read(configFileName,referenceAndFinal);
 
 //	-------------------------------------------------------------------
 // Create grid
 //	-------------------------------------------------------------------
-	int ngrid;
-	ngrid= 90601;
-	//Grid<Current> gridFromFile(ngrid);
-	//gridFromFile.read("grid_cauchy.data");
+    int ngrid;
+    ngrid= 90601;
+    Grid<Current> gridFromFile(ngrid);
+    gridFromFile.read("grid_cauchy.data");
 
-    Grid<Current> gridFromFile({9950,1920,13.577375}, {10050,1920.0001,13.577376},5000);
+    //Grid<Current> gridFromFile({9950,1920,13.577375}, {10050,1920.0001,13.577376},5000);
 
 //	-------------------------------------------------------------------
 // Calculate stress on the grid
 //	-------------------------------------------------------------------
-	// Create hardyStress object
+    // Create hardyStress object
 
-	// Hardy stress
-	MethodSphere hardy5(2,"hardy");
-	MethodSphere hardy10(4,"hardy");
-	MethodSphere hardy15(6,"hardy");
-	MethodSphere hardy20(8,"hardy");
+    // Hardy stress
+    MethodSphere hardy5(2,"hardy");
+    MethodSphere hardy10(4,"hardy");
+    MethodSphere hardy15(6,"hardy");
+    MethodSphere hardy20(8,"hardy");
 
-	Stress<MethodSphere,Cauchy> hardyStress5("hardy5",hardy5,&gridFromFile);
-	Stress<MethodSphere,Cauchy> hardyStress10("hardy10",hardy10,&gridFromFile);
-	Stress<MethodSphere,Cauchy> hardyStress15("hardy15",hardy15,&gridFromFile);
-	Stress<MethodSphere,Cauchy> hardyStress20("hardy20",hardy20,&gridFromFile);
+    for (const auto modelname : modelnames)
+    {
+        Kim kim(modelname);
+        try {
+            Stress<MethodSphere,Cauchy> hardyStress5 (hardy5,&gridFromFile);
+            Stress<MethodSphere,Cauchy> hardyStress10(hardy10,&gridFromFile);
+            Stress<MethodSphere,Cauchy> hardyStress15(hardy15,&gridFromFile);
+            Stress<MethodSphere,Cauchy> hardyStress20(hardy20,&gridFromFile);
 
-	calculateStress(body,kim,
-					std::tie(),
-					std::tie(hardyStress5,hardyStress10,hardyStress15,hardyStress20),true);
-    hardyStress5.write();
-    hardyStress10.write();
-    hardyStress15.write();
-    hardyStress20.write();
+            // Calculate stress using the projected forces
+            calculateStress(body, kim,
+                            std::tie(),
+                            std::tie(hardyStress5, hardyStress10, hardyStress15, hardyStress20), true);
+            hardyStress5.write("project_hardy5_" + modelname);
+            hardyStress10.write("project_hardy10_" + modelname);
+            hardyStress15.write("project_hardy15_" + modelname);
+            hardyStress20.write("project_hardy20_" + modelname);
+        }
+        catch(const std::runtime_error& e){
+            std::cout << e.what() << std::endl;
+            std::cout << "Compute stress with projected forces failed. Moving on" << std::endl;
+        }
+
+        try{
+            Stress<MethodSphere,Cauchy> hardyStress5 (hardy5,&gridFromFile);
+            Stress<MethodSphere,Cauchy> hardyStress10(hardy10,&gridFromFile);
+            Stress<MethodSphere,Cauchy> hardyStress15(hardy15,&gridFromFile);
+            Stress<MethodSphere,Cauchy> hardyStress20(hardy20,&gridFromFile);
+
+            // Calculate stress using the process_dedr, if possible
+            calculateStress(body, kim,
+                            std::tie(),
+                            std::tie(hardyStress5, hardyStress10, hardyStress15, hardyStress20));
+            hardyStress5.write("hardy5_" + modelname);
+            hardyStress10.write("hardy10_" + modelname);
+            hardyStress15.write("hardy15_" + modelname);
+            hardyStress20.write("hardy20_" + modelname);
+        }
+        catch(const std::runtime_error& e){
+            std::cout << e.what() << std::endl;
+            std::cout << "Compute stress with process_dedr failed. Moving on" << std::endl;
+        }
+    }
 
 
 	return 0;

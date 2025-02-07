@@ -39,6 +39,8 @@ Kim::Kim(const std::string modelname) : modelname(modelname),kim_ptr(nullptr),co
 
 Kim::~Kim()
 {
+    int error = kim_ptr->ComputeArgumentsDestroy(&computeArguments);
+    if (error) { MY_ERROR("Unable to destroy compute arguments"); }
 	/* call model destroy */
 	KIM::Model::Destroy(&kim_ptr);
 }
@@ -300,12 +302,4 @@ void Kim::compute()
     //if (error) MY_ERROR("compute");
     if (error) throw(std::runtime_error("compute"));
 }
-
-void Kim::destroy()
-{
-    int error = kim_ptr->ComputeArgumentsDestroy(&computeArguments);
-    if (error) { MY_ERROR("Unable to destroy compute arguments"); }
-    KIM::Model::Destroy(&kim_ptr);
-}
-
 
