@@ -368,83 +368,105 @@ int calculateStress(const Configuration* pconfig,
     }
     else
     {
-        bonds.dVidxj_dVjdxi.resize(bonds.fij.size(),Vector3d::Zero());
-        MY_HEADING("Beginning local calculations")
-        for(int i_particlei=0; i_particlei<subconfig.numberOfParticles; ++i_particlei)
+        bonds.dVidxj_dVjdxi.resize(bonds.fij.size(), Vector3d::Zero());
+        MY_HEADING("Beginning force projection")
+        /*
+         * std::ofstream null_stream("/dev/null");  // For Unix/Linux/macOS
+        std::streambuf* cout_buf = std::cout.rdbuf(); // Save original buffer
+        std::cout.rdbuf(null_stream.rdbuf()); // Redirect std::cout to null
+         */
+        #pragma omp parallel
         {
-            // consider only contributing particles
-            if(subconfig.particleContributing[i_particlei] == 0) continue;
+            Kim kimLocal(kim.modelname);
+            std::vector<Vector3d> dVidxj_dVjdxiLocal(bonds.fij.size(), Vector3d::Zero());;
+            #pragma omp for
+            for (int i_particlei = 0; i_particlei < subconfig.numberOfParticles; ++i_particlei) {
+                // consider only contributing particles
+                if (subconfig.particleContributing[i_particlei] == 0) continue;
 
-            // stencil out particle and its neighborhood
-            Stencil singleParticleStencil(subconfig);
-            std::vector<Vector3d> centerParticleCoordinates;
-            centerParticleCoordinates.push_back(subconfig.coordinates.at(Current).row(i_particlei));
-            //singleParticleStencil.expandStencil(centerParticleCoordinates,subconfig.coordinates.at(Current),0.0,influenceDistance);
-            singleParticleStencil.expandStencil(centerParticleCoordinates,subconfig.coordinates.at(Current),0,influenceDistance);
-            SubConfiguration subconfigOfParticle{singleParticleStencil};
+                // stencil out particle and its neighborhood
+                Stencil singleParticleStencil(subconfig);
+                std::vector<Vector3d> centerParticleCoordinates;
+                centerParticleCoordinates.push_back(subconfig.coordinates.at(Current).row(i_particlei));
+                singleParticleStencil.expandStencil(centerParticleCoordinates, subconfig.coordinates.at(Current), 0.0,
+                                                    influenceDistance);
+                SubConfiguration subconfigOfParticle{singleParticleStencil};
 
-            // form neighborlist of the particle
-            const double* cutoffs= kim.getCutoffs();
-            int numberOfNeighborLists= kim.getNumberOfNeighborLists();
+                // form neighborlist of the particle
+                const double *cutoffs = kimLocal.getCutoffs();
+                int numberOfNeighborLists = kimLocal.getNumberOfNeighborLists();
 
-            // TODO: assert whenever the subconfiguration is empty
-            NeighList* nlOfParticle;
-            nbl_initialize(&nlOfParticle);
-            nbl_build(nlOfParticle,subconfigOfParticle.numberOfParticles,
-                      subconfigOfParticle.coordinates.at(Current).data(),
-                      influenceDistance,
-                      numberOfNeighborLists,
-                      cutoffs,
-                      subconfigOfParticle.particleContributing.data());
+                // TODO: assert whenever the subconfiguration is empty
+                NeighList *nlOfParticle;
+                nbl_initialize(&nlOfParticle);
+                nbl_build(nlOfParticle, subconfigOfParticle.numberOfParticles,
+                          subconfigOfParticle.coordinates.at(Current).data(),
+                          influenceDistance,
+                          numberOfNeighborLists,
+                          cutoffs,
+                          subconfigOfParticle.particleContributing.data());
 
-            MatrixXd forces(subconfigOfParticle.numberOfParticles,DIM);
-            forces.setZero();
+                MatrixXd forces(subconfigOfParticle.numberOfParticles, DIM);
+                forces.setZero();
 
-            // broadcast to model
-            kim.broadcastToModel(&subconfigOfParticle,
-                                 subconfigOfParticle.particleContributing,
-                                 &forces,
-                                 nlOfParticle,
-                                 (KIM::Function *) &nbl_get_neigh,
-                                 nullptr,
-                                 nullptr);
-            // compute partial forces
-            kim.compute();
+                // broadcast to model
+                kimLocal.broadcastToModel(&subconfigOfParticle,
+                                     subconfigOfParticle.particleContributing,
+                                     &forces,
+                                     nlOfParticle,
+                                     (KIM::Function *) &nbl_get_neigh,
+                                     nullptr,
+                                     nullptr);
+                // compute partial forces
+                kimLocal.compute();
 
-            InteratomicForces localBonds(nlOfParticle);
-            // loop over the neighbors of  center particle and collect all interatomic forces
-            // We do not know if the center particle is numbered 0
-            for (int i_local=0; i_local<subconfigOfParticle.numberOfParticles; ++i_local) {
-                assert(i_particlei == subconfigOfParticle.localGlobalMap.at(i_local));
+                InteratomicForces localBonds(nlOfParticle);
+                int i_local= subconfigOfParticle.globalLocalMap.at(i_particlei);
+
+                // loop over the neighbors of  center particle and collect all interatomic forces
                 for (int i_neighbor = 0; i_neighbor < localBonds.nlOne_ptr->Nneighbors[i_local]; ++i_neighbor) {
                     int index = localBonds.nlOne_ptr->beginIndex[i_local] + i_neighbor;
-                    int jLocal= localBonds.nlOne_ptr->neighborList[index];
-                    int i_particlej= subconfigOfParticle.localGlobalMap.at(jLocal);
+                    int jLocal = localBonds.nlOne_ptr->neighborList[index];
+                    int i_particlej = subconfigOfParticle.localGlobalMap.at(jLocal);
 
                     // look for particlej in the neighborhood of particlei in bonds
-                    for(int i_neighborOfi=0; i_neighborOfi<bonds.nlOne_ptr->Nneighbors[i_particlei]; ++i_neighborOfi) {
+                    for (int i_neighborOfi = 0;
+                         i_neighborOfi < bonds.nlOne_ptr->Nneighbors[i_particlei]; ++i_neighborOfi) {
                         index = bonds.nlOne_ptr->beginIndex[i_particlei] + i_neighborOfi;
-                        if(i_particlej ==  bonds.nlOne_ptr->neighborList[index]) {
+                        if (i_particlej == bonds.nlOne_ptr->neighborList[index]) {
                             // add force contribution dVi/dxj to fij
-                            bonds.dVidxj_dVjdxi[index] += forces.row(jLocal);
+                            //bonds.dVidxj_dVjdxi[index] += forces.row(jLocal);
+                            dVidxj_dVjdxiLocal[index] += forces.row(jLocal);
                             break;
                         }
                     }
 
                     // look for particlei in the neighborhood of particlej
-                    for(int i_neighborOfj=0; i_neighborOfj<bonds.nlOne_ptr->Nneighbors[i_particlej]; ++i_neighborOfj)
-                    {
-                        index= bonds.nlOne_ptr->beginIndex[i_particlej]+i_neighborOfj;
-                        if (i_particlei == bonds.nlOne_ptr->neighborList[index]){
+                    for (int i_neighborOfj = 0;
+                         i_neighborOfj < bonds.nlOne_ptr->Nneighbors[i_particlej]; ++i_neighborOfj) {
+                        index = bonds.nlOne_ptr->beginIndex[i_particlej] + i_neighborOfj;
+                        if (i_particlei == bonds.nlOne_ptr->neighborList[index]) {
                             // add force contribution dVi/dxj to fji:= dVj/dxi - dVi/dxj
-                            bonds.dVidxj_dVjdxi[index] += -forces.row(jLocal);
+                            //bonds.dVidxj_dVjdxi[index] += -forces.row(jLocal);
+                            dVidxj_dVjdxiLocal[index] += -forces.row(jLocal);
                             break;
                         }
                     }
                 }
+                nbl_clean(&nlOfParticle);
             }
-            nbl_clean(&nlOfParticle);
+            kimLocal.destroy();
+            #pragma omp critical
+            {
+                int i_dVidxj= 0;
+                for(const auto& elem : dVidxj_dVjdxiLocal)
+                {
+                    bonds.dVidxj_dVjdxi[i_dVidxj]+= elem;
+                    i_dVidxj++;
+                }
+            }
         }
+        //std::cout.rdbuf(cout_buf); // Restore the original stream buffer
         std::cout << "Done" << std::endl;
 
 

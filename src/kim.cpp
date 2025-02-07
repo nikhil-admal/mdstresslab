@@ -10,7 +10,7 @@
 #include "kim.h"
 #include "typedef.h"
 
-Kim::Kim(const std::string modelname)
+Kim::Kim(const std::string modelname) : modelname(modelname),kim_ptr(nullptr),computeArguments(nullptr)
 {
 	std::string message= "Connecting to model: " + modelname;
 	MY_HEADING(message.c_str());
@@ -297,7 +297,15 @@ void Kim::broadcastToModel(const Configuration* config_ptr,
 void Kim::compute()
 {
 	int error= kim_ptr->Compute(computeArguments);
-    if (error) MY_ERROR("compute");
+    //if (error) MY_ERROR("compute");
+    if (error) throw(std::runtime_error("compute"));
+}
+
+void Kim::destroy()
+{
+    int error = kim_ptr->ComputeArgumentsDestroy(&computeArguments);
+    if (error) { MY_ERROR("Unable to destroy compute arguments"); }
+    KIM::Model::Destroy(&kim_ptr);
 }
 
 

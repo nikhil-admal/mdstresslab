@@ -17,10 +17,11 @@
 class Kim
 {
 public:
+    std::vector<int> speciesCode;
+    std::string modelname;
+    double influenceDistance;
 	KIM::Model* kim_ptr;
 	KIM::ComputeArguments* computeArguments;
-	double influenceDistance;
-	std::vector<int> speciesCode;
 
 	Kim(std::string);
 	Kim(){kim_ptr=nullptr; computeArguments=nullptr; influenceDistance=0;}
@@ -37,6 +38,7 @@ public:
 	const double* getCutoffs() const;
 	int getNumberOfNeighborLists() const;
 	static void processDEDr(){};
+    void destroy();
 
 };
 #endif /* KIM_H_ */
