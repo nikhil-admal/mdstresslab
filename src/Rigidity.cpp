@@ -12,7 +12,7 @@ Rigidity::Rigidity(const MatrixXd& coordinates, const NeighListOne* p_inputNl)
       p_inputNl(p_inputNl),
       halfNl(getHalfNeighborList(coordinates,p_inputNl->cutoff))
 {
-    MY_HEADING("Constructing rigidity");
+    std::cout << "Constructing rigidity matrix" << std::endl;
     typedef Eigen::Triplet<double> T;
     std::vector<T> tripletList;
     int halfNlSize= 0;
@@ -46,10 +46,7 @@ Rigidity::Rigidity(const MatrixXd& coordinates, const NeighListOne* p_inputNl)
 
     matrixRTR.resize(DIM*numberOfParticles,DIM*numberOfParticles);
     matrixRTR= matrixR.transpose() * matrixR;
-    std::cout << matrixRTR.rows() << "   " << matrixRTR.cols() << std::endl;
-    std::cout << "Non-zeros in RTR = " << matrixRTR.nonZeros() << std::endl;
-    //std::cout << "Diagonal of RTR = " << matrixRTR.diagonal() << std::endl;
-    std::cout << "last row of RTR = " << matrixR.row(matrixR.rows()-1).norm() << std::endl;
+    std::cout << "# of non-zeros in RTR = " << matrixRTR.nonZeros() << std::endl;
 }
 
 std::vector<double> Rigidity::project(const Eigen::VectorXd& gi) const{
@@ -99,51 +96,6 @@ std::vector<double> Rigidity::project(const Eigen::VectorXd& gi) const{
     return hij;
 }
 
-/*
-NeighListOne Rigidity::getHalfNeighborList(const NeighListOne* p_inputNl)
-{
-    NeighListOne halfNl;
-    int numberOfParticles= p_inputNl->numberOfParticles;
-    halfNl.numberOfParticles= numberOfParticles;
-    std::vector<std::set<int>> temp(numberOfParticles);
-
-    for(size_t i_particle1=0; i_particle1<numberOfParticles; ++i_particle1) {
-        int numberOfNeighborsOf1 = p_inputNl->Nneighbors[i_particle1];
-
-        //	Loop over the neighbors of particle 1 in the input NL
-        for (size_t i_neighborOf1 = 0; i_neighborOf1 < numberOfNeighborsOf1; i_neighborOf1++) {
-            size_t index= p_inputNl->beginIndex[i_particle1] + i_neighborOf1;
-            size_t i_particle2 = p_inputNl->neighborList[index];
-
-            int i_particlei = (i_particle1 < i_particle2) ? i_particle1 : i_particle2;
-            int i_particlej = (i_particle1 < i_particle2) ? i_particle2 : i_particle1;
-
-            temp[i_particlei].insert(i_particlej);
-        }
-    }
-
-    int halfNlSize= 0;
-    for(int i=0; i<numberOfParticles;i++) halfNlSize+= temp[i].size();
-
-    halfNl.Nneighbors= new int[numberOfParticles];
-    halfNl.beginIndex= new int[numberOfParticles];
-    halfNl.neighborList= new int[halfNlSize];
-
-    int i_particle= 0;
-    std::vector<int> tempNl;
-    for(const auto neighbors : temp)
-    {
-        halfNl.Nneighbors[i_particle]= neighbors.size();
-        halfNl.beginIndex[i_particle]= tempNl.size();
-        // concaternate neighbors to the end of tempNl
-        tempNl.insert(tempNl.end(),std::make_move_iterator(neighbors.begin()), std::make_move_iterator(neighbors.end()));
-        i_particle++;
-    }
-    std::memcpy(halfNl.neighborList, tempNl.data(), sizeof(int) * tempNl.size());
-
-    return halfNl;
-}
- */
 NeighListOne Rigidity::getHalfNeighborList(const MatrixXd& coordinates, const double& cutoff)
 {
     NeighListOne halfNl;
@@ -153,7 +105,7 @@ NeighListOne Rigidity::getHalfNeighborList(const MatrixXd& coordinates, const do
     particleContributing.setOnes();
 
 
-    MY_HEADING("Building neighbor list for rigidity calculation");
+    std::cout << "Building neighbor list for rigidity calculation" << std::endl;
     NeighList* tempNl;
     nbl_initialize(&tempNl);
     nbl_build(tempNl,numberOfParticles,

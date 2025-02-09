@@ -25,7 +25,7 @@ Kim::Kim(const std::string modelname) : modelname(modelname),kim_ptr(nullptr),co
 							   modelname,
 							   &requestedUnitsAccepted,
 							   &kim_ptr);
-	if (error) { MY_ERROR("KIM::Model::Create()"); }
+	if (error) { throw(std::runtime_error("KIM::Model::Create()")); }
 
 	// Check for compatibility of units with the model's units
 	if (!requestedUnitsAccepted) { MY_ERROR("Must Adapt to model units"); }
@@ -292,7 +292,8 @@ void Kim::broadcastToModel(const Configuration* config_ptr,
             (processDEDr_ptr== nullptr ? 0 :
                 computeArguments->SetCallbackPointer(KIM::COMPUTE_CALLBACK_NAME::ProcessDEDrTerm,
                                                      KIM::LANGUAGE_NAME::cpp, processDEDr_ptr, bonds));
-	if (error) MY_ERROR("set_call_back");
+	//if (error) MY_ERROR("set_call_back");
+    if (error) throw(std::runtime_error("set_call_back"));
 
 }
 

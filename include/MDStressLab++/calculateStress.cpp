@@ -369,15 +369,19 @@ int calculateStress(const Configuration* pconfig,
     else
     {
         bonds.dVidxj_dVjdxi.resize(bonds.fij.size(), Vector3d::Zero());
+        //	------------------------------------------------------------------
+        //	Beginning force projection
+        //	------------------------------------------------------------------
         MY_HEADING("Beginning force projection")
-        /*
-         * std::ofstream null_stream("/dev/null");  // For Unix/Linux/macOS
+        std::ofstream null_stream("/dev/null");  // For Unix/Linux/macOS
         std::streambuf* cout_buf = std::cout.rdbuf(); // Save original buffer
         std::cout.rdbuf(null_stream.rdbuf()); // Redirect std::cout to null
-         */
         #pragma omp parallel
         {
-            Kim kimLocal(kim.modelname);
+            Kim* p_kimLocal;
+            #pragma omp critical
+                p_kimLocal= new Kim(kim.modelname);
+            //Kim kimLocal(kim.modelname);
             std::vector<Vector3d> dVidxj_dVjdxiLocal(bonds.fij.size(), Vector3d::Zero());;
             #pragma omp for
             for (int i_particlei = 0; i_particlei < subconfig.numberOfParticles; ++i_particlei) {
@@ -393,8 +397,8 @@ int calculateStress(const Configuration* pconfig,
                 SubConfiguration subconfigOfParticle{singleParticleStencil};
 
                 // form neighborlist of the particle
-                const double *cutoffs = kimLocal.getCutoffs();
-                int numberOfNeighborLists = kimLocal.getNumberOfNeighborLists();
+                const double *cutoffs = p_kimLocal->getCutoffs();
+                int numberOfNeighborLists = p_kimLocal->getNumberOfNeighborLists();
 
                 // TODO: assert whenever the subconfiguration is empty
                 NeighList *nlOfParticle;
@@ -410,7 +414,7 @@ int calculateStress(const Configuration* pconfig,
                 forces.setZero();
 
                 // broadcast to model
-                kimLocal.broadcastToModel(&subconfigOfParticle,
+                p_kimLocal->broadcastToModel(&subconfigOfParticle,
                                      subconfigOfParticle.particleContributing,
                                      &forces,
                                      nlOfParticle,
@@ -418,7 +422,7 @@ int calculateStress(const Configuration* pconfig,
                                      nullptr,
                                      nullptr);
                 // compute partial forces
-                kimLocal.compute();
+                p_kimLocal->compute();
 
                 InteratomicForces localBonds(nlOfParticle);
                 int i_local= subconfigOfParticle.globalLocalMap.at(i_particlei);
@@ -455,6 +459,9 @@ int calculateStress(const Configuration* pconfig,
                 }
                 nbl_clean(&nlOfParticle);
             }
+
+            delete p_kimLocal;
+            p_kimLocal= nullptr;
             #pragma omp critical
             {
                 int i_dVidxj= 0;
@@ -465,12 +472,14 @@ int calculateStress(const Configuration* pconfig,
                 }
             }
         }
-        //std::cout.rdbuf(cout_buf); // Restore the original stream buffer
-        std::cout << "Done" << std::endl;
+
+        std::cout.rdbuf(cout_buf); // Restore the original stream buffer
+        std::cout << "Done with local force calculations" << std::endl;
 
 
         // At this point, dVi/dxj-dVj/dxi is antisymmetric only for pairs of contributing atoms.
         MatrixXd gi(numberOfParticles,DIM);
+        // gi: total force from the perpendicular components of interatomic forces
         gi.setZero();
         for(int i_particlei=0; i_particlei<subconfig.numberOfParticles; ++i_particlei)
         {
@@ -506,6 +515,7 @@ int calculateStress(const Configuration* pconfig,
             index++;
         }
 
+        // fi: total force from the interatomic force corrections
         MatrixXd fi(numberOfParticles,DIM);
         fi.setZero();
         for(int i_particlei=0; i_particlei<subconfig.numberOfParticles; ++i_particlei) {
@@ -520,12 +530,14 @@ int calculateStress(const Configuration* pconfig,
             }
         }
 
+        // check if gi~fi
         double maxError=0;
         for(int i_particlei=0; i_particlei<subconfig.numberOfParticles; ++i_particlei) {
             if (subconfig.particleContributing[i_particlei] == 0) continue;
             maxError= std::max(maxError,(gi.row(i_particlei)-fi.row(i_particlei)).norm());
         }
         std::cout << "Maximum error = " << maxError << std::endl;
+        std::cout << "Done" << std::endl;
     }
 
 //	------------------------------------------------------------------

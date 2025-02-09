@@ -13,6 +13,8 @@
 #include "calculateStress.h"
 #include "Grid.h"
 #include "typedef.h"
+#include "kim_query.cpp"
+#include <regex>
 
 
 int main()
@@ -21,10 +23,9 @@ int main()
 	int referenceAndFinal= true;
 	std::string configFileName= "config.data";
     std::vector<std::string> modelnames={
-            "SW_BalamaneHauchShi_2017Brittle_Si__MO_381114941873_002",// - has processdEdr
             "MEAM_LAMMPS_DuLenoskyHennig_2011_Si__MO_883726743759_002",
-            "SNAP_ZuoChenLi_2019quadratic_Si__MO_721469752060_000",
             "SNAP_ZuoChenLi_2019_Si__MO_869330304805_000",
+            "SNAP_ZuoChenLi_2019quadratic_Si__MO_721469752060_000",
             "ThreeBodyBondOrder_PPM_PurjaPunMishin_2017_Si__MO_566683736730_000",
             "EDIP_JustoBazantKaxiras_1998_Si__MO_958932894036_002",
             "EDIP_LAMMPS_JustoBazantKaxiras_1998_Si__MO_315965276297_000",
@@ -36,7 +37,45 @@ int main()
             "ThreeBodyCluster_BH_BiswasHamann_1987_Si__MO_019616213550_000",
             "ThreeBodyCluster_Gong_Gong_1993_Si__MO_407755720412_000",
             "ThreeBodyCluster_KP_KaxirasPandey_1988_Si__MO_072486242437_000",
+            "SW_BalamaneHauchShi_2017Brittle_Si__MO_381114941873_002",// - has processdEdr
             "ThreeBodyCluster_SRS_StephensonRadnySmith_1996_Si__MO_604248666067_000"};
+
+//	-------------------------------------------------------------------
+//  Querying models
+//	-------------------------------------------------------------------
+    std::cout << "Querying models." << std::endl;
+    for (int i = 0; i < modelnames.size(); ++i) {
+        std::cout << "Model: " << modelnames[i] << std::endl;
+        // Regular expression to match the pattern "MO_" followed by digits and an underscore, then digits
+        std::regex rgx("MO_\\d+_\\d{3}");
+
+        std::smatch match;
+        if (!std::regex_search(modelnames[i], match, rgx))
+            std::cout << "Regex error!" << std::endl;
+
+
+        std::string latticeConstant= kim_query(
+                "get_lattice_constant_cubic",
+                {
+                        "model=[\"" + match.str()+ "\"]",
+                        "crystal=[\"diamond\"]",
+                        "species=[\"Si\"]",
+                        "units=[\"angstrom\"]"
+                }
+        );
+        std::cout << "Lattice constant = " << latticeConstant << std::endl;
+        std::string elasticConstants= kim_query(
+                "get_elastic_constants_isothermal_cubic",
+                {
+                        "model=[\"" + match.str()+ "\"]",
+                        "crystal=[\"diamond\"]",
+                        "species=[\"Si\"]",
+                        "units=[\"eV/angstrom^3\"]"
+                }
+        );
+        std::cout << "Elastic constants = " << elasticConstants << std::endl;
+        std::cout << "------------------------------------------ " << std::endl;
+    }
 
 //	-------------------------------------------------------------------
 // Input configuration and potential
@@ -75,6 +114,7 @@ int main()
     for (const auto modelname : modelnames)
     {
         Kim kim(modelname);
+        // stress calculation using projected forces
         try {
             Stress<MethodSphere,Cauchy> hardyStress5 (hardy5,&gridFromFile);
             Stress<MethodSphere,Cauchy> hardyStress10(hardy10,&gridFromFile);
@@ -95,6 +135,7 @@ int main()
             std::cout << "Compute stress with projected forces failed. Moving on" << std::endl;
         }
 
+        // stress calculation using process_dedr
         try{
             Stress<MethodSphere,Cauchy> hardyStress5 (hardy5,&gridFromFile);
             Stress<MethodSphere,Cauchy> hardyStress10(hardy10,&gridFromFile);
@@ -115,7 +156,6 @@ int main()
             std::cout << "Compute stress with process_dedr failed. Moving on" << std::endl;
         }
     }
-
 
 	return 0;
 }

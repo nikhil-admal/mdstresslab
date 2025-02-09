@@ -5,7 +5,6 @@
 #ifndef MDSTRESSLAB_RIGIDITY_H
 #define MDSTRESSLAB_RIGIDITY_H
 
-#define EIGEN_DONT_PARALLELIZE
 #include "Eigen/Eigen/Sparse"
 #include "neighbor_list.h"
 
