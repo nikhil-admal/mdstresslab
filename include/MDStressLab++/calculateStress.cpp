@@ -503,15 +503,16 @@ int calculateStress(const Configuration* pconfig,
             }
         }
         std::vector<double> hij(bonds.fij.size(),0.0);
+        double gimax= gi.cwiseAbs().maxCoeff();
         if (gi.reshaped<Eigen::RowMajor>().norm() > 1e-6) {
             Rigidity rigidity(subconfig.coordinates.at(Current), bonds.nlOne_ptr);
-            hij = rigidity.project(gi.reshaped<Eigen::RowMajor>());
+            hij = rigidity.project(gi.reshaped<Eigen::RowMajor>()/gimax);
         }
 
         // update: fij
         int index= 0;
         for(auto& element : bonds.fij) {
-            element += hij[index];
+            element += gimax*hij[index];
             index++;
         }
 
@@ -526,7 +527,7 @@ int calculateStress(const Configuration* pconfig,
                 Vector3d particlei = subconfig.coordinates.at(Current).row(i_particlei);
                 Vector3d particlej = subconfig.coordinates.at(Current).row(i_particlej);
                 Vector3d eij = (particlei - particlej).normalized();
-                fi.row(i_particlei) += hij[index] * eij;
+                fi.row(i_particlei) += gimax*hij[index] * eij;
             }
         }
 
