@@ -54,7 +54,7 @@ private:
     std::pair<ConstSpatialHash,ConstSpatialHash> hashGridSubconfig;
 public:
     GridSubConfiguration(const Grid<T>&, const SubConfiguration&, const double& );
-    std::set<int> getGridPointNeighbors(const int& );
+    std::set<int> getGridPointNeighbors(const int& ) const;
 
 };
 /*!

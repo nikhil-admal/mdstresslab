@@ -171,10 +171,10 @@ hashGridSubconfig(std::make_pair(ConstSpatialHash(Vector3d::Zero(),Vector3d::Con
 {}
 
 template<ConfigType T>
-std::set<int> GridSubConfiguration<T>::getGridPointNeighbors(const int& i_gridPoint)
+std::set<int> GridSubConfiguration<T>::getGridPointNeighbors(const int& i_gridPoint) const
 {
-    ConstSpatialHash& hashGrid= hashGridSubconfig.first;
-    ConstSpatialHash& hashParticles= hashGridSubconfig.second;
+    const ConstSpatialHash& hashGrid= hashGridSubconfig.first;
+    const ConstSpatialHash& hashParticles= hashGridSubconfig.second;
 
     std::set<int> gridContributingList;
     Triplet bin= hashGrid.hashFunction(i_gridPoint);
@@ -182,7 +182,11 @@ std::set<int> GridSubConfiguration<T>::getGridPointNeighbors(const int& i_gridPo
     // for each neighboring bin of a grid point's bin
     for (const auto& neighborBin : bin.neighborList())
     {
-        const std::vector<int>& particleList= hashParticles.hashTable[neighborBin];
+        //const std::vector<int>& particleList= hashParticles.hashTable.at(neighborBin);
+        const std::vector<int>& particleList=
+        (hashParticles.hashTable.find(neighborBin)!=hashParticles.hashTable.end()) ?
+            hashParticles.hashTable.at(neighborBin) : std::vector<int>();
+
         // for each particle in a neighboring bin
         for(const auto& particle : particleList)
         {

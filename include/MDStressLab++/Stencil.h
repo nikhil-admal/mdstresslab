@@ -53,7 +53,12 @@ public:
                 Triplet bin = hashGrid.hashFunction(i_gridPoint);
                 // for each neighboring bin of a grid point's bin
                 for (const auto &neighborBin: bin.neighborList()) {
-                    std::vector<int> &particleList = hashParticles.hashTable[neighborBin];
+
+                    const std::vector<int>& particleList=
+                          (hashParticles.hashTable.find(neighborBin)!=hashParticles.hashTable.end()) ?
+                          hashParticles.hashTable.at(neighborBin) : std::vector<int>();
+
+
                     // for each particle in a neighboring bin
                     for (const auto &particle: particleList) {
                         double distanceSquared = (coordinates.row(particle) -
