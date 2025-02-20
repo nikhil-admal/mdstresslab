@@ -378,6 +378,7 @@ int calculateStress(const Configuration* pconfig,
                              (KIM::Function *) &nbl_get_neigh,
                              nullptr,
                              nullptr);
+	kim.compute();
 
         //	------------------------------------------------------------------
         //	Beginning force projection
