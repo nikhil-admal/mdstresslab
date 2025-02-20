@@ -321,37 +321,40 @@ int calculateStress(const Configuration* pconfig,
 				 subconfig.particleContributing.data());
 	InteratomicForces bonds(nlForBonds);
 
+    //	------------------------------------------------------------------
+    //	Build neighbor list of particles
+    //	------------------------------------------------------------------
+    MY_HEADING("Building neighbor list");
+    const double* cutoffs= kim.getCutoffs();
+    int numberOfNeighborLists= kim.getNumberOfNeighborLists();
+
+    // TODO: assert whenever the subconfiguration is empty
+    NeighList* nl;
+    nbl_initialize(&nl);
+    nbl_build(nl,numberOfParticles,
+              subconfig.coordinates.at(Current).data(),
+              influenceDistance,
+              numberOfNeighborLists,
+              cutoffs,
+              subconfig.particleContributing.data());
+
+    int neighborListSize= 0;
+    for (int i_particle=0; i_particle<numberOfParticles; i_particle++)
+        neighborListSize+= nl->lists->Nneighbors[i_particle];
+    std::cout << "Size of neighbor list = " <<neighborListSize << std::endl;
+
+
+    MatrixXd forces(numberOfParticles,DIM);
+    forces.setZero();
+
     if (!projectForces) {
-        //	------------------------------------------------------------------
-        //	Build neighbor list of particles
-        //	------------------------------------------------------------------
-        MY_HEADING("Building neighbor list");
-        const double* cutoffs= kim.getCutoffs();
-        int numberOfNeighborLists= kim.getNumberOfNeighborLists();
-
-        // TODO: assert whenever the subconfiguration is empty
-        NeighList* nl;
-        nbl_initialize(&nl);
-        nbl_build(nl,numberOfParticles,
-                  subconfig.coordinates.at(Current).data(),
-                  influenceDistance,
-                  numberOfNeighborLists,
-                  cutoffs,
-                  subconfig.particleContributing.data());
-
-        int neighborListSize= 0;
-        for (int i_particle=0; i_particle<numberOfParticles; i_particle++)
-            neighborListSize+= nl->lists->Nneighbors[i_particle];
-        std::cout << "Size of neighbor list = " <<neighborListSize << std::endl;
-
-
     //	------------------------------------------------------------------
     //	Broadcast to model
     //	------------------------------------------------------------------
         MY_HEADING("Broadcasting to model");
         kim.broadcastToModel(&subconfig,
                              subconfig.particleContributing,
-                             nullptr,
+                             &forces,
                              nl,
                              (KIM::Function *) &nbl_get_neigh,
                              &bonds,
@@ -364,11 +367,18 @@ int calculateStress(const Configuration* pconfig,
         MY_HEADING("Computing forces");
         kim.compute();
         std::cout << "Done" << std::endl;
-        nbl_clean(&nl);
+        //nbl_clean(&nl);
     }
     else
     {
-        bonds.dVidxj_dVjdxi.resize(bonds.fij.size(), Vector3d::Zero());
+        kim.broadcastToModel(&subconfig,
+                             subconfig.particleContributing,
+                             &forces,
+                             nl,
+                             (KIM::Function *) &nbl_get_neigh,
+                             nullptr,
+                             nullptr);
+
         //	------------------------------------------------------------------
         //	Beginning force projection
         //	------------------------------------------------------------------
@@ -382,12 +392,13 @@ int calculateStress(const Configuration* pconfig,
             #pragma omp critical
                 p_kimLocal= new Kim(kim.modelname);
             //Kim kimLocal(kim.modelname);
-            std::vector<Vector3d> dVidxj_dVjdxiLocal(bonds.fij.size(), Vector3d::Zero());;
+            std::vector<double> fijCopy(bonds.fij.size(),0.0);
             #pragma omp for
             for (int i_particlei = 0; i_particlei < subconfig.numberOfParticles; ++i_particlei) {
                 // consider only contributing particles
                 if (subconfig.particleContributing[i_particlei] == 0) continue;
 
+                std::cout << i_particlei << std::endl;
                 // stencil out particle and its neighborhood
                 Stencil singleParticleStencil(subconfig);
                 std::vector<Vector3d> centerParticleCoordinates;
@@ -410,13 +421,13 @@ int calculateStress(const Configuration* pconfig,
                           cutoffs,
                           subconfigOfParticle.particleContributing.data());
 
-                MatrixXd forces(subconfigOfParticle.numberOfParticles, DIM);
-                forces.setZero();
+                MatrixXd localForces(subconfigOfParticle.numberOfParticles, DIM);
+                localForces.setZero();
 
                 // broadcast to model
                 p_kimLocal->broadcastToModel(&subconfigOfParticle,
                                      subconfigOfParticle.particleContributing,
-                                     &forces,
+                                     &localForces,
                                      nlOfParticle,
                                      (KIM::Function *) &nbl_get_neigh,
                                      nullptr,
@@ -424,36 +435,52 @@ int calculateStress(const Configuration* pconfig,
                 // compute partial forces
                 p_kimLocal->compute();
 
-                InteratomicForces localBonds(nlOfParticle);
-                int i_local= subconfigOfParticle.globalLocalMap.at(i_particlei);
+                /*
+                // check moment
+                Vector3d moment, totalForce;
+                moment.setZero(); totalForce.setZero();
+                for(int i_row=0; i_row<forces.rows(); ++i_row)
+                {
+                    Vector3d pos= subconfigOfParticle.coordinates.at(Current).row(i_row);
+                    Vector3d f= forces.row(i_row);
+                    moment= moment+pos.cross(f);
+                    totalForce= totalForce + f;
+                }
+                std::cout << "moment = " << std::endl;
+                std::cout << moment << std::endl;
+                std::cout << "total force = " << std::endl;
+                std::cout << totalForce << std::endl;
+                 */
 
-                // loop over the neighbors of  center particle and collect all interatomic forces
-                for (int i_neighbor = 0; i_neighbor < localBonds.nlOne_ptr->Nneighbors[i_local]; ++i_neighbor) {
-                    int index = localBonds.nlOne_ptr->beginIndex[i_local] + i_neighbor;
-                    int jLocal = localBonds.nlOne_ptr->neighborList[index];
-                    int i_particlej = subconfigOfParticle.localGlobalMap.at(jLocal);
+                Rigidity rigidity(subconfigOfParticle.coordinates.at(Current));
+                double forceMax= localForces.cwiseAbs().maxCoeff();
 
-                    // look for particlej in the neighborhood of particlei in bonds
-                    for (int i_neighborOfi = 0;
-                         i_neighborOfi < bonds.nlOne_ptr->Nneighbors[i_particlei]; ++i_neighborOfi) {
-                        index = bonds.nlOne_ptr->beginIndex[i_particlei] + i_neighborOfi;
-                        if (i_particlej == bonds.nlOne_ptr->neighborList[index]) {
-                            // add force contribution dVi/dxj to fij
-                            //bonds.dVidxj_dVjdxi[index] += forces.row(jLocal);
-                            dVidxj_dVjdxiLocal[index] += forces.row(jLocal);
-                            break;
+                std::vector<double> fij = rigidity.project(localForces.reshaped<Eigen::RowMajor>()/forceMax);
+
+                // loop over the local bonds and collect all interatomic forces
+                int indexLocal= -1;
+                for(int kLocal= 0; kLocal<subconfigOfParticle.numberOfParticles; ++kLocal) {
+                    int i_particlek = subconfigOfParticle.localGlobalMap.at(kLocal);
+                    for (int jLocal= kLocal+1; jLocal < subconfigOfParticle.numberOfParticles; ++jLocal) {
+                        indexLocal++;
+                        int i_particlej = subconfigOfParticle.localGlobalMap.at(jLocal);
+                        // look for particlej in the neighborhood of particlek in bonds
+                        for (int i_neighborOfk = 0; i_neighborOfk < bonds.nlOne_ptr->Nneighbors[i_particlek]; ++i_neighborOfk) {
+                            int index = bonds.nlOne_ptr->beginIndex[i_particlek] + i_neighborOfk;
+                            if (i_particlej == bonds.nlOne_ptr->neighborList[index]) {
+                                fijCopy[index] -= fij[indexLocal]*forceMax;
+                                break;
+                            }
                         }
-                    }
 
-                    // look for particlei in the neighborhood of particlej
-                    for (int i_neighborOfj = 0;
-                         i_neighborOfj < bonds.nlOne_ptr->Nneighbors[i_particlej]; ++i_neighborOfj) {
-                        index = bonds.nlOne_ptr->beginIndex[i_particlej] + i_neighborOfj;
-                        if (i_particlei == bonds.nlOne_ptr->neighborList[index]) {
-                            // add force contribution dVi/dxj to fji:= dVj/dxi - dVi/dxj
-                            //bonds.dVidxj_dVjdxi[index] += -forces.row(jLocal);
-                            dVidxj_dVjdxiLocal[index] += -forces.row(jLocal);
-                            break;
+                        // look for particlek in the neighborhood of particlej
+                        for (int i_neighborOfj = 0;
+                             i_neighborOfj < bonds.nlOne_ptr->Nneighbors[i_particlej]; ++i_neighborOfj) {
+                            int index = bonds.nlOne_ptr->beginIndex[i_particlej] + i_neighborOfj;
+                            if (i_particlek == bonds.nlOne_ptr->neighborList[index]) {
+                                fijCopy[index] -= fij[indexLocal]*forceMax;
+                                break;
+                            }
                         }
                     }
                 }
@@ -464,83 +491,47 @@ int calculateStress(const Configuration* pconfig,
             p_kimLocal= nullptr;
             #pragma omp critical
             {
-                int i_dVidxj= 0;
-                for(const auto& elem : dVidxj_dVjdxiLocal)
+                int i_fijCopy= 0;
+                for(const auto& elem : fijCopy)
                 {
-                    bonds.dVidxj_dVjdxi[i_dVidxj]+= elem;
-                    i_dVidxj++;
+                    bonds.fij[i_fijCopy]+= elem;
+                    i_fijCopy++;
                 }
             }
         }
 
         std::cout.rdbuf(cout_buf); // Restore the original stream buffer
         std::cout << "Done with local force calculations" << std::endl;
-
-
-        // At this point, dVi/dxj-dVj/dxi is antisymmetric only for pairs of contributing atoms.
-        MatrixXd gi(numberOfParticles,DIM);
-        // gi: total force from the perpendicular components of interatomic forces
-        gi.setZero();
-        for(int i_particlei=0; i_particlei<subconfig.numberOfParticles; ++i_particlei)
-        {
-            if(subconfig.particleContributing[i_particlei] == 0) continue;
-            for(int i_neighborOfi=0; i_neighborOfi<bonds.nlOne_ptr->Nneighbors[i_particlei]; ++i_neighborOfi)
-            {
-                int index= bonds.nlOne_ptr->beginIndex[i_particlei]+i_neighborOfi;
-                int i_particlej= bonds.nlOne_ptr->neighborList[index];
-                Vector3d particlei= subconfig.coordinates.at(Current).row(i_particlei);
-                Vector3d particlej= subconfig.coordinates.at(Current).row(i_particlej);
-                Vector3d eij= (particlei-particlej).normalized();
-                bonds.fij[index]= bonds.dVidxj_dVjdxi[index].dot(eij);
-
-                Vector3d fijPerp= bonds.dVidxj_dVjdxi[index]- bonds.fij[index]*eij;
-                // sum over all the perpendicular components
-                gi.row(i_particlei)+= fijPerp;
-
-                // account for perpendicular forces on non-contributing particles
-                if(subconfig.particleContributing[i_particlej] == 0)
-                    gi.row(i_particlej)-= fijPerp;
-            }
-        }
-        std::vector<double> hij(bonds.fij.size(),0.0);
-        double gimax= gi.cwiseAbs().maxCoeff();
-        if (gi.reshaped<Eigen::RowMajor>().norm() > 1e-6) {
-            Rigidity rigidity(subconfig.coordinates.at(Current), bonds.nlOne_ptr);
-            hij = rigidity.project(gi.reshaped<Eigen::RowMajor>()/gimax);
-        }
-
-        // update: fij
-        int index= 0;
-        for(auto& element : bonds.fij) {
-            element += gimax*hij[index];
-            index++;
-        }
-
-        // fi: total force from the interatomic force corrections
-        MatrixXd fi(numberOfParticles,DIM);
-        fi.setZero();
-        for(int i_particlei=0; i_particlei<subconfig.numberOfParticles; ++i_particlei) {
-            if (subconfig.particleContributing[i_particlei] == 0) continue;
-            for (int i_neighborOfi = 0; i_neighborOfi < bonds.nlOne_ptr->Nneighbors[i_particlei]; ++i_neighborOfi) {
-                int index = bonds.nlOne_ptr->beginIndex[i_particlei] + i_neighborOfi;
-                int i_particlej = bonds.nlOne_ptr->neighborList[index];
-                Vector3d particlei = subconfig.coordinates.at(Current).row(i_particlei);
-                Vector3d particlej = subconfig.coordinates.at(Current).row(i_particlej);
-                Vector3d eij = (particlei - particlej).normalized();
-                fi.row(i_particlei) += gimax*hij[index] * eij;
-            }
-        }
-
-        // check if gi~fi
-        double maxError=0;
-        for(int i_particlei=0; i_particlei<subconfig.numberOfParticles; ++i_particlei) {
-            if (subconfig.particleContributing[i_particlei] == 0) continue;
-            maxError= std::max(maxError,(gi.row(i_particlei)-fi.row(i_particlei)).norm());
-        }
-        std::cout << "Maximum error = " << maxError << std::endl;
-        std::cout << "Done" << std::endl;
     }
 
+    //	------------------------------------------------------------------
+    //	Checking error in interatomic forces
+    //	------------------------------------------------------------------
+    MY_HEADING("Checking error in interatomic forces");
+    // fi: total force from the interatomic force projection
+    MatrixXd fi(numberOfParticles,DIM);
+    fi.setZero();
+    for(int i_particlei=0; i_particlei<subconfig.numberOfParticles; ++i_particlei) {
+        if (subconfig.particleContributing[i_particlei] == 0) continue;
+        Vector3d particlei = subconfig.coordinates.at(Current).row(i_particlei);
+        for (int i_neighborOfi = 0; i_neighborOfi < bonds.nlOne_ptr->Nneighbors[i_particlei]; ++i_neighborOfi) {
+            int index = bonds.nlOne_ptr->beginIndex[i_particlei] + i_neighborOfi;
+            int i_particlej = bonds.nlOne_ptr->neighborList[index];
+            Vector3d particlej = subconfig.coordinates.at(Current).row(i_particlej);
+            Vector3d eij = (particlei - particlej).normalized();
+            fi.row(i_particlei) -= bonds.fij[index] * eij;
+        }
+    }
+
+    // check if gi~fi
+    double maxError=0;
+    for(int i_particlei=0; i_particlei<subconfig.numberOfParticles; ++i_particlei) {
+        if (subconfig.particleContributing[i_particlei] == 0) continue;
+        maxError= std::max(maxError,(forces.row(i_particlei)-fi.row(i_particlei)).norm());
+    }
+    std::cout << "Maximum error in f_i = \Sigma_j f_ij: " << maxError << std::endl;
+    std::cout << "Done" << std::endl;
+    nbl_clean(&nl);
 //	------------------------------------------------------------------
 //	Loop over local grid points and accumulate stress
 //	------------------------------------------------------------------

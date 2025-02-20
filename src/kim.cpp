@@ -280,7 +280,8 @@ void Kim::broadcastToModel(const Configuration* config_ptr,
 	        ||
 			computeArguments->SetArgumentPointer(KIM::COMPUTE_ARGUMENT_NAME::coordinates, config_ptr->coordinates.at(Current).data())
             ||
-            (forces_ptr == nullptr ? 0 :
+            (forces_ptr == nullptr ?
+             computeArguments->SetArgumentPointer(KIM::COMPUTE_ARGUMENT_NAME::partialForces,static_cast<double*>(nullptr)) :
              computeArguments->SetArgumentPointer(KIM::COMPUTE_ARGUMENT_NAME::partialForces, (*forces_ptr).data())
             );
 
@@ -289,7 +290,9 @@ void Kim::broadcastToModel(const Configuration* config_ptr,
 												 KIM::LANGUAGE_NAME::cpp, get_neigh_ptr, nl_ptr)
 			||
 
-            (processDEDr_ptr== nullptr ? 0 :
+            (processDEDr_ptr== nullptr ?
+                computeArguments->SetCallbackPointer(KIM::COMPUTE_CALLBACK_NAME::ProcessDEDrTerm,
+                                                  KIM::LANGUAGE_NAME::cpp, nullptr, nullptr) :
                 computeArguments->SetCallbackPointer(KIM::COMPUTE_CALLBACK_NAME::ProcessDEDrTerm,
                                                      KIM::LANGUAGE_NAME::cpp, processDEDr_ptr, bonds));
 	//if (error) MY_ERROR("set_call_back");

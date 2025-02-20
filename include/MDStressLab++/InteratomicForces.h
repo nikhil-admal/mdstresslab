@@ -15,7 +15,6 @@ public:
 	virtual ~InteratomicForces();
 	const NeighListOne* nlOne_ptr;
 	std::vector<double> fij;
-    std::vector<Vector3d> dVidxj_dVjdxi;
 };
 
 #endif /* SRC_INTERATOMICFORCES_H_ */

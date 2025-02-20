@@ -13,16 +13,10 @@
 // Output bonds;
 class Rigidity {
 public:
-    Eigen::SparseMatrix<double> matrixR, matrixRTR;
+    Eigen::MatrixXd matrixR, matrixRTR;
     const MatrixXd& coordinates;
-    const NeighListOne* p_inputNl;
-    Rigidity(const MatrixXd & coordinates, const NeighListOne* p_inputNl);
+    Rigidity(const MatrixXd & coordinates);
     std::vector<double> project(const Eigen::VectorXd& gi) const;
-    ~Rigidity();
-private:
-    NeighListOne halfNl;
-    //NeighListOne static getHalfNeighborList(const NeighListOne* p_inputNl);
-    NeighListOne static getHalfNeighborList(const MatrixXd& coordinates, const double& cutoff);
 };
 
 
