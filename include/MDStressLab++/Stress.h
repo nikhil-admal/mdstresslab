@@ -50,13 +50,24 @@ public:
 		std::ofstream file(name+".stress");
 
 		file << field.size() << "\n";
-		file << "\n";
+		//file << "\n";
         int index= 0;
+        //Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
         Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
-		for (auto& stress : field)
+        file << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10);
+        file << "Properties=pos:R:3:stress:R:6" << std::endl;
+        for (auto& stress : field)
 		{
-			Eigen::Map<Eigen::Matrix<double,1,DIM*DIM>> stressRow(stress.data(), stress.size());
-			file << pgrid->coordinates[index].format(fmt) << std::setw(5) << stressRow.format(fmt) << std::endl;
+			//Eigen::Map<Eigen::Matrix<double,1,DIM*DIM>> stressRow(stress.data(), stress.size());
+			//file << pgrid->coordinates[index].format(fmt) << std::setw(5) << stressRow.format(fmt) << std::endl;
+            file << pgrid->coordinates[index].format(fmt)
+                << std::setw(25) << stress(0,0)
+                << std::setw(25) << stress(1,1)
+                << std::setw(25) << stress(2,2)
+                << std::setw(25) << stress(0,1)
+                << std::setw(25) << stress(0,2)
+                << std::setw(25) << stress(1,2)
+                << std::endl;
             index++;
 		}
 	}

@@ -17,6 +17,10 @@ public:
 	Vector3i pbc;
 	Configuration* getConfiguration(double) const;
 	void read(std::string,int);
+    void readLMP(const std::string&,const ConfigType& configType= Current);
+    void readLMP(const std::string&,
+                 const std::string&);
+    void lmpParser(std::ifstream&, const ConfigType&);
 
 	BoxConfiguration(int,int);
 	BoxConfiguration(std::string,int);

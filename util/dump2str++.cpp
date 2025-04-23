@@ -25,26 +25,26 @@
 #include <stdlib.h>
 #include <cmath>
 #include <cstdlib>
-using namespace std;
+// # using namespace std;
 
-ifstream initialFile;
-ifstream finalFile;
+std::ifstream initialFile;
+std::ifstream finalFile;
 FILE * pOutputFile;
-string element[100], boundary, stmp;
+std::string element[100], boundary, stmp;
 int numAtom, nAtomType, col1[8] = {0,0,0,0,0,0,0,0}, col2[8] = {0,0,0,0,0,0,0,0}, count = -1, itmp, iatom_type; // x y z vx vy vz atomtype last_column // starting from column 5
 double boxLow, boxHigh, pos1, pos2, pos3, vel1 = 0.0, vel2 = 0.0, vel3 = 0.0;
 
-bool fexists(const string& filename);
+bool fexists(const std::string& filename);
 void readingNAtm();
 void readingBox();
-void isdata1(ifstream & filestream);
-void isdata2(ifstream & filestream);
+void isdata1(std::ifstream & filestream);
+void isdata2(std::ifstream & filestream);
 void readingPosition();
 void closeFile();
 
-bool fexists(const string& filename) // check whether a file exists or not
+bool fexists(const std::string& filename) // check whether a file exists or not
 {
-    ifstream ifile(filename.c_str());
+    std::ifstream ifile(filename.c_str());
     return (bool)ifile;
 }
 
@@ -60,9 +60,9 @@ void readingNAtm() // Reading number of atoms in the configuration
     finalFile >> itmp;    // get the number of atoms
     if (numAtom != itmp)
     {
-        cout << "The initial configuration and the final configuration should have the same # atoms!" << endl;
-        cout << "In inital configuration # atoms : " << numAtom << endl;
-        cout << "In final configuration # atoms : " << itmp << endl;
+        std::cout << "The initial configuration and the final configuration should have the same # atoms!" << std::endl;
+        std::cout << "In inital configuration # atoms : " << numAtom << std::endl;
+        std::cout << "In final configuration # atoms : " << itmp << std::endl;
         exit(-3);
     }
     getline(initialFile,stmp); // notorious cin mind the \n
@@ -73,9 +73,9 @@ void readingNAtm() // Reading number of atoms in the configuration
 void readingBox() // Get the samplesize and pbc information
 {
     getline(initialFile,stmp);
-    //cout << stmp << endl;
+    //std::cout << stmp << std::endl;
     getline(finalFile,stmp); 
-    //cout << stmp << endl;
+    //std::cout << stmp << std::endl;
 
     initialFile >> boxLow >> boxHigh;
     fprintf(pOutputFile,"%25.16lf 0.0 0.0\n",boxHigh - boxLow);
@@ -118,7 +118,7 @@ void readingBox() // Get the samplesize and pbc information
         }
     else
     {
-        cout << "The boundary condition of the initial configuration and final configuration should be the same!" << endl;
+        std::cout << "The boundary condition of the initial configuration and final configuration should be the same!" << std::endl;
         exit(-4);
     }
 
@@ -136,7 +136,7 @@ void readingBox() // Get the samplesize and pbc information
         }
     else
     {
-        cout << "The boundary condition of the initial configuration and final configuration should be the same!" << endl;
+        std::cout << "The boundary condition of the initial configuration and final configuration should be the same!" << std::endl;
         exit(-4);
     }
 
@@ -154,7 +154,7 @@ void readingBox() // Get the samplesize and pbc information
         }
     else
     {
-        cout << "The boundary condition of the initial configuration and final configuration should be the same!" << endl;
+        std::cout << "The boundary condition of the initial configuration and final configuration should be the same!" << std::endl;
         exit(-4);
     }
     getline(initialFile,stmp);
@@ -165,10 +165,10 @@ void readingBox() // Get the samplesize and pbc information
     getline(finalFile,stmp);
     getline(finalFile,stmp);
     getline(finalFile,stmp);
-    //cout << stmp << endl;
+    //std::cout << stmp << std::endl;
 }
 
-void isdata1(ifstream & filestream) // get the correct column information for initial configuration
+void isdata1(std::ifstream & filestream) // get the correct column information for initial configuration
 {
     count = -2;
     do
@@ -205,10 +205,10 @@ void isdata1(ifstream & filestream) // get the correct column information for in
         }
     }while(!isdigit(stmp.c_str()[0]));
     col1[7] = count - 1;
-    //cout << col1[0] << " " << col1[1] << " " << col1[2] << " " << col1[3] << " " << col1[4] << " " << col1[5] << " " << col1[6] << ' ' << col1[7] << endl; 
+    //std::cout << col1[0] << " " << col1[1] << " " << col1[2] << " " << col1[3] << " " << col1[4] << " " << col1[5] << " " << col1[6] << ' ' << col1[7] << std::endl; 
 }
 
-void isdata2(ifstream & filestream) // get the correct column information for final configuration
+void isdata2(std::ifstream & filestream) // get the correct column information for final configuration
 {
     count = -2;
     do
@@ -245,7 +245,7 @@ void isdata2(ifstream & filestream) // get the correct column information for fi
         }
     }while(!isdigit(stmp.c_str()[0]));
     col2[7] = count - 1;
-    //cout << col2[0] << " " << col2[1] << " " << col2[2] << " " << col2[3] << " " << col2[4] << " " << col2[5] << " " << col2[6] << ' ' << col2[7] << endl;
+    //std::cout << col2[0] << " " << col2[1] << " " << col2[2] << " " << col2[3] << " " << col2[4] << " " << col2[5] << " " << col2[6] << ' ' << col2[7] << std::endl;
 }
 
 void readingPosition() // Read atomtype x y z vx vy vz (velocities are optional)
@@ -272,7 +272,7 @@ void readingPosition() // Read atomtype x y z vx vy vz (velocities are optional)
     getline(finalFile,stmp);
     getline(finalFile,stmp);
     getline(finalFile,stmp);
-    //cout << stmp << endl;
+    //std::cout << stmp << std::endl;
 
     vel1 = 0.0;
     vel2 = 0.0;
@@ -282,15 +282,15 @@ void readingPosition() // Read atomtype x y z vx vy vz (velocities are optional)
 
     if (col1[0] == 0 || col1[1] == 0 || col1[2] == 0)
     {
-        cout << "Could not find the position of atoms. Something wrong with your input." << endl;
-        cout << "Please make sure x y z appear in your initial lammps dump file." << endl;
+        std::cout << "Could not find the position of atoms. Something wrong with your input." << std::endl;
+        std::cout << "Please make sure x y z appear in your initial lammps dump file." << std::endl;
         exit(-5);
     }
 
     if (col2[0] == 0 || col2[1] == 0 || col2[2] == 0)
     {
-        cout << "Could not find the position of atoms. Something wrong with your input." << endl;
-        cout << "Please make sure x y z appear in your final lammps dump file." << endl;
+        std::cout << "Could not find the position of atoms. Something wrong with your input." << std::endl;
+        std::cout << "Please make sure x y z appear in your final lammps dump file." << std::endl;
         exit(-5);
     }
 
@@ -329,14 +329,14 @@ void readingPosition() // Read atomtype x y z vx vy vz (velocities are optional)
                 count++;
                 initialFile >> iatom_type;
             }while(col1[6] > count);
-            //cout << element[iatom_type - 1].c_str() << endl;
+            //std::cout << element[iatom_type - 1].c_str() << std::endl;
             // for element type
             do
             {
                 count++;
                 initialFile >> pos1;
             }while(col1[0] > count);
-            //cout <<pos1<< endl;
+            //std::cout <<pos1<< std::endl;
             do
             {
                 count++;
@@ -401,14 +401,14 @@ void readingPosition() // Read atomtype x y z vx vy vz (velocities are optional)
                 count++;
                 initialFile >> iatom_type;
             }while(col1[6] > count);
-            //cout << element[iatom_type - 1].c_str() << endl;
+            //std::cout << element[iatom_type - 1].c_str() << std::endl;
             // for element type
             do
             {
                 count++;
                 initialFile >> pos1;
             }while(col1[0] > count);
-            //cout <<pos1<< endl;
+            //std::cout <<pos1<< std::endl;
             do
             {
                 count++;
@@ -436,24 +436,24 @@ int main(int argc, char **argv)
 {
     if (argc < 6) // command line input
     {
-        cout << "You must enter at least 5 arguments for this program!" << endl;
-        cout << "The Simulations are assumed to be 3D." << endl;
-        cout << "The data of the LAMMPS dump files should be in a good sequence, i.e. id type x y z vx vy vz. (Velocities are optional)" << endl;
-        cout << "Velocities are only read in when all vx vy vz appear in your initial dump file or final dump file." << endl;
-        cout << "Otherwise, velocities are set to 0 in all 3 dimensions." << endl;
-        cout << "Since the dump file can contain multiple steps, only the first timestep is processed." << endl;
-        cout << "Please arrange your dump file so that the appropriate data are being handled." << endl;
-        cout << "Usage:" << endl;
-        cout << "./dump2str InitialDumpFile FinalDumpFile Outputfile #Element ElementType1 ... ElementTypeN" << endl;
-        cout << "e.g." << endl;
-        cout << "./dump2str dump.initial.0 dump.final.1 config.data 2 Si C" << endl;
+        std::cout << "You must enter at least 5 arguments for this program!" << std::endl;
+        std::cout << "The Simulations are assumed to be 3D." << std::endl;
+        std::cout << "The data of the LAMMPS dump files should be in a good sequence, i.e. id type x y z vx vy vz. (Velocities are optional)" << std::endl;
+        std::cout << "Velocities are only read in when all vx vy vz appear in your initial dump file or final dump file." << std::endl;
+        std::cout << "Otherwise, velocities are set to 0 in all 3 dimensions." << std::endl;
+        std::cout << "Since the dump file can contain multiple steps, only the first timestep is processed." << std::endl;
+        std::cout << "Please arrange your dump file so that the appropriate data are being handled." << std::endl;
+        std::cout << "Usage:" << std::endl;
+        std::cout << "./dump2str InitialDumpFile FinalDumpFile Outputfile #Element ElementType1 ... ElementTypeN" << std::endl;
+        std::cout << "e.g." << std::endl;
+        std::cout << "./dump2str dump.initial.0 dump.final.1 config.data 2 Si C" << std::endl;
         return -1; // Bad input error
     }
     else
     {
         if (fexists(argv[1]) and fexists(argv[2]))
         {
-            cout << "Processing..." << endl;
+            std::cout << "Processing..." << std::endl;
             initialFile.open(argv[1]);
             finalFile.open(argv[2]);
             pOutputFile = fopen(argv[3],"w");
@@ -472,7 +472,7 @@ int main(int argc, char **argv)
         }
         else
         {
-            cout << "The input file(s) do(es) not exist!" << endl;
+            std::cout << "The input file(s) do(es) not exist!" << std::endl;
             return -2; // files not exist error
         }
     }

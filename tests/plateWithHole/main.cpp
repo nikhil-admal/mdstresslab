@@ -76,12 +76,21 @@ int main()
         Kim kim(modelname);
 
         std::string configFileName= prefix+modelname+".data";
+        //std::string configFileName= prefix+modelname+".lmp";
         std::ifstream file(configFileName);
         if(!file) MY_ERROR("ERROR: config.dat could not be opened for reading!");
-        file >> numberOfParticles;
+        
+        // get number of particles
+        std::string line;
+        while (std::getline(file, line)) {
+            std::istringstream ss(line);
+            if (ss >> numberOfParticles)
+                break;
+        }
         if (numberOfParticles < 0) MY_ERROR("Error: Negative number of particles.\n");
         BoxConfiguration body{numberOfParticles,referenceAndFinal};
         body.read(configFileName,referenceAndFinal);
+        //body.readLMP(configFileName);
 
 
 
