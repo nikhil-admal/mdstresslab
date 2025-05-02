@@ -24,3 +24,6 @@ add_library(MDStressLab++ SHARED BoxConfiguration.cpp
 
 target_link_libraries(MDStressLab++ KIM-API::kim-api)
 
+add_executable(MDStressLab++_in readScript.cpp)
+target_link_libraries(MDStressLab++_in PRIVATE MDStressLab++)
+
