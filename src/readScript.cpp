@@ -4,6 +4,8 @@
  *  Created on: Nov 3, 2019
  *      Author: Nikhil Admal
  */
+#include "Mls.h"
+#include "MethodLdad.h"
 #include "MethodSphere.h"
 #include <string>
 #include <iostream>
@@ -29,15 +31,26 @@ int main()
     };
 
     // Read LAMMPS data file
-    std::string configFileName= next_line();
-    std::cout << "LAMMPS data file: " << configFileName << std::endl;
-    std::ifstream configFile(configFileName);
-    if(!configFile) MY_ERROR("ERROR: configuration file could not be opened for reading!");
+    std::istringstream configFileStream(next_line());
+
+    std::string currentConfigFileName, referenceConfigFileName;
+    std::ifstream referenceConfigFile, currentConfigFile;
+    if (configFileStream >> currentConfigFileName) {
+        std::cout << "LAMMPS data file for current configuration: " << currentConfigFileName << std::endl;
+        currentConfigFile.open(currentConfigFileName);
+        if(!currentConfigFile) MY_ERROR("ERROR: current configuration file could not be opened for reading!");
+    }
+    if (configFileStream >> referenceConfigFileName) {
+        std::cout << "LAMMPS data file for reference configuration: " << referenceConfigFileName << std::endl;
+        referenceConfigFile.open(referenceConfigFileName);
+        if(!referenceConfigFile) MY_ERROR("ERROR: reference configuration file could not be opened for reading!");
+    }
+
 
     // get number of particles
     int numberOfParticles;
     double xlo, xhi, ylo, yhi, zlo, zhi;
-    while (std::getline(configFile, line)) {
+    while (std::getline(currentConfigFile, line)) {
         std::string loweredLine = line;
         std::transform(loweredLine.begin(), loweredLine.end(), loweredLine.begin(), ::tolower);
 
@@ -57,18 +70,29 @@ int main()
     }
 
     if (numberOfParticles < 0) MY_ERROR("Error: Negative number of particles.\n");
-    BoxConfiguration body{numberOfParticles,false};
-    body.readLMP(configFileName);
+
+    bool readReference= (!referenceConfigFileName.empty());
+    BoxConfiguration body{numberOfParticles, readReference};
+    body.readLMP(currentConfigFileName,referenceConfigFileName);
 
     // Read periodic boundaries
     Vector3i pbc;
     std::istringstream pbStream(next_line());
     pbStream >> pbc(0) >> pbc(1) >> pbc(2);
     std::cout << "PBCs: " << pbc << std::endl;
+    body.pbc= pbc;
+
+    std::ofstream writeConfigReference("reference.txt");
+    std::ofstream writeConfigCurrent("current.txt");
+    for (int i=0; i<body.numberOfParticles; ++i)
+    {
+        writeConfigReference << body.species[i] << " " << body.coordinates[Reference].row(i) << std::endl;
+        writeConfigCurrent << body.species[i] << " " << body.coordinates[Current].row(i) << std::endl;
+    }
 
     // Read KIM ID
     std::string kimID = next_line();
-    std::cout << "KIM ID: " << kimID << "\n";
+    std::cout << "KIM ID: " << kimID << std::endl;
     Kim kim(kimID);
 
     // Read atom types
@@ -77,28 +101,50 @@ int main()
     std::string atom;
     while (atomStream >> atom) atomTypes.push_back(atom);
     std::cout << "Atom types: ";
-    for (const auto& a : atomTypes) std::cout << a << " " << std::endl;
-
-    // Read stress method
-    bool project= false;
-    std::string stressMethod = next_line();
-    std::cout << "Stress Method: " << stressMethod << "\n";
-    if (stressMethod == "project")
-        project= true;
+    for (const auto& a : atomTypes) std::cout << a << " ";
+    std::cout << std::endl;
 
     // Number of grids
     int numGrids = std::stoi(next_line());
     std::cout << "Number of grids: " << numGrids << "\n";
+    Vector3d lowerLimit, upperLimit;
+    int ngridx, ngridy, ngridz;
+    double deltax, deltay, deltaz;
+    std::string outPrefix;
 
-    std::vector<Vector3d> lowerLimit(numGrids), upperLimit(numGrids);
-    std::vector<int> ngridx(numGrids), ngridy(numGrids), ngridz(numGrids);
-    std::vector<double> deltax(numGrids), deltay(numGrids), deltaz(numGrids);
-    std::vector<double> d(numGrids);
-    std::vector<std::string> outPrefix(numGrids);
-    // Grid info
     for (int i = 0; i < numGrids; ++i) {
+        //-------- Read stress method
+        bool project= false;
+        std::istringstream stressStream(next_line());
+        std::string stressMethod, averagingDomain;
+        double averagingDomainSize;
+        stressStream >> averagingDomain >> stressMethod >> averagingDomainSize;
+        std::cout << "averaging domain: " << averagingDomain << "\n";
+        std::cout << "stress method: " << stressMethod << "\n";
+        std::cout << "averaging domain size: " << averagingDomainSize << "\n";
+        if (stressMethod == "project")
+            project= true;
+
+        std::string structure;
+        Vector3d xdir, ydir, zdir;
+        if (averagingDomain=="ldad")
+            stressStream >> structure >> xdir[0] >> xdir[1] >> xdir[2] >>
+                                         ydir[0] >> ydir[1] >> ydir[2] >>
+                                         zdir[0] >> zdir[1] >> zdir[2];
+        Vector3d basis1, basis2, basis3;
+        if (structure=="bcc")
+        {
+            basis1 << -0.5,0.5,0.5; basis2 << 0.5,-0.5,0.5; basis3 << 0.5,0.5,-0.5;
+        }
+        else if (structure == "fcc")
+        {
+            basis1 << 0,0.5,0.5; basis2 << 0.5,0,0.5; basis3 << 0.5,0.5,0;
+
+        }
+
+        //------------ Read grid
         std::istringstream gridStream(next_line());
-        std::string token[10];
+        std::string token[9];
         for (auto & j : token) {
             gridStream >> j;
         }
@@ -106,57 +152,94 @@ int main()
         auto parseOrFallback = [](const std::string& s, double fallback) -> double {
             return (s == "*") ? fallback : std::stod(s);
         };
+        // Use fallback values if needed
+        lowerLimit[0]= parseOrFallback(token[0], xlo)-FLT_EPSILON;
+        lowerLimit[1]= parseOrFallback(token[1], ylo)-FLT_EPSILON;
+        lowerLimit[2]= parseOrFallback(token[2], zlo)-FLT_EPSILON;
 
-// Use fallback values if needed
-        lowerLimit[i][0]= parseOrFallback(token[0], xlo);
-        lowerLimit[i][1]= parseOrFallback(token[1], ylo);
-        lowerLimit[i][2]= parseOrFallback(token[2], zlo);
+        upperLimit[0]= parseOrFallback(token[3], xhi);
+        upperLimit[1]= parseOrFallback(token[4], yhi);
+        upperLimit[2]= parseOrFallback(token[5], zhi);
 
-        upperLimit[i][0]= parseOrFallback(token[3], xhi);
-        upperLimit[i][1]= parseOrFallback(token[4], yhi);
-        upperLimit[i][2]= parseOrFallback(token[5], zhi);
+        // Parse delta values and diameter directly
+        deltax = std::stod(token[6]);
+        deltay = std::stod(token[7]);
+        deltaz = std::stod(token[8]);
 
-// Parse delta values and diameter directly
-        deltax[i] = std::stod(token[6]);
-        deltay[i] = std::stod(token[7]);
-        deltaz[i] = std::stod(token[8]);
-        d[i]      = std::stod(token[9]);
-
-        ngridx[i]= (abs(deltax[i]) > FLT_EPSILON) ? floor((upperLimit[i](0)-lowerLimit[i](0))/deltax[i]) : 0;
-        ngridy[i]= (abs(deltay[i]) > FLT_EPSILON) ? floor((upperLimit[i](1)-lowerLimit[i](1))/deltay[i]) : 1;
-        ngridz[i]= (abs(deltaz[i]) > FLT_EPSILON) ? floor((upperLimit[i](2)-lowerLimit[i](2))/deltaz[i]) : 0;
+        ngridx= (abs(deltax) > FLT_EPSILON) ? floor((upperLimit(0)-lowerLimit(0))/deltax) : 0;
+        ngridy= (abs(deltay) > FLT_EPSILON) ? floor((upperLimit(1)-lowerLimit(1))/deltay) : 1;
+        ngridz= (abs(deltaz) > FLT_EPSILON) ? floor((upperLimit(2)-lowerLimit(2))/deltaz) : 0;
 
         std::cout << "Grid " << i << ":" << std::endl;
         std::cout << "  Limits: ";
-        std::cout << lowerLimit[i] << " " << upperLimit[i] << std::endl;
-        std::cout << "  Grid points: " << ngridx[i] << " " << ngridy[i] << " " << ngridz[i] << std::endl;
-        std::cout << "  Diameter: " << d[i] << std::endl;
+        std::cout << lowerLimit << " " << upperLimit << std::endl;
+        std::cout << "  Grid points: " << ngridx << " " << ngridy << " " << ngridz << std::endl;
 
-        // Output prefix
-        outPrefix[i]= next_line();
-        std::cout << "Output prefix: " << outPrefix[i] << "\n";
-
-    }
-
-    for(int i=0; i<numGrids; ++i) {
-        Grid<Current> grid(lowerLimit[i], upperLimit[i], ngridx[i], ngridy[i], ngridz[i]);
-        MethodSphere hardy(d[i], "hardy");
+        // ----------- Output prefix
+        outPrefix= next_line();
+        std::cout << "Output file: " << outPrefix << "\n";
 
 
-        // stress calculation using projected forces
-        try {
-            Stress<MethodSphere, Cauchy> hardyStress(hardy, &grid);
+        if (averagingDomain=="ldad") {
+            try {
+                Grid<Reference> grid(lowerLimit, upperLimit, ngridx, ngridy, ngridz);
+                //Matrix3d ldadVectors= averagingDomainSize*Matrix3d::Identity();
 
-            // Calculate stress using the projected forces
-            calculateStress(body, kim,
-                            std::tie(),
-                            std::tie(hardyStress), project);
-            hardyStress.write(outPrefix[i] + "_grid" + std::to_string(i));
+                Matrix3d rotation;
+                rotation.row(0)= xdir.normalized();
+                rotation.row(1)= ydir.normalized();
+                rotation.row(2)= zdir.normalized();
+                assert((rotation.transpose()*rotation).isIdentity());
+                Matrix3d ldadVectors;
+                ldadVectors.col(0)= rotation*basis1.transpose();
+                ldadVectors.col(1)= rotation*basis2.transpose();
+                ldadVectors.col(2)= rotation*basis3.transpose();
+                ldadVectors= ldadVectors* averagingDomainSize;
+                MethodLdadTrigonometric ldadDomain(ldadVectors);
+                Stress<MethodLdadTrigonometric, Piola> ldadTrigonometricStress(ldadDomain, &grid);
+                calculateStress(body, kim,
+                                std::tie(ldadTrigonometricStress),
+                                std::tie(), project);
+
+                double mlsRadius= 10.0;
+                Mls mls(body,&grid,mlsRadius,outPrefix);
+                std::vector<Matrix3d> cauchyPushedField;
+                mls.pushToCauchy(ldadTrigonometricStress.field,cauchyPushedField);
+                mls.writePushedCauchyStress(cauchyPushedField);
+                mls.writeDeformationGradient();
+            }
+            catch (const std::runtime_error &e) {
+                std::cout << e.what() << std::endl;
+                std::cout << "Compute stress with projected forces failed. Moving on" << std::endl;
+            }
         }
-        catch (const std::runtime_error &e) {
-            std::cout << e.what() << std::endl;
-            std::cout << "Compute stress with projected forces failed. Moving on" << std::endl;
+        else if(averagingDomain=="sphere"){
+            //Grid<Current> grid(lowerLimit, upperLimit, ngridx, ngridy, ngridz);
+            Grid<Reference> grid(lowerLimit, upperLimit, ngridx, ngridy, ngridz);
+            MethodSphere hardy(averagingDomainSize, "hardy");
+
+            // stress calculation using projected forces
+            try {
+                //Stress<MethodSphere, Cauchy> hardyStress(hardy, &grid);
+                Stress<MethodSphere, Piola> hardyStress(hardy, &grid);
+
+                // Calculate stress using the projected forces
+                //calculateStress(body, kim,
+                //                std::tie(),
+                //                std::tie(hardyStress), project);
+                calculateStress(body, kim,
+                                std::tie(hardyStress),
+                                std::tie(),
+                                project);
+                hardyStress.write(outPrefix);
+            }
+            catch (const std::runtime_error &e) {
+                std::cout << e.what() << std::endl;
+                std::cout << "Compute stress with projected forces failed. Moving on" << std::endl;
+            }
         }
+        else
+            MY_ERROR("Unknown stress method: " + stressMethod);
     }
 
 	return 0;

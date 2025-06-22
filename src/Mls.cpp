@@ -836,6 +836,29 @@ void Mls::writeDeformationGradient()
     std::ofstream file(name+".DeformationGradient");
 	file << deformationGradient.size() << "\n";
 	file << "\n";
+
+    Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
+    file << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10);
+    file << "Properties=pos:R:3:DeformationGradient:R:9" << std::endl;
+    int index= 0;
+    //XX, YX, ZX, XY, YY, ZY, XZ, YZ, ZZ
+    for (auto& F : deformationGradient)
+    {
+        file << gridPushed[index]
+             << std::setw(25) << F(0,0)
+             << std::setw(25) << F(1,0)
+             << std::setw(25) << F(2,0)
+             << std::setw(25) << F(0,1)
+             << std::setw(25) << F(1,1)
+             << std::setw(25) << F(2,1)
+             << std::setw(25) << F(0,2)
+             << std::setw(25) << F(1,2)
+             << std::setw(25) << F(2,2)
+             << std::endl;
+        index++;
+
+    }
+    /*
 	for (auto& F : deformationGradient)
 	{
 
@@ -843,6 +866,7 @@ void Mls::writeDeformationGradient()
 		Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "", "");
 		file << FRow.format(fmt) << "      " << std::setprecision(16) << F.determinant() << std::endl;
 	}
+     */
 }
 
 void Mls::writeGridPushed()
@@ -863,16 +887,36 @@ void Mls::writeGridPushed()
 void Mls::writePushedCauchyStress(std::vector<Matrix3d>& cauchyStress)
 {
     MY_HEADING("Writing Pushed Cauchy Stress.");
-    //std::setprecision(16);
-    std::ofstream file(name+".CauchyPushed");
-	file << cauchyStress.size() << "\n";
-	file << "\n";
+    /*
+     std::ofstream file(name+".CauchyPushed");
+     file << cauchyStress.size() << "\n";
+     for (auto& pushedStress : cauchyStress)
+     {
+         Eigen::Map<Eigen::Matrix<double,1,DIM*DIM>> pushedStressRow(pushedStress.data(), pushedStress.size());
+         Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "", "");
+         file << pushedStressRow.format(fmt) << std::endl;
+     }
+     */
+
+    std::ofstream file(name+".stress");
+    file << cauchyStress.size() << "\n";
+    Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
+    file << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10);
+    file << "Properties=pos:R:3:stress:R:6" << std::endl;
+    int index= 0;
     for (auto& pushedStress : cauchyStress)
-	{
-        Eigen::Map<Eigen::Matrix<double,1,DIM*DIM>> pushedStressRow(pushedStress.data(), pushedStress.size());
-		Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "", "");
-		file << pushedStressRow.format(fmt) << std::endl;
-	}
+    {
+        file << gridPushed[index]
+             << std::setw(25) << pushedStress(0,0)
+             << std::setw(25) << pushedStress(1,1)
+             << std::setw(25) << pushedStress(2,2)
+             << std::setw(25) << pushedStress(0,1)
+             << std::setw(25) << pushedStress(0,2)
+             << std::setw(25) << pushedStress(1,2)
+             << std::endl;
+        index++;
+
+    }
 }
 
 

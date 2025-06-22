@@ -90,7 +90,7 @@ void BoxConfiguration::readLMP(const std::string& configFileName,
     // Read in the atomistic system
     if (configType==Current)
         std::cout << "Reading the current box configuration from lammps data file " << configFileName << std::endl;
-    else if (configType==Current)
+    else if (configType==Reference)
         std::cout << "Reading the reference box configuration from lammps data file " << configFileName << std::endl;
     std::ifstream file(configFileName);
     if(!file)
@@ -113,8 +113,8 @@ void BoxConfiguration::readLMP(const std::string& configFileName,
     }
 }
 
-void BoxConfiguration::readLMP(const std::string& referenceConfigFileName,
-                               const std::string& currentConfigFileName){
+void BoxConfiguration::readLMP(const std::string& currentConfigFileName,
+                               const std::string& referenceConfigFileName){
     readLMP(currentConfigFileName,Current);
     if(coordinates[Reference].rows()>0)
         readLMP(referenceConfigFileName,Reference);
@@ -151,17 +151,26 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
             std::istringstream ss(line);
             double xlo, xhi;
             ss >> xlo >> xhi;
-            box(0, 0) = xhi - xlo;
+            if (configType==Current)
+                box(0, 0) = xhi - xlo;
+            else
+                reference_box(0, 0) = xhi - xlo;
         } else if (loweredLine.find("ylo yhi") != std::string::npos) {
             std::istringstream ss(line);
             double ylo, yhi;
             ss >> ylo >> yhi;
-            box(1, 1) = yhi - ylo;
+            if (configType==Current)
+                box(1, 1) = yhi - ylo;
+            else
+                reference_box(1, 1) = yhi - ylo;
         } else if (loweredLine.find("zlo zhi") != std::string::npos) {
             std::istringstream ss(line);
             double zlo, zhi;
             ss >> zlo >> zhi;
-            box(2, 2) = zhi - zlo;
+            if (configType==Current)
+                box(2, 2) = zhi - zlo;
+            else
+                reference_box(2, 2) = zhi - zlo;
         }
 
             // Process Masses section
@@ -216,6 +225,7 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
                 break; // first data line found
             }
 
+            if(configType==Current) species.resize(numberOfParticles);
             // Read atom lines
             for (int i = 0; i < numberOfParticles; ++i) {
                 std::istringstream ss(line); // first valid line
@@ -224,10 +234,29 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
                 if (!(ss >> id >> type >> x >> y >> z))
                     MY_ERROR("ERROR: Coordinate of particle " + std::to_string(i));
 
-                species.push_back(typeToSpecies[type]);
-                coordinates[configType](i, 0) = x;
-                coordinates[configType](i, 1) = y;
-                coordinates[configType](i, 2) = z;
+                int idxFlagx= 0; int idxFlagy= 0; int idxFlagz= 0;
+                int tmpx, tmpy, tmpz;
+                if (ss >> tmpx >> tmpy >> tmpz) {
+                    idxFlagx = tmpx;
+                    idxFlagy = tmpy;
+                    idxFlagz = tmpz;
+                }
+
+                //if(configType==Current) species.push_back(typeToSpecies[type]);
+                if(configType==Current) species[id-1]= typeToSpecies[type];
+                if(configType==Reference) assert(species[id-1] == typeToSpecies[type] &&
+                                                 "Species in the reference configuration do not match with those in the "
+                                                 "current configuration");
+                if (configType==Reference) {
+                    coordinates[configType](id - 1, 0) = x + idxFlagx * reference_box(0, 0);
+                    coordinates[configType](id - 1, 1) = y + idxFlagy * reference_box(1, 1);;
+                    coordinates[configType](id - 1, 2) = z + idxFlagz * reference_box(2, 2);;
+                }
+                else{
+                    coordinates[configType](id - 1, 0) = x + idxFlagx * box(0, 0);
+                    coordinates[configType](id - 1, 1) = y + idxFlagy * box(1, 1);;
+                    coordinates[configType](id - 1, 2) = z + idxFlagz * box(2, 2);;
+                }
 
                 if (i < numberOfParticles - 1) {
                     std::getline(file, line); // read next line
@@ -237,9 +266,6 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
             break; // done reading atom data
         }
     }
-
-    // Set reference box same as current box
-    reference_box = box;
 
     // Assume no periodicity for now
     pbc = Eigen::Vector3i::Zero();

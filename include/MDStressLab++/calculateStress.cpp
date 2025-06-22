@@ -166,8 +166,8 @@ int calculateStress(const BoxConfiguration& body,
 		// TODO Change step to accommodate non-orthogonal boundary conditions
 		Vector3d origin= Vector3d::Zero();
 		Vector3d step= body.box.diagonal();
-		recursiveFold(origin,step,body.pbc,piolaStress);
-		recursiveFold(origin,step,body.pbc,cauchyStress);
+		//recursiveFold(origin,step,body.pbc,piolaStress);
+		//recursiveFold(origin,step,body.pbc,cauchyStress);
 
 		status= calculateStress(pconfig.get(),kim,piolaStress,cauchyStress,projectForces);
 	}
@@ -530,7 +530,7 @@ int calculateStress(const Configuration* pconfig,
         if (subconfig.particleContributing[i_particlei] == 0) continue;
         maxError= std::max(maxError,(forces.row(i_particlei)-fi.row(i_particlei)).norm());
     }
-    std::cout << "Maximum error in f_i = \Sigma_j f_ij: " << maxError << std::endl;
+    std::cout << "Maximum error in f_i - sum_j f_ij: " << maxError << std::endl;
     std::cout << "Done" << std::endl;
     nbl_clean(&nl);
 //	------------------------------------------------------------------
