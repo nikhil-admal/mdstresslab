@@ -1,0 +1,76 @@
+# Input file for MDStressLab++ to generate the Cauchy stress field
+# on a grid for a configuration read in from a LAMMPS data file using
+# an interatomic potential from the OpenKIM repository
+#
+# Calculations will be accelerated using OpenMP parallelism if available.
+# To specify the number of threads, set the environment variable OMP_NUM_THREADS
+# If not set, all available processors will be used.
+
+### START OF REQUIRED INPUT ###
+
+# LAMMPS data file name containing current and reference atomic configuration (orthogonal box)
+#
+NbTaV_samples/relaxed_samples/sample1.lmp NbTaV_samples/init_samples/sample1.lmp
+
+# Periodic boundary conditions in x, y and z directions (0=false, 1=true)
+#
+0 0 0
+
+# KIM ID for the interatomic potential (must be installed)
+#
+EAM_Dynamo_MarescaCurtin_2020_NbTaV__MO_330233188199_000
+
+# Mapping between LAMMPS atom types (appearing in the LAMMPS data file)
+# and chemical elements (which must be supported by the KIM model listed above)
+#
+Nb Ta V
+
+# Stress calculation type, options:
+#    project : local project method
+#    chain   : chain rule approach (available for only some KIM models)
+#
+project
+
+# Number of grids on which to compute stress
+#
+1
+
+# For each grid the following information:
+#
+#    domain, size, option
+#    xl, yl, zl, xu, yu, zu, ngridx, ngridy, ngridz, d
+#
+# where
+#
+#    domain: shape of the averaging domain - sphere or ldad
+#    size: size of the averaging domain - diameter of the sphere or ldad cube size
+#    option: project or chain
+#    xl, yl, zl : coordinates of the lower left corner of the grid;
+#                 set a coordinate to "*" to use the corresponding lower
+#                 value from the LAMMPS data file
+#    xu, yu, zu : coordinates of the upper right corner of the grid
+#                 set a coordinate to "*" to use the corresponding upper
+#                 value from the LAMMPS data file
+#    deltax, deltay, deltaz : grid spacing in the x, y, z directions
+#
+#    Notes:
+#    (1) Set a coordinate to "*" to use the corresponding lower or upper
+#        value (as appropriate) from the LAMMPS data file
+#    (2) The coordinate must satisfy: xl ≤ xu, yl ≤ yu, zl ≤ zu
+#        - Flat grids, or grids along a line are allowed.
+#        - In the event that two coordinates are equal (e.g. yl=yu),
+#          the number of grid points along that direction must be one
+#          (e.g. if yl=yu, then ngridy=1)
+#
+
+ldad 3.233 project
+* -1.14294 * * -1.14294 * 0.5 0 0.5
+
+# Output filename prefix
+# MDStressLab will generate an output file for each provided grid.
+# The names of these files will begin with the provided prefix,
+# appended by a "_gridXX" where "XX" is the grid number.
+#
+HEA_MarescaCurtin_NbTaV_init1
+
+### END OF REQUIRED INPUT ###
