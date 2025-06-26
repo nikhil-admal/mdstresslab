@@ -1,0 +1,18 @@
+/**
+ * @mainpage MDStressLab – Molecular Dynamics Post-Processing Tool
+ *
+ * MDStressLab is a software package developed at the University of Minnesota
+   and the University of Illinois Urbana Champaign
+ * It provides tools to compute stress fields from atomistic simulation data.
+ *
+ * ## 📝 Overview
+ * *(Copy over the introductory description of the software, research goals, etc.)*
+ *
+ * ## 🔬 Features
+ * - KIM‑compliant processing of atomic snapshots
+ * - Support for MD simulation data formats (LAMMPS, custom, etc.)
+ *
+ * ## 📥 Installation & Usage
+ * *(Paste build instructions, dependencies, or usage examples from the original page.)*
+ *
+ */
