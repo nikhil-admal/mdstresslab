@@ -145,7 +145,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classKim.html">Kim</a> class links MDStressLab to an openkim interatomic potential model. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testLDADLJ_8cpp-example.html#_a3">testLDADLJ.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testLDADLJ_8cpp-example.html#_a3">testLDADLJ.cpp</a>, and <a class="el" href="testLJ_8cpp-example.html#_a3">testLJ.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="kim_8h_source.html#l00020">20</a> of file <a class="el" href="kim_8h_source.html">kim.h</a>.</p>
@@ -289,12 +289,12 @@ Public Attributes</h2></td></tr>
 <p>This function broadcasts the atomistic system to the KIM model </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">config_ptr</td><td>- pointer to the configuration of atoms </td></tr>
-    <tr><td class="paramname">particleContributing</td><td>- </td></tr>
-    <tr><td class="paramname">forces_ptr</td><td>- </td></tr>
-    <tr><td class="paramname">nl_ptr</td><td>- </td></tr>
-    <tr><td class="paramname">get_neigh_ptr</td><td>- </td></tr>
-    <tr><td class="paramname">bonds</td><td>- </td></tr>
-    <tr><td class="paramname">processDEDr_ptr</td><td>- </td></tr>
+    <tr><td class="paramname">particleContributing</td><td>- an integer array of size equal to the number of atoms. If a particle is contributing it is marked as 1, and 0 otherwise. </td></tr>
+    <tr><td class="paramname">forces_ptr</td><td>- pointer to a matrix of size [3 x numberOfParticle] describing atomic forces </td></tr>
+    <tr><td class="paramname">nl_ptr</td><td>- pointer to the neighbor list </td></tr>
+    <tr><td class="paramname">get_neigh_ptr</td><td>- a pointer to a function that return the neighbor list of an atom </td></tr>
+    <tr><td class="paramname">bonds</td><td>- pointer to a <a class="el" href="classInteratomicForces.html">InteratomicForces</a> object </td></tr>
+    <tr><td class="paramname">processDEDr_ptr</td><td>- a pointer to the processdEdr function </td></tr>
   </table>
   </dd>
 </dl>
@@ -317,6 +317,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>This function call the model's compute routine to calculate the atomic forces. In addition, if processDEDr_ptr!=nullptr, interatomic forces are calculated using the model's processdEdr functionality. </p>
 
 <p class="definition">Definition at line <a class="el" href="kim_8cpp_source.html#l00303">303</a> of file <a class="el" href="kim_8cpp_source.html">kim.cpp</a>.</p>
 

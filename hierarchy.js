@@ -13,9 +13,6 @@ var hierarchy =
     [ "GridSubConfiguration< T >", "classGridSubConfiguration.html", null ],
     [ "InteratomicForces", "classInteratomicForces.html", null ],
     [ "Kim", "classKim.html", null ],
-    [ "Ldad", null, [
-      [ "MethodLdadConst", "classMethodLdadConst.html", null ]
-    ] ],
     [ "Method< TMethod >", "classMethod.html", null ],
     [ "Method< MethodLdad< T > >", "classMethod.html", [
       [ "MethodLdad< T >", "classMethodLdad.html", null ]

@@ -145,10 +145,12 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aa13ffab39af119d1ea8253e236480cd2" id="r_aa13ffab39af119d1ea8253e236480cd2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#a62b42fd2ce74b4f877759c2466f17238">Matrix3d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#aa13ffab39af119d1ea8253e236480cd2">box</a></td></tr>
+<tr class="memdesc:aa13ffab39af119d1ea8253e236480cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current and reference box vectors stored as columns of respective matrices.  <br /></td></tr>
 <tr class="separator:aa13ffab39af119d1ea8253e236480cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff8e04cb505591b49713d3ee7af090e8" id="r_aff8e04cb505591b49713d3ee7af090e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#a62b42fd2ce74b4f877759c2466f17238">Matrix3d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#aff8e04cb505591b49713d3ee7af090e8">reference_box</a></td></tr>
 <tr class="separator:aff8e04cb505591b49713d3ee7af090e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1988923b4618bca603e6c5b169e9d42b" id="r_a1988923b4618bca603e6c5b169e9d42b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#ab2e2a70cab71ad9e7d7cef44cf247224">Vector3i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#a1988923b4618bca603e6c5b169e9d42b">pbc</a></td></tr>
+<tr class="memdesc:a1988923b4618bca603e6c5b169e9d42b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic boundary conditions. pbc=(1,0,1) implies periodicity along the \(x\) and \(z\)-directions.  <br /></td></tr>
 <tr class="separator:a1988923b4618bca603e6c5b169e9d42b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classConfiguration"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classConfiguration')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classConfiguration.html">Configuration</a></td></tr>
 <tr class="memitem:a8f9f5aa7a16dae76a09a6a127b9cb616 inherit pub_attribs_classConfiguration" id="r_a8f9f5aa7a16dae76a09a6a127b9cb616"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a8f9f5aa7a16dae76a09a6a127b9cb616">numberOfParticles</a></td></tr>
@@ -167,10 +169,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ad2fcad1b46409bb9446e972a02a11737 inherit pro_methods_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testLDADLJ_8cpp-example.html#_a1">testLDADLJ.cpp</a>.</dd>
+<div class="textblock"><p><a class="el" href="classBoxConfiguration.html">BoxConfiguration</a> class describes the shape of boxes that bound the current and reference configurations in addition to periodic boundary conditions. Moreover, it includes member functions for reading atomic configurations in either MDStressLab or Lammps dump file formats. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testLDADLJ_8cpp-example.html#_a1">testLDADLJ.cpp</a>, and <a class="el" href="testLJ_8cpp-example.html#_a1">testLJ.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00014">14</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00020">20</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae38350b830dc745bf35ad799f09b31a8" name="ae38350b830dc745bf35ad799f09b31a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae38350b830dc745bf35ad799f09b31a8">&#9670;&#160;</a></span>BoxConfiguration() <span class="overload">[1/2]</span></h2>
@@ -333,7 +336,7 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testLDADLJ_8cpp-example.html#a2">testLDADLJ.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testLDADLJ_8cpp-example.html#a2">testLDADLJ.cpp</a>, and <a class="el" href="testLJ_8cpp-example.html#a2">testLJ.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00033">33</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
@@ -413,7 +416,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00016">16</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
+<p>The current and reference box vectors stored as columns of respective matrices. </p>
+
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00025">25</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
 
 </div>
 </div>
@@ -429,7 +434,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00017">17</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
+<p>Periodic boundary conditions. pbc=(1,0,1) implies periodicity along the \(x\) and \(z\)-directions. </p>
+
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00030">30</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
 
 </div>
 </div>
@@ -445,7 +452,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00016">16</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00025">25</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
 
 </div>
 </div>

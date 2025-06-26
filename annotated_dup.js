@@ -13,7 +13,6 @@ var annotated_dup =
     [ "Kim", "classKim.html", "classKim" ],
     [ "Method", "classMethod.html", "classMethod" ],
     [ "MethodLdad", "classMethodLdad.html", "classMethodLdad" ],
-    [ "MethodLdadConst", "classMethodLdadConst.html", "classMethodLdadConst" ],
     [ "MethodSphere", "classMethodSphere.html", "classMethodSphere" ],
     [ "MethodUser", "classMethodUser.html", "classMethodUser" ],
     [ "Mls", "classMls.html", "classMls" ],
