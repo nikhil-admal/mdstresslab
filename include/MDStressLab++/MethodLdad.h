@@ -36,7 +36,7 @@ private:
 
 /*!
  * @example{lineno} testLDADLJ.cpp
- * -# Open the configuration file (in MDStressLab format) and read the number of particles
+ * -# Open the configuration file (*.data in MDStressLab format) and read the number of particles.
  * @snippet{lineno} testLDADLJ.cpp Read
  *
  * -# Initialize the BoxConfiguration and read the reference and current atomic coordinates
@@ -63,22 +63,17 @@ private:
  * @snippet{lineno} testLDADLJ.cpp Calculate
  *
  * -# Repeat the previous three steps to calculate and output Cauchy stress fields. Note
- * that the LDAD stress was originally formulated as a Piola stress since the LDAD vectors should
- * be commensurate with a lattice, which is possible if the reference configuration is a single crystal.
- * Since the deformed configuration is also a single crystal in this example, we compute the LDAD Cauchy
+ * that the LDAD stress was originally formulated as a Piola stress with a single crystal reference
+ * configuration since the LDAD vectors should be commensurate with a lattice.
+ * In this example, since the deformed configuration is also a single crystal, we can compute the LDAD Cauchy
  * stress using the appropriately deformed lattice vectors.
- * @snippet{lineno} testLDADLJ.cpp Calculate
+ * @snippet{lineno} testLDADLJ.cpp Cauchy
  *
  * -# We compare our results with the exact results for unit testing purposes.
  * @snippet{lineno} testLDADLJ.cpp Compare
  *
  * Full code:
  */
-
-/*!
- * @example TestLDADSW.cpp
- */
-
 
 #include "MethodLdad.cpp"
 // instantiate MethodLdad templates

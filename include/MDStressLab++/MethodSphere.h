@@ -35,4 +35,43 @@ private:
 	double integrate(const double&,const double&,const double&,const double&) const;
 };
 
+/*!
+ * @example testLJ.cpp
+ * An example demonstrating the computation of Piola and Cauchy stress tensors
+ * using various spherical averaging domains and grids
+ *
+ * -# Open the configuration file (*.data in MDStressLab format) and read the number of particles
+ * @snippet{lineno} testLJ.cpp Read
+ *
+ * -# Initialize the BoxConfiguration and read the reference and current atomic coordinates
+ *  from the configuration file. The reference configuration is an fcc Ar crystal in the relaxed state.
+ *  The deformed/current configuration is the reference crystal strained in the \f$y\f$-direction.
+ * @snippet{lineno} testLJ.cpp Configuration
+ *
+ * -# Initialize the Kim model
+ * @snippet{lineno} testLJ.cpp Model
+ *
+ * -# Create grids
+ * @snippet{lineno} testLJ.cpp Grid
+ *
+ * -# Construct MethodSphere objects of various averaging domain diameters
+ * @snippet{lineno} testLJ.cpp Method
+ *
+ * -# Construct Stress objects using the MethodSphere and Grid objects
+ * @snippet{lineno} testLJ.cpp Stress
+ *
+ * -# Calculate stresses. The following snippet shows that stresses can be calculated all at once or
+ * with various combinations.
+ * @snippet{lineno} testLJ.cpp Calculate
+ *
+ * -# Write stresses
+ * @snippet{lineno} testLJ.cpp Write
+ *
+ * -# We compare our results with the exact results for unit testing purposes.
+ * @snippet{lineno} testLJ.cpp Compare
+ *
+ * Full code:
+ */
+
+
 #endif /* METHODSPHERE_H_ */

@@ -58,8 +58,24 @@ public:
 
 };
 /*!
- * \example testGrid.cpp
- * This example demonstrates the Grid class
+ * \example{lineno} testGrid.cpp
+ * This example demonstrates the Grid class.
+ *
+ * -# Construct two grids in a rectangular region defined by the lower and upper limits that describe
+ * the region's body diagonal endpoints. \ref grid1 is a 3D Reference grid, while \ref grid2 is a 1D Current grid
+ * @snippet{lineno} testGrid.cpp Limits
+ *
+ * -# Write the coordinates of grids to files.
+ * @snippet{lineno} testGrid.cpp Write
+ *
+ * -# An alternate way to construct a grid is to read its coordinates from a file.
+ * The following snippet initializes a 3D Current grid and reads its coordinates from a file
+ * @snippet{lineno} testGrid.cpp Read
+ *
+ * -# We can keep track of the total number of Reference and Current grids using static variables.
+ * @snippet{lineno} testGrid.cpp Static
+ *
+ * Full code:
  */
 #include "Grid.cpp"
 

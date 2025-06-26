@@ -15,35 +15,6 @@
 #include "typedef.h"
 #include "../compareStress.cpp"
 
-/*!
- * @example testLJ.cpp
- * An example demonstrating the computation of Piola and Cauchy stress tensors
- * using various spherical averaging domains and grids
- *
- * Read the configuration of particles
- * @snippet{lineno} testLJ.cpp Read
- *
- * Link to the Kim model
- * @snippet{lineno} testLJ.cpp Model
- *
- * Create grids
- * @snippet{lineno} testLJ.cpp Grid
- *
- * Create Stress objects
- * @snippet{lineno} testLJ.cpp Stress
- *
- * Stresses can be calculated all at once or with any combinations
- * @snippet{lineno} testLJ.cpp Calculate
- *
- * Write stresses
- * @snippet{lineno} testLJ.cpp Write
- *
- * Compare stresses
- * @snippet{lineno} testLJ.cpp Compare
- *
- * Full code:
- */
-
 int main()
 {
     /*! [Read] */
@@ -52,13 +23,14 @@ int main()
 	std::string configFileName= "config.data";
     std::ifstream file(configFileName);
     if(!file) MY_ERROR("ERROR: config.data could not be opened for reading!\n");
-
     file >> numberOfParticles;
     if (numberOfParticles < 0) MY_ERROR("Error: Negative number of particles.\n");
+    /*! [Read] */
 
+    /*! [Configuration] */
 	BoxConfiguration body{numberOfParticles,referenceAndFinal};
 	body.read(configFileName,referenceAndFinal);
-    /*! [Read] */
+    /*! [Configuration] */
 
     /*! [Model] */
     std::string modelname= "LJ_Smoothed_Bernardes_1958_Ar__MO_764178710049_001";
@@ -78,37 +50,29 @@ int main()
 	gridFromFile.read("grid_cauchy.data");
     /*! [Grid] */
 
-    /*! [Stress] */
-	// MethodSphere stress 1
+    /*! [Method] */
 	MethodSphere hardy1(5.29216036151419,"hardy");
-	Stress<MethodSphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
-
-	// MethodSphere stress 2
 	MethodSphere hardy2(20,"hardy");
+    MethodSphere hardy3(5,"hardy");
+    MethodSphere hardy4(7,"hardy");
+    MethodSphere hardyRandom(9,"hardy");
+    /*! [Method] */
+
+    /*! [Stress] */
+    Stress<MethodSphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
 	Stress<MethodSphere,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
-
-	// MethodSphere stress 3
-	MethodSphere hardy3(5,"hardy");
 	Stress<MethodSphere,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
-
-	// MethodSphere stress 4
-	MethodSphere hardy4(7,"hardy");
 	Stress<MethodSphere,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
-
-	MethodSphere hardyRandom(9,"hardy");
 	Stress<MethodSphere,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
-
 	Stress<MethodSphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
     /*! [Stress] */
 
 
     /*! [Calculate] */
-//  Calculate none
 	calculateStress(body,kim,
 					std::tie(),
 					std::tie());
 
-//  Calculate all
 	calculateStress(body,kim,
 					std::tie(hardyStress3,hardyStress4,hardyStressRandomPiola),
 					std::tie(hardyStress1,hardyStress2,hardyStressRandomCauchy));

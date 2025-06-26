@@ -15,6 +15,10 @@
 #include <set>
 #include <map>
 
+/*!
+ * Configuration class describes the properties (position, velocity, species) of atoms.
+ * It is the base class of the BoxConfiguration class.
+ */
 class Configuration{
 public:
 	Configuration(int,int);
