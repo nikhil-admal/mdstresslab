@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "MDStressLab++", "index.html", [
+    [ "MDStressLab – Molecular Dynamics Post-Processing Tool", "index.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
