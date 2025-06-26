@@ -17,7 +17,7 @@ digraph "include/MDStressLab++/SubConfiguration.h"
   Node4 -> Node6 [id="edge6_Node000004_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node6 [id="Node000006",label="src/readScript.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$readScript_8cpp.html",tooltip=" "];
   Node4 -> Node7 [id="edge7_Node000004_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node7 [id="Node000007",label="tests/readScript/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$readScript_2main_8cpp.html",tooltip=" "];
+  Node7 [id="Node000007",label="tests/heaScript/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$heaScript_2main_8cpp.html",tooltip=" "];
   Node2 -> Node8 [id="edge8_Node000002_Node000008",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node8 [id="Node000008",label="include/MDStressLab\l++/Stress.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$Stress_8h.html",tooltip=" "];
   Node8 -> Node9 [id="edge9_Node000008_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
@@ -27,14 +27,14 @@ digraph "include/MDStressLab++/SubConfiguration.h"
   Node10 -> Node6 [id="edge11_Node000010_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node10 -> Node11 [id="edge12_Node000010_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node11 [id="Node000011",label="tests/crack/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$crack_2main_8cpp.html",tooltip=" "];
-  Node10 -> Node12 [id="edge13_Node000010_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node10 -> Node7 [id="edge13_Node000010_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node10 -> Node12 [id="edge14_Node000010_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node12 [id="Node000012",label="tests/plateWithHole\l/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$plateWithHole_2main_8cpp.html",tooltip=" "];
-  Node10 -> Node7 [id="edge14_Node000010_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node2 -> Node5 [id="edge15_Node000002_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node2 -> Node6 [id="edge16_Node000002_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node2 -> Node11 [id="edge17_Node000002_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node2 -> Node12 [id="edge18_Node000002_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node2 -> Node7 [id="edge19_Node000002_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 -> Node7 [id="edge18_Node000002_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 -> Node12 [id="edge19_Node000002_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node1 -> Node9 [id="edge20_Node000001_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node1 -> Node5 [id="edge21_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node1 -> Node13 [id="edge22_Node000001_Node000013",dir="back",color="steelblue1",style="solid",tooltip=" "];

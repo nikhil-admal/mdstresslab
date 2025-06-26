@@ -99,11 +99,13 @@ $(document).ready(function(){initNavTree('classConfiguration.html',''); initResi
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classConfiguration-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Configuration Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents atomic configuration data including coordinates, velocities, and species.  
+ <a href="classConfiguration.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Configuration_8h_source.html">Configuration.h</a>&gt;</code></p>
 <div class="dynheader">
@@ -120,32 +122,34 @@ Collaboration diagram for Configuration:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9968c30c5b5718680a6f0a37e9abe11e" id="r_a9968c30c5b5718680a6f0a37e9abe11e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a9968c30c5b5718680a6f0a37e9abe11e">Configuration</a> (int, int)</td></tr>
+<tr class="memdesc:a9968c30c5b5718680a6f0a37e9abe11e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, and species.">Configuration</a> object.  <br /></td></tr>
 <tr class="separator:a9968c30c5b5718680a6f0a37e9abe11e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dd0fa189e239f4c9a036303f641441e" id="r_a0dd0fa189e239f4c9a036303f641441e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a0dd0fa189e239f4c9a036303f641441e">~Configuration</a> ()</td></tr>
 <tr class="separator:a0dd0fa189e239f4c9a036303f641441e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad92bf7172e28ef845831cfb8317f002" id="r_aad92bf7172e28ef845831cfb8317f002"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classConfiguration.html">Configuration</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#aad92bf7172e28ef845831cfb8317f002">getLocalConfiguration</a> (const std::set&lt; int &gt; &amp;localParticleList) const</td></tr>
+<tr class="memdesc:aad92bf7172e28ef845831cfb8317f002"><td class="mdescLeft">&#160;</td><td class="mdescRight">can be deleted  <br /></td></tr>
 <tr class="separator:aad92bf7172e28ef845831cfb8317f002"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a8f9f5aa7a16dae76a09a6a127b9cb616" id="r_a8f9f5aa7a16dae76a09a6a127b9cb616"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a8f9f5aa7a16dae76a09a6a127b9cb616">numberOfParticles</a></td></tr>
+<tr class="memdesc:a8f9f5aa7a16dae76a09a6a127b9cb616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of particles in the configuration.  <br /></td></tr>
 <tr class="separator:a8f9f5aa7a16dae76a09a6a127b9cb616"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43dffc4aba8ef2a5ec8a2dd72faf95dd" id="r_a43dffc4aba8ef2a5ec8a2dd72faf95dd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a43dffc4aba8ef2a5ec8a2dd72faf95dd">species</a></td></tr>
+<tr class="memdesc:a43dffc4aba8ef2a5ec8a2dd72faf95dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Species names for each particle (size equals numberOfParticles).  <br /></td></tr>
 <tr class="separator:a43dffc4aba8ef2a5ec8a2dd72faf95dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2bc09e4f8aea736e6b878dd41b09e99" id="r_af2bc09e4f8aea736e6b878dd41b09e99"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9">ConfigType</a>, <a class="el" href="typedef_8h.html#a82264e4a8487759a15a98c90573c6bd8">MatrixXd</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#af2bc09e4f8aea736e6b878dd41b09e99">coordinates</a></td></tr>
+<tr class="memdesc:af2bc09e4f8aea736e6b878dd41b09e99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map from configuration type (Reference or Current) to coordinate matrices.  <br /></td></tr>
 <tr class="separator:af2bc09e4f8aea736e6b878dd41b09e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6229b086177ef3a1381cc9db5cb4c466" id="r_a6229b086177ef3a1381cc9db5cb4c466"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#a82264e4a8487759a15a98c90573c6bd8">MatrixXd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a6229b086177ef3a1381cc9db5cb4c466">velocities</a></td></tr>
+<tr class="memdesc:a6229b086177ef3a1381cc9db5cb4c466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocities of particles.  <br /></td></tr>
 <tr class="separator:a6229b086177ef3a1381cc9db5cb4c466"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:ad2fcad1b46409bb9446e972a02a11737" id="r_ad2fcad1b46409bb9446e972a02a11737"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#ad2fcad1b46409bb9446e972a02a11737">allocate</a> (int _numberOfParticles, int _referenceAndFinal)</td></tr>
-<tr class="separator:ad2fcad1b46409bb9446e972a02a11737"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classConfiguration.html">Configuration</a> class describes the properties (position, velocity, species) of atoms. It is the base class of the <a class="el" href="classBoxConfiguration.html">BoxConfiguration</a> class. </p>
+<div class="textblock"><p>Represents atomic configuration data including coordinates, velocities, and species. </p>
+<p>This class stores the number of particles, their species, coordinates for different configuration states (e.g., Reference and Current), and velocities. </p>
 
-<p class="definition">Definition at line <a class="el" href="Configuration_8h_source.html#l00022">22</a> of file <a class="el" href="Configuration_8h_source.html">Configuration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Configuration_8h_source.html#l00025">25</a> of file <a class="el" href="Configuration_8h_source.html">Configuration.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9968c30c5b5718680a6f0a37e9abe11e" name="a9968c30c5b5718680a6f0a37e9abe11e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9968c30c5b5718680a6f0a37e9abe11e">&#9670;&#160;</a></span>Configuration()</h2>
@@ -172,6 +176,19 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Constructs a <a class="el" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, and species.">Configuration</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numberOfParticles</td><td>Number of particles in the configuration. </td></tr>
+    <tr><td class="paramname">referenceAndFinal</td><td>Flag indicating which configurations to allocate:<ul>
+<li>0: Only Current configuration</li>
+<li>1: Both Current and Reference configurations </li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="Configuration_8cpp_source.html#l00011">11</a> of file <a class="el" href="Configuration_8cpp_source.html">Configuration.cpp</a>.</p>
 
@@ -205,42 +222,6 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad2fcad1b46409bb9446e972a02a11737" name="ad2fcad1b46409bb9446e972a02a11737"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2fcad1b46409bb9446e972a02a11737">&#9670;&#160;</a></span>allocate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Configuration::allocate </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>_numberOfParticles</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>_referenceAndFinal</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aad92bf7172e28ef845831cfb8317f002" name="aad92bf7172e28ef845831cfb8317f002"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad92bf7172e28ef845831cfb8317f002">&#9670;&#160;</a></span>getLocalConfiguration()</h2>
 
@@ -256,6 +237,8 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>can be deleted </p>
 
 <p class="definition">Definition at line <a class="el" href="Configuration_8cpp_source.html#l00022">22</a> of file <a class="el" href="Configuration_8cpp_source.html">Configuration.cpp</a>.</p>
 
@@ -274,7 +257,14 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Configuration_8h_source.html#l00028">28</a> of file <a class="el" href="Configuration_8h_source.html">Configuration.h</a>.</p>
+<p>Map from configuration type (Reference or Current) to coordinate matrices. </p>
+<p>Each matrix in the map has dimensions \(\texttt{numberOfParticles} \times 3\), where each row corresponds to a particle’s position vector (x, y, z).</p>
+<ul>
+<li><code>coordinates[Current]</code> is always allocated.</li>
+<li><code>coordinates[Reference]</code> is allocated only if <code>referenceAndFinal == 1</code> during construction; otherwise, it is a zero-sized matrix. </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="Configuration_8h_source.html#l00059">59</a> of file <a class="el" href="Configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -290,7 +280,9 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Configuration_8h_source.html#l00026">26</a> of file <a class="el" href="Configuration_8h_source.html">Configuration.h</a>.</p>
+<p>Total number of particles in the configuration. </p>
+
+<p class="definition">Definition at line <a class="el" href="Configuration_8h_source.html#l00041">41</a> of file <a class="el" href="Configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -306,7 +298,9 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Configuration_8h_source.html#l00027">27</a> of file <a class="el" href="Configuration_8h_source.html">Configuration.h</a>.</p>
+<p>Species names for each particle (size equals numberOfParticles). </p>
+
+<p class="definition">Definition at line <a class="el" href="Configuration_8h_source.html#l00046">46</a> of file <a class="el" href="Configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>
@@ -322,7 +316,10 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Configuration_8h_source.html#l00029">29</a> of file <a class="el" href="Configuration_8h_source.html">Configuration.h</a>.</p>
+<p>Velocities of particles. </p>
+<p>A \(\texttt{numberOfParticles} \times 3\) matrix where each row corresponds to the velocity vector of a particle. </p>
+
+<p class="definition">Definition at line <a class="el" href="Configuration_8h_source.html#l00067">67</a> of file <a class="el" href="Configuration_8h_source.html">Configuration.h</a>.</p>
 
 </div>
 </div>

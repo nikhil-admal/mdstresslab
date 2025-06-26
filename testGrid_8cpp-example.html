@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('testGrid_8cpp-example.html',''); initR
 <div class="contents">
 <p>This example demonstrates the <a class="el" href="classGrid.html">Grid</a> class.</p>
 <ol type="1">
-<li>Construct two grids in a rectangular region defined by the lower and upper limits that describe the region's body diagonal endpoints. grid1 is a 3D Reference grid, while grid2 is a 1D Current grid <div class="fragment"><div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> lowerLimit(1,2,3);</div>
+<li>Construct two grids in a rectangular region defined by the lower and upper limits that describe the region's body diagonal endpoints. 'grid1' is a 3D Reference grid, while 'grid2' is a 1D Current grid <div class="fragment"><div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> lowerLimit(1,2,3);</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> upperLimit(2,4,6);</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">int</span> ngrid= 10;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a id="_a0" name="_a0"></a><a class="code hl_class" href="classGrid.html">Grid&lt;Reference&gt;</a> grid1(lowerLimit,upperLimit,ngrid,ngrid,ngrid);</div>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('testGrid_8cpp-example.html',''); initR
 <div class="ttc" id="aclassGrid_html"><div class="ttname"><a href="classGrid.html">Grid</a></div><div class="ttdef"><b>Definition</b> <a href="Grid_8h_source.html#l00031">Grid.h:31</a></div></div>
 <div class="ttc" id="atypedef_8h_html_ab25a6f70a8d0160a3d6dc742284309a8"><div class="ttname"><a href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a></div><div class="ttdeci">Eigen::Matrix&lt; double, 1, DIM, Eigen::RowMajor &gt; Vector3d</div><div class="ttdef"><b>Definition</b> <a href="typedef_8h_source.html#l00060">typedef.h:60</a></div></div>
 </div><!-- fragment --></li>
-<li>Write the coordinates of grids to files. <div class="fragment"><div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    grid1.write(<span class="stringliteral">&quot;grid1&quot;</span>);</div>
+<li>Write the coordinates of grids to files grid1.grid and grid2.grid <div class="fragment"><div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    grid1.write(<span class="stringliteral">&quot;grid1&quot;</span>);</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    grid2.write(<span class="stringliteral">&quot;grid2&quot;</span>);</div>
 </div><!-- fragment --></li>
 <li>An alternate way to construct a grid is to read its coordinates from a file. The following snippet initializes a 3D Current grid and reads its coordinates from a file <div class="fragment"><div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_class" href="classGrid.html">Grid&lt;Current&gt;</a> grid3(ngrid*ngrid*ngrid);</div>

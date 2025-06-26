@@ -2,7 +2,7 @@ var searchData=
 [
   ['getaveragingdomainsize_0',['getAveragingDomainSize',['../classMethod.html#a270b7de75e5fab04e06fdad8730b4cd1',1,'Method']]],
   ['getbasegridlist_1',['getbasegridlist',['../StressTuple_8h.html#a87014e82899cbcbd6368b7208a56de6d',1,'getBaseGridList(const std::tuple&lt;&gt; t):&#160;StressTuple.h'],['../StressTuple_8h.html#a21586712001b69cc9b9a9e3762c758ff',1,'getBaseGridList(const std::tuple&lt; TStress &amp;... &gt; t):&#160;StressTuple.h']]],
-  ['getconfiguration_2',['getConfiguration',['../classBoxConfiguration.html#a00b101b9a35480365868ee242a38b430',1,'BoxConfiguration']]],
+  ['getconfiguration_2',['getConfiguration',['../classBoxConfiguration.html#a7355e3113aade200df20d6167c8c32a2',1,'BoxConfiguration']]],
   ['getcutoffs_3',['getCutoffs',['../classKim.html#a16617428380de2cd6afc368e31c041d8',1,'Kim']]],
   ['getgridneighborlists_4',['getGridNeighborLists',['../classGrid.html#a2e932636d28a0c842a55f301756309e1',1,'Grid']]],
   ['getgridpointneighbors_5',['getGridPointNeighbors',['../classGridSubConfiguration.html#a15a4ea884a1887542d8873136fa9147c',1,'GridSubConfiguration']]],

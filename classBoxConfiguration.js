@@ -1,11 +1,10 @@
 var classBoxConfiguration =
 [
-    [ "BoxConfiguration", "classBoxConfiguration.html#ae38350b830dc745bf35ad799f09b31a8", null ],
-    [ "BoxConfiguration", "classBoxConfiguration.html#ae6d6b420b251b332edaf021a584ecab7", null ],
+    [ "BoxConfiguration", "classBoxConfiguration.html#a16dcbf9a58f025390d097d1d4940aee9", null ],
     [ "~BoxConfiguration", "classBoxConfiguration.html#a867a43698adcf9cce20afbce953411b0", null ],
-    [ "getConfiguration", "classBoxConfiguration.html#a00b101b9a35480365868ee242a38b430", null ],
+    [ "getConfiguration", "classBoxConfiguration.html#a7355e3113aade200df20d6167c8c32a2", null ],
     [ "lmpParser", "classBoxConfiguration.html#a9002be5dcabcff0ca381fa295b6f6f65", null ],
-    [ "read", "classBoxConfiguration.html#ac9774e5da28cbe2e20d3dc85e208bb73", null ],
+    [ "read", "classBoxConfiguration.html#a7098ac0270582b79837adb6f44b97708", null ],
     [ "readLMP", "classBoxConfiguration.html#a13f482925d3ff101d11ab4e0b99dd700", null ],
     [ "readLMP", "classBoxConfiguration.html#ab2d57771e836c060be12c340eb276544", null ],
     [ "box", "classBoxConfiguration.html#aa13ffab39af119d1ea8253e236480cd2", null ],

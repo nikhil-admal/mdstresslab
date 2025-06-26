@@ -1,7 +1,7 @@
 var searchData=
 [
   ['range_0',['range',['../classrange.html#ac6da478fdf3af790d47dcb45dcf5a9b5',1,'range']]],
-  ['read_1',['read',['../classBoxConfiguration.html#ac9774e5da28cbe2e20d3dc85e208bb73',1,'BoxConfiguration::read()'],['../classGrid.html#a54274c82ba3693cfd92bbc7af15ff2a2',1,'Grid::read()']]],
+  ['read_1',['read',['../classBoxConfiguration.html#a7098ac0270582b79837adb6f44b97708',1,'BoxConfiguration::read()'],['../classGrid.html#a54274c82ba3693cfd92bbc7af15ff2a2',1,'Grid::read()']]],
   ['readlmp_2',['readlmp',['../classBoxConfiguration.html#a13f482925d3ff101d11ab4e0b99dd700',1,'BoxConfiguration::readLMP(const std::string &amp;, const ConfigType &amp;configType)'],['../classBoxConfiguration.html#ab2d57771e836c060be12c340eb276544',1,'BoxConfiguration::readLMP(const std::string &amp;currentConfigFileName, const std::string &amp;referenceConfigFileName)']]],
   ['recursivebuildstress_3',['recursiveBuildStress',['../StressTuple_8h.html#a3f36737661f8d56edfceda6b5be0a50c',1,'StressTuple.h']]],
   ['recursivefold_4',['recursiveFold',['../StressTuple_8h.html#a233e9456992775a003da56d1288515d8',1,'StressTuple.h']]],
