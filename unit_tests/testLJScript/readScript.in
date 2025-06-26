@@ -1,0 +1,103 @@
+# Input file for MDStressLab++ to generate the Cauchy stress field
+# on a grid for a configuration read in from a LAMMPS data file using
+# an interatomic potential from the OpenKIM repository.
+#
+# Calculations will be accelerated using OpenMP parallelism if available.
+# To specify the number of threads, set the environment variable OMP_NUM_THREADS
+# If not set, all available processors will be used.
+
+### START OF REQUIRED INPUT ###
+
+# The filename of the atomic configuration (simulation cell and atoms)
+# in LAMMPS data file # form for which the Cauchy stress is to be computed,
+# optionally followed by a second filename containing the reference
+# configuration for the first configuration:
+#    current.lmp [reference.lmp]
+#
+#    where
+#               current.lmp   : name of file cotaining the current
+#                               (deformation) configuration
+#               reference.lmp : name of file cotaining the reference
+#                               configuration [optional]
+#
+# If only one filename is specified, it is assumed to be both the reference
+# and # current configurations
+#
+configCurrent.lmp
+
+# Periodic boundary conditions in x, y and z directions (0=false, 1=true)
+#
+1 1 1
+
+# KIM ID for the interatomic potential (must be installed)
+#
+LJ_Smoothed_Bernardes_1958_Ar__MO_764178710049_001
+
+# Mapping between LAMMPS atom types (appearing in the LAMMPS data file)
+# and chemical elements (which must be supported by the KIM model listed above)
+#
+Ar
+
+# Number of grids on which to compute stress
+#
+1
+
+# For each grid the following three lines are read:
+#
+#    style domain args
+#    xl  yl  zl  xu  yu  zu  deltax deltay deltaz
+#    file-prefix
+#
+# where
+#
+#    style = method for computing force decomposition:
+#            `project` : local projection
+#            `chain' : chain rule
+#    domain  = type of averaging domain:
+#              `sphere` : spherical averaging domain
+#              `ldad` : averaging domain commensurate with reference
+#                       crystal structure
+#      `sphere` args = size
+#      `ldad` args = type args2
+#          type = approach used to define ldad cell:
+#                 `fcc' : fcc crystal structure
+#                 `bcc' : bcc crystal structure
+#                 `lat': lattice vectors
+#          'fcc' or 'bcc' args2 = latparam l m n p q r s t u
+#          'lat' args2 = l1x l1y l1z l2x l2y l2z l3x l3y l3z l m n p q r s t u
+#
+#    where
+#       size = averaging domain size for spherical domain.
+#       latparam = lattice paramater
+#       [l m n] [p q r] [s t u] = reference lattice crystallographic
+#               directions parallel to the global x,y, and z axes.
+#       [l1x l1y l1z] [l2x l2y l2z] [l3x l3y l3z] = coordinates of the
+#               three lattice vectors spanning the averaging domain.
+#       xl  yl  zl = coordinates of the lower left corner of the grid;
+#                    set a coordinate to "*" to use the corresponding lower
+#                    value from the LAMMPS data file
+#       xu  yu  zu = coordinates of the upper right corner of the grid
+#                    set a coordinate to "*" to use the corresponding upper
+#                    value from the LAMMPS data file
+#       deltax, deltay, deltaz : grid spacing in the x, y, z directions
+#       file-prefix = Output filename prefix. MDStressLab will generate an
+#                     output file for each provided grid.
+#                     The names of these files will begin with the provided
+#                     prefix, appended by a "_gridXX" where "XX" is the grid
+#                     number.
+#
+#    Notes:
+#    (1) Set a coordinate to "*" to use the corresponding lower or upper
+#        value (as appropriate) from the LAMMPS data file
+#    (2) The coordinate must satisfy: xl ≤ xu, yl ≤ yu, zl ≤ zu
+#        - Flat grids, or grids along a line are allowed.
+#
+chain sphere 9.0
+0.0 0.0 0.0 60.0 60.0 60.0 6.0 6.0 0.0
+LJ_sphere
+
+### END OF REQUIRED INPUT ###
+
+
+
+

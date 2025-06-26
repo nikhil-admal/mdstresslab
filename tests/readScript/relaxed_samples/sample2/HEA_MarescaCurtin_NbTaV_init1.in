@@ -1,0 +1,74 @@
+# Input file for MDStressLab++ to generate the Cauchy stress field
+# on a grid for a configuration read in from a LAMMPS data file using
+# an interatomic potential from the OpenKIM repository
+#
+# Calculations will be accelerated using OpenMP parallelism if available.
+# To specify the number of threads, set the environment variable OMP_NUM_THREADS
+# If not set, all available processors will be used.
+
+### START OF REQUIRED INPUT ###
+
+# LAMMPS data file name containing atomic configuration (orthogonal box)
+#
+sample2.lmp
+
+# Periodic boundary conditions in x, y and z directions (0=false, 1=true)
+#
+0 0 0
+
+# KIM ID for the interatomic potential (must be installed)
+#
+#
+EAM_Dynamo_MarescaCurtin_2020_NbTaV__MO_330233188199_000
+
+# Mapping between LAMMPS atom types (appearing in the LAMMPS data file)
+# and chemical elements (which must be supported by the KIM model listed above)
+#
+Nb Ta V
+
+# Stress calculation type, options:
+#    project : local project method
+#    chain   : chain rule approach (available for only some KIM models)
+#
+project
+
+# Number of grids on which to compute stress
+#
+1
+
+# For each grid the following information:
+#    xl, yl, zl, xu, yu, zu, deltax, deltay, deltaz, d
+# where
+#    xl, yl, zl : coordinates of the lower left corner of the grid;
+#                 set a coordinate to "*" to use the corresponding lower
+#                 value from the LAMMPS data file
+#    xu, yu, zu : coordinates of the upper right corner of the grid
+#                 set a coordinate to "*" to use the corresponding upper
+#                 value from the LAMMPS data file
+#    deltax, deltay, deltaz : grid spacing in the x, y, z directions
+#    d : diameter of the averaging domain size
+#
+#    Notes:
+#    (1) Set a coordinate to "*" to use the corresponding lower or upper
+#        value (as appropriate) from the LAMMPS data file
+#    (2) The coordinate must satisfy: xl ≤ xu, yl ≤ yu, zl ≤ zu
+#        - Flat grids, or grids along a line are allowed.
+#        - In the event that two coordinates are equal (e.g. yl=yu),
+#          the number of grid points along that direction must be one
+#          (e.g. if yl=yu, then ngridy=1)
+#
+
+#  * -1.14294 * * -1.14294 * 250 1 250
+#-95.187276549540 -1.14294 -11.877806246622 95.187276549540 -1.1429 11.877806246622 250 1 250 4.0
+#-95.187276549540 -1.14294 -11.877806246622 95.187276549540 -1.1429 11.877806246622 0.5 0.0 0.5 4.0
+-95.187276549540 -1.14294 * *  -1.1429 * 0.5 0.0 0.5 4.0
+
+# Output filename prefix
+# MDStressLab will generate an output file for each provided grid.
+# The names of these files will begin with the provided prefix,
+# appended by a "_gridXX" where "XX" is the grid number.
+#
+HEA_MarescaCurtin_NbTaV_relaxed2
+
+### END OF REQUIRED INPUT ###
+
