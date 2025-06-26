@@ -184,12 +184,12 @@ int main()
             return (s == "*") ? fallback : std::stod(s);
         };
         // Use fallback values if needed
-        //lowerLimit[0]= parseOrFallback(token[0], xlo)-FLT_EPSILON;
-        //lowerLimit[1]= parseOrFallback(token[1], ylo)-FLT_EPSILON;
-        //lowerLimit[2]= parseOrFallback(token[2], zlo)-FLT_EPSILON;
-        lowerLimit[0]= parseOrFallback(token[0], xlo);
-        lowerLimit[1]= parseOrFallback(token[1], ylo);
-        lowerLimit[2]= parseOrFallback(token[2], zlo);
+        lowerLimit[0]= parseOrFallback(token[0], xlo)-FLT_EPSILON;
+        lowerLimit[1]= parseOrFallback(token[1], ylo)-FLT_EPSILON;
+        lowerLimit[2]= parseOrFallback(token[2], zlo)-FLT_EPSILON;
+        //lowerLimit[0]= parseOrFallback(token[0], xlo);
+        //lowerLimit[1]= parseOrFallback(token[1], ylo);
+        //lowerLimit[2]= parseOrFallback(token[2], zlo);
 
         upperLimit[0]= parseOrFallback(token[3], xhi);
         upperLimit[1]= parseOrFallback(token[4], yhi);
@@ -200,9 +200,12 @@ int main()
         deltay = std::stod(token[7]);
         deltaz = std::stod(token[8]);
 
-        ngridx= (abs(deltax) > FLT_EPSILON) ? floor((upperLimit(0)-lowerLimit(0)+FLT_EPSILON)/deltax) : 1;
-        ngridy= (abs(deltay) > FLT_EPSILON) ? floor((upperLimit(1)-lowerLimit(1)+FLT_EPSILON)/deltay) : 1;
-        ngridz= (abs(deltaz) > FLT_EPSILON) ? floor((upperLimit(2)-lowerLimit(2)+FLT_EPSILON)/deltaz) : 1;
+        ngridx= (abs(deltax) > FLT_EPSILON) ? floor((upperLimit(0)-lowerLimit(0))/deltax) : 1;
+        ngridy= (abs(deltay) > FLT_EPSILON) ? floor((upperLimit(1)-lowerLimit(1))/deltay) : 1;
+        ngridz= (abs(deltaz) > FLT_EPSILON) ? floor((upperLimit(2)-lowerLimit(2))/deltaz) : 1;
+        //ngridx= (abs(deltax) > FLT_EPSILON) ? floor((upperLimit(0)-lowerLimit(0)+FLT_EPSILON)/deltax) : 1;
+        //ngridy= (abs(deltay) > FLT_EPSILON) ? floor((upperLimit(1)-lowerLimit(1)+FLT_EPSILON)/deltay) : 1;
+        //ngridz= (abs(deltaz) > FLT_EPSILON) ? floor((upperLimit(2)-lowerLimit(2)+FLT_EPSILON)/deltaz) : 1;
 
         std::cout << "Grid Limits: ";
         std::cout << lowerLimit << " " << upperLimit << std::endl;
@@ -260,5 +263,3 @@ int main()
 
 	return 0;
 }
-
-

@@ -1,3 +1,3 @@
 add_subdirectory(crack)
 add_subdirectory(plateWithHole)
-add_subdirectory(readScript)
+add_subdirectory(heaScript)

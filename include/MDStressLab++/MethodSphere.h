@@ -73,5 +73,10 @@ private:
  * Full code:
  */
 
+/*!
+ * @example testLJScript.in
+ */
+
+
 
 #endif /* METHODSPHERE_H_ */

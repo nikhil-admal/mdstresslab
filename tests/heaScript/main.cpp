@@ -45,6 +45,8 @@ int main()
         referenceConfigFile.open(referenceConfigFileName);
         if(!referenceConfigFile) MY_ERROR("ERROR: reference configuration file could not be opened for reading!");
     }
+    if(referenceConfigFileName.empty())
+        referenceConfigFileName= currentConfigFileName;
 
 
     // get number of particles
@@ -71,8 +73,7 @@ int main()
 
     if (numberOfParticles < 0) MY_ERROR("Error: Negative number of particles.\n");
 
-    bool readReference= (!referenceConfigFileName.empty());
-    BoxConfiguration body{numberOfParticles, readReference};
+    BoxConfiguration body{numberOfParticles, 1};
     body.readLMP(currentConfigFileName,referenceConfigFileName);
 
     // Read periodic boundaries
@@ -196,9 +197,9 @@ int main()
         deltay = std::stod(token[7]);
         deltaz = std::stod(token[8]);
 
-        ngridx= (abs(deltax) > FLT_EPSILON) ? floor((upperLimit(0)-lowerLimit(0))/deltax) : 0;
+        ngridx= (abs(deltax) > FLT_EPSILON) ? floor((upperLimit(0)-lowerLimit(0))/deltax) : 1;
         ngridy= (abs(deltay) > FLT_EPSILON) ? floor((upperLimit(1)-lowerLimit(1))/deltay) : 1;
-        ngridz= (abs(deltaz) > FLT_EPSILON) ? floor((upperLimit(2)-lowerLimit(2))/deltaz) : 0;
+        ngridz= (abs(deltaz) > FLT_EPSILON) ? floor((upperLimit(2)-lowerLimit(2))/deltaz) : 1;
 
         std::cout << "Grid Limits: ";
         std::cout << lowerLimit << " " << upperLimit << std::endl;

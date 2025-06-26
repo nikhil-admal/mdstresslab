@@ -62,10 +62,10 @@ public:
  * This example demonstrates the Grid class.
  *
  * -# Construct two grids in a rectangular region defined by the lower and upper limits that describe
- * the region's body diagonal endpoints. \ref grid1 is a 3D Reference grid, while \ref grid2 is a 1D Current grid
+ * the region's body diagonal endpoints. 'grid1' is a 3D Reference grid, while 'grid2' is a 1D Current grid
  * @snippet{lineno} testGrid.cpp Limits
  *
- * -# Write the coordinates of grids to files.
+ * -# Write the coordinates of grids to files grid1.grid and grid2.grid
  * @snippet{lineno} testGrid.cpp Write
  *
  * -# An alternate way to construct a grid is to read its coordinates from a file.
