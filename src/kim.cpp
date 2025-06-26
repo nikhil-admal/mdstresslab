@@ -10,7 +10,7 @@
 #include "kim.h"
 #include "typedef.h"
 
-Kim::Kim(const std::string modelname) : modelname(modelname),kim_ptr(nullptr),computeArguments(nullptr)
+Kim::Kim(const std::string& modelname) : modelname(modelname),kim_ptr(nullptr),computeArguments(nullptr)
 {
 	std::string message= "Connecting to model: " + modelname;
 	MY_HEADING(message.c_str());

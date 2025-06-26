@@ -15,7 +15,11 @@ void compareStress(std::string stressFile)
 		std::string errorMessage= "Test failed in " + stressFile + ". Number of grid points do not match.";
 		MY_ERROR(errorMessage);
 	}
-	std::getline(file,str); std::getline(fileReference,str);
+	std::getline(file,str); 
+	std::getline(file,str); 
+	std::getline(fileReference,str); 
+    std::getline(fileReference,str);
+
 	double data,dataReference;
 	for (int i_point=0; i_point<ngrid; i_point++)
 	{
@@ -25,6 +29,8 @@ void compareStress(std::string stressFile)
 			fileReference >> std::setprecision(15) >> dataReference;
 			if (abs(data-dataReference) > tol)
 			{
+                std::cout << data << std::endl;
+                std::cout << dataReference << std::endl;
 				std::string errorMessage= "Test failed in " + stressFile + ". Data error.";
 				MY_ERROR(errorMessage);
 			}

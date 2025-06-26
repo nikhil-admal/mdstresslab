@@ -114,32 +114,62 @@ int main()
 
     for (int i = 0; i < numGrids; ++i) {
         //-------- Read stress method
+        MY_HEADING("Reading stress and grid parameters from input file");
         bool project= false;
         std::istringstream stressStream(next_line());
-        std::string stressMethod, averagingDomain;
+        std::string stressMethod, averagingDomain, averagingDomainParameter;
         double averagingDomainSize;
-        stressStream >> averagingDomain >> stressMethod >> averagingDomainSize;
-        std::cout << "averaging domain: " << averagingDomain << "\n";
+
+        stressStream >> stressMethod >> averagingDomain ;
         std::cout << "stress method: " << stressMethod << "\n";
-        std::cout << "averaging domain size: " << averagingDomainSize << "\n";
+        std::cout << "averaging domain: " << averagingDomain << "\n";
         if (stressMethod == "project")
             project= true;
 
-        std::string structure;
         Vector3d xdir, ydir, zdir;
-        if (averagingDomain=="ldad")
-            stressStream >> structure >> xdir[0] >> xdir[1] >> xdir[2] >>
-                                         ydir[0] >> ydir[1] >> ydir[2] >>
-                                         zdir[0] >> zdir[1] >> zdir[2];
-        Vector3d basis1, basis2, basis3;
-        if (structure=="bcc")
-        {
-            basis1 << -0.5,0.5,0.5; basis2 << 0.5,-0.5,0.5; basis3 << 0.5,0.5,-0.5;
-        }
-        else if (structure == "fcc")
-        {
-            basis1 << 0,0.5,0.5; basis2 << 0.5,0,0.5; basis3 << 0.5,0.5,0;
+        Matrix3d ldadVectors;
 
+        if (averagingDomain=="ldad")
+        {
+            stressStream >> averagingDomainParameter;
+            std::cout << "averaging domain parameter: " << averagingDomainParameter << "\n";
+
+            // read crystallographic directions and domain size to calculate ldadVectors
+            if (averagingDomainParameter=="bcc" || averagingDomainParameter=="fcc")
+            {
+                stressStream >> averagingDomainSize >> xdir(0) >> xdir(1) >> xdir(2) >>
+                                                       ydir(0) >> ydir(1) >> ydir(2) >>
+                                                       zdir(0) >> zdir(1) >> zdir(2);
+                std::cout << "averaging domain size : " << averagingDomainSize << "\n";
+
+                Vector3d basis1, basis2, basis3;
+                if (averagingDomainParameter=="bcc"){
+                    basis1 << -0.5,0.5,0.5; basis2 << 0.5,-0.5,0.5; basis3 << 0.5,0.5,-0.5;
+                }
+                else if (averagingDomainParameter== "fcc"){
+                    basis1 << 0,0.5,0.5; basis2 << 0.5,0,0.5; basis3 << 0.5,0.5,0;
+                }
+                Matrix3d rotation;
+
+                // calculate lattice vectors
+                rotation.row(0)= xdir.normalized();
+                rotation.row(1)= ydir.normalized();
+                rotation.row(2)= zdir.normalized();
+                assert((rotation.transpose()*rotation).isIdentity());
+                ldadVectors.col(0)= rotation*basis1.transpose();
+                ldadVectors.col(1)= rotation*basis2.transpose();
+                ldadVectors.col(2)= rotation*basis3.transpose();
+                ldadVectors= ldadVectors* averagingDomainSize;
+            }
+            // instead directly read ldad lattice vectors
+            else if (averagingDomainParameter=="lat")
+                stressStream >> ldadVectors(0,0) >> ldadVectors(1,0) >> ldadVectors(2,0) >>
+                                ldadVectors(0,1) >> ldadVectors(1,1) >> ldadVectors(2,1) >>
+                                ldadVectors(0,2) >> ldadVectors(1,2) >> ldadVectors(2,2);
+        }
+        else if (averagingDomain=="sphere"){
+                stressStream >> averagingDomainSize;
+                std::cout << "averaging domain size : " << averagingDomainSize << "\n";
         }
 
         //------------ Read grid
@@ -170,10 +200,9 @@ int main()
         ngridy= (abs(deltay) > FLT_EPSILON) ? floor((upperLimit(1)-lowerLimit(1))/deltay) : 1;
         ngridz= (abs(deltaz) > FLT_EPSILON) ? floor((upperLimit(2)-lowerLimit(2))/deltaz) : 0;
 
-        std::cout << "Grid " << i << ":" << std::endl;
-        std::cout << "  Limits: ";
+        std::cout << "Grid Limits: ";
         std::cout << lowerLimit << " " << upperLimit << std::endl;
-        std::cout << "  Grid points: " << ngridx << " " << ngridy << " " << ngridz << std::endl;
+        std::cout << "Number of grid points: " << ngridx << " " << ngridy << " " << ngridz << std::endl;
 
         // ----------- Output prefix
         outPrefix= next_line();
@@ -185,16 +214,6 @@ int main()
                 Grid<Reference> grid(lowerLimit, upperLimit, ngridx, ngridy, ngridz);
                 //Matrix3d ldadVectors= averagingDomainSize*Matrix3d::Identity();
 
-                Matrix3d rotation;
-                rotation.row(0)= xdir.normalized();
-                rotation.row(1)= ydir.normalized();
-                rotation.row(2)= zdir.normalized();
-                assert((rotation.transpose()*rotation).isIdentity());
-                Matrix3d ldadVectors;
-                ldadVectors.col(0)= rotation*basis1.transpose();
-                ldadVectors.col(1)= rotation*basis2.transpose();
-                ldadVectors.col(2)= rotation*basis3.transpose();
-                ldadVectors= ldadVectors* averagingDomainSize;
                 MethodLdadTrigonometric ldadDomain(ldadVectors);
                 Stress<MethodLdadTrigonometric, Piola> ldadTrigonometricStress(ldadDomain, &grid);
                 calculateStress(body, kim,
@@ -214,23 +233,16 @@ int main()
             }
         }
         else if(averagingDomain=="sphere"){
-            //Grid<Current> grid(lowerLimit, upperLimit, ngridx, ngridy, ngridz);
-            Grid<Reference> grid(lowerLimit, upperLimit, ngridx, ngridy, ngridz);
+            Grid<Current> grid(lowerLimit, upperLimit, ngridx, ngridy, ngridz);
             MethodSphere hardy(averagingDomainSize, "hardy");
 
             // stress calculation using projected forces
             try {
-                //Stress<MethodSphere, Cauchy> hardyStress(hardy, &grid);
-                Stress<MethodSphere, Piola> hardyStress(hardy, &grid);
+                Stress<MethodSphere, Cauchy> hardyStress(hardy, &grid);
 
-                // Calculate stress using the projected forces
-                //calculateStress(body, kim,
-                //                std::tie(),
-                //                std::tie(hardyStress), project);
                 calculateStress(body, kim,
-                                std::tie(hardyStress),
                                 std::tie(),
-                                project);
+                                std::tie(hardyStress), project);
                 hardyStress.write(outPrefix);
             }
             catch (const std::runtime_error &e) {

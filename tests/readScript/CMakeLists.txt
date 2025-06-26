@@ -1,5 +1,18 @@
 find_package(CURL REQUIRED)
 
+configure_file(readScript.in readScript.in)
+configure_file(init_samples/sample1.lmp init_samples/sample1.lmp)
+configure_file(init_samples/sample2.lmp init_samples/sample2.lmp)
+configure_file(init_samples/sample3.lmp init_samples/sample3.lmp)
+configure_file(init_samples/sample4.lmp init_samples/sample4.lmp)
+configure_file(init_samples/sample5.lmp init_samples/sample5.lmp)
+configure_file(relaxed_samples/sample1.lmp relaxed_samples/sample1.lmp)
+configure_file(relaxed_samples/sample2.lmp relaxed_samples/sample2.lmp)
+configure_file(relaxed_samples/sample3.lmp relaxed_samples/sample3.lmp)
+configure_file(relaxed_samples/sample4.lmp relaxed_samples/sample4.lmp)
+configure_file(relaxed_samples/sample5.lmp relaxed_samples/sample5.lmp)
+configure_file(NbTaV.eam.alloy NbTaV.eam.alloy)
+
 # add the executable
 add_executable(readScript main.cpp)
 target_link_libraries(readScript PRIVATE MDStressLab++ CURL::libcurl)

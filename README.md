@@ -13,7 +13,7 @@ $ cmake -DCMAKE_BUILD_TYPE=Release ..
 
 $ make
 
-To test installation run unit tests, for example from build/ do:
+To test installation run unit tests, for example from build, do:
 
 $ cd unit_tests/testSW
 

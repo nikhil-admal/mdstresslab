@@ -59,7 +59,7 @@ public:
 };
 /*!
  * \example testGrid.cpp
- * This is an example of how to use the Grid class
+ * This example demonstrates the Grid class
  */
 #include "Grid.cpp"
 

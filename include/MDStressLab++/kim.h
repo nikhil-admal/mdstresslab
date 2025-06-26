@@ -14,6 +14,9 @@
 #include "neighbor_list.h"
 #include "InteratomicForces.h"
 
+/*!
+ * The Kim class links MDStressLab to an openkim interatomic potential model.
+ */
 class Kim
 {
 public:
@@ -23,10 +26,26 @@ public:
 	KIM::Model* kim_ptr;
 	KIM::ComputeArguments* computeArguments;
 
-	Kim(std::string);
+    /*!
+     * Constructs the Kim object
+     * @param modelname - KIM model name
+     */
+	Kim(const std::string& modelname);
 	Kim(){kim_ptr=nullptr; computeArguments=nullptr; influenceDistance=0;}
 	virtual ~Kim();
 	void queryModel();
+
+
+    /*!
+     * This function broadcasts the atomistic system to the KIM model
+     * @param config_ptr - pointer to the configuration of atoms
+     * @param particleContributing -
+     * @param forces_ptr -
+     * @param nl_ptr -
+     * @param get_neigh_ptr -
+     * @param bonds -
+     * @param processDEDr_ptr -
+     */
 	void broadcastToModel(const Configuration* config_ptr,
 						  const VectorXi& particleContributing,
                           const MatrixXd* forces_ptr,
@@ -37,7 +56,5 @@ public:
 	void compute();
 	const double* getCutoffs() const;
 	int getNumberOfNeighborLists() const;
-	static void processDEDr(){};
-
 };
 #endif /* KIM_H_ */
