@@ -36,7 +36,7 @@ private:
 };
 
 /*!
- * @example testLJ.cpp
+ * @example{lineno} testLJ.cpp
  * An example demonstrating the computation of Piola and Cauchy stress tensors
  * using various spherical averaging domains and grids
  *

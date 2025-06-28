@@ -23,10 +23,6 @@ int main()
 	std::string configFileName= "config_T.data";
 	std::string modelname= "SW_BalamaneHauchShi_2017Brittle_Si__MO_381114941873_002";
 
-    //	-------------------------------------------------------------------
-    //  Input configuration and potential
-    //	-------------------------------------------------------------------
-
 	std::ifstream file(configFileName);
 	if(!file) MY_ERROR("ERROR: config_T.data could not be opened for reading!");
 
@@ -38,26 +34,25 @@ int main()
 
 	Kim kim(modelname);
 
-	int ngrid = 10;
-    Grid<Reference> gridFromFile(ngrid);
-	gridFromFile.read("grid_ten.data");
+	int ngrid = 301;
+    Grid<Reference> grid({9950,1870,13.577375}, {10050,1970.0001,13.577376},ngrid,ngrid);
+    grid.write("referenceGrid");
 
 
-	// MethodHardySphere stress 3
-	MethodSphere hardy3(5,"hardy");
-	Stress<MethodSphere,Piola> hardyStress3("hardy3",hardy3,&gridFromFile);
-
+	MethodSphere hardy(5,"hardy");
+	Stress<MethodSphere,Piola> hardyPiolaStress("hardy",hardy,&grid);
     calculateStress(body,kim,
-					std::tie(hardyStress3));
+					std::tie(hardyPiolaStress));
+    hardyPiolaStress.write("hardyPiola");
 
-    // MLS
+
     double MlsRadius = 16.29285;
-	Mls testMls(body,&gridFromFile,MlsRadius,"hardyStress3");
-	std::vector<Matrix3d> cauchyPushedField3;
-    testMls.pushToCauchy(hardyStress3.field,cauchyPushedField3);
+	Mls testMls(body,&grid,MlsRadius,"mls_crack");
+	std::vector<Matrix3d> cauchyPushedField;
+    testMls.pushToCauchy(hardyPiolaStress.field,cauchyPushedField);
     testMls.writeDeformationGradient();
 	testMls.writeGridPushed();
-	testMls.writePushedCauchyStress(cauchyPushedField3);
+	testMls.writePushedCauchyStress(cauchyPushedField);
 
 	return 0;
 }

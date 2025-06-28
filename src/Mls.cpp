@@ -873,7 +873,7 @@ void Mls::writeGridPushed()
 {
     MY_HEADING("Writing Pushed grid points.");
     //std::setprecision(16);
-    std::ofstream file(name+".pushedGrids");
+    std::ofstream file(name+"Pushed.grid");
 	file << gridPushed.size() << "\n";
 	file << "\n";
 	for (auto& grid : gridPushed)
@@ -898,7 +898,7 @@ void Mls::writePushedCauchyStress(std::vector<Matrix3d>& cauchyStress)
      }
      */
 
-    std::ofstream file(name+".stress");
+    std::ofstream file(name+"Pushed.stress");
     file << cauchyStress.size() << "\n";
     Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
     file << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10);
