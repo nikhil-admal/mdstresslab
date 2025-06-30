@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MDStressLab++: MDStressLab – Molecular Dynamics Post-Processing Tool</title>
+<title>MDStressLab++: MDStressLab++</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,22 +96,55 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">MDStressLab – Molecular Dynamics Post-Processing Tool </div></div>
+  <div class="headertitle"><div class="title">MDStressLab++ </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>MDStressLab is a software package developed at the University of Minnesota and the University of Illinois Urbana Champaign It provides tools to compute stress fields from atomistic simulation data.</p>
-<h2><a class="anchor" id="autotoc_md3"></a>
-📝 Overview</h2>
-<p>*(Copy over the introductory description of the software, research goals, etc.)*</p>
-<h2><a class="anchor" id="autotoc_md4"></a>
-🔬 Features</h2>
+<div class="textblock"><h1><a class="anchor" id="overview"></a>
+Overview</h1>
+<p><b>MDStressLab++</b> is a KIM-compliant program for postprocessing molecular dynamics (MD) or molecular statics (MS) simulations to compute atomistic stress fields using different definitions of the atomistic stress tensor.</p>
+<p>For more information on KIM (Knowledgebase of Interatomic Models), see <a href="https://openkim.org">openkim.org</a>.</p>
+<p>MDStressLab++ provides the following capabilities:</p>
 <ul>
-<li>KIM‑compliant processing of atomic snapshots</li>
-<li>Support for MD simulation data formats (LAMMPS, custom, etc.)</li>
+<li>Compute the <b>Cauchy</b> and <b>first Piola-Kirchhoff</b> versions of the <b>Hardy</b> and <b>virial</b> stress tensors on a user-defined grid. See <b>[AdmalTadmor2010]</b>, <b>[AdmalTadmor2011]</b>, <b>[AdmalTadmor2016a]</b>.</li>
+<li>Integrated Python tools for visualizing stress fields. See <a class="el" href="visualization_intro.html">Visualization Utilities</a>.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md5"></a>
-📥 Installation &amp; Usage</h2>
-<p>*(Paste build instructions, dependencies, or usage examples from the original page.)* </p>
+<h1><a class="anchor" id="features"></a>
+Key Features</h1>
+<ul>
+<li><b>LAMMPS compatibility</b>: Atomistic configurations can be read from LAMMPS-style <code>dump</code> files.</li>
+<li><b>No <code>process_dedr</code> required</b>: Atomistic stress can be computed even for interatomic potentials that do not provide interatomic forces derived from the derivatives of energy with respect to distances.</li>
+<li><b>Flexible weight functions via CRTP</b>: User-defined weighting functions can be implemented easily by inheriting from the <code><a class="el" href="classMethod.html">Method</a></code> template class using the Curiously Recurring Template Pattern (CRTP).</li>
+<li><b>Lattice-dependent averaging domains</b>: Reduced noise is achieved by using lattice-dependent averaging domains. See <b>[AdmalTadmorShi2019]</b>.</li>
+<li><b>Library or script mode</b>: MDStressLab++ can be used as a C++ library within custom applications or driven by user-defined input scripts for standard workflows.</li>
+</ul>
+<h1><a class="anchor" id="installation"></a>
+Installation instructions</h1>
+<h1><a class="anchor" id="authors"></a>
+Authors</h1>
+<p>This code was written by:</p><ul>
+<li>Prof. Nikhil Chandra Admal (UIUC)</li>
+<li>Min Shi (University of Minnesota)</li>
+<li>Prof. Ellad B. Tadmor (University of Minnesota)</li>
+</ul>
+<p>and is based on their collaborative research.</p>
+<h1><a class="anchor" id="cite"></a>
+How to Cite MDStressLab++</h1>
+<p>When publishing results obtained using this program, please acknowledge that the code was obtained from <a href="https://github.com/nikhil-admal/mdstresslab">https://github.com/nikhil-admal/mdstresslab</a> and cite the following publications:</p>
+<ul>
+<li><a class="anchor" id="AdmalTadmor2010"></a>N. C. Admal and E. B. Tadmor, <br  />
+ <em>A unified interpretation of stress in molecular systems</em>, <br  />
+ <em>Journal of Elasticity</em>, <b>100</b>, 63–143 (2010).</li>
+<li><a class="anchor" id="AdmalTadmor2011"></a>N. C. Admal and E. B. Tadmor, <br  />
+ <em><a class="el" href="classStress.html">Stress</a> and heat flux for arbitrary multi-body potentials: A unified framework</em>, <br  />
+ <em>Journal of Chemical Physics</em>, <b>134</b>, 184106 (2011).</li>
+<li><a class="anchor" id="AdmalTadmor2016a"></a>N. C. Admal and E. B. Tadmor, <br  />
+ <em>Material fields in atomistics as pull-backs of spatial distributions</em>, <br  />
+ <em>Journal of the Mechanics and Physics of Solids</em>, <b>89</b>, 59–76 (2016).</li>
+<li><a class="anchor" id="AdmalTadmor2016b"></a>N. C. Admal and E. B. Tadmor, <br  />
+ <em>The non-uniqueness of the atomistic stress tensor and its relationship to the generalized Beltrami representation</em>, <br  />
+ <em>Journal of the Mechanics and Physics of Solids</em>, <b>93</b>, 72–92 (2016).</li>
+<li><a class="anchor" id="AdmalTadmorShi2019"></a>N. C. Admal, E. B. Tadmor, and M. Shi, <em>Noise reduction in atomistic stress calculations using tailored integration domains</em>, <em>Modelling and Simulation in Materials Science and Engineering</em>, <b>27</b>, 045007 (2019). </li>
+</ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

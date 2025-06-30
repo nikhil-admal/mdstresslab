@@ -25,7 +25,20 @@
 var NAVTREE =
 [
   [ "MDStressLab++", "index.html", [
-    [ "MDStressLab – Molecular Dynamics Post-Processing Tool", "index.html", null ],
+    [ "Overview", "index.html#overview", null ],
+    [ "Key Features", "index.html#features", null ],
+    [ "Installation instructions", "index.html#installation", null ],
+    [ "Authors", "index.html#authors", null ],
+    [ "How to Cite MDStressLab++", "index.html#cite", null ],
+    [ "Visualization Utilities", "visualization_intro.html", null ],
+    [ "Namespaces", "namespaces.html", [
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

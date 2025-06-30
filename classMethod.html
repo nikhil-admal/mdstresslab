@@ -111,10 +111,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64caf481605ec1e96b6580f0af3512c5" id="r_a64caf481605ec1e96b6580f0af3512c5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a64caf481605ec1e96b6580f0af3512c5">~Method</a> ()</td></tr>
 <tr class="separator:a64caf481605ec1e96b6580f0af3512c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65f3ec190572e1912f2c2b6b0ffa1734" id="r_a65f3ec190572e1912f2c2b6b0ffa1734"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a65f3ec190572e1912f2c2b6b0ffa1734">operator()</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec) const</td></tr>
+<tr class="memdesc:a65f3ec190572e1912f2c2b6b0ffa1734"><td class="mdescLeft">&#160;</td><td class="mdescRight">The weighting function \(w\) used to compute stress.  <br /></td></tr>
 <tr class="separator:a65f3ec190572e1912f2c2b6b0ffa1734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e971ada35a39ed4243540ad7dea3fa9" id="r_a2e971ada35a39ed4243540ad7dea3fa9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a2e971ada35a39ed4243540ad7dea3fa9">bondFunction</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec1, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec2) const</td></tr>
+<tr class="memdesc:a2e971ada35a39ed4243540ad7dea3fa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The bond function \(b(\boldsymbol v^1, \boldsymbol v^2)\) gives the weight associated to a bond formed by two atoms.  <br /></td></tr>
 <tr class="separator:a2e971ada35a39ed4243540ad7dea3fa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a270b7de75e5fab04e06fdad8730b4cd1" id="r_a270b7de75e5fab04e06fdad8730b4cd1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a270b7de75e5fab04e06fdad8730b4cd1">getAveragingDomainSize</a> () const</td></tr>
+<tr class="memdesc:a270b7de75e5fab04e06fdad8730b4cd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the spatial size of the averaging domain, i.e. the support of the weighting function.  <br /></td></tr>
 <tr class="separator:a270b7de75e5fab04e06fdad8730b4cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -124,8 +127,16 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename TMethod&gt;<br />
-class Method&lt; TMethod &gt;</div>
-<p class="definition">Definition at line <a class="el" href="Method_8h_source.html#l00014">14</a> of file <a class="el" href="Method_8h_source.html">Method.h</a>.</p>
+class Method&lt; TMethod &gt;</div><p>This class provides a polymorphic interface for defining a <code>method</code>, which constitutes a weighting function and its associated bond function, to compute atomistic stress.</p>
+<p>It is intended to be used as a CRTP (Curiously Recurring Template Pattern) base class: the actual implementation of the method should be provided in the derived class <code>TMethod</code>, which will override the weighting function call operator and <code>bondFunction</code>.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TMethod</td><td>The derived class implementing specific method logic. Examples of derived classes include <code><a class="el" href="classMethodSphere.html" title="Implements radially symmetric weighting functions (Hardy, Virial) and its associated bond function fo...">MethodSphere</a></code>, <code><a class="el" href="classMethodLdad.html">MethodLdad</a>&lt;<a class="el" href="classConstant.html">Constant</a>&gt;</code>, and <code><a class="el" href="classMethodLdad.html">MethodLdad</a>&lt;<a class="el" href="classTrigonometric.html">Trigonometric</a>&gt;</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Method_8h_source.html#l00025">25</a> of file <a class="el" href="Method_8h_source.html">Method.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a64caf481605ec1e96b6580f0af3512c5" name="a64caf481605ec1e96b6580f0af3512c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64caf481605ec1e96b6580f0af3512c5">&#9670;&#160;</a></span>~Method()</h2>
@@ -185,6 +196,27 @@ template&lt;typename TMethod &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>The bond function \(b(\boldsymbol v^1, \boldsymbol v^2)\) gives the weight associated to a bond formed by two atoms. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="calculateStress_8cpp.html#a74b38fc973350f98b0e95a5cd71ebb8c">calculateStress()</a> to see how bondfunction is used in stress computation</dd></dl>
+<p>The function delegates the actual implementation to <code>TMethod::bondFunction(vec1, vec2)</code>.</p>
+<p>The bond function is defined as  </p><p class="formulaDsp">
+\[
+\begin{equation}
+     b(\boldsymbol v^1, \boldsymbol v^2)=
+     \int_{s=0}^1 w((1-s)\boldsymbol v^1 + s\boldsymbol v^2) \, ds
+\end{equation}
+\]
+</p>
+<p>The actual implementation of the bondFunction is delegated to <code>TMethod::bondFunction(vec1, vec2)</code>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vec1</td><td>first atomic position vector relative to a grid point </td></tr>
+    <tr><td class="paramname">vec2</td><td>second atomic position vector relative to a grid point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The scalar output of the bond function. </dd></dl>
+
 <p class="definition">Definition at line <a class="el" href="Method_8cpp_source.html#l00033">33</a> of file <a class="el" href="Method_8cpp_source.html">Method.cpp</a>.</p>
 
 </div>
@@ -205,6 +237,9 @@ template&lt;typename TMethod &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gets the spatial size of the averaging domain, i.e. the support of the weighting function. </p>
+<dl class="section return"><dt>Returns</dt><dd>Averaging domain radius or cutoff, as a double. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="Method_8cpp_source.html#l00040">40</a> of file <a class="el" href="Method_8cpp_source.html">Method.cpp</a>.</p>
 
@@ -227,6 +262,17 @@ template&lt;typename TMethod &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The weighting function \(w\) used to compute stress. </p>
+<dl class="section see"><dt>See also</dt><dd><code><a class="el" href="classMethod.html#a2e971ada35a39ed4243540ad7dea3fa9" title="The bond function  gives the weight associated to a bond formed by two atoms.">bondFunction()</a></code> and <code><a class="el" href="calculateStress_8cpp.html#a74b38fc973350f98b0e95a5cd71ebb8c">calculateStress</a></code> to see its usage in stress calculation.</dd></dl>
+<p>This weighting function operator delegates the implementation to the derived <code>TMethod</code> class.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vec</td><td>A 3D vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The scalar (non-negative) output of the weighting function. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="Method_8cpp_source.html#l00026">26</a> of file <a class="el" href="Method_8cpp_source.html">Method.cpp</a>.</p>
 
@@ -255,7 +301,7 @@ template&lt;typename TMethod &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Method_8h_source.html#l00024">24</a> of file <a class="el" href="Method_8h_source.html">Method.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Method_8h_source.html#l00076">76</a> of file <a class="el" href="Method_8h_source.html">Method.h</a>.</p>
 
 </div>
 </div>

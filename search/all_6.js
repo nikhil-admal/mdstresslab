@@ -1,19 +1,9 @@
 var searchData=
 [
-  ['getaveragingdomainsize_0',['getAveragingDomainSize',['../classMethod.html#a270b7de75e5fab04e06fdad8730b4cd1',1,'Method']]],
-  ['getbasegridlist_1',['getbasegridlist',['../StressTuple_8h.html#a21586712001b69cc9b9a9e3762c758ff',1,'getBaseGridList(const std::tuple&lt; TStress &amp;... &gt; t):&#160;StressTuple.h'],['../StressTuple_8h.html#a87014e82899cbcbd6368b7208a56de6d',1,'getBaseGridList(const std::tuple&lt;&gt; t):&#160;StressTuple.h']]],
-  ['getconfiguration_2',['getConfiguration',['../classBoxConfiguration.html#a7355e3113aade200df20d6167c8c32a2',1,'BoxConfiguration']]],
-  ['getcutoffs_3',['getCutoffs',['../classKim.html#a16617428380de2cd6afc368e31c041d8',1,'Kim']]],
-  ['getgridneighborlists_4',['getGridNeighborLists',['../classGrid.html#a2e932636d28a0c842a55f301756309e1',1,'Grid']]],
-  ['getgridpointneighbors_5',['getGridPointNeighbors',['../classGridSubConfiguration.html#a15a4ea884a1887542d8873136fa9147c',1,'GridSubConfiguration']]],
-  ['getlocalconfiguration_6',['getLocalConfiguration',['../classConfiguration.html#aad92bf7172e28ef845831cfb8317f002',1,'Configuration']]],
-  ['getnumberofneighborlists_7',['getNumberOfNeighborLists',['../classKim.html#ade2c837b4f127188d4a9631816223f19',1,'Kim']]],
-  ['gettgriddomainsizepairs_8',['gettgriddomainsizepairs',['../StressTuple_8h.html#acd07ba6e065132d77a18a7ae66427d2b',1,'getTGridDomainSizePairs(const std::tuple&lt; Stress&lt; BF, stressType &gt; &amp;... &gt; t):&#160;StressTuple.h'],['../StressTuple_8h.html#a12a5fe9c22cee6a5e429e01b089ebd1c',1,'getTGridDomainSizePairs(std::tuple&lt;&gt; &amp;&amp;emptyTuple):&#160;StressTuple.h'],['../StressTuple_8h.html#a51be74516070601c30d399c7215c3dd8',1,'getTGridDomainSizePairs(const std::tuple&lt;&gt; &amp;emptyTuple):&#160;StressTuple.h']]],
-  ['globallocalmap_9',['globalLocalMap',['../classSubConfiguration.html#a5904e4d2d9e4c8a3e3eabbccf5e59f3f',1,'SubConfiguration']]],
-  ['grid_10',['grid',['../classGrid.html#ad25e33e42b901974714e6d15931e2856',1,'Grid::Grid(int)'],['../classGrid.html#aa62c5cc4a70c4a4b55294a60d76ceddf',1,'Grid::Grid(Vector3d, Vector3d, int ngridx, int ngridy=1, int ngridz=1)'],['../classGrid.html#ad8fa36b8c4c904d19060c85f6b87b840',1,'Grid::Grid(std::string)'],['../classGrid.html',1,'Grid&lt; T &gt;']]],
-  ['grid_2ecpp_11',['Grid.cpp',['../Grid_8cpp.html',1,'']]],
-  ['grid_2eh_12',['Grid.h',['../Grid_8h.html',1,'']]],
-  ['gridbase_13',['GridBase',['../classGridBase.html',1,'']]],
-  ['gridpushed_14',['gridPushed',['../classMls.html#ad815325d46bc47c12d8d93a81c00f3be',1,'Mls']]],
-  ['gridsubconfiguration_15',['gridsubconfiguration',['../classGridSubConfiguration.html#a7cd5d72e2cc94f8e7e256c6ffadfa635',1,'GridSubConfiguration::GridSubConfiguration()'],['../classGridSubConfiguration.html',1,'GridSubConfiguration&lt; T &gt;']]]
+  ['features_0',['Key Features',['../index.html#features',1,'']]],
+  ['field_1',['field',['../classStress.html#a1ab3e9545c4350082e5bcc7222610e35',1,'Stress']]],
+  ['fij_2',['fij',['../classInteratomicForces.html#ab7e800eb81ef7df6c3c39406dec05d2a',1,'InteratomicForces']]],
+  ['filename_3',['filename',['../namespacevisualize.html#add13d99a73cfbd561c0ca8a6d53f150a',1,'visualize']]],
+  ['fold_4',['fold',['../classBoxPoints.html#a58cd3126e3476fd116bb62d16429900e',1,'BoxPoints::fold()'],['../StressTuple_8h.html#a7c9939871078f7961a965bb0ee293b4c',1,'fold():&#160;StressTuple.h']]],
+  ['format_5',['format',['../visualize_8py.html#autotoc_md7',1,'Input Format'],['../visualization_intro.html#autotoc_md4',1,'Supported Input Format']]]
 ];

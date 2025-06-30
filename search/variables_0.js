@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['averagingdomainsize_0',['averagingDomainSize',['../classMethod.html#a6e2aa4bab07012864d0bb73f7b139727',1,'Method']]]
+  ['_5f_0',['_',['../namespacevisualize.html#a76e7d91839967bececa38f34a5a8a332',1,'visualize']]]
 ];

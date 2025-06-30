@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kim_5fptr_0',['kim_ptr',['../classKim.html#ae42ab5f06fc060140f6756bbcf8244c3',1,'Kim']]]
+  ['influencedistance_0',['influenceDistance',['../classKim.html#a3b398bb1f8bed462575792b6fda3c692',1,'Kim']]]
 ];

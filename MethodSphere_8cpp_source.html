@@ -119,7 +119,7 @@ $(document).ready(function(){initNavTree('MethodSphere_8cpp_source.html',''); in
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classMethodSphere.html#adec686688f709466d7e49a46a451eed5">   15</a></span><a class="code hl_function" href="classMethodSphere.html#adec686688f709466d7e49a46a451eed5">MethodSphere::MethodSphere</a>(<span class="keywordtype">double</span> averagingDomainSize, std::string type=<span class="stringliteral">&quot;virial&quot;</span>) : <a class="code hl_class" href="classMethod.html">Method</a>&lt;<a class="code hl_class" href="classMethodSphere.html">MethodSphere</a>&gt;(averagingDomainSize)</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classMethodSphere.html#a867b1ce962236c9bcba65bc9a0fdd7a3">   15</a></span><a class="code hl_function" href="classMethodSphere.html#a867b1ce962236c9bcba65bc9a0fdd7a3">MethodSphere::MethodSphere</a>(<span class="keywordtype">double</span> averagingDomainSize, <span class="keyword">const</span> std::string&amp; type) : <a class="code hl_class" href="classMethod.html">Method</a>&lt;<a class="code hl_class" href="classMethodSphere.html">MethodSphere</a>&gt;(averagingDomainSize)</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{ </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">double</span> normalizer;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">if</span> (type ==<span class="stringliteral">&quot;hardy&quot;</span>)</div>
@@ -152,228 +152,229 @@ $(document).ready(function(){initNavTree('MethodSphere_8cpp_source.html',''); in
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (type == <span class="stringliteral">&quot;virial&quot;</span>)</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        normalizer= 1/(M_PI*pow(<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>,3));</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        std::deque&lt;double&gt; constant{normalizer};</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="comment">// constant polynomial</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_class" href="classPolynomial.html">Polynomial</a> constantPolynomial{constant};</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        std::pair&lt;double,double&gt; interval;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        interval.first= 0;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        interval.second= <a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        piecewisePolynomial[interval]= constantPolynomial;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    assert(0);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="comment">//normalizer= 1/(M_PI*pow(averagingDomainSize,3));</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        normalizer= 3.0/(4*M_PI*pow(<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>,3));</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        std::deque&lt;double&gt; constant{normalizer};</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="comment">// constant polynomial</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_class" href="classPolynomial.html">Polynomial</a> constantPolynomial{constant};</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        std::pair&lt;double,double&gt; interval;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        interval.first= 0;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        interval.second= <a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        piecewisePolynomial[interval]= constantPolynomial;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    assert(0);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
 </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classMethodSphere.html#ae6452af113a8105c8d9c1dd6f6571737">   62</a></span><a class="code hl_function" href="classMethodSphere.html#adec686688f709466d7e49a46a451eed5">MethodSphere::MethodSphere</a>(<span class="keywordtype">double</span> averagingDomainSize, std::map&lt;double,double&gt; map) : <a class="code hl_class" href="classMethod.html">Method</a>&lt;<a class="code hl_class" href="classMethodSphere.html">MethodSphere</a>&gt;(averagingDomainSize)</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>{ </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="comment">// ensure the domain of map lies in between 0 and 1, and its range is non-negative</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    assert(  (map.cbegin())-&gt;first &gt;= 0  &amp;&amp; </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>             (map.cend())-&gt;first &lt;= 1    &amp;&amp;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>             (map.cbegin())-&gt;second &gt;= 0 &amp;&amp;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>             (map.cend())-&gt;second &gt;= 0 );</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> iter = map.cbegin(); iter != map.cend(); iter++)</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="comment">// (y-y1)/(y2-y1) = (x-x1)/(x2-x1)</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="comment">// y = (y2-y1)/(x2-x1)  *  (x-x1)   +   y1</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="comment">//   = y1-x1*(y2-y1)/(x2-x1) + (y2-y1)/(x2-x1)  *   x</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keyword">auto</span> nextiter= std::next(iter);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">if</span> (nextiter != map.cend())</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="keywordtype">double</span> x1= iter-&gt;first;  <span class="keywordtype">double</span> x2= nextiter-&gt;first;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            x1= x1*<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>; x2= x2*<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            std::pair&lt;double,double&gt; interval{x1,x2};</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordtype">double</span> y1= iter-&gt;second; <span class="keywordtype">double</span> y2= nextiter-&gt;second;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            std::deque&lt;double&gt; linear{ y1-x1*(y2-y1)/(x2-x1),  (y2-y1)/(x2-x1) };</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <a class="code hl_class" href="classPolynomial.html">Polynomial</a> linearPolynomial{linear};</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            piecewisePolynomial[interval]= linearPolynomial;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        }</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">else</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">if</span> (abs(iter-&gt;first-1.0)&gt;<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>)</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                <a class="code hl_define" href="typedef_8h.html#a1d291618ea678125579af53ed4624215">MY_ERROR</a>(<span class="stringliteral">&quot;Weight function is not defined entirely on the averaging domain.&quot;</span>);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="comment">// now compute the normalizer </span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">double</span> integral= 0;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> iter=piecewisePolynomial.cbegin(); iter!=piecewisePolynomial.cend(); iter++)</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    {</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <a class="code hl_class" href="classPolynomial.html">Polynomial</a> temp(iter-&gt;second);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        temp.<a class="code hl_variable" href="classPolynomial.html#a2a896703294406aa645bd77188d735c4">coefficients</a>.push_front(0); temp.<a class="code hl_variable" href="classPolynomial.html#a2a896703294406aa645bd77188d735c4">coefficients</a>.push_front(0); <span class="comment">// Multiplying the polynomial by r^2</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <a class="code hl_class" href="classPolynomial.html">Polynomial</a> integratedPolynomial= temp.<a class="code hl_function" href="classPolynomial.html#aecccb05d9934d3ea606d6b86c1095ba0">integrate</a>();</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        integral= integral+integratedPolynomial(iter-&gt;first.second) - integratedPolynomial(iter-&gt;first.first);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    }</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordtype">double</span> normalizer = 1/(4*M_PI*integral);</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> iter=piecewisePolynomial.begin(); iter!=piecewisePolynomial.end(); iter++)</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; coeff : iter-&gt;second.coefficients)</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            coeff= normalizer*coeff;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        }</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classMethodSphere.html#ae6452af113a8105c8d9c1dd6f6571737">   63</a></span><a class="code hl_function" href="classMethodSphere.html#a867b1ce962236c9bcba65bc9a0fdd7a3">MethodSphere::MethodSphere</a>(<span class="keywordtype">double</span> averagingDomainSize, std::map&lt;double,double&gt; map) : <a class="code hl_class" href="classMethod.html">Method</a>&lt;<a class="code hl_class" href="classMethodSphere.html">MethodSphere</a>&gt;(averagingDomainSize)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>{ </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="comment">// ensure the domain of map lies in between 0 and 1, and its range is non-negative</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    assert(  (map.cbegin())-&gt;first &gt;= 0  &amp;&amp; </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>             (map.cend())-&gt;first &lt;= 1    &amp;&amp;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>             (map.cbegin())-&gt;second &gt;= 0 &amp;&amp;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>             (map.cend())-&gt;second &gt;= 0 );</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> iter = map.cbegin(); iter != map.cend(); iter++)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="comment">// (y-y1)/(y2-y1) = (x-x1)/(x2-x1)</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="comment">// y = (y2-y1)/(x2-x1)  *  (x-x1)   +   y1</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="comment">//   = y1-x1*(y2-y1)/(x2-x1) + (y2-y1)/(x2-x1)  *   x</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keyword">auto</span> nextiter= std::next(iter);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">if</span> (nextiter != map.cend())</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="keywordtype">double</span> x1= iter-&gt;first;  <span class="keywordtype">double</span> x2= nextiter-&gt;first;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            x1= x1*<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>; x2= x2*<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            std::pair&lt;double,double&gt; interval{x1,x2};</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordtype">double</span> y1= iter-&gt;second; <span class="keywordtype">double</span> y2= nextiter-&gt;second;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            std::deque&lt;double&gt; linear{ y1-x1*(y2-y1)/(x2-x1),  (y2-y1)/(x2-x1) };</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <a class="code hl_class" href="classPolynomial.html">Polynomial</a> linearPolynomial{linear};</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            piecewisePolynomial[interval]= linearPolynomial;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">else</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <span class="keywordflow">if</span> (abs(iter-&gt;first-1.0)&gt;<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                <a class="code hl_define" href="typedef_8h.html#a1d291618ea678125579af53ed4624215">MY_ERROR</a>(<span class="stringliteral">&quot;Weight function is not defined entirely on the averaging domain.&quot;</span>);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="comment">// now compute the normalizer </span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">double</span> integral= 0;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> iter=piecewisePolynomial.cbegin(); iter!=piecewisePolynomial.cend(); iter++)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <a class="code hl_class" href="classPolynomial.html">Polynomial</a> temp(iter-&gt;second);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        temp.<a class="code hl_variable" href="classPolynomial.html#a2a896703294406aa645bd77188d735c4">coefficients</a>.push_front(0); temp.<a class="code hl_variable" href="classPolynomial.html#a2a896703294406aa645bd77188d735c4">coefficients</a>.push_front(0); <span class="comment">// Multiplying the polynomial by r^2</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <a class="code hl_class" href="classPolynomial.html">Polynomial</a> integratedPolynomial= temp.<a class="code hl_function" href="classPolynomial.html#aecccb05d9934d3ea606d6b86c1095ba0">integrate</a>();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        integral= integral+integratedPolynomial(iter-&gt;first.second) - integratedPolynomial(iter-&gt;first.first);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordtype">double</span> normalizer = 1/(4*M_PI*integral);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> iter=piecewisePolynomial.begin(); iter!=piecewisePolynomial.end(); iter++)</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; coeff : iter-&gt;second.coefficients)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            coeff= normalizer*coeff;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
 </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="foldopen" id="foldopen00114" data-start="{" data-end="}">
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="classMethodSphere.html#af5ac0f4c97f3189a48c832770f9eefc2">  114</a></span><a class="code hl_function" href="classMethodSphere.html#adec686688f709466d7e49a46a451eed5">MethodSphere::MethodSphere</a>(<span class="keyword">const</span> <a class="code hl_class" href="classMethodSphere.html">MethodSphere</a>&amp; _hardy) : <a class="code hl_class" href="classMethod.html">Method</a>&lt;<a class="code hl_class" href="classMethodSphere.html">MethodSphere</a>&gt;(_hardy)</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>{</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    *<span class="keyword">this</span>= _hardy;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="foldopen" id="foldopen00115" data-start="{" data-end="}">
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classMethodSphere.html#af5ac0f4c97f3189a48c832770f9eefc2">  115</a></span><a class="code hl_function" href="classMethodSphere.html#a867b1ce962236c9bcba65bc9a0fdd7a3">MethodSphere::MethodSphere</a>(<span class="keyword">const</span> <a class="code hl_class" href="classMethodSphere.html">MethodSphere</a>&amp; _hardy) : <a class="code hl_class" href="classMethod.html">Method</a>&lt;<a class="code hl_class" href="classMethodSphere.html">MethodSphere</a>&gt;(_hardy)</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>{</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    *<span class="keyword">this</span>= _hardy;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
 </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="foldopen" id="foldopen00119" data-start="{" data-end="}">
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="classMethodSphere.html#ae3a7b61ad2e8a2e70a39cc97d3d202c0">  119</a></span><a class="code hl_function" href="classMethodSphere.html#ae3a7b61ad2e8a2e70a39cc97d3d202c0">MethodSphere::~MethodSphere</a>() {</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="comment">// TODO Auto-generated destructor stub</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>}</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="foldopen" id="foldopen00120" data-start="{" data-end="}">
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classMethodSphere.html#ae3a7b61ad2e8a2e70a39cc97d3d202c0">  120</a></span><a class="code hl_function" href="classMethodSphere.html#ae3a7b61ad2e8a2e70a39cc97d3d202c0">MethodSphere::~MethodSphere</a>() {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="comment">// TODO Auto-generated destructor stub</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>}</div>
 </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="keywordtype">double</span> MethodSphere::integratePolynomial(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; degree,</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a,</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; b,</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; r1,</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; r2)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    assert(r1&lt;=r2);</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">switch</span>(degree)</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    {</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <span class="keywordflow">case</span> 0:</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            assert (a*pow(r2,2)+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>&gt;0 &amp;&amp; a*pow(r1,2)+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>&gt;0);</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            <span class="keywordflow">return</span> (std::sqrt(a*pow(r2,2)+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) - std::sqrt(a*pow(r1,2)+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>))/a;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        }</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        {</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            assert(a*r1*r1+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>&gt;0 &amp;&amp; a*r2*r2+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>&gt;0 &amp;&amp; a&gt;0);</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <span class="keywordtype">double</span> temp1= std::sqrt(a)*std::sqrt(a*r1*r1 + b + <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>);</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="keywordtype">double</span> temp2= std::sqrt(a)*std::sqrt(a*r2*r2 + b + <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>);</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            <span class="keywordflow">return</span> ((r2*temp2-b*log(temp2+a*r2))-</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                       (r1*temp1-b*log(temp1+a*r1)))/(2*pow(a,1.5));</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        }</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <a class="code hl_define" href="typedef_8h.html#a1d291618ea678125579af53ed4624215">MY_ERROR</a>(<span class="stringliteral">&quot;Attempt to integrate polynomial of degree not equal to 0 or 1.&quot;</span>);</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    }</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>}</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classMethodSphere.html#aa7098cb289c65d38df179e149234a264">  153</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classMethodSphere.html#aa7098cb289c65d38df179e149234a264">MethodSphere::operator()</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; vec)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordtype">double</span> r= vec.norm();</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keyword">auto</span> iter = std::find_if(piecewisePolynomial.cbegin(), piecewisePolynomial.cend(),</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                          [=](<span class="keyword">const</span> std::pair&lt; std::pair&lt;double,double&gt;, <a class="code hl_class" href="classPolynomial.html">Polynomial</a>&gt;&amp; polynomial)</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                          {</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                             return r&gt;=polynomial.first.first &amp;&amp;  r&lt;polynomial.first.second;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                          });</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">if</span> (iter == piecewisePolynomial.end()) <a class="code hl_define" href="typedef_8h.html#a1d291618ea678125579af53ed4624215">MY_ERROR</a>(<span class="stringliteral">&quot;Argument out of range for the piecewise-defined weight function&quot;</span>);</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordflow">return</span> (iter-&gt;second)(r);</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>}</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="keywordtype">double</span> MethodSphere::integratePolynomial(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; degree,</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; b,</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; r1,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                                   <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; r2)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    assert(r1&lt;=r2);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordflow">switch</span>(degree)</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        {</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            assert (a*pow(r2,2)+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>&gt;0 &amp;&amp; a*pow(r1,2)+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>&gt;0);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            <span class="keywordflow">return</span> (std::sqrt(a*pow(r2,2)+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) - std::sqrt(a*pow(r1,2)+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>))/a;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            assert(a*r1*r1+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>&gt;0 &amp;&amp; a*r2*r2+b+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>&gt;0 &amp;&amp; a&gt;0);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="keywordtype">double</span> temp1= std::sqrt(a)*std::sqrt(a*r1*r1 + b + <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keywordtype">double</span> temp2= std::sqrt(a)*std::sqrt(a*r2*r2 + b + <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <span class="keywordflow">return</span> ((r2*temp2-b*log(temp2+a*r2))-</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                       (r1*temp1-b*log(temp1+a*r1)))/(2*pow(a,1.5));</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <a class="code hl_define" href="typedef_8h.html#a1d291618ea678125579af53ed4624215">MY_ERROR</a>(<span class="stringliteral">&quot;Attempt to integrate polynomial of degree not equal to 0 or 1.&quot;</span>);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    }</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>}</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="foldopen" id="foldopen00154" data-start="{" data-end="}">
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classMethodSphere.html#aa7098cb289c65d38df179e149234a264">  154</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classMethodSphere.html#aa7098cb289c65d38df179e149234a264">MethodSphere::operator()</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; vec)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordtype">double</span> r= vec.norm();</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keyword">auto</span> iter = std::find_if(piecewisePolynomial.cbegin(), piecewisePolynomial.cend(),</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                          [=](<span class="keyword">const</span> std::pair&lt; std::pair&lt;double,double&gt;, <a class="code hl_class" href="classPolynomial.html">Polynomial</a>&gt;&amp; polynomial)</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                          {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                             return r&gt;=polynomial.first.first &amp;&amp;  r&lt;polynomial.first.second;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                          });</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keywordflow">if</span> (iter == piecewisePolynomial.end()) <a class="code hl_define" href="typedef_8h.html#a1d291618ea678125579af53ed4624215">MY_ERROR</a>(<span class="stringliteral">&quot;Argument out of range for the piecewise-defined weight function&quot;</span>);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordflow">return</span> (iter-&gt;second)(r);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>}</div>
 </div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
-<div class="foldopen" id="foldopen00167" data-start="{" data-end="}">
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="classMethodSphere.html#ad43bcfff9885d071ba547a10fd11fa85">  167</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classMethodSphere.html#ad43bcfff9885d071ba547a10fd11fa85">MethodSphere::bondFunction</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; vec1, <span class="keyword">const</span> <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; vec2)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="keywordtype">double</span> r1= vec1.norm();</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordtype">double</span> r2= vec2.norm();</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordtype">double</span> a= 4*(vec1-vec2).squaredNorm();</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">double</span> b= 4*pow(vec2.dot(vec1)-vec1.dot(vec1),2)-a*r1*r1;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordtype">double</span> sPerp= (vec1.dot(vec1)-vec2.dot(vec1))/(vec1-vec2).squaredNorm();</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> vecPerp;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    vecPerp= (1-sPerp)*vec1+sPerp*vec2;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordtype">double</span> rPerp= vecPerp.norm();</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    assert(rPerp&lt;std::min(r1,r2)+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>= <a class="code hl_function" href="classMethod.html#a270b7de75e5fab04e06fdad8730b4cd1">getAveragingDomainSize</a>();</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordflow">if</span> (rPerp&gt;=<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    r1= std::min(r1,<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    r2= std::min(r2,<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>);</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordtype">double</span> rmin;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordtype">double</span> rmax;</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordtype">double</span> result= 0;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordflow">if</span> (sPerp&lt;0 || sPerp&gt;1)</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    {</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        rmin= std::min(r1,r2);</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        rmax= std::max(r1,r2);</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">if</span> (abs(rmax-rmin)&gt;<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) <span class="keywordflow">return</span> integrate(a,b,rmin,rmax);</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keywordflow">else</span> <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    {</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        rmin= rPerp;</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <span class="keywordflow">if</span> (abs(r1-rmin)&gt;<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) result= integrate(a,b,rmin,r1);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordflow">if</span> (abs(r2-rmin)&gt;<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) result= result+integrate(a,b,rmin,r2);</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    }</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    assert(0);</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>}</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="foldopen" id="foldopen00168" data-start="{" data-end="}">
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="classMethodSphere.html#ad43bcfff9885d071ba547a10fd11fa85">  168</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classMethodSphere.html#ad43bcfff9885d071ba547a10fd11fa85">MethodSphere::bondFunction</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; vec1, <span class="keyword">const</span> <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; vec2)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordtype">double</span> r1= vec1.norm();</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordtype">double</span> r2= vec2.norm();</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <span class="keywordtype">double</span> a= 4*(vec1-vec2).squaredNorm();</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordtype">double</span> b= 4*pow(vec2.dot(vec1)-vec1.dot(vec1),2)-a*r1*r1;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordtype">double</span> sPerp= (vec1.dot(vec1)-vec2.dot(vec1))/(vec1-vec2).squaredNorm();</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> vecPerp;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    vecPerp= (1-sPerp)*vec1+sPerp*vec2;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <span class="keywordtype">double</span> rPerp= vecPerp.norm();</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    assert(rPerp&lt;std::min(r1,r2)+<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>= <a class="code hl_function" href="classMethod.html#a270b7de75e5fab04e06fdad8730b4cd1">getAveragingDomainSize</a>();</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">if</span> (rPerp&gt;=<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    r1= std::min(r1,<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    r2= std::min(r2,<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordtype">double</span> rmin;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordtype">double</span> rmax;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordtype">double</span> result= 0;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordflow">if</span> (sPerp&lt;0 || sPerp&gt;1)</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        rmin= std::min(r1,r2);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        rmax= std::max(r1,r2);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keywordflow">if</span> (abs(rmax-rmin)&gt;<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) <span class="keywordflow">return</span> integrate(a,b,rmin,rmax);</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="keywordflow">else</span> <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        rmin= rPerp;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordflow">if</span> (abs(r1-rmin)&gt;<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) result= integrate(a,b,rmin,r1);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="keywordflow">if</span> (abs(r2-rmin)&gt;<a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) result= result+integrate(a,b,rmin,r2);</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    assert(0);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}</div>
 </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="keywordtype">double</span> MethodSphere::integrate(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a,</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>                        <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; b,</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                        <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; rmin,</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>                        <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; rmax)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>= <a class="code hl_function" href="classMethod.html#a270b7de75e5fab04e06fdad8730b4cd1">getAveragingDomainSize</a>();</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    assert(rmin&lt;=rmax &amp;&amp; rmax&lt;=<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordtype">double</span> result= 0;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keyword">auto</span> iterMin = std::find_if(piecewisePolynomial.cbegin(), piecewisePolynomial.cend(),</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                          [=](<span class="keyword">const</span> std::pair&lt; std::pair&lt;double,double&gt;, <a class="code hl_class" href="classPolynomial.html">Polynomial</a>&gt;&amp; polynomial)</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                          {</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                             return rmin&gt;=polynomial.first.first &amp;&amp;  rmin&lt;polynomial.first.second;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                          });</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordflow">if</span> (iterMin == piecewisePolynomial.cend()) <a class="code hl_define" href="typedef_8h.html#a1d291618ea678125579af53ed4624215">MY_ERROR</a>(<span class="stringliteral">&quot;Lower integral limit out of range for the piecewise-defined weight function&quot;</span>);</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keyword">auto</span> iterMax = std::find_if(iterMin, piecewisePolynomial.cend(),</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>                          [=](<span class="keyword">const</span> std::pair&lt; std::pair&lt;double,double&gt;, <a class="code hl_class" href="classPolynomial.html">Polynomial</a>&gt;&amp; polynomial)</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>                          {</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>                             return rmax&gt;=polynomial.first.first &amp;&amp;  rmax&lt;polynomial.first.second;</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>                          });</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it=iterMin; it!=piecewisePolynomial.cend(); it++)</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    {</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <span class="keywordtype">double</span> lb,ub;</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="keywordflow">if</span> (it == iterMin) lb= rmin;</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">else</span> lb= it-&gt;first.first;</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">if</span> (it == iterMax) ub= rmax;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        <span class="keywordflow">else</span> ub= it-&gt;first.second;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <span class="keywordtype">int</span> degree= 0;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; coefficient : it-&gt;second.coefficients)</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        {</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            result= result + 2*coefficient*integratePolynomial(degree,a,b,lb,ub);</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            degree++;</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        }</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <span class="keywordflow">if</span> (it == iterMax) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    }</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>}</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="keywordtype">double</span> MethodSphere::integrate(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; a,</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                        <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; b,</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>                        <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; rmin,</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                        <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; rmax)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>= <a class="code hl_function" href="classMethod.html#a270b7de75e5fab04e06fdad8730b4cd1">getAveragingDomainSize</a>();</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    assert(rmin&lt;=rmax &amp;&amp; rmax&lt;=<a class="code hl_variable" href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">averagingDomainSize</a>);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    <span class="keywordtype">double</span> result= 0;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="keyword">auto</span> iterMin = std::find_if(piecewisePolynomial.cbegin(), piecewisePolynomial.cend(),</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                          [=](<span class="keyword">const</span> std::pair&lt; std::pair&lt;double,double&gt;, <a class="code hl_class" href="classPolynomial.html">Polynomial</a>&gt;&amp; polynomial)</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                          {</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                             return rmin&gt;=polynomial.first.first &amp;&amp;  rmin&lt;polynomial.first.second;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                          });</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keywordflow">if</span> (iterMin == piecewisePolynomial.cend()) <a class="code hl_define" href="typedef_8h.html#a1d291618ea678125579af53ed4624215">MY_ERROR</a>(<span class="stringliteral">&quot;Lower integral limit out of range for the piecewise-defined weight function&quot;</span>);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keyword">auto</span> iterMax = std::find_if(iterMin, piecewisePolynomial.cend(),</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>                          [=](<span class="keyword">const</span> std::pair&lt; std::pair&lt;double,double&gt;, <a class="code hl_class" href="classPolynomial.html">Polynomial</a>&gt;&amp; polynomial)</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>                          {</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>                             return rmax&gt;=polynomial.first.first &amp;&amp;  rmax&lt;polynomial.first.second;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>                          });</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordflow">for</span>(<span class="keyword">auto</span> it=iterMin; it!=piecewisePolynomial.cend(); it++)</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    {</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="keywordtype">double</span> lb,ub;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">if</span> (it == iterMin) lb= rmin;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">else</span> lb= it-&gt;first.first;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        <span class="keywordflow">if</span> (it == iterMax) ub= rmax;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <span class="keywordflow">else</span> ub= it-&gt;first.second;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordtype">int</span> degree= 0;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; coefficient : it-&gt;second.coefficients)</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            result= result + 2*coefficient*integratePolynomial(degree,a,b,lb,ub);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            degree++;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        }</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordflow">if</span> (it == iterMax) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    }</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>}</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
 <div class="ttc" id="aMethodSphere_8h_html"><div class="ttname"><a href="MethodSphere_8h.html">MethodSphere.h</a></div></div>
-<div class="ttc" id="aclassMethodSphere_html"><div class="ttname"><a href="classMethodSphere.html">MethodSphere</a></div><div class="ttdef"><b>Definition</b> <a href="MethodSphere_8h_source.html#l00016">MethodSphere.h:17</a></div></div>
-<div class="ttc" id="aclassMethodSphere_html_aa7098cb289c65d38df179e149234a264"><div class="ttname"><a href="classMethodSphere.html#aa7098cb289c65d38df179e149234a264">MethodSphere::operator()</a></div><div class="ttdeci">double operator()(const Vector3d &amp;vec) const</div><div class="ttdef"><b>Definition</b> <a href="MethodSphere_8cpp_source.html#l00153">MethodSphere.cpp:153</a></div></div>
-<div class="ttc" id="aclassMethodSphere_html_ad43bcfff9885d071ba547a10fd11fa85"><div class="ttname"><a href="classMethodSphere.html#ad43bcfff9885d071ba547a10fd11fa85">MethodSphere::bondFunction</a></div><div class="ttdeci">double bondFunction(const Vector3d &amp;vec1, const Vector3d &amp;vec2) const</div><div class="ttdef"><b>Definition</b> <a href="MethodSphere_8cpp_source.html#l00167">MethodSphere.cpp:167</a></div></div>
-<div class="ttc" id="aclassMethodSphere_html_adec686688f709466d7e49a46a451eed5"><div class="ttname"><a href="classMethodSphere.html#adec686688f709466d7e49a46a451eed5">MethodSphere::MethodSphere</a></div><div class="ttdeci">MethodSphere(double, std::string)</div><div class="ttdef"><b>Definition</b> <a href="MethodSphere_8cpp_source.html#l00015">MethodSphere.cpp:15</a></div></div>
-<div class="ttc" id="aclassMethodSphere_html_ae3a7b61ad2e8a2e70a39cc97d3d202c0"><div class="ttname"><a href="classMethodSphere.html#ae3a7b61ad2e8a2e70a39cc97d3d202c0">MethodSphere::~MethodSphere</a></div><div class="ttdeci">virtual ~MethodSphere()</div><div class="ttdef"><b>Definition</b> <a href="MethodSphere_8cpp_source.html#l00119">MethodSphere.cpp:119</a></div></div>
-<div class="ttc" id="aclassMethod_html"><div class="ttname"><a href="classMethod.html">Method</a></div><div class="ttdef"><b>Definition</b> <a href="Method_8h_source.html#l00014">Method.h:15</a></div></div>
-<div class="ttc" id="aclassMethod_html_a270b7de75e5fab04e06fdad8730b4cd1"><div class="ttname"><a href="classMethod.html#a270b7de75e5fab04e06fdad8730b4cd1">Method&lt; MethodSphere &gt;::getAveragingDomainSize</a></div><div class="ttdeci">double getAveragingDomainSize() const</div><div class="ttdef"><b>Definition</b> <a href="Method_8cpp_source.html#l00021">Method.cpp:40</a></div></div>
-<div class="ttc" id="aclassMethod_html_a6e2aa4bab07012864d0bb73f7b139727"><div class="ttname"><a href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">Method&lt; MethodSphere &gt;::averagingDomainSize</a></div><div class="ttdeci">double averagingDomainSize</div><div class="ttdef"><b>Definition</b> <a href="Method_8h_source.html#l00024">Method.h:24</a></div></div>
+<div class="ttc" id="aclassMethodSphere_html"><div class="ttname"><a href="classMethodSphere.html">MethodSphere</a></div><div class="ttdoc">Implements radially symmetric weighting functions (Hardy, Virial) and its associated bond function fo...</div><div class="ttdef"><b>Definition</b> <a href="MethodSphere_8h_source.html#l00028">MethodSphere.h:29</a></div></div>
+<div class="ttc" id="aclassMethodSphere_html_a867b1ce962236c9bcba65bc9a0fdd7a3"><div class="ttname"><a href="classMethodSphere.html#a867b1ce962236c9bcba65bc9a0fdd7a3">MethodSphere::MethodSphere</a></div><div class="ttdeci">MethodSphere(double, const std::string &amp;type=&quot;virial&quot;)</div><div class="ttdoc">Constructs a MethodSphere using a named weighting type.</div><div class="ttdef"><b>Definition</b> <a href="MethodSphere_8cpp_source.html#l00015">MethodSphere.cpp:15</a></div></div>
+<div class="ttc" id="aclassMethodSphere_html_aa7098cb289c65d38df179e149234a264"><div class="ttname"><a href="classMethodSphere.html#aa7098cb289c65d38df179e149234a264">MethodSphere::operator()</a></div><div class="ttdeci">double operator()(const Vector3d &amp;vec) const</div><div class="ttdoc">Evaluate the weighting function at a vector.</div><div class="ttdef"><b>Definition</b> <a href="MethodSphere_8cpp_source.html#l00154">MethodSphere.cpp:154</a></div></div>
+<div class="ttc" id="aclassMethodSphere_html_ad43bcfff9885d071ba547a10fd11fa85"><div class="ttname"><a href="classMethodSphere.html#ad43bcfff9885d071ba547a10fd11fa85">MethodSphere::bondFunction</a></div><div class="ttdeci">double bondFunction(const Vector3d &amp;vec1, const Vector3d &amp;vec2) const</div><div class="ttdoc">Computes the bond function for a pair of atomic positions.</div><div class="ttdef"><b>Definition</b> <a href="MethodSphere_8cpp_source.html#l00168">MethodSphere.cpp:168</a></div></div>
+<div class="ttc" id="aclassMethodSphere_html_ae3a7b61ad2e8a2e70a39cc97d3d202c0"><div class="ttname"><a href="classMethodSphere.html#ae3a7b61ad2e8a2e70a39cc97d3d202c0">MethodSphere::~MethodSphere</a></div><div class="ttdeci">virtual ~MethodSphere()</div><div class="ttdef"><b>Definition</b> <a href="MethodSphere_8cpp_source.html#l00120">MethodSphere.cpp:120</a></div></div>
+<div class="ttc" id="aclassMethod_html"><div class="ttname"><a href="classMethod.html">Method</a></div><div class="ttdef"><b>Definition</b> <a href="Method_8h_source.html#l00025">Method.h:26</a></div></div>
+<div class="ttc" id="aclassMethod_html_a270b7de75e5fab04e06fdad8730b4cd1"><div class="ttname"><a href="classMethod.html#a270b7de75e5fab04e06fdad8730b4cd1">Method&lt; MethodSphere &gt;::getAveragingDomainSize</a></div><div class="ttdeci">double getAveragingDomainSize() const</div><div class="ttdoc">Gets the spatial size of the averaging domain, i.e. the support of the weighting function.</div><div class="ttdef"><b>Definition</b> <a href="Method_8cpp_source.html#l00073">Method.cpp:40</a></div></div>
+<div class="ttc" id="aclassMethod_html_a6e2aa4bab07012864d0bb73f7b139727"><div class="ttname"><a href="classMethod.html#a6e2aa4bab07012864d0bb73f7b139727">Method&lt; MethodSphere &gt;::averagingDomainSize</a></div><div class="ttdeci">double averagingDomainSize</div><div class="ttdef"><b>Definition</b> <a href="Method_8h_source.html#l00076">Method.h:76</a></div></div>
 <div class="ttc" id="aclassPolynomial_html"><div class="ttname"><a href="classPolynomial.html">Polynomial</a></div><div class="ttdef"><b>Definition</b> <a href="Polynomial_8h_source.html#l00014">Polynomial.h:14</a></div></div>
 <div class="ttc" id="aclassPolynomial_html_a2a896703294406aa645bd77188d735c4"><div class="ttname"><a href="classPolynomial.html#a2a896703294406aa645bd77188d735c4">Polynomial::coefficients</a></div><div class="ttdeci">std::deque&lt; double &gt; coefficients</div><div class="ttdef"><b>Definition</b> <a href="Polynomial_8h_source.html#l00020">Polynomial.h:20</a></div></div>
 <div class="ttc" id="aclassPolynomial_html_aecccb05d9934d3ea606d6b86c1095ba0"><div class="ttname"><a href="classPolynomial.html#aecccb05d9934d3ea606d6b86c1095ba0">Polynomial::integrate</a></div><div class="ttdeci">Polynomial integrate() const</div><div class="ttdef"><b>Definition</b> <a href="Polynomial_8h_source.html#l00035">Polynomial.h:35</a></div></div>

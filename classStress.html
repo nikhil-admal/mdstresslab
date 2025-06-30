@@ -145,7 +145,7 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename TMethod, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid = typename std::conditional&lt;stressType==Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type&gt;<br />
 class Stress&lt; TMethod, stressType, TGrid &gt;</div><p><a class="el" href="classStress.html">Stress</a> class template describes a three dimensional stress field on a grid, computed using a prescribed averaging domain. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">TMethod</td><td>- <a class="el" href="classMethod.html">Method</a> template parameter. For example, TMethod=<a class="el" href="classMethodSphere.html">MethodSphere</a> for a spherical averaging domain and TMethod=MethodLDAD for LDAD. For a user-defined averaging domain, TMethod=<a class="el" href="classMethodUser.html">MethodUser</a> </td></tr>
+    <tr><td class="paramname">TMethod</td><td>- <a class="el" href="classMethod.html">Method</a> template parameter. For example, TMethod=<a class="el" href="classMethodSphere.html" title="Implements radially symmetric weighting functions (Hardy, Virial) and its associated bond function fo...">MethodSphere</a> for a spherical averaging domain and TMethod=MethodLDAD for LDAD. For a user-defined averaging domain, TMethod=<a class="el" href="classMethodUser.html">MethodUser</a> </td></tr>
     <tr><td class="paramname">stressType</td><td>- Piola or Cauchy </td></tr>
     <tr><td class="paramname">TGrid</td><td>- pointer to Grid&lt;Reference&gt; or Grid&lt;Current&gt; depending on whether stressType is Piola or Cauchy, respectively </td></tr>
   </table>
@@ -301,7 +301,7 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 </table>
 </div><div class="memdoc">
 <p>This function writes the stress field to a filename with extension .stress and prefix [name]. The output file is in a OVITO-readable format with nine columns. The first three columns represent the three coordinates of the grid points, and the last six columns are the six components of the stress field - \(\sigma_{xx}\), \(\sigma_{yy}\), \(\sigma_{zz}\), \(\sigma_{xy}\), \(\sigma_{xz}\), and \(\sigma_{yz}\) </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#a11">crack/main.cpp</a>, <a class="el" href="testLDADLJ_8cpp-example.html#a10">testLDADLJ.cpp</a>, and <a class="el" href="testLJ_8cpp-example.html#a11">testLJ.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#a11">crack/main.cpp</a>, <a class="el" href="testLDADLJ_8cpp-example.html#a10">testLDADLJ.cpp</a>, and <a class="el" href="testLJ_8cpp-example.html#a10">testLJ.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00090">90</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>

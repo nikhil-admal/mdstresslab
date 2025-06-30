@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['beginindex_0',['beginIndex',['../structNeighListOne.html#a3294bb413ec1577fb2c21dbc8cf7e3db',1,'NeighListOne']]],
-  ['box_1',['box',['../classBoxConfiguration.html#aa13ffab39af119d1ea8253e236480cd2',1,'BoxConfiguration']]]
+  ['averagingdomainsize_0',['averagingDomainSize',['../classMethod.html#a6e2aa4bab07012864d0bb73f7b139727',1,'Method']]]
 ];

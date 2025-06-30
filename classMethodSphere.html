@@ -105,6 +105,9 @@ $(document).ready(function(){initNavTree('classMethodSphere.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 
+<p>Implements radially symmetric weighting functions (Hardy, Virial) and its associated bond function for atomistic stress computation.  
+ <a href="classMethodSphere.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="MethodSphere_8h_source.html">MethodSphere.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for MethodSphere:</div>
@@ -119,9 +122,11 @@ Collaboration diagram for MethodSphere:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adec686688f709466d7e49a46a451eed5" id="r_adec686688f709466d7e49a46a451eed5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethodSphere.html#adec686688f709466d7e49a46a451eed5">MethodSphere</a> (double, std::string)</td></tr>
-<tr class="separator:adec686688f709466d7e49a46a451eed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a867b1ce962236c9bcba65bc9a0fdd7a3" id="r_a867b1ce962236c9bcba65bc9a0fdd7a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethodSphere.html#a867b1ce962236c9bcba65bc9a0fdd7a3">MethodSphere</a> (double, const std::string &amp;type=&quot;virial&quot;)</td></tr>
+<tr class="memdesc:a867b1ce962236c9bcba65bc9a0fdd7a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMethodSphere.html" title="Implements radially symmetric weighting functions (Hardy, Virial) and its associated bond function fo...">MethodSphere</a> using a named weighting type.  <br /></td></tr>
+<tr class="separator:a867b1ce962236c9bcba65bc9a0fdd7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6452af113a8105c8d9c1dd6f6571737" id="r_ae6452af113a8105c8d9c1dd6f6571737"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethodSphere.html#ae6452af113a8105c8d9c1dd6f6571737">MethodSphere</a> (double, std::map&lt; double, double &gt;)</td></tr>
+<tr class="memdesc:ae6452af113a8105c8d9c1dd6f6571737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMethodSphere.html" title="Implements radially symmetric weighting functions (Hardy, Virial) and its associated bond function fo...">MethodSphere</a> using a user-defined piecewise-linear weight function.  <br /></td></tr>
 <tr class="separator:ae6452af113a8105c8d9c1dd6f6571737"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5ac0f4c97f3189a48c832770f9eefc2" id="r_af5ac0f4c97f3189a48c832770f9eefc2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethodSphere.html#af5ac0f4c97f3189a48c832770f9eefc2">MethodSphere</a> (const <a class="el" href="classMethodSphere.html">MethodSphere</a> &amp;)</td></tr>
 <tr class="separator:af5ac0f4c97f3189a48c832770f9eefc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,17 +136,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64caf481605ec1e96b6580f0af3512c5 inherit pub_methods_classMethod" id="r_a64caf481605ec1e96b6580f0af3512c5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a64caf481605ec1e96b6580f0af3512c5">~Method</a> ()</td></tr>
 <tr class="separator:a64caf481605ec1e96b6580f0af3512c5 inherit pub_methods_classMethod"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65f3ec190572e1912f2c2b6b0ffa1734 inherit pub_methods_classMethod" id="r_a65f3ec190572e1912f2c2b6b0ffa1734"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a65f3ec190572e1912f2c2b6b0ffa1734">operator()</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec) const</td></tr>
+<tr class="memdesc:a65f3ec190572e1912f2c2b6b0ffa1734 inherit pub_methods_classMethod"><td class="mdescLeft">&#160;</td><td class="mdescRight">The weighting function \(w\) used to compute stress.  <br /></td></tr>
 <tr class="separator:a65f3ec190572e1912f2c2b6b0ffa1734 inherit pub_methods_classMethod"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e971ada35a39ed4243540ad7dea3fa9 inherit pub_methods_classMethod" id="r_a2e971ada35a39ed4243540ad7dea3fa9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a2e971ada35a39ed4243540ad7dea3fa9">bondFunction</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec1, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec2) const</td></tr>
+<tr class="memdesc:a2e971ada35a39ed4243540ad7dea3fa9 inherit pub_methods_classMethod"><td class="mdescLeft">&#160;</td><td class="mdescRight">The bond function \(b(\boldsymbol v^1, \boldsymbol v^2)\) gives the weight associated to a bond formed by two atoms.  <br /></td></tr>
 <tr class="separator:a2e971ada35a39ed4243540ad7dea3fa9 inherit pub_methods_classMethod"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a270b7de75e5fab04e06fdad8730b4cd1 inherit pub_methods_classMethod" id="r_a270b7de75e5fab04e06fdad8730b4cd1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a270b7de75e5fab04e06fdad8730b4cd1">getAveragingDomainSize</a> () const</td></tr>
+<tr class="memdesc:a270b7de75e5fab04e06fdad8730b4cd1 inherit pub_methods_classMethod"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the spatial size of the averaging domain, i.e. the support of the weighting function.  <br /></td></tr>
 <tr class="separator:a270b7de75e5fab04e06fdad8730b4cd1 inherit pub_methods_classMethod"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:aa7098cb289c65d38df179e149234a264" id="r_aa7098cb289c65d38df179e149234a264"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethodSphere.html#aa7098cb289c65d38df179e149234a264">operator()</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec) const</td></tr>
+<tr class="memdesc:aa7098cb289c65d38df179e149234a264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the weighting function at a vector.  <br /></td></tr>
 <tr class="separator:aa7098cb289c65d38df179e149234a264"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad43bcfff9885d071ba547a10fd11fa85" id="r_ad43bcfff9885d071ba547a10fd11fa85"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethodSphere.html#ad43bcfff9885d071ba547a10fd11fa85">bondFunction</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec1, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec2) const</td></tr>
+<tr class="memdesc:ad43bcfff9885d071ba547a10fd11fa85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the bond function for a pair of atomic positions.  <br /></td></tr>
 <tr class="separator:ad43bcfff9885d071ba547a10fd11fa85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
@@ -156,16 +166,25 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a6e2aa4bab07012864d0bb73f7b139727 inherit pro_attribs_classMethod"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#_a5">crack/main.cpp</a>, and <a class="el" href="testLJ_8cpp-example.html#_a6">testLJ.cpp</a>.</dd>
+<div class="textblock"><p>Implements radially symmetric weighting functions (Hardy, Virial) and its associated bond function for atomistic stress computation. </p>
+<p>This class defines a weighting function \(w\) over a spherical domain of radius \(R\) (the averaging domain size). Two common forms are supported:</p><ul>
+<li>Hardy-type weighting</li>
+<li>Virial-type (uniform) weighting</li>
+</ul>
+<p>Additionally, users can supply a custom radial weighting function as a piecewise linear map. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#_a5">crack/main.cpp</a>, and <a class="el" href="testLJ_8cpp-example.html#_a6">testLJ.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="MethodSphere_8h_source.html#l00016">16</a> of file <a class="el" href="MethodSphere_8h_source.html">MethodSphere.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MethodSphere_8h_source.html#l00028">28</a> of file <a class="el" href="MethodSphere_8h_source.html">MethodSphere.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="adec686688f709466d7e49a46a451eed5" name="adec686688f709466d7e49a46a451eed5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adec686688f709466d7e49a46a451eed5">&#9670;&#160;</a></span>MethodSphere() <span class="overload">[1/3]</span></h2>
+<a id="a867b1ce962236c9bcba65bc9a0fdd7a3" name="a867b1ce962236c9bcba65bc9a0fdd7a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a867b1ce962236c9bcba65bc9a0fdd7a3">&#9670;&#160;</a></span>MethodSphere() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">MethodSphere::MethodSphere </td>
@@ -176,7 +195,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>type</em> = <code>&quot;virial&quot;</code>&#160;</td>
         </tr>
         <tr>
@@ -185,7 +204,42 @@ Additional Inherited Members</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Constructs a <a class="el" href="classMethodSphere.html" title="Implements radially symmetric weighting functions (Hardy, Virial) and its associated bond function fo...">MethodSphere</a> using a named weighting type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">averagingDomainSize</td><td>The diameter \(R\) of the spherical averaging domain. </td></tr>
+    <tr><td class="paramname">type</td><td>The type of weighting function: <code>"hardy"</code> or <code>"virial"</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>For <code>"hardy"</code>, the radial weighting function \(w(r)\) is defined as:  </p><p class="formulaDsp">
+\[
+w(r) =
+\begin{cases}
+c, &amp; \text{if } 0 \le r \le R/2 \\
+2c\left(1 - \frac{r}{R}\right), &amp; \text{if } R/2 &lt; r \le R \\
+0, &amp; \text{otherwise}
+\end{cases}
+\]
+</p>
+<p> where \(c = \frac{8}{5\pi R^3}\) ensures normalization.</p>
+<p>For <code>"virial"</code>, the weighting function is:  </p><p class="formulaDsp">
+\[
+w(r) =
+\begin{cases}
+c, &amp; \text{if } 0 \le r \le R \\
+0, &amp; \text{otherwise}
+\end{cases}
+\]
+</p>
+<p> where \(c = \frac{3}{4 \pi R^3}\). </p>
 
 <p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00015">15</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
 
@@ -217,7 +271,27 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00062">62</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
+<p>Constructs a <a class="el" href="classMethodSphere.html" title="Implements radially symmetric weighting functions (Hardy, Virial) and its associated bond function fo...">MethodSphere</a> using a user-defined piecewise-linear weight function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">averagingDomainSize</td><td>The diameter \(R\) of the spherical domain. </td></tr>
+    <tr><td class="paramname">map</td><td>A map from normalized radius values in \([0,1]\) to non-negative weight values.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The keys of the map (in \([0, 1]\)) are rescaled by \(R\) to get the real radii. For each interval \([x_i, x_{i+1}]\), a linear segment is fitted:  </p><p class="formulaDsp">
+\[
+w(r) = y_i + \frac{y_{i+1} - y_i}{x_{i+1} - x_i} (r - x_i R), \quad r \in [x_i R, x_{i+1} R]
+\]
+</p>
+<p> The resulting piecewise linear function is then normalized, i.e.  </p><p class="formulaDsp">
+\[
+4 \pi \int_{0}^{R} w(r) \cdot r^2 \, dr = 1
+\]
+</p>
+<p>This allows users to define arbitrary, smooth weight profiles that are zero outside the domain. </p>
+
+<p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00063">63</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
 
 </div>
 </div>
@@ -237,7 +311,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00114">114</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00115">115</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
 
 </div>
 </div>
@@ -264,7 +338,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00119">119</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00120">120</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
 
 </div>
 </div>
@@ -303,7 +377,17 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00167">167</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
+<p>Computes the bond function for a pair of atomic positions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vec1</td><td>Vector from grid point to atom 1. </td></tr>
+    <tr><td class="paramname">vec2</td><td>Vector from grid point to atom 2. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>This function evaluates the line integral of the radially symmetric weighting function along the bond. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00168">168</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
 
 </div>
 </div>
@@ -331,7 +415,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00153">153</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
+<p>Evaluate the weighting function at a vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vec</td><td>Position vector relative to center of the averaging domain. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Weight value. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="MethodSphere_8cpp_source.html#l00154">154</a> of file <a class="el" href="MethodSphere_8cpp_source.html">MethodSphere.cpp</a>.</p>
 
 </div>
 </div>
