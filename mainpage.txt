@@ -63,8 +63,8 @@
  *   *Journal of the Mechanics and Physics of Solids*, **93**, 72–92 (2016).
  *
  * - @anchor AdmalTadmorShi2019 N. C. Admal, E. B. Tadmor, and M. Shi,
- *   *Noise reduction in atomistic stress calculations using tailored integration domains*,
- *   *Modelling and Simulation in Materials Science and Engineering*, **27**, 045007 (2019).
+ *   *Noise filtering in atomistic stress calculations for crystalline materials*,
+ *   *Journal of the Mechanics and Physics of Solids, **144**, 104083 (2020).
  */
  */
 
