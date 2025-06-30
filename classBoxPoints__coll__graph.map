@@ -1,0 +1,15 @@
+<map id="BoxPoints" name="BoxPoints">
+<area shape="rect" id="Node000001" title=" " alt="" coords="89,345,176,371"/>
+<area shape="rect" id="Node000002" href="$classSpatialHash.html" title=" " alt="" coords="51,271,214,296"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,310,135,345,130,345,130,310"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,168,148,208"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="96,219,111,245,127,269,122,272,106,248,91,222"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="173,168,330,208"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="224,220,192,249,155,273,152,268,188,245,221,216"/>
+<area shape="rect" id="Node000005" href="$classTriplet.html" title=" " alt="" coords="143,80,205,105"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="194,114,238,166,234,170,190,117"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="137,5,211,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="177,45,177,80,171,80,171,45"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="230,80,369,105"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="289,119,263,169,259,167,285,116"/>
+</map>

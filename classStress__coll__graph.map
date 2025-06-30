@@ -1,0 +1,9 @@
+<map id="Stress&lt; TMethod, stressType, TGrid &gt;" name="Stress&lt; TMethod, stressType, TGrid &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="19,183,234,223"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,95,184,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,132,123,182,118,183,100,134"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="209,95,295,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,130,154,185,151,180,224,126"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="183,5,321,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="255,59,255,94,249,94,249,59"/>
+</map>
