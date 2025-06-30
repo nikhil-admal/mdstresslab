@@ -12,7 +12,7 @@
 #include "typedef.h"
 
 
-MethodSphere::MethodSphere(double averagingDomainSize, std::string type="virial") : Method<MethodSphere>(averagingDomainSize)
+MethodSphere::MethodSphere(double averagingDomainSize, const std::string& type) : Method<MethodSphere>(averagingDomainSize)
 { 
     double normalizer;
     if (type =="hardy")
@@ -45,7 +45,8 @@ MethodSphere::MethodSphere(double averagingDomainSize, std::string type="virial"
     }
     else if (type == "virial")
     {
-        normalizer= 1/(M_PI*pow(averagingDomainSize,3));
+        //normalizer= 1/(M_PI*pow(averagingDomainSize,3));
+        normalizer= 3.0/(4*M_PI*pow(averagingDomainSize,3));
         std::deque<double> constant{normalizer};
         // constant polynomial
         Polynomial constantPolynomial{constant};

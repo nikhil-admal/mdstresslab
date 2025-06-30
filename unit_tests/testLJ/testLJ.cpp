@@ -38,33 +38,25 @@ int main()
     /*! [Model] */
 
     /*! [Grid] */
-	int ngrid=10;
-	Grid<Current> randomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid);
-	Grid<Reference> referenceRandomGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid);
+	int ngrid=200;
+	Grid<Current> current2DGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid);
+	Grid<Reference> reference2DGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid,ngrid);
 
-	ngrid= 20;
-	Grid<Reference> reference_grid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
-
-	ngrid= 125;
-	Grid<Current> gridFromFile(ngrid);
-	gridFromFile.read("grid_cauchy.data");
+	ngrid= 500;
+	Grid<Reference> reference1DGrid(Vector3d(0,0,0),Vector3d(60,60,60),ngrid);
     /*! [Grid] */
 
     /*! [Method] */
-	MethodSphere hardy1(5.29216036151419,"hardy");
-	MethodSphere hardy2(20,"hardy");
-    MethodSphere hardy3(5,"hardy");
-    MethodSphere hardy4(7,"hardy");
-    MethodSphere hardyRandom(9,"hardy");
+	MethodSphere hardy5(5.0,"hardy");
+    MethodSphere virial5(5.0,"virial");
     /*! [Method] */
 
     /*! [Stress] */
-    Stress<MethodSphere,Cauchy> hardyStress1("hardy1",hardy1,&gridFromFile);
-	Stress<MethodSphere,Cauchy> hardyStress2("hardy2",hardy2,&gridFromFile);
-	Stress<MethodSphere,Piola> hardyStress3("hardy3",hardy3,&reference_grid);
-	Stress<MethodSphere,Piola> hardyStress4("hardy4",hardy4,&reference_grid);
-	Stress<MethodSphere,Cauchy> hardyStressRandomCauchy("hardyRandomCauchy",hardyRandom,&randomGrid);
-	Stress<MethodSphere,Piola> hardyStressRandomPiola("hardyRandomPiola",hardyRandom,&referenceRandomGrid);
+    Stress<MethodSphere,Cauchy> hardyCauchy("hardyCauchy",hardy5,&current2DGrid);
+    Stress<MethodSphere,Cauchy> virialCauchy("virialCauchy",virial5,&current2DGrid);
+
+	Stress<MethodSphere,Piola> hardyPiola("hardyPiola",hardy5,&reference1DGrid);
+    Stress<MethodSphere,Piola> virialPiola("virialPiola",virial5,&reference1DGrid);
     /*! [Stress] */
 
 
@@ -74,33 +66,29 @@ int main()
 					std::tie());
 
 	calculateStress(body,kim,
-					std::tie(hardyStress3,hardyStress4,hardyStressRandomPiola),
-					std::tie(hardyStress1,hardyStress2,hardyStressRandomCauchy));
+					std::tie(hardyCauchy));
 
 	calculateStress(body,kim,
-					std::tie(hardyStress1));
+                    std::tie(virialPiola));
 
-	calculateStress(body,kim,
-                    std::tie(hardyStress3),
-					std::tie(hardyStress1));
+    calculateStress(body,kim,
+                    std::tie(hardyPiola,virialPiola),
+                    std::tie(hardyCauchy,virialCauchy));
+
     /*! [Calculate] */
 
     /*! [Write] */
-    hardyStress1.write();
-    hardyStress2.write();
-    hardyStress3.write();
-    hardyStress4.write();
-    hardyStressRandomPiola.write();
-    hardyStressRandomCauchy.write();
+    hardyCauchy.write();
+    hardyPiola.write();
+    virialCauchy.write();
+    virialPiola.write();
     /*! [Write] */
 
     /*! [Compare] */
-	compareStress("hardy1");
-	compareStress("hardy3");
-	compareStress("hardy4");
-	compareStress("hardy2");
-	compareStress("hardyRandomCauchy");
-	compareStress("hardyRandomPiola");
+	compareStress("hardyCauchy");
+	compareStress("hardyPiola");
+	compareStress("virialCauchy");
+	compareStress("virialPiola");
     /*! [Compare] */
 
 

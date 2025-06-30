@@ -1,18 +1,70 @@
 /**
- * @mainpage MDStressLab – Molecular Dynamics Post-Processing Tool
+ * @mainpage MDStressLab++
  *
- * MDStressLab is a software package developed at the University of Minnesota
-   and the University of Illinois Urbana Champaign
- * It provides tools to compute stress fields from atomistic simulation data.
+ * @section overview Overview
  *
- * ## 📝 Overview
- * *(Copy over the introductory description of the software, research goals, etc.)*
+ * **MDStressLab++** is a KIM-compliant program for postprocessing molecular dynamics (MD)
+ * or molecular statics (MS) simulations to compute atomistic stress fields using
+ * different definitions of the atomistic stress tensor.
+ * 
+ * For more information on KIM (Knowledgebase of Interatomic Models), see
+ * [openkim.org](https://openkim.org).
+ * 
+ * MDStressLab++ provides the following capabilities:
  *
- * ## 🔬 Features
- * - KIM‑compliant processing of atomic snapshots
- * - Support for MD simulation data formats (LAMMPS, custom, etc.)
+ * - Compute the **Cauchy** and **first Piola-Kirchhoff** versions of the **Hardy** and **virial** stress tensors on a user-defined grid.
+ *   See @cite AdmalTadmor2010, @cite AdmalTadmor2011, @cite AdmalTadmor2016a.
+ * - Integrated Python tools for visualizing stress fields. See @ref visualization_intro "Visualization Utilities".
+
+ @section features Key Features
  *
- * ## 📥 Installation & Usage
- * *(Paste build instructions, dependencies, or usage examples from the original page.)*
+ * - **LAMMPS compatibility**: Atomistic configurations can be read from LAMMPS-style `dump` files.
+ * - **No `process_dedr` required**: Atomistic stress can be computed even for interatomic potentials
+ *   that do not provide interatomic forces derived from the derivatives of
+ *   energy with respect to distances. 
+ * - **Flexible weight functions via CRTP**: User-defined weighting functions can be implemented easily
+ *   by inheriting from the `Method` template class using the Curiously Recurring Template Pattern (CRTP).
+ * - **Lattice-dependent averaging domains**: Reduced noise is achieved by using 
+ *   lattice-dependent averaging domains. See @cite AdmalTadmorShi2019.
+ * - **Library or script mode**: MDStressLab++ can be used as a C++ library within custom applications
+ *   or driven by user-defined input scripts for standard workflows.
  *
+ @section installation Installation instructions
+ *
+ * @section authors Authors
+ *
+ * This code was written by:
+ * - Prof. Nikhil Chandra Admal (UIUC)
+ * - Min Shi (University of Minnesota)
+ * - Prof. Ellad B. Tadmor (University of Minnesota)
+ *
+ * and is based on their collaborative research.
+ *
+ * @section cite How to Cite MDStressLab++
+ *
+ * When publishing results obtained using this program, please acknowledge
+ * that the code was obtained from [https://github.com/nikhil-admal/mdstresslab](https://github.com/nikhil-admal/mdstresslab)
+ * and cite the following publications:
+ *
+ * - @anchor AdmalTadmor2010 N. C. Admal and E. B. Tadmor,  
+ *   *A unified interpretation of stress in molecular systems*,  
+ *   *Journal of Elasticity*, **100**, 63–143 (2010).
+ *
+ * - @anchor AdmalTadmor2011 N. C. Admal and E. B. Tadmor,  
+ *   *Stress and heat flux for arbitrary multi-body potentials: A unified framework*,  
+ *   *Journal of Chemical Physics*, **134**, 184106 (2011).
+ *
+ * - @anchor AdmalTadmor2016a N. C. Admal and E. B. Tadmor,  
+ *   *Material fields in atomistics as pull-backs of spatial distributions*,  
+ *   *Journal of the Mechanics and Physics of Solids*, **89**, 59–76 (2016).
+ *
+ * - @anchor AdmalTadmor2016b N. C. Admal and E. B. Tadmor,  
+ *   *The non-uniqueness of the atomistic stress tensor and its relationship to the generalized Beltrami representation*,  
+ *   *Journal of the Mechanics and Physics of Solids*, **93**, 72–92 (2016).
+ *
+ * - @anchor AdmalTadmorShi2019 N. C. Admal, E. B. Tadmor, and M. Shi,
+ *   *Noise reduction in atomistic stress calculations using tailored integration domains*,
+ *   *Modelling and Simulation in Materials Science and Engineering*, **27**, 045007 (2019).
  */
+ */
+

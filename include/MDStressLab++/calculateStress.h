@@ -31,15 +31,15 @@ int process_DEDr(const void* dataObject, const double de, const double r, const 
  * elastic constants. In this demo, the list contains only one model.
  * @snippet{lineno} crack/main.cpp QueryModels
  *
- * -# **Load atomic configuration**: Read a LAMMPS-style configuration (`config.data`).
+ * -# **Load atomic configuration**: Read a MDStressLab-style configuration (`config.data`).
  * @snippet{lineno} crack/main.cpp ReadConfiguration
  *
  * -# **Load grid**: Read grid points for stress evaluation from `grid_cauchy.data`.
  * @snippet{lineno} crack/main.cpp LoadGrid
  *
  * -# **Compute and compare Hardy stress**:
- *     - Attempt stress computation using projected forces.
- *     - If not supported, try `process_dEdr` method.
+ *     - Start with stress computation using projected forces (always possible).
+ *     - Try `process_dEdr` method, if available.
  *     - Write output stress fields for both methods (if available).
  * @snippet{lineno} crack/main.cpp ComputeStress
  *
@@ -50,14 +50,35 @@ int process_DEDr(const void* dataObject, const double de, const double r, const 
  *
  * #### Visual comparison
  *
+ *  * See @ref visualization_intro "Visualization Utilities" for contour plotting
  * <table>
  *   <tr>
  *     <td align="center">
- *       <img src="project_hardy_Tersoff_LAMMPS_Tersoff_1988T3.png" width="300px"/><br/>
+ *       <img src="project_hardy_Tersoff_LAMMPS_Tersoff_1988T3_Si__MO_186459956893_004_xx.pdf" width="300px"/><br/>
  *       Projected force–based stress
  *     </td>
  *     <td align="center">
- *       <img src="hardy_Tersoff_LAMMPS_Tersoff_1988T3.png" width="300px"/><br/>
+ *       <img src="hardy_Tersoff_LAMMPS_Tersoff_1988T3_Si__MO_186459956893_004_xx.pdf" width="300px"/><br/>
+ *       process_dEdr–based stress
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <td align="center">
+ *       <img src="project_hardy_Tersoff_LAMMPS_Tersoff_1988T3_Si__MO_186459956893_004_yy.pdf" width="300px"/><br/>
+ *       Projected force–based stress
+ *     </td>
+ *     <td align="center">
+ *       <img src="hardy_Tersoff_LAMMPS_Tersoff_1988T3_Si__MO_186459956893_004_yy.pdf" width="300px"/><br/>
+ *       process_dEdr–based stress
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <td align="center">
+ *       <img src="project_hardy_Tersoff_LAMMPS_Tersoff_1988T3_Si__MO_186459956893_004_xy.pdf" width="300px"/><br/>
+ *       Projected force–based stress
+ *     </td>
+ *     <td align="center">
+ *       <img src="hardy_Tersoff_LAMMPS_Tersoff_1988T3_Si__MO_186459956893_004_xy.pdf" width="300px"/><br/>
  *       process_dEdr–based stress
  *     </td>
  *   </tr>

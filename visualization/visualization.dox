@@ -1,0 +1,27 @@
+/*!
+ * \page visualization_intro Visualization Utilities
+ * \brief Overview of visualization utilities.
+ *
+ * This page documents the Python script used for generating contour plots of atomistic stress fields
+ * from simulation output files with `.stress` format.
+ *
+ * ## Supported Input Format
+ * ```
+ * 125
+ * Properties=pos:R:3:stress:R:6
+ * x y z σ_xx σ_yy σ_zz σ_xy σ_xz σ_yz
+ * ...
+ * ```
+ *
+ * ## Usage
+ * ```
+ * python visualize.py data.stress yy
+ * ```
+ *
+ * This will read the stress component σ<sub>yy</sub> from `data.stress`, convert it to GPa,
+ * and generate a contour plot in `data_yy.pdf`. **The script assumes the units of stress are** eV/Å\f$^3\f$.
+ *
+ * ## Related Scripts
+ * - \ref visualize.py "visualize.py" — contour plot generator
+ */
+
