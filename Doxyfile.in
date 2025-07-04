@@ -3,7 +3,7 @@ MARKDOWN_SUPPORT       = YES
 BUILTIN_STL_SUPPORT    = YES
 EXTRACT_ALL            = YES
 OUTPUT_DIRECTORY       = docs
-INPUT                  = ./src/ ./include/ ./tests/ ./visualization/  ./mainpage.txt ./images/ 
+INPUT                  = ./src/ ./include/ ./tests/ ./visualization/  ./mainpage.txt ./images/ ./docs/
 IMAGE_PATH             = ./images/
 EXAMPLE_PATH           = ./unit_tests/  ./tests/
 EXCLUDE                = ./include/MDStressLab++/Eigen/
@@ -22,4 +22,5 @@ FILE_PATTERNS = *.cpp *.h *.hpp *.py *.dox
 EXTENSION_MAPPING = py=Python
 OPTIMIZE_OUTPUT_JAVA = NO
 OPTIMIZE_OUTPUT_PYTHON = YES
+LAYOUT_FILE = ./layout.xml
 
