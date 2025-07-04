@@ -3,7 +3,7 @@ MARKDOWN_SUPPORT       = YES
 BUILTIN_STL_SUPPORT    = YES
 EXTRACT_ALL            = YES
 OUTPUT_DIRECTORY       = docs
-INPUT                  = ./src/ ./include/ ./tests/ ./visualization/  ./mainpage.txt ./images/ ./docs/
+INPUT                  = ./theory.dox  ./src/ ./include/ ./tests/ ./visualization/  ./mainpage.txt ./images/ 
 IMAGE_PATH             = ./images/
 EXAMPLE_PATH           = ./unit_tests/  ./tests/
 EXCLUDE                = ./include/MDStressLab++/Eigen/
@@ -17,6 +17,7 @@ RECURSIVE              = YES
 SOURCE_BROWSER         = YES
 HTML_COLORSTYLE        = AUTO_LIGHT
 GENERATE_TREEVIEW      = YES
+GENERATE_LAYOUT        = NO
 EXTENSION_MAPPING = py=Python
 FILE_PATTERNS = *.cpp *.h *.hpp *.py *.dox
 EXTENSION_MAPPING = py=Python

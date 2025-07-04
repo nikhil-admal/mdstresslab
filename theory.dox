@@ -1,0 +1,31 @@
+/**
+ * @page theory Theory
+ * @brief Theoretical Background
+
+ * This page provides a detailed overview of the theoretical framework behind the atomistic stress tensor calculations.
+
+ * ## Hardy Stress Tensor
+
+ * The Hardy stress is defined as:
+
+ * \f[
+ * \boldsymbol{\sigma}(\mathbf{x},t) = -\sum_i m_i \mathbf{v}_i \otimes \mathbf{v}_i \, w(\mathbf{x}-\mathbf{x}^i(t))
+ *      - \frac{1}{2} \sum_{i,j \ne i} \mathbf{f}_{ij} \otimes  (\mathbf{x}^i-\mathbf{x}^j) b(\mathbf x; \mathbf x^i, \mathbf x^j)
+ * \f]
+
+ * where \f$ w(\cdot) \f$ is the weighting function and \f$b\f$ is the bond function defined as.
+
+ * ## Hardy and Virial Stresses
+
+ * 
+
+ * ## Lattice Dependent Averaging Domains
+
+ * 
+
+ * ## Additional Topics
+
+ * - See @ref visualization_intro for visualizing stress fields.
+ * - See also @ref stressTensor for implementation of different tensor definitions.
+ */
+
