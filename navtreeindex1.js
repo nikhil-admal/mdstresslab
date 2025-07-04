@@ -178,6 +178,7 @@ var NAVTREEINDEX1 =
 "typedef_8h.html#aeb7c3b50827bb48058bfacdd3cb00f15":[8,0,0,0,28,7],
 "typedef_8h.html#af952c1ec8822b94b950a3361f81d9d43":[8,0,0,0,28,0],
 "typedef_8h_source.html":[8,0,0,0,28],
+"user":[10],
 "visualization_intro.html":[5],
 "visualize_8py.html":[8,0,3,0],
 "visualize_8py.html#a158cecaf86cdc5969d2946bfe590d959":[8,0,3,0,7],

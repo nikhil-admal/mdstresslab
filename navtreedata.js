@@ -63,7 +63,8 @@ var NAVTREE =
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ],
-    [ "Examples", "examples.html", "examples" ]
+    [ "Examples", "examples.html", "examples" ],
+    [ "Theory", "user", null ]
   ] ]
 ];
 
