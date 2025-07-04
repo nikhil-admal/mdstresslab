@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>MDStressLab++: Visualization Utilities</title>
+<title>MDStressLab++: Theory</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('visualization_intro.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('theory.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -96,26 +96,30 @@ $(document).ready(function(){initNavTree('visualization_intro.html',''); initRes
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Visualization Utilities</div></div>
+  <div class="headertitle"><div class="title">Theory</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Overview of visualization utilities.</p>
-<p>This page documents the Python script used for generating contour plots of atomistic stress fields from simulation output files with <code>.stress</code> format.</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
-Supported Input Format</h2>
-<div class="fragment"><div class="line">125</div>
-<div class="line">Properties=pos:R:3:stress:R:6</div>
-<div class="line">x y z σ_xx σ_yy σ_zz σ_xy σ_xz σ_yz</div>
-<div class="line">...</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
-Usage</h2>
-<div class="fragment"><div class="line">python <a class="code hl_namespace" href="namespacevisualize.html">visualize</a>.py data.stress yy</div>
-<div class="ttc" id="anamespacevisualize_html"><div class="ttname"><a href="namespacevisualize.html">visualize</a></div><div class="ttdef"><b>Definition</b> <a href="visualize_8py_source.html#l00001">visualize.py:1</a></div></div>
-</div><!-- fragment --><p>This will read the stress component σ<sub>yy</sub> from <code>data.stress</code>, convert it to GPa, and generate a contour plot in <code>data_yy.pdf</code>. <b>The script assumes the units of stress are</b> eV/Å \(^3\).</p>
-<h2><a class="anchor" id="autotoc_md10"></a>
-Related Scripts</h2>
+<div class="textblock"><p>Theoretical Background.</p>
+<p>This page provides a detailed overview of the theoretical framework behind the atomistic stress tensor calculations.</p>
+<h2><a class="anchor" id="autotoc_md0"></a>
+Hardy Stress Tensor</h2>
+<p>The Hardy stress is defined as:</p>
+<p class="formulaDsp">
+\[
+\boldsymbol{\sigma}(\mathbf{x},t) = -\sum_i m_i \mathbf{v}_i \otimes \mathbf{v}_i \, w(\mathbf{x}-\mathbf{x}^i(t))
+     - \frac{1}{2} \sum_{i,j \ne i} \mathbf{f}_{ij} \otimes  (\mathbf{x}^i-\mathbf{x}^j) b(\mathbf x; \mathbf x^i, \mathbf x^j)
+\]
+</p>
+<p>where \( w(\cdot) \) is the weighting function and \(b\) is the bond function defined as.</p>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Hardy and Virial Stresses</h2>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Lattice Dependent Averaging Domains</h2>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Additional Topics</h2>
 <ul>
-<li><a class="el" href="visualize_8py.html">visualize.py</a> — contour plot generator </li>
+<li>See <a class="el" href="visualization_intro.html">Visualization Utilities</a> for visualizing stress fields.</li>
+<li>See also stressTensor for implementation of different tensor definitions. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

@@ -11,7 +11,7 @@ var indexSectionsWithContent =
   8: "cpr",
   9: "m",
   10: "dmst",
-  11: "muv"
+  11: "mtuv"
 };
 
 var indexSectionNames =

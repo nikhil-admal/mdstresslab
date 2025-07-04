@@ -30,6 +30,8 @@ var NAVTREE =
     [ "Installation instructions", "index.html#installation", null ],
     [ "Authors", "index.html#authors", null ],
     [ "How to Cite MDStressLab++", "index.html#cite", null ],
+    [ "Theory", "theory.html", null ],
+    [ "Theory", "theory.html", null ],
     [ "Visualization Utilities", "visualization_intro.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -63,8 +65,7 @@ var NAVTREE =
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ],
-    [ "Examples", "examples.html", "examples" ],
-    [ "Theory", "user", null ]
+    [ "Examples", "examples.html", "examples" ]
   ] ]
 ];
 

@@ -148,7 +148,7 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Generates 2D contour plots of stress components from .stress files. </p>
 <p>This script reads atomistic simulation output and visualizes a selected stress component (e.g., σ<sub>yy</sub>) using a filled contour plot.</p>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 Input Format</h2>
 <p>The input file should be structured as follows:</p>
 <div class="fragment"><div class="line">125</div>
@@ -156,11 +156,11 @@ Input Format</h2>
 <div class="line">x y z σ_xx σ_yy σ_zz σ_xy σ_xz σ_yz</div>
 <div class="line">...</div>
 </div><!-- fragment --><p>Each data line must contain 9 floating-point values: the atomic position <code>(x, y, z)</code> followed by the six unique components of the symmetric Cauchy stress tensor.</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 Command-Line Usage</h2>
 <div class="fragment"><div class="line">python visualize.py &lt;filename.stress&gt; &lt;component: xx|yy|zz|xy|xz|yz&gt;</div>
 </div><!-- fragment --><p>Converts the selected stress component from internal units to GPa (by multiplying by 160.0), and saves a PDF contour plot.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Related Pages</h2>
 <ul>
 <li><a class="el" href="visualization_intro.html">Visualization Utilities Overview</a> </li>

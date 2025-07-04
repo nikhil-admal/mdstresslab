@@ -6,9 +6,10 @@ var searchData=
   ['vectorxd_3',['VectorXd',['../typedef_8h.html#a95c2aca5fc1a1ab42f573f852bda9433',1,'typedef.h']]],
   ['vectorxi_4',['VectorXi',['../typedef_8h.html#a7e51d2924fd913063b0c961a0f55f339',1,'typedef.h']]],
   ['velocities_5',['velocities',['../classConfiguration.html#a6229b086177ef3a1381cc9db5cb4c466',1,'Configuration']]],
-  ['visual_20comparison_6',['visual comparison',['..//home/runner/work/mdstresslab/mdstresslab/include/MDStressLab++/calculateStress.h#autotoc_md2',1,'Visual comparison'],['..//home/runner/work/mdstresslab/mdstresslab/include/MDStressLab++/MethodSphere.h#autotoc_md3',1,'Visual comparison']]],
-  ['visualization_20utilities_7',['Visualization Utilities',['../visualization_intro.html',1,'']]],
-  ['visualization_2edox_8',['visualization.dox',['../visualization_8dox.html',1,'']]],
-  ['visualize_9',['visualize',['../namespacevisualize.html',1,'']]],
-  ['visualize_2epy_10',['visualize.py',['../visualize_8py.html',1,'']]]
+  ['virial_20stresses_6',['Hardy and Virial Stresses',['../theory.html#autotoc_md1',1,'']]],
+  ['visual_20comparison_7',['visual comparison',['..//home/runner/work/mdstresslab/mdstresslab/include/MDStressLab++/calculateStress.h#autotoc_md6',1,'Visual comparison'],['..//home/runner/work/mdstresslab/mdstresslab/include/MDStressLab++/MethodSphere.h#autotoc_md7',1,'Visual comparison']]],
+  ['visualization_20utilities_8',['Visualization Utilities',['../visualization_intro.html',1,'']]],
+  ['visualization_2edox_9',['visualization.dox',['../visualization_8dox.html',1,'']]],
+  ['visualize_10',['visualize',['../namespacevisualize.html',1,'']]],
+  ['visualize_2epy_11',['visualize.py',['../visualize_8py.html',1,'']]]
 ];

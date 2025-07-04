@@ -3,7 +3,7 @@ var searchData=
   ['emptystencil_0',['emptyStencil',['../classStencil.html#a93a45c249b3f855441a7f626ece8ecef',1,'Stencil']]],
   ['end_1',['end',['../classrange.html#a4ba214e8e2dc3dcb988774a8456cc412',1,'range']]],
   ['epsilon_2',['epsilon',['../typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025',1,'typedef.h']]],
-  ['example_3a_3',['📄 Example:',['../classBoxConfiguration.html#autotoc_md0',1,'']]],
+  ['example_3a_3',['📄 Example:',['../classBoxConfiguration.html#autotoc_md4',1,'']]],
   ['exception_4',['exception',['../classException.html',1,'Exception'],['../classException.html#adfa76894125bf07420fbf824e80c324d',1,'Exception::Exception()']]],
   ['exception_2ecpp_5',['Exception.cpp',['../Exception_8cpp.html',1,'']]],
   ['exception_2eh_6',['Exception.h',['../Exception_8h.html',1,'']]],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['visualization_20utilities_0',['Visualization Utilities',['../visualization_intro.html',1,'']]]
+  ['utilities_0',['Visualization Utilities',['../visualization_intro.html',1,'']]]
 ];
