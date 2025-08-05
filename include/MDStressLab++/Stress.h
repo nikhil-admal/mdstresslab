@@ -93,8 +93,8 @@ public:
             MY_ERROR("Stress object created without specifying a name. Use write(filename) instead of write()");
 		std::ofstream file(name+".stress");
 
-		file << field.size() << "\n";
-		//file << "\n";
+    file << field.size() << "\n";
+		file << "\n";
         int index= 0;
         //Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
         Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
@@ -116,15 +116,63 @@ public:
 		}
 	}
 
-    void write(const std::string& filename)
-    {
-        if (name.empty())
-            name= filename;
-        else
-            std::cout << "Stress object created with name " << name << ". Ignoring the filename: " << filename << "." << std::endl; 
-        write();
-    }
-
+  void write(const std::string& filename)
+  {
+    if (name.empty())
+      name= filename;
+    else
+      std::cout << "Stress object created with name " << name << ". Ignoring the filename: " << filename << "." << std::endl; 
+    write();
+  }
+  
+  /*!
+   * This function writes the stress field to a filename with extension
+   * .voxel_grid_stress and prefix [name]. The output file is in a OVITO-readable format
+   * based on the LAMMPS dump_grid format. The file header contains information about the
+   * grid, its size and spatial resolution. The six stress components are then dumped as 6
+   * columns where all lines correspond to the flattened arrays using the F-order convention.
+   * The data, at the bottom of the file, then correspond to (Nx*Ny*Nz) lines over 6 columns
+   * that represent the six components of the stress field - \f$\sigma_{xx}\f$,
+   * \f$\sigma_{yy}\f$, \f$\sigma_{zz}\f$, \f$\sigma_{xy}\f$, \f$\sigma_{xz}\f$, and \f$\sigma_{yz}\f$
+   */
+	void write_voxel_grid(const int nx, const int ny, const int nz, const Vector3d lowerLimit, const Vector3d upperLimit)
+	{
+    if (name.empty())
+      MY_ERROR("Stress object created without specifying a name. Use write(filename) instead of write()");
+		std::ofstream file(name+".voxel_grid_stress");
+    
+    file << "ITEM: TIMESTEP \n";
+    file << "0\n";
+		file << "ITEM: BOX BOUNDS pp pp pp\n";
+    file << lowerLimit(0) << " " << upperLimit(0) << "\n";
+    file << lowerLimit(1) << " " << upperLimit(1) << "\n";
+    file << lowerLimit(2) << " " << upperLimit(2) << "\n";    
+		file << "ITEM: DIMENSION\n";
+    file << "3\n";
+    file << "ITEM: GRID SIZE nx ny nz\n";
+    file << nx << " " << ny << " " << nz << "\n";
+    file << "ITEM: GRID CELLS SXX SYY SZZ SYZ SXZ SXY\n";
+    
+    for (auto& stress : field)
+      {
+        file << stress(0,0) << std::setw(25)
+             << stress(1,1) << std::setw(25)
+             << stress(2,2) << std::setw(25)
+             << stress(1,2) << std::setw(25)
+             << stress(0,2) << std::setw(25)
+             << stress(0,1) << std::endl;
+      }
+	}
+  
+  void write_voxel_grid(const std::string& filename, const int nx, const int ny, const int nz, const Vector3d lowerLimit, const Vector3d upperLimit)
+  {
+    if (name.empty())
+      name= filename;
+    else
+      std::cout << "Stress object created with name " << name << ". Ignoring the filename: " << filename << "." << std::endl; 
+    write_voxel_grid(nx,ny,nz,lowerLimit,upperLimit);
+  }
+  
 	~Stress()
 	{
 		// TODO Auto-generated destructor stub
