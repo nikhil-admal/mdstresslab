@@ -364,8 +364,15 @@ int calculateStress(const Configuration* pconfig,
     //	------------------------------------------------------------------
     //	Compute forces
     //	------------------------------------------------------------------
+        auto start = std::chrono::system_clock::now();
+        std::time_t startTime = std::chrono::system_clock::to_time_t(start);
         MY_HEADING("Computing forces");
+        std::cout << "Time stamp at the beginning of process de-dr interatomic force calculation: " << std::ctime(&startTime) << std::endl;
         kim.compute();
+        auto end= std::chrono::system_clock::now();
+        std::time_t endTime= std::chrono::system_clock::to_time_t(end);
+        std::chrono::duration<double> elapsedSeconds(end-start);
+        std::cout << "Elapsed time for calculating process-dedr interatomic forces: " << elapsedSeconds.count() << " seconds" << std::endl;
         std::cout << "Done" << std::endl;
         //nbl_clean(&nl);
     }
@@ -378,12 +385,15 @@ int calculateStress(const Configuration* pconfig,
                              (KIM::Function *) &nbl_get_neigh,
                              nullptr,
                              nullptr);
-	kim.compute();
+	    kim.compute();
 
         //	------------------------------------------------------------------
         //	Beginning force projection
         //	------------------------------------------------------------------
         MY_HEADING("Beginning force projection")
+        auto start = std::chrono::system_clock::now();
+        std::time_t startTime = std::chrono::system_clock::to_time_t(start);
+        std::cout << "Time stamp at the beginning of interatomic force projection: " << std::ctime(&startTime) << std::endl;
         std::ofstream null_stream("/dev/null");  // For Unix/Linux/macOS
         std::streambuf* cout_buf = std::cout.rdbuf(); // Save original buffer
         std::cout.rdbuf(null_stream.rdbuf()); // Redirect std::cout to null
@@ -502,6 +512,10 @@ int calculateStress(const Configuration* pconfig,
         }
 
         std::cout.rdbuf(cout_buf); // Restore the original stream buffer
+        auto end= std::chrono::system_clock::now();
+        std::time_t endTime= std::chrono::system_clock::to_time_t(end);
+        std::chrono::duration<double> elapsedSeconds(end-start);
+        std::cout << "Elapsed time for calculating projected interatomic forces: " << elapsedSeconds.count() << " seconds" << std::endl;
         std::cout << "Done with local force calculations" << std::endl;
     }
 

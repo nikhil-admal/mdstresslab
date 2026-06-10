@@ -96,10 +96,13 @@ def plot_contour(data, output_fname, component_index, component_label):
 
     plt.figure(figsize=(6, 5))
     contour = plt.contourf(xi, yi, sig_grid, levels=100, cmap='RdBu_r')
-    plt.colorbar(contour, label='Stress (GPa)')
+    #plt.colorbar(contour, label='Stress (GPa)')
+    cbar = plt.colorbar(contour, orientation='horizontal', pad=0.15)  # pad adjusts distance from plot
+    cbar.set_label('Stress (GPa)')
     plt.xlabel('x')
     plt.ylabel('y')
     plt.title(component_label)
+    plt.gca().set_aspect('equal', adjustable='box')
     plt.tight_layout()
     plt.savefig(output_fname)
     plt.close()

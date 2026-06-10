@@ -30,6 +30,9 @@
  *   or driven by user-defined input scripts for standard workflows.
  *
  @section installation Installation instructions
+ * - https://openkim.org/doc/usage/obtaining-models/
+ * - openmp: M1 related settings
+ * - installation
  *
  * @section authors Authors
  *
