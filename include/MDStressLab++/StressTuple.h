@@ -57,6 +57,88 @@ inline typename std::enable_if<I < sizeof...(BF), void>::type
 // Recursively build the kinetic part of a Cauchy stress field.
 template<std::size_t I=0, typename ...TStress>
 inline typename std::enable_if<I == sizeof...(TStress), void>::type
+recursiveBuildContinuumFields(const double& mass,
+                              const Vector3d& velocity,
+                              const Vector3d& position,
+                              const int& i_gridPoint,
+                              const int& i_stress,
+                              std::tuple<TStress&...> t)
+{
+	if (sizeof...(TStress)!=0)
+		assert(0);
+}
+template<std::size_t I=0, typename ...BF>
+inline typename std::enable_if<I < sizeof...(BF), void>::type
+recursiveBuildContinuumFields(const double& mass,
+                              const Vector3d& velocity,
+                              const Vector3d& position,
+                              const int& i_gridPoint,
+                              const int& i_stress,
+                              std::tuple<Stress<BF,Cauchy>&...> t)
+{
+	if (I == i_stress)
+	{
+		auto& stress= std::get<I>(t);
+		if (position.norm() >= stress.method.getAveragingDomainSize())
+			return;
+		double weight= stress.method(position);
+		stress.massDensityField[i_gridPoint]+= mass*weight;
+		stress.momentumDensityField[i_gridPoint]+= mass*weight*velocity;
+	}
+	else
+		recursiveBuildContinuumFields<I+1>(mass,velocity,position,i_gridPoint,i_stress,t);
+}
+
+template<std::size_t I=0, typename ...TStress>
+inline typename std::enable_if<I == sizeof...(TStress), void>::type
+recursiveFinalizeContinuumVelocity(const int& i_gridPoint,
+                                   const int& i_stress,
+                                   std::tuple<TStress&...> t)
+{
+	if (sizeof...(TStress)!=0)
+		assert(0);
+}
+template<std::size_t I=0, typename ...BF>
+inline typename std::enable_if<I < sizeof...(BF), void>::type
+recursiveFinalizeContinuumVelocity(const int& i_gridPoint,
+                                   const int& i_stress,
+                                   std::tuple<Stress<BF,Cauchy>&...> t)
+{
+	if (I == i_stress)
+	{
+		auto& stress= std::get<I>(t);
+		if (stress.massDensityField[i_gridPoint] > epsilon)
+			stress.velocityField[i_gridPoint]= stress.momentumDensityField[i_gridPoint]/stress.massDensityField[i_gridPoint];
+		else
+			stress.velocityField[i_gridPoint]= Vector3d::Zero();
+	}
+	else
+		recursiveFinalizeContinuumVelocity<I+1>(i_gridPoint,i_stress,t);
+}
+
+template<std::size_t I=0, typename ...TStress>
+inline typename std::enable_if<I == sizeof...(TStress), Vector3d>::type
+recursiveGetContinuumVelocity(const int& i_gridPoint,
+                              const int& i_stress,
+                              std::tuple<TStress&...> t)
+{
+	if (sizeof...(TStress)!=0)
+		assert(0);
+	return Vector3d::Zero();
+}
+template<std::size_t I=0, typename ...BF>
+inline typename std::enable_if<I < sizeof...(BF), Vector3d>::type
+recursiveGetContinuumVelocity(const int& i_gridPoint,
+                              const int& i_stress,
+                              std::tuple<Stress<BF,Cauchy>&...> t)
+{
+	if (I == i_stress)
+		return std::get<I>(t).velocityField[i_gridPoint];
+	return recursiveGetContinuumVelocity<I+1>(i_gridPoint,i_stress,t);
+}
+
+template<std::size_t I=0, typename ...TStress>
+inline typename std::enable_if<I == sizeof...(TStress), void>::type
 recursiveBuildKineticStress(const double& mass,
                             const Vector3d& velocity,
                             const Vector3d& position,
@@ -99,7 +181,14 @@ template<std::size_t I=0, StressType stressType, typename ...BF>
 inline typename std::enable_if<I < sizeof...(BF), void>::type
 recursiveNullifyStress(std::tuple<Stress<BF,stressType>&...> t)
 {
-    std::fill(std::get<I>(t).field.begin(), std::get<I>(t).field.end(),Matrix3d::Zero() );
+    auto& stress= std::get<I>(t);
+    std::fill(stress.field.begin(), stress.field.end(),Matrix3d::Zero());
+	if constexpr (stressType==Cauchy)
+	{
+		std::fill(stress.momentumDensityField.begin(), stress.momentumDensityField.end(),Vector3d::Zero());
+		std::fill(stress.massDensityField.begin(), stress.massDensityField.end(),0.0);
+		std::fill(stress.velocityField.begin(), stress.velocityField.end(),Vector3d::Zero());
+	}
     recursiveNullifyStress<I+1>(t);
 }
 

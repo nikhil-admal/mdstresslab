@@ -31,12 +31,33 @@ int main()
     body.pbc= Vector3i(1,1,1);
 
     const double volume= body.box.determinant();
-    Matrix3d expectedStress= Matrix3d::Zero();
+    const double boltzmannConstantEvPerK= 8.617333262145e-5;
+    double totalMass= 0.0;
+    Vector3d totalMomentum= Vector3d::Zero();
     for (int i=0; i<body.numberOfParticles; ++i)
     {
         Vector3d velocity= body.velocities.row(i);
-        expectedStress-= amuAngstromSquaredPerPicosecondSquaredToEv*body.masses(i)*velocity.transpose()*velocity/volume;
+        totalMass+= body.masses(i);
+        totalMomentum+= body.masses(i)*velocity;
     }
+    Vector3d averageVelocity= totalMomentum/totalMass;
+
+    Matrix3d expectedStress= Matrix3d::Zero();
+    Matrix3d rawVelocityStress= Matrix3d::Zero();
+    double thermalKineticEnergyFactor= 0.0;
+    for (int i=0; i<body.numberOfParticles; ++i)
+    {
+        Vector3d velocity= body.velocities.row(i);
+        Vector3d relativeVelocity= velocity - averageVelocity;
+        expectedStress-= amuAngstromSquaredPerPicosecondSquaredToEv*
+                        body.masses(i)*relativeVelocity.transpose()*relativeVelocity/volume;
+        rawVelocityStress-= amuAngstromSquaredPerPicosecondSquaredToEv*
+                           body.masses(i)*velocity.transpose()*velocity/volume;
+        thermalKineticEnergyFactor+= body.masses(i)*relativeVelocity.squaredNorm();
+    }
+    const double instantaneousTemperature=
+            amuAngstromSquaredPerPicosecondSquaredToEv*thermalKineticEnergyFactor/
+            (3.0*body.numberOfParticles*boltzmannConstantEvPerK);
 
     Grid<Current> grid(Vector3d(0.0,0.0,30.0),Vector3d(60.0,60.0,31.0),12,12);
     MethodSphere virial(20.0,"virial");
@@ -47,16 +68,38 @@ int main()
 
     Matrix3d meanStress= Matrix3d::Zero();
     Matrix3d maxAbsDeviation= Matrix3d::Zero();
-    for (const auto& stress : kineticStress.field)
+    for (int i_grid=0; i_grid<kineticStress.field.size(); ++i_grid)
     {
+        const auto& stress= kineticStress.field[i_grid];
         meanStress+= stress;
         maxAbsDeviation= maxAbsDeviation.cwiseMax((stress-expectedStress).cwiseAbs());
+
+        if (kineticStress.massDensityField[i_grid] < -epsilon)
+            MY_ERROR("Mass density should be nonnegative.");
+
+        if (kineticStress.massDensityField[i_grid] > epsilon)
+        {
+            Vector3d expectedVelocity=
+                    kineticStress.momentumDensityField[i_grid]/kineticStress.massDensityField[i_grid];
+            if ((kineticStress.velocityField[i_grid]-expectedVelocity).norm() > 1e-12)
+                MY_ERROR("Continuum velocity does not equal momentum density divided by mass density.");
+        }
+        else
+        {
+            if (kineticStress.velocityField[i_grid].norm() > 1e-12)
+                MY_ERROR("Continuum velocity should be zero where mass density is zero.");
+        }
     }
     meanStress/= static_cast<double>(kineticStress.field.size());
 
     const double pressure= -expectedStress.trace()/3.0;
+    const double analyticalPressure=
+            body.numberOfParticles*boltzmannConstantEvPerK*instantaneousTemperature/volume;
     const double meanTolerance= 0.20*pressure;
     const double pointwiseTolerance= 0.75*pressure;
+
+    if ((rawVelocityStress-expectedStress).cwiseAbs().maxCoeff() < 10.0*meanTolerance)
+        MY_ERROR("Bulk velocity is too small to distinguish raw-velocity stress from relative-velocity stress.");
 
     if ((meanStress-expectedStress).cwiseAbs().maxCoeff() > meanTolerance)
     {
@@ -72,7 +115,11 @@ int main()
         MY_ERROR("Ideal gas kinetic stress field is too far from the expected uniform field.");
     }
 
-    std::cout << "Instantaneous ideal-gas pressure = " << pressure << " eV/A^3" << std::endl;
+    std::cout << "Mass-weighted average velocity = " << averageVelocity << " A/ps" << std::endl;
+    std::cout << "Instantaneous ideal-gas temperature = " << instantaneousTemperature << " K" << std::endl;
+    std::cout << "Instantaneous ideal-gas pressure from stress = " << pressure << " eV/A^3" << std::endl;
+    std::cout << "Analytical ideal-gas pressure NkBT/V = " << analyticalPressure << " eV/A^3" << std::endl;
+    std::cout << "Raw-velocity stress before subtracting bulk motion:\n" << rawVelocityStress << std::endl;
     std::cout << "Expected stress:\n" << expectedStress << std::endl;
     std::cout << "Mean computed stress:\n" << meanStress << std::endl;
 

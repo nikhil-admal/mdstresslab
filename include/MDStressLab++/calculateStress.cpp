@@ -133,8 +133,23 @@ int calculateKineticStress(const Configuration* pconfig,
             {
                 Vector3d ra= subconfig.coordinates.at(Current).row(particle) - gridPoint;
                 Vector3d velocity= subconfig.velocities.row(particle);
+                recursiveBuildContinuumFields(subconfig.masses(particle),
+                                              velocity,
+                                              ra,
+                                              i_gridPoint,
+                                              i_grid,
+                                              cauchyStress);
+            }
+            recursiveFinalizeContinuumVelocity(i_gridPoint,i_grid,cauchyStress);
+            Vector3d continuumVelocity= recursiveGetContinuumVelocity(i_gridPoint,i_grid,cauchyStress);
+
+            for (const auto& particle : neighborList)
+            {
+                Vector3d ra= subconfig.coordinates.at(Current).row(particle) - gridPoint;
+                Vector3d velocity= subconfig.velocities.row(particle);
+                Vector3d relativeVelocity= velocity - continuumVelocity;
                 recursiveBuildKineticStress(subconfig.masses(particle),
-                                            velocity,
+                                            relativeVelocity,
                                             ra,
                                             i_gridPoint,
                                             i_grid,
@@ -668,8 +683,24 @@ int calculateStress(const Configuration* pconfig,
                 {
                     Vector3d ra= subconfig.coordinates.at(Current).row(particle) - gridPoint;
                     Vector3d velocity= subconfig.velocities.row(particle);
+                    recursiveBuildContinuumFields(subconfig.masses(particle),
+                                                  velocity,
+                                                  ra,
+                                                  i_gridPoint,
+                                                  i_grid-numberOfPiolaStresses,
+                                                  cauchyStress);
+                }
+                recursiveFinalizeContinuumVelocity(i_gridPoint,i_grid-numberOfPiolaStresses,cauchyStress);
+                Vector3d continuumVelocity=
+                        recursiveGetContinuumVelocity(i_gridPoint,i_grid-numberOfPiolaStresses,cauchyStress);
+
+                for (const auto& particle : neighborListOne)
+                {
+                    Vector3d ra= subconfig.coordinates.at(Current).row(particle) - gridPoint;
+                    Vector3d velocity= subconfig.velocities.row(particle);
+                    Vector3d relativeVelocity= velocity - continuumVelocity;
                     recursiveBuildKineticStress(subconfig.masses(particle),
-                                                velocity,
+                                                relativeVelocity,
                                                 ra,
                                                 i_gridPoint,
                                                 i_grid-numberOfPiolaStresses,

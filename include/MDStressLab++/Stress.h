@@ -37,6 +37,9 @@ public:
  * \brief A three-dimensional stress field
  */
 	std::vector<Matrix3d> field;
+	std::vector<Vector3d> momentumDensityField;
+	std::vector<double> massDensityField;
+	std::vector<Vector3d> velocityField;
 
     /*!
      * \brief Pointer to the Grid on which the stress field is defined
@@ -66,6 +69,12 @@ public:
 		field.resize(pgrid->ngrid);
 		for(auto& matrix : field)
 			matrix= Matrix3d::Zero();
+		if constexpr (stressType==Cauchy)
+		{
+			momentumDensityField.resize(pgrid->ngrid,Vector3d::Zero());
+			massDensityField.resize(pgrid->ngrid,0.0);
+			velocityField.resize(pgrid->ngrid,Vector3d::Zero());
+		}
 	}
 
     /*!
@@ -77,6 +86,12 @@ public:
 		field.resize(pgrid->ngrid);
 		for(auto& matrix : field)
 			matrix= Matrix3d::Zero();
+		if constexpr (stressType==Cauchy)
+		{
+			momentumDensityField.resize(pgrid->ngrid,Vector3d::Zero());
+			massDensityField.resize(pgrid->ngrid,0.0);
+			velocityField.resize(pgrid->ngrid,Vector3d::Zero());
+		}
 	}
 
     /*!
@@ -99,7 +114,10 @@ public:
         //Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
         Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
         file << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10);
-        file << "Properties=pos:R:3:stress:R:6" << std::endl;
+		if constexpr (stressType==Cauchy)
+			file << "Properties=pos:R:3:stress:R:6:momentum_density:R:3:mass_density:R:1:velocity:R:3" << std::endl;
+		else
+			file << "Properties=pos:R:3:stress:R:6" << std::endl;
         for (auto& stress : field)
 		{
 			//Eigen::Map<Eigen::Matrix<double,1,DIM*DIM>> stressRow(stress.data(), stress.size());
@@ -110,8 +128,16 @@ public:
                 << std::setw(25) << stress(2,2)
                 << std::setw(25) << stress(0,1)
                 << std::setw(25) << stress(0,2)
-                << std::setw(25) << stress(1,2)
-                << std::endl;
+                << std::setw(25) << stress(1,2);
+			if constexpr (stressType==Cauchy)
+				file << std::setw(25) << momentumDensityField[index](0)
+					 << std::setw(25) << momentumDensityField[index](1)
+					 << std::setw(25) << momentumDensityField[index](2)
+					 << std::setw(25) << massDensityField[index]
+					 << std::setw(25) << velocityField[index](0)
+					 << std::setw(25) << velocityField[index](1)
+					 << std::setw(25) << velocityField[index](2);
+			file << std::endl;
             index++;
 		}
 	}

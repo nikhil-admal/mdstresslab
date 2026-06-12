@@ -9,6 +9,9 @@ atom_style      atomic
 variable        nAtoms equal 8000
 variable        box equal 60.0
 variable        temperature equal 300.0
+variable        vxBulk equal 5.0
+variable        vyBulk equal -3.0
+variable        vzBulk equal 2.0
 
 region          simbox block 0 ${box} 0 ${box} 0 ${box} units box
 create_box      1 simbox
@@ -20,6 +23,7 @@ pair_style      zero 10.0
 pair_coeff      * *
 
 velocity        all create ${temperature} 4928459 mom yes rot no dist gaussian
+velocity        all set ${vxBulk} ${vyBulk} ${vzBulk} sum yes units box
 fix             thermostat all nvt temp ${temperature} ${temperature} 0.1
 
 timestep        0.001
