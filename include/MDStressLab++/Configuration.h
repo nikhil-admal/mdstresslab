@@ -16,10 +16,10 @@
 #include <map>
 
 /**
-* @brief Represents atomic configuration data including coordinates, velocities, and species.
+* @brief Represents atomic configuration data including coordinates, velocities, species, and masses.
 *
 * This class stores the number of particles, their species, coordinates for different
-* configuration states (e.g., Reference and Current), and velocities.
+* configuration states (e.g., Reference and Current), velocities, and masses.
 *
 */
 class Configuration{
@@ -44,6 +44,14 @@ public:
      * @brief Species names for each particle (size equals numberOfParticles).
      */
 	std::vector<std::string> species;
+
+    /**
+     * @brief Mass of each particle.
+     *
+     * A vector of length \f$\texttt{numberOfParticles}\f$, where each entry is
+     * the mass of the corresponding particle.
+     */
+    VectorXd masses;
 
     /**
      * @brief Map from configuration type (Reference or Current) to coordinate matrices.

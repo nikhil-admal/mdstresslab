@@ -63,8 +63,8 @@ int calculateStress(const BoxConfiguration& body,
 }
 template<typename ...BF>
 int calculateStress(const BoxConfiguration& body,
-                    Kim& kim,
-                    std::tuple<Stress<BF,Piola>&...> stress,
+		             Kim& kim,
+					 std::tuple<Stress<BF,Piola>&...> stress,
                     const bool& projectForces=false)
 {
     std::tuple<> emptyTuple;
@@ -73,6 +73,92 @@ int calculateStress(const BoxConfiguration& body,
                            stress,
                            emptyTuple,
                            projectForces);
+}
+
+int calculateKineticStress(const BoxConfiguration& body,
+                           std::tuple<> cauchyStress)
+{
+    MY_WARNING("No Cauchy stress calculation requested. Returning to caller.");
+    return 1;
+}
+
+template<typename ...BF>
+int calculateKineticStress(const Configuration* pconfig,
+                           std::tuple<Stress<BF,Cauchy>&...> cauchyStress)
+{
+    int numberOfCauchyStresses= sizeof...(BF);
+    if (numberOfCauchyStresses == 0)
+    {
+        MY_WARNING("No Cauchy stress calculation requested. Returning to caller.");
+        return 1;
+    }
+
+    recursiveNullifyStress(cauchyStress);
+
+    const auto currentGridAveragingDomainSizeMap=
+            recursiveGridMaxAveragingDomainSizeMap(cauchyStress);
+
+    Stencil stencil(*pconfig);
+    for(const auto& [pgrid,domainSize] : currentGridAveragingDomainSizeMap)
+        stencil.expandStencil(pgrid,domainSize,0.0);
+
+    SubConfiguration subconfig{stencil};
+    if (subconfig.numberOfParticles == 0)
+    {
+        MY_WARNING("All grids away from the current material. Kinetic stresses are identically zero.");
+        return 1;
+    }
+
+    auto currentGridDomainSizePairs= getTGridDomainSizePairs(cauchyStress);
+    assert(numberOfCauchyStresses == currentGridDomainSizePairs.size());
+
+    std::vector<GridSubConfiguration<Current>> neighborListsOfCurrentGrids;
+    for(const auto& gridDomainSizePair : currentGridDomainSizePairs)
+        neighborListsOfCurrentGrids.emplace_back(*gridDomainSizePair.first,subconfig,gridDomainSizePair.second);
+
+    int i_grid= 0;
+    for(const auto& gridDomainSizePair : currentGridDomainSizePairs)
+    {
+        const auto& pgrid= gridDomainSizePair.first;
+        int numberOfGridPoints= pgrid->coordinates.size();
+
+        #pragma omp parallel for
+        for(int i_gridPoint=0; i_gridPoint<numberOfGridPoints; i_gridPoint++)
+        {
+            const auto& gridPoint= pgrid->coordinates[i_gridPoint];
+            std::set<int> neighborList=
+                    neighborListsOfCurrentGrids[i_grid].getGridPointNeighbors(i_gridPoint);
+
+            for (const auto& particle : neighborList)
+            {
+                Vector3d ra= subconfig.coordinates.at(Current).row(particle) - gridPoint;
+                Vector3d velocity= subconfig.velocities.row(particle);
+                recursiveBuildKineticStress(subconfig.masses(particle),
+                                            velocity,
+                                            ra,
+                                            i_gridPoint,
+                                            i_grid,
+                                            cauchyStress);
+            }
+        }
+        i_grid++;
+    }
+
+    return 1;
+}
+
+template<typename ...BF>
+int calculateKineticStress(const BoxConfiguration& body,
+                           std::tuple<Stress<BF,Cauchy>&...> cauchyStress)
+{
+    double maxAveragingDomainSize= averagingDomainSize_max(cauchyStress);
+    if (body.pbc.any() == 1)
+    {
+        std::unique_ptr<const Configuration> pconfig;
+        pconfig.reset(body.getConfiguration(maxAveragingDomainSize));
+        return calculateKineticStress(pconfig.get(),cauchyStress);
+    }
+    return calculateKineticStress(&body,cauchyStress);
 }
 
 // This is the main driver of stress calculation
@@ -581,6 +667,22 @@ int calculateStress(const Configuration* pconfig,
                 neighborListOne= neighborListsOfCurrentGridsOne[i_grid-numberOfPiolaStresses].getGridPointNeighbors(i_gridPoint);
                 neighborListTwo= neighborListsOfCurrentGridsTwo[i_grid-numberOfPiolaStresses].getGridPointNeighbors(i_gridPoint);
             }
+
+            if (i_grid>=numberOfPiolaStresses)
+            {
+                for (const auto& particle : neighborListOne)
+                {
+                    Vector3d ra= subconfig.coordinates.at(Current).row(particle) - gridPoint;
+                    Vector3d velocity= subconfig.velocities.row(particle);
+                    recursiveBuildKineticStress(subconfig.masses(particle),
+                                                velocity,
+                                                ra,
+                                                i_gridPoint,
+                                                i_grid-numberOfPiolaStresses,
+                                                cauchyStress);
+                }
+            }
+
 			for (const auto& particle1 : neighborListOne)
 			{
                 Vector3d ra,rA,rb,rB,rab,rAB;

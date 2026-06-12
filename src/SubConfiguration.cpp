@@ -34,6 +34,7 @@ SubConfiguration::SubConfiguration(const Stencil& stencil) :
 		this->coordinates.at(Current).row(i_localParticle)= parent.coordinates.at(Current).row(particle);
 		if (referenceAndFinal) this->coordinates.at(Reference).row(i_localParticle)= parent.coordinates.at(Reference).row(particle);
 		this->velocities.row(i_localParticle)= parent.velocities.row(particle);
+		this->masses(i_localParticle)= parent.masses(particle);
 		this->species.push_back(parent.species[particle]);
 		i_localParticle++;
 	}
@@ -43,4 +44,3 @@ SubConfiguration::SubConfiguration(const Stencil& stencil) :
 SubConfiguration::~SubConfiguration() {
 	// TODO Auto-generated destructor stub
 }
-

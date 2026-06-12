@@ -54,6 +54,41 @@ inline typename std::enable_if<I < sizeof...(BF), void>::type
 		recursiveBuildStress<I+1>(fij,ra,rA,rb,rB,rab,rAB,i_gridPoint,i_stress,t);
 }
 
+// Recursively build the kinetic part of a Cauchy stress field.
+template<std::size_t I=0, typename ...TStress>
+inline typename std::enable_if<I == sizeof...(TStress), void>::type
+recursiveBuildKineticStress(const double& mass,
+                            const Vector3d& velocity,
+                            const Vector3d& position,
+                            const int& i_gridPoint,
+                            const int& i_stress,
+                            std::tuple<TStress&...> t)
+{
+	if (sizeof...(TStress)!=0)
+		assert(0);
+}
+template<std::size_t I=0, typename ...BF>
+inline typename std::enable_if<I < sizeof...(BF), void>::type
+recursiveBuildKineticStress(const double& mass,
+                            const Vector3d& velocity,
+                            const Vector3d& position,
+                            const int& i_gridPoint,
+                            const int& i_stress,
+                            std::tuple<Stress<BF,Cauchy>&...> t)
+{
+	if (I == i_stress)
+	{
+        auto& stress= std::get<I>(t);
+        if (position.norm() >= stress.method.getAveragingDomainSize())
+            return;
+		stress.field[i_gridPoint]= stress.field[i_gridPoint] -
+                amuAngstromSquaredPerPicosecondSquaredToEv*
+                stress.method(position)*mass*velocity.transpose()*velocity;
+	}
+	else
+		recursiveBuildKineticStress<I+1>(mass,velocity,position,i_gridPoint,i_stress,t);
+}
+
 // Recursively nullify stress of a type sType= Piola/Cauchy
 template<std::size_t I=0, typename ...TStress>
 inline typename std::enable_if<I == sizeof...(TStress), void>::type
@@ -224,4 +259,3 @@ inline typename std::enable_if<I < sizeof...(TStress), void>::type
 }
 
 #endif
-

@@ -1,0 +1,31 @@
+# Ideal gas fixture for MDStressLab++ kinetic stress tests.
+# Units are LAMMPS metal: mass in amu, velocity in Angstrom/ps, energy in eV.
+
+units           metal
+dimension       3
+boundary        p p p
+atom_style      atomic
+
+variable        nAtoms equal 8000
+variable        box equal 60.0
+variable        temperature equal 300.0
+
+region          simbox block 0 ${box} 0 ${box} 0 ${box} units box
+create_box      1 simbox
+create_atoms    1 random ${nAtoms} 87287 simbox
+mass            1 39.948
+
+# No interatomic forces; pair_style zero lets LAMMPS run and report pressure.
+pair_style      zero 10.0
+pair_coeff      * *
+
+velocity        all create ${temperature} 4928459 mom yes rot no dist gaussian
+fix             thermostat all nvt temp ${temperature} ${temperature} 0.1
+
+timestep        0.001
+thermo          1000
+thermo_style    custom step temp press ke pe etotal
+run             10000
+
+set             group all image 0 0 0
+write_data      idealGas.lmp

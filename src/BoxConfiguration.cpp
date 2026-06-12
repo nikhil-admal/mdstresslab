@@ -6,6 +6,9 @@
  */
 
 #include <fstream>
+#include <algorithm>
+#include <sstream>
+#include <unordered_map>
 #include "BoxConfiguration.h"
 #include "Configuration.h"
 #include "typedef.h"
@@ -54,12 +57,36 @@ void BoxConfiguration::read(std::string configFileName, int referenceAndFinal)
 	for(int i=0;i<DIM;++i)
 		if(!(file >> pbc(i))) 			 MY_ERROR("ERROR: PBC.");
 
+	file.ignore(32767, '\n');
+	std::string speciesMassLine;
+	do
+	{
+		if (!std::getline(file, speciesMassLine))
+			MY_ERROR("ERROR: Expected species-mass line after PBC.");
+	}
+	while (speciesMassLine.empty() || speciesMassLine.find_first_not_of(" \t\r\n") == std::string::npos);
+
+	std::map<std::string,double> speciesMasses;
+	std::istringstream speciesMassStream(speciesMassLine);
+	std::string speciesName;
+	double speciesMass;
+	while (speciesMassStream >> speciesName)
+	{
+		if (!(speciesMassStream >> speciesMass))
+			MY_ERROR("ERROR: Expected mass after species " + speciesName + " in species-mass line.");
+		speciesMasses[speciesName]= speciesMass;
+	}
+	if (speciesMasses.empty())
+		MY_ERROR("ERROR: No species masses found after PBC.");
 
 	std::string speciesTemp;
 	for(int i=0;i<numberOfParticles;++i)
 	{
 		if(!(file >> speciesTemp)) 			 MY_ERROR("ERROR: Species code of particle " + std::to_string(i));
+		if (speciesMasses.find(speciesTemp) == speciesMasses.end())
+			MY_ERROR("ERROR: Species " + speciesTemp + " has no mass in the species-mass line.");
 		species.push_back(speciesTemp);
+		masses(i)= speciesMasses.at(speciesTemp);
 		for(int j=0;j<DIM;++j)
 			if(!(file >> coordinates[Current](i,j)))  MY_ERROR("ERROR: Coordinate of particle " + std::to_string(i));
 		for(int j=0;j<DIM;++j)
@@ -128,6 +155,7 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
     int numAtoms = 0;
     int numberOfAtomTypes = 0;
     std::unordered_map<int, std::string> typeToSpecies;
+    std::unordered_map<int, double> typeToMass;
 
     while (std::getline(file, line)) {
         // Normalize to lowercase for keyword checks (optional but helpful)
@@ -208,6 +236,7 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
                 }
 
                 typeToSpecies[type] = speciesName;
+                typeToMass[type] = mass;
 
                 if (++massLinesRead >= numberOfAtomTypes)
                     break; // We've read all the expected mass lines
@@ -233,6 +262,9 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
                 double x, y, z;
                 if (!(ss >> id >> type >> x >> y >> z))
                     MY_ERROR("ERROR: Coordinate of particle " + std::to_string(i));
+                if (typeToSpecies.find(type) == typeToSpecies.end() ||
+                    typeToMass.find(type) == typeToMass.end())
+                    MY_ERROR("ERROR: Atom type " + std::to_string(type) + " is missing from the Masses section.");
 
                 int idxFlagx= 0; int idxFlagy= 0; int idxFlagz= 0;
                 int tmpx, tmpy, tmpz;
@@ -243,10 +275,18 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
                 }
 
                 //if(configType==Current) species.push_back(typeToSpecies[type]);
-                if(configType==Current) species[id-1]= typeToSpecies[type];
-                if(configType==Reference) assert(species[id-1] == typeToSpecies[type] &&
-                                                 "Species in the reference configuration do not match with those in the "
-                                                 "current configuration");
+                if(configType==Current) {
+                    species[id-1]= typeToSpecies.at(type);
+                    masses(id-1)= typeToMass.at(type);
+                }
+                if(configType==Reference) {
+                    assert(species[id-1] == typeToSpecies.at(type) &&
+                           "Species in the reference configuration do not match with those in the "
+                           "current configuration");
+                    assert(masses(id-1) == typeToMass.at(type) &&
+                           "Masses in the reference configuration do not match with those in the "
+                           "current configuration");
+                }
                 if (configType==Reference) {
                     coordinates[configType](id - 1, 0) = x + idxFlagx * reference_box(0, 0);
                     coordinates[configType](id - 1, 1) = y + idxFlagy * reference_box(1, 1);;
@@ -263,7 +303,36 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
                 }
             }
 
-            break; // done reading atom data
+        }
+
+            // Process Velocities section
+        else if (loweredLine.find("velocities") != std::string::npos) {
+            // Skip lines until we reach actual velocity data
+            while (std::getline(file, line)) {
+                if (line.empty() || line.find_first_not_of(" \t\r\n") == std::string::npos)
+                    continue;
+                if (line[0] == '#')
+                    continue;
+                break; // first data line found
+            }
+
+            for (int i = 0; i < numberOfParticles; ++i) {
+                std::istringstream ss(line);
+                int id;
+                double vx, vy, vz;
+                if (!(ss >> id >> vx >> vy >> vz))
+                    MY_ERROR("ERROR: Velocity of particle " + std::to_string(i));
+
+                if(configType==Current) {
+                    velocities(id - 1, 0) = vx;
+                    velocities(id - 1, 1) = vy;
+                    velocities(id - 1, 2) = vz;
+                }
+
+                if (i < numberOfParticles - 1) {
+                    std::getline(file, line);
+                }
+            }
         }
     }
 
@@ -304,6 +373,8 @@ Configuration* BoxConfiguration::getConfiguration(double padding) const
 	// of contributing atoms from BoxConfiguration to Configuration
 	if (referenceAndFinal) (config_ptr->coordinates.at(Reference)).topRows(numberOfParticles)= coordinates.at(Reference);
 	(config_ptr->coordinates.at(Current)).topRows(numberOfParticles)= coordinates.at(Current);
+	config_ptr->velocities.topRows(numberOfParticles)= velocities;
+	config_ptr->masses.head(numberOfParticles)= masses;
 	for (auto it= species.begin();it!= species.end();it++)
 		config_ptr->species.push_back(*it);
 
@@ -313,6 +384,12 @@ Configuration* BoxConfiguration::getConfiguration(double padding) const
 		*new Eigen::Map<MatrixXd> (reference_coordinatesOfPaddings.data(),numberOfPaddings,DIM);
 		config_ptr->coordinates.at(Current).bottomRows(numberOfPaddings)=
 		*new Eigen::Map<MatrixXd> (coordinatesOfPaddings.data(),numberOfPaddings,DIM);
+		for (int i_padding=0; i_padding<numberOfPaddings; ++i_padding)
+		{
+			int master= masterOfPaddings[i_padding];
+			config_ptr->velocities.row(numberOfParticles+i_padding)= velocities.row(master);
+			config_ptr->masses(numberOfParticles+i_padding)= masses(master);
+		}
 		for (auto it= speciesOfPaddings.begin();it!= speciesOfPaddings.end();it++)
 			config_ptr->species.push_back(*it);
 	}
@@ -322,4 +399,3 @@ Configuration* BoxConfiguration::getConfiguration(double padding) const
 BoxConfiguration::~BoxConfiguration() {
 	// TODO Auto-generated destructor stub
 }
-

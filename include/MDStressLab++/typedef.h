@@ -71,6 +71,7 @@ enum ConfigType {
 };
 
 const double epsilon= 1e-8;
+const double amuAngstromSquaredPerPicosecondSquaredToEv= 1.0364269656262175e-4;
 
 
 

@@ -74,7 +74,11 @@ public:
      * - **Lines 2–4**: Reference box vectors as columns of a 3×3 matrix
      * - **Lines 5–7**: Current box vectors as columns of a 3×3 matrix
      * - **Line 8**: Periodic boundary conditions (3 integers, typically 0 or 1)
-     * - **Line 9 onward**: Per-particle data in 10 columns:
+     * - **Line 9**: Species-mass pairs:
+     *   ```
+     *   <species_1> <mass_1> <species_2> <mass_2> ...
+     *   ```
+     * - **Line 10 onward**: Per-particle data in 10 columns:
      *   - Column 1: Species code (e.g., `Ar`)
      *   - Columns 2–4: Current coordinates (x, y, z)
      *   - Columns 5–7: Velocities (vx, vy, vz)
@@ -90,6 +94,7 @@ public:
         0.0  53.4508196512933154 0.0
         0.0  0.0 52.9216036151419047
         1 1 1
+        Ar 39.948
         Ar  0.0000000000000000 0.0000000000000000 0.0000000000000000  0.0000000000000000 0.0000000000000000 0.0000000000000000  0.0000000000000000 0.0000000000000000 0.0000000000000000
         Ar  0.0000000000000000 2.6725409825646658 2.6460801807570951  0.0000000000000000 0.0000000000000000 0.0000000000000000  0.0000000000000000 2.6460801807570951 2.6460801807570951
      * \endverbatim

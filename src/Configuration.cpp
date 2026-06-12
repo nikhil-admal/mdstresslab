@@ -16,6 +16,9 @@ Configuration::Configuration(int numberOfParticles, int referenceAndFinal): numb
 	coordinates[Reference]= MatrixXd::Zero(0,0);
 	if(referenceAndFinal) coordinates[Reference].resize(numberOfParticles,DIM);
 	velocities.resize(numberOfParticles,DIM);
+	velocities.setZero();
+	masses.resize(numberOfParticles);
+	masses.setZero();
 	species.reserve(numberOfParticles);
 }
 
@@ -38,6 +41,7 @@ Configuration* Configuration::getLocalConfiguration(const std::set<int>& localPa
 		plocalConfiguration->coordinates.at(Current).row(i_localParticle)= coordinates.at(Current).row(localParticle);
 		if (referenceAndFinal) plocalConfiguration->coordinates.at(Reference).row(i_localParticle)= coordinates.at(Reference).row(localParticle);
 		plocalConfiguration->velocities.row(i_localParticle)= velocities.row(localParticle);
+		plocalConfiguration->masses(i_localParticle)= masses(localParticle);
 		plocalConfiguration->species.push_back(species[localParticle]);
 		i_localParticle++;
 	}
@@ -48,7 +52,4 @@ Configuration* Configuration::getLocalConfiguration(const std::set<int>& localPa
 Configuration::~Configuration() {
 	// TODO Auto-generated destructor stub
 }
-
-
-
 
