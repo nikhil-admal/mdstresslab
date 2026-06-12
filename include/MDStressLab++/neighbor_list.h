@@ -32,6 +32,8 @@ void nbl_initialize(NeighList ** const nl);
 
 int nbl_create_paddings(const int numberOfParticles,
                         const double cutoff,
+                        double const * reference_origin,
+                        double const * origin,
                         double const * reference_cell,
                         double const * cell,
                         int const * PBC,

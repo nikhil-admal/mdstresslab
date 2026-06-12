@@ -275,6 +275,8 @@ int nbl_get_neigh(void const * const dataObject,
 
 int nbl_create_paddings(int const numberOfParticles,
                         double const cutoff,
+                        double const * reference_origin,
+                        double const * origin,
                         double const * reference_cell,
                         double const * cell,
                         int const * PBC,
@@ -318,9 +320,11 @@ int nbl_create_paddings(int const numberOfParticles,
   {
     const double * atom_coords = coordinates + (DIM * i);
     const double * reference_atom_coords = reference_coordinates + (DIM * i);
-    double x = dot(fcell, atom_coords);
-    double y = dot(fcell + 3, atom_coords);
-    double z = dot(fcell + 6, atom_coords);
+	double atom_coords_relative[DIM];
+	for (int j=0; j<DIM; ++j) atom_coords_relative[j]= atom_coords[j] - origin[j];
+    double x = dot(fcell, atom_coords_relative);
+    double y = dot(fcell + 3, atom_coords_relative);
+    double z = dot(fcell + 6, atom_coords_relative);
     frac_coords[DIM * i + 0] = x;
     frac_coords[DIM * i + 1] = y;
     frac_coords[DIM * i + 2] = z;
@@ -332,9 +336,11 @@ int nbl_create_paddings(int const numberOfParticles,
     if (z > max[2]) { max[2] = z; }
     if(referenceAndFinal)
     {
-		double reference_x = dot(reference_fcell,     reference_atom_coords);
-		double reference_y = dot(reference_fcell + 3, reference_atom_coords);
-		double reference_z = dot(reference_fcell + 6, reference_atom_coords);
+		double reference_atom_coords_relative[DIM];
+		for (int j=0; j<DIM; ++j) reference_atom_coords_relative[j]= reference_atom_coords[j] - reference_origin[j];
+		double reference_x = dot(reference_fcell,     reference_atom_coords_relative);
+		double reference_y = dot(reference_fcell + 3, reference_atom_coords_relative);
+		double reference_z = dot(reference_fcell + 6, reference_atom_coords_relative);
 		reference_frac_coords[DIM * i + 0]= reference_x;
 		reference_frac_coords[DIM * i + 1]= reference_y;
 		reference_frac_coords[DIM * i + 2]= reference_z;
@@ -430,14 +436,14 @@ int nbl_create_paddings(int const numberOfParticles,
 		  }
 
           // absolute coordinates of padding atoms
-          coordinatesOfPaddings.push_back(dot(tcell, atom_coords));
-		  coordinatesOfPaddings.push_back(dot(tcell + 3, atom_coords));
-		  coordinatesOfPaddings.push_back(dot(tcell + 6, atom_coords));
+          coordinatesOfPaddings.push_back(origin[0] + dot(tcell, atom_coords));
+		  coordinatesOfPaddings.push_back(origin[1] + dot(tcell + 3, atom_coords));
+		  coordinatesOfPaddings.push_back(origin[2] + dot(tcell + 6, atom_coords));
           if (referenceAndFinal)
           {
-			  reference_coordinatesOfPaddings.push_back(dot(reference_tcell, reference_atom_coords));
-			  reference_coordinatesOfPaddings.push_back(dot(reference_tcell + 3, reference_atom_coords));
-			  reference_coordinatesOfPaddings.push_back(dot(reference_tcell + 6, reference_atom_coords));
+			  reference_coordinatesOfPaddings.push_back(reference_origin[0] + dot(reference_tcell, reference_atom_coords));
+			  reference_coordinatesOfPaddings.push_back(reference_origin[1] + dot(reference_tcell + 3, reference_atom_coords));
+			  reference_coordinatesOfPaddings.push_back(reference_origin[2] + dot(reference_tcell + 6, reference_atom_coords));
           }
 
           // padding speciesCode code and image
@@ -454,4 +460,3 @@ int nbl_create_paddings(int const numberOfParticles,
 
   return 0;
 }
-

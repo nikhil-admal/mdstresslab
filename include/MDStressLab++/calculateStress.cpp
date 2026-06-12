@@ -249,12 +249,6 @@ int calculateStress(const BoxConfiguration& body,
 		std::cout << std::endl;
 
 
-		// TODO Change step to accommodate non-orthogonal boundary conditions
-		Vector3d origin= Vector3d::Zero();
-		Vector3d step= body.box.diagonal();
-		//recursiveFold(origin,step,body.pbc,piolaStress);
-		//recursiveFold(origin,step,body.pbc,cauchyStress);
-
 		status= calculateStress(pconfig.get(),kim,piolaStress,cauchyStress,projectForces);
 	}
 	else

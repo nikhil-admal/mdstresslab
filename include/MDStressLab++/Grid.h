@@ -34,6 +34,11 @@ public:
 	Grid(Vector3d,
 		 Vector3d,
 		 int ngridx, int ngridy=1,int ngridz=1);
+	Grid(Vector3d,
+		 Matrix3d,
+		 Vector3d,
+		 Vector3d,
+		 int ngridx, int ngridy=1,int ngridz=1);
     Grid(std::string);
 	virtual ~Grid();
 	int ngrid;

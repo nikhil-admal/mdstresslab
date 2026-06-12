@@ -33,9 +33,10 @@
 class BoxConfiguration : public Configuration{
 public:
     /*! \brief The current and reference box vectors stored as columns of respective
-     * matrices.
+     * matrices, and their origins.
      */
     Matrix3d box, reference_box;
+    Vector3d box_origin, reference_box_origin;
 
     /*! \brief Periodic boundary conditions. \ref pbc=(1,0,1) implies periodicity along the \f$x\f$
      * and \f$z\f$-directions.
@@ -71,10 +72,12 @@ public:
      * described below
      *
      * - **Line 1**: Number of particles (integer)
-     * - **Lines 2–4**: Reference box vectors as columns of a 3×3 matrix
-     * - **Lines 5–7**: Current box vectors as columns of a 3×3 matrix
-     * - **Line 8**: Periodic boundary conditions (3 integers, typically 0 or 1)
-     * - **Line 9**: Species-mass pairs:
+     * - **Optional Line 2**: Box origin, tagged as `origin ox oy oz`.
+     *   If absent, both reference and current origins default to `(0,0,0)`.
+     * - **Next 3 lines**: Reference box vectors as columns of a 3×3 matrix
+     * - **Next 3 lines**: Current box vectors as columns of a 3×3 matrix
+     * - **Next line**: Periodic boundary conditions (3 integers, typically 0 or 1)
+     * - **Next line**: Species-mass pairs:
      *   ```
      *   <species_1> <mass_1> <species_2> <mass_2> ...
      *   ```
@@ -87,6 +90,7 @@ public:
      * ### 📄 Example:
      * \verbatim
         2
+        origin 0.0 0.0 0.0
         52.9216036151419047 0.0 0.0
         0.0  52.9216036151419047 0.0
         0.0  0.0 52.9216036151419047

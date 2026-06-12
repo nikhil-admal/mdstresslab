@@ -12,6 +12,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <cmath>
 #include "range.h"
 #include "typedef.h"
 
@@ -155,17 +156,31 @@ typedef SpatialHash<true> ConstSpatialHash;
 
 /*!
  * @class BoxPoints
- * @details A class to fold a collection of points back into a given orthogonal box
+ * @details A class to fold a collection of points back into a given periodic box
  */
 class BoxPoints : public SpatialHash<false>
 {
+private:
+    Matrix3d cell;
 public:
 	BoxPoints(Vector3d origin,
 			  Vector3d step,
-			  MatrixXd& coordinates):SpatialHash<false>(origin,step,coordinates){}
+			  MatrixXd& coordinates):SpatialHash<false>(origin,step,coordinates)
+	{
+		cell= step.asDiagonal();
+	}
+	BoxPoints(Vector3d origin,
+			  const Matrix3d& cell,
+			  MatrixXd& coordinates):SpatialHash<false>(origin,cell.diagonal(),coordinates),cell(cell){}
 	BoxPoints(Vector3d origin,
 			  Vector3d step,
-			  std::vector<Vector3d>& coordinates) : SpatialHash<false>(origin,step,coordinates) {}
+			  std::vector<Vector3d>& coordinates) : SpatialHash<false>(origin,step,coordinates)
+	{
+		cell= step.asDiagonal();
+	}
+	BoxPoints(Vector3d origin,
+			  const Matrix3d& cell,
+			  std::vector<Vector3d>& coordinates) : SpatialHash<false>(origin,cell.diagonal(),coordinates),cell(cell) {}
 
 	virtual ~BoxPoints(){}
 
@@ -175,17 +190,22 @@ public:
      */
 	void fold(const Vector3i& pbc)
 	{
+		Matrix3d inverseCell= cell.inverse();
 		int size= coordinates.size();
 		for(auto i_point : range<int>(0,size))
 		{
-			if (hashFunction(i_point) != Triplet(0,0,0))
+			Vector3d relativePosition= coordinates[i_point] - origin;
+			Vector3d fractionalPosition= (inverseCell * relativePosition.transpose()).transpose();
+			Vector3d foldedFractionalPosition= fractionalPosition;
+			for (int i_dim=0; i_dim<DIM; ++i_dim)
+				if (pbc(i_dim))
+					foldedFractionalPosition(i_dim)-= std::floor(foldedFractionalPosition(i_dim));
+
+			if ((foldedFractionalPosition-fractionalPosition).squaredNorm()>epsilon)
 			{
 				std::cout << "Folding point " << i_point << ": "
 						  << coordinates[i_point] << " ---> ";
-				Vector3d shift;
-				shift= ((hashFunction(i_point).template cast<double>()).array()*step.array()).matrix();
-				shift= (shift.array()* pbc.template cast<double>().array()).matrix();
-				coordinates[i_point]= coordinates[i_point] - shift;
+				coordinates[i_point]= origin + (cell * foldedFractionalPosition.transpose()).transpose();
 				std::cout << coordinates[i_point] << std::endl;
 			}
 		}

@@ -60,6 +60,59 @@ Grid<T>::Grid(Vector3d lowerLimit,
 }
 
 template<ConfigType T>
+Grid<T>::Grid(Vector3d origin,
+			  Matrix3d cell,
+			  Vector3d lowerLimit,
+			  Vector3d upperLimit,
+			  int ngridx,
+			  int ngridy,
+			  int ngridz):ngrid(ngridx*ngridy*ngridz)
+{
+	(void) origin;
+	this->setCounter();
+	int numberOfGrids= GridBase::numberOfCurrentGrids + GridBase::numberOfReferenceGrids;
+	if (numberOfGrids == 1) MY_HEADING("Creating Grids");
+
+	std::cout << "Grid " << numberOfGrids << ". Creating a cell-aligned uniform grid of " << ngrid
+			  << " points between (" << lowerLimit << ") and (" << upperLimit << ")" << std::endl;
+	std::cout << std::endl;
+	coordinates.resize(ngrid);
+
+	Vector3d cellVectorLengths;
+	for (int i_dim=0; i_dim<DIM; ++i_dim)
+	{
+		cellVectorLengths(i_dim)= cell.col(i_dim).norm();
+		if (cellVectorLengths(i_dim)<epsilon)
+			MY_ERROR("ERROR: Degenerate cell vector in grid construction.");
+	}
+
+	Vector3d cellDisplacement= (cell.inverse()*(upperLimit-lowerLimit).transpose()).transpose();
+	if ((cellDisplacement.array() < -epsilon).any())
+		MY_ERROR("ERROR: upperLimit-lowerLimit has negative components in the cell-vector basis.");
+
+	int index= 0;
+	for (auto i : range<int>(0,ngridx))
+	{
+		double coordinate0= 0.0;
+		if (ngridx>1) coordinate0 += i*cellDisplacement(0)/ngridx;
+		for (auto j : range<int>(0,ngridy))
+		{
+			double coordinate1= 0.0;
+			if (ngridy>1) coordinate1 += j*cellDisplacement(1)/ngridy;
+			for (auto k : range<int>(0,ngridz))
+			{
+				double coordinate2= 0.0;
+				if (ngridz>1) coordinate2 += k*cellDisplacement(2)/ngridz;
+
+				Vector3d fractionalCoordinates(coordinate0,coordinate1,coordinate2);
+				coordinates[index]= lowerLimit + (cell*fractionalCoordinates.transpose()).transpose();
+				index++;
+			}
+		}
+	}
+}
+
+template<ConfigType T>
 Grid<T>::Grid(std::string filename)
 {
 	this->setCounter();

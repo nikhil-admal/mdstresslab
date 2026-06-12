@@ -17,6 +17,8 @@
 #include "Grid.h"
 #include "typedef.h"
 #include <regex>
+#include <algorithm>
+#include <cmath>
 
 
 int main()
@@ -50,23 +52,12 @@ int main()
 
 
     // get number of particles
-    int numberOfParticles;
-    double xlo, xhi, ylo, yhi, zlo, zhi;
+    int numberOfParticles= -1;
     while (std::getline(currentConfigFile, line)) {
         std::string loweredLine = line;
         std::transform(loweredLine.begin(), loweredLine.end(), loweredLine.begin(), ::tolower);
 
         if (loweredLine.find("atoms") != std::string::npos && (std::stringstream(line) >> numberOfParticles) ) {
-        }
-        else if (loweredLine.find("xlo xhi") != std::string::npos) {
-            std::istringstream ss(line);
-            ss >> xlo >> xhi;
-        } else if (loweredLine.find("ylo yhi") != std::string::npos) {
-            std::istringstream ss(line);
-            ss >> ylo >> yhi;
-        } else if (loweredLine.find("zlo zhi") != std::string::npos) {
-            std::istringstream ss(line);
-            ss >> zlo >> zhi;
             break;
         }
     }
@@ -179,37 +170,48 @@ int main()
         for (auto & j : token) {
             gridStream >> j;
         }
+
         // Lambda to convert token or use fallback
         auto parseOrFallback = [](const std::string& s, double fallback) -> double {
             return (s == "*") ? fallback : std::stod(s);
         };
-        // Use fallback values if needed
-        lowerLimit[0]= parseOrFallback(token[0], xlo)-FLT_EPSILON;
-        lowerLimit[1]= parseOrFallback(token[1], ylo)-FLT_EPSILON;
-        lowerLimit[2]= parseOrFallback(token[2], zlo)-FLT_EPSILON;
-        //lowerLimit[0]= parseOrFallback(token[0], xlo);
-        //lowerLimit[1]= parseOrFallback(token[1], ylo);
-        //lowerLimit[2]= parseOrFallback(token[2], zlo);
-
-        upperLimit[0]= parseOrFallback(token[3], xhi);
-        upperLimit[1]= parseOrFallback(token[4], yhi);
-        upperLimit[2]= parseOrFallback(token[5], zhi);
 
         // Parse delta values and diameter directly
         deltax = std::stod(token[6]);
         deltay = std::stod(token[7]);
         deltaz = std::stod(token[8]);
 
-        ngridx= (abs(deltax) > FLT_EPSILON) ? floor((upperLimit(0)-lowerLimit(0))/deltax) : 1;
-        ngridy= (abs(deltay) > FLT_EPSILON) ? floor((upperLimit(1)-lowerLimit(1))/deltay) : 1;
-        ngridz= (abs(deltaz) > FLT_EPSILON) ? floor((upperLimit(2)-lowerLimit(2))/deltaz) : 1;
-        //ngridx= (abs(deltax) > FLT_EPSILON) ? floor((upperLimit(0)-lowerLimit(0)+FLT_EPSILON)/deltax) : 1;
-        //ngridy= (abs(deltay) > FLT_EPSILON) ? floor((upperLimit(1)-lowerLimit(1)+FLT_EPSILON)/deltay) : 1;
-        //ngridz= (abs(deltaz) > FLT_EPSILON) ? floor((upperLimit(2)-lowerLimit(2)+FLT_EPSILON)/deltaz) : 1;
+        auto configureCellAlignedGrid = [&](const Vector3d& origin, const Matrix3d& cell) {
+            Vector3d lowerCorner= origin;
+            Vector3d upperCorner= origin + cell.col(0).transpose() +
+                                  cell.col(1).transpose() + cell.col(2).transpose();
 
-        std::cout << "Grid Limits: ";
-        std::cout << lowerLimit << " " << upperLimit << std::endl;
-        std::cout << "Number of grid points: " << ngridx << " " << ngridy << " " << ngridz << std::endl;
+            lowerLimit[0]= parseOrFallback(token[0],lowerCorner[0]);
+            lowerLimit[1]= parseOrFallback(token[1],lowerCorner[1]);
+            lowerLimit[2]= parseOrFallback(token[2],lowerCorner[2]);
+
+            upperLimit[0]= parseOrFallback(token[3],upperCorner[0]);
+            upperLimit[1]= parseOrFallback(token[4],upperCorner[1]);
+            upperLimit[2]= parseOrFallback(token[5],upperCorner[2]);
+
+            Vector3d cellDisplacement= (cell.inverse()*(upperLimit-lowerLimit).transpose()).transpose();
+            if ((cellDisplacement.array() < -epsilon).any())
+                MY_ERROR("ERROR: Grid upperLimit-lowerLimit has negative components in the cell-vector basis.");
+
+            Vector3d cellVectorLengths(cell.col(0).norm(),cell.col(1).norm(),cell.col(2).norm());
+            auto gridCount = [](double length, double delta) -> int {
+                if (std::abs(delta) <= FLT_EPSILON) return 1;
+                return std::max(1,static_cast<int>(floor((length+FLT_EPSILON)/delta)));
+            };
+
+            ngridx= gridCount(cellDisplacement(0)*cellVectorLengths(0),deltax);
+            ngridy= gridCount(cellDisplacement(1)*cellVectorLengths(1),deltay);
+            ngridz= gridCount(cellDisplacement(2)*cellVectorLengths(2),deltaz);
+
+            std::cout << "Grid Limits: ";
+            std::cout << lowerLimit << " " << upperLimit << std::endl;
+            std::cout << "Number of grid points: " << ngridx << " " << ngridy << " " << ngridz << std::endl;
+        };
 
         // ----------- Output prefix
         outPrefix= next_line();
@@ -218,7 +220,9 @@ int main()
 
         if (averagingDomain=="ldad") {
             try {
-                Grid<Reference> grid(lowerLimit, upperLimit, ngridx, ngridy, ngridz);
+                configureCellAlignedGrid(body.reference_box_origin,body.reference_box);
+                Grid<Reference> grid(body.reference_box_origin,body.reference_box,lowerLimit,upperLimit,
+                                     ngridx,ngridy,ngridz);
                 //Matrix3d ldadVectors= averagingDomainSize*Matrix3d::Identity();
 
                 MethodLdadTrigonometric ldadDomain(ldadVectors);
@@ -240,7 +244,8 @@ int main()
             }
         }
         else if(averagingDomain=="sphere"){
-            Grid<Current> grid(lowerLimit, upperLimit, ngridx, ngridy, ngridz);
+            configureCellAlignedGrid(body.box_origin,body.box);
+            Grid<Current> grid(body.box_origin,body.box,lowerLimit,upperLimit,ngridx,ngridy,ngridz);
             MethodSphere hardy(averagingDomainSize, "hardy");
 
             // stress calculation using projected forces

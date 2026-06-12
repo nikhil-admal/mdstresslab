@@ -29,6 +29,8 @@ BoxConfiguration::BoxConfiguration(int numberOfParticles, int referenceAndFinal)
 	// Default to zero box sizes and no pbc
 	box.setZero();
 	reference_box.setZero();
+	box_origin.setZero();
+	reference_box_origin.setZero();
 	pbc.setZero();
 }
 
@@ -50,12 +52,53 @@ void BoxConfiguration::read(std::string configFileName, int referenceAndFinal)
 	if (numberOfParticles != numberOfParticlesInFile)
 		MY_ERROR("Error: Number of particles in file does not equal to that of BoxConfiguration");
 
+	file.ignore(32767, '\n');
+	auto nextDataLine = [&]() {
+		std::string dataLine;
+		do
+		{
+			if (!std::getline(file,dataLine))
+				MY_ERROR("ERROR: Unexpected end of file while reading box configuration.");
+		}
+		while (dataLine.empty() ||
+			   dataLine.find_first_not_of(" \t\r\n") == std::string::npos ||
+			   dataLine[dataLine.find_first_not_of(" \t\r\n")] == '#');
+		return dataLine;
+	};
+
+	std::string firstBoxLine= nextDataLine();
+	std::istringstream keywordStream(firstBoxLine);
+	std::string keyword;
+	keywordStream >> keyword;
+	std::transform(keyword.begin(),keyword.end(),keyword.begin(),::tolower);
+	if (keyword=="origin")
+	{
+		Vector3d origin;
+		if (!(keywordStream >> origin(0) >> origin(1) >> origin(2)))
+			MY_ERROR("ERROR: Expected three coordinates after origin.");
+		reference_box_origin= origin;
+		box_origin= origin;
+		firstBoxLine= nextDataLine();
+	}
+
+	std::istringstream firstBoxLineStream(firstBoxLine);
+	auto readBoxScalar = [&](double& value, const std::string& errorMessage) {
+		if (firstBoxLineStream >> value)
+			return;
+		if (!(file >> value))
+			MY_ERROR(errorMessage);
+	};
+
 	for(int i=0;i<DIM*DIM;++i)
-		if(!(file >> reference_box(i)))  MY_ERROR("ERROR: Reference box size.");
+		readBoxScalar(reference_box(i),"ERROR: Reference box size.");
 	for(int i=0;i<DIM*DIM;++i)
-		if(!(file >> box(i))) 			 MY_ERROR("ERROR: Box size.");
+		readBoxScalar(box(i),"ERROR: Box size.");
 	for(int i=0;i<DIM;++i)
-		if(!(file >> pbc(i))) 			 MY_ERROR("ERROR: PBC.");
+	{
+		if (firstBoxLineStream >> pbc(i))
+			continue;
+		if (!(file >> pbc(i))) 			 MY_ERROR("ERROR: PBC.");
+	}
 
 	file.ignore(32767, '\n');
 	std::string speciesMassLine;
@@ -156,6 +199,28 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
     int numberOfAtomTypes = 0;
     std::unordered_map<int, std::string> typeToSpecies;
     std::unordered_map<int, double> typeToMass;
+    double xlo=0.0, xhi=0.0, ylo=0.0, yhi=0.0, zlo=0.0, zhi=0.0;
+    double xy=0.0, xz=0.0, yz=0.0;
+    auto updateBox = [&]() {
+        double xloTrue= xlo - std::min({0.0,xy,xz,xy+xz});
+        double xhiTrue= xhi - std::max({0.0,xy,xz,xy+xz});
+        double yloTrue= ylo - std::min(0.0,yz);
+        double yhiTrue= yhi - std::max(0.0,yz);
+        Matrix3d lammpsBox= Matrix3d::Zero();
+        lammpsBox.col(0)= Vector3d(xhiTrue-xloTrue,0.0,0.0);
+        lammpsBox.col(1)= Vector3d(xy,yhiTrue-yloTrue,0.0);
+        lammpsBox.col(2)= Vector3d(xz,yz,zhi-zlo);
+        if (configType==Current)
+        {
+            box= lammpsBox;
+            box_origin= Vector3d(xloTrue,yloTrue,zlo);
+        }
+        else
+        {
+            reference_box= lammpsBox;
+            reference_box_origin= Vector3d(xloTrue,yloTrue,zlo);
+        }
+    };
 
     while (std::getline(file, line)) {
         // Normalize to lowercase for keyword checks (optional but helpful)
@@ -177,28 +242,20 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
             // Parse box dimensions
         else if (loweredLine.find("xlo xhi") != std::string::npos) {
             std::istringstream ss(line);
-            double xlo, xhi;
             ss >> xlo >> xhi;
-            if (configType==Current)
-                box(0, 0) = xhi - xlo;
-            else
-                reference_box(0, 0) = xhi - xlo;
+            updateBox();
         } else if (loweredLine.find("ylo yhi") != std::string::npos) {
             std::istringstream ss(line);
-            double ylo, yhi;
             ss >> ylo >> yhi;
-            if (configType==Current)
-                box(1, 1) = yhi - ylo;
-            else
-                reference_box(1, 1) = yhi - ylo;
+            updateBox();
         } else if (loweredLine.find("zlo zhi") != std::string::npos) {
             std::istringstream ss(line);
-            double zlo, zhi;
             ss >> zlo >> zhi;
-            if (configType==Current)
-                box(2, 2) = zhi - zlo;
-            else
-                reference_box(2, 2) = zhi - zlo;
+            updateBox();
+        } else if (loweredLine.find("xy xz yz") != std::string::npos) {
+            std::istringstream ss(line);
+            ss >> xy >> xz >> yz;
+            updateBox();
         }
 
             // Process Masses section
@@ -287,16 +344,11 @@ void BoxConfiguration::lmpParser(std::ifstream& file, const ConfigType& configTy
                            "Masses in the reference configuration do not match with those in the "
                            "current configuration");
                 }
-                if (configType==Reference) {
-                    coordinates[configType](id - 1, 0) = x + idxFlagx * reference_box(0, 0);
-                    coordinates[configType](id - 1, 1) = y + idxFlagy * reference_box(1, 1);;
-                    coordinates[configType](id - 1, 2) = z + idxFlagz * reference_box(2, 2);;
-                }
-                else{
-                    coordinates[configType](id - 1, 0) = x + idxFlagx * box(0, 0);
-                    coordinates[configType](id - 1, 1) = y + idxFlagy * box(1, 1);;
-                    coordinates[configType](id - 1, 2) = z + idxFlagz * box(2, 2);;
-                }
+                const Matrix3d& boxMatrix= (configType==Reference) ? reference_box : box;
+                Vector3d imageShift= idxFlagx*boxMatrix.col(0).transpose() +
+                                     idxFlagy*boxMatrix.col(1).transpose() +
+                                     idxFlagz*boxMatrix.col(2).transpose();
+                coordinates[configType].row(id - 1)= Vector3d(x,y,z) + imageShift;
 
                 if (i < numberOfParticles - 1) {
                     std::getline(file, line); // read next line
@@ -352,6 +404,8 @@ Configuration* BoxConfiguration::getConfiguration(double padding) const
 
 	nbl_create_paddings(numberOfParticles,
 						padding,
+						reference_box_origin.data(),
+						box_origin.data(),
 						reference_box.data(),
 						box.data(),
 						pbc.data(),

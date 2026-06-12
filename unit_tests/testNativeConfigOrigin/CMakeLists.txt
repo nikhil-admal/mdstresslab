@@ -1,0 +1,8 @@
+enable_testing()
+
+configure_file(config_with_origin.data config_with_origin.data)
+configure_file(config_legacy.data config_legacy.data)
+add_executable(testNativeConfigOrigin testNativeConfigOrigin.cpp)
+target_link_libraries(testNativeConfigOrigin MDStressLab++)
+
+add_test(TestNativeConfigOrigin testNativeConfigOrigin)

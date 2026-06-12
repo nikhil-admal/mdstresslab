@@ -226,20 +226,20 @@ inline typename std::enable_if<I < sizeof...(TStress)-1, std::vector<GridBase*>>
 ///////////////////////////      Fold the grid points in all the grids of type= Reference/Current     //////////////////////////////
 template<std::size_t I=0, typename ...TStress>
 inline typename std::enable_if<I == sizeof...(TStress), void>::type
- recursiveFold(const Vector3d& origin, const Vector3d& step, const Vector3i& pbc, const std::tuple<TStress&...> t)
+ recursiveFold(const Vector3d& origin, const Matrix3d& cell, const Vector3i& pbc, const std::tuple<TStress&...> t)
 { }
 template<std::size_t I=0, typename ...TStress>
 inline typename std::enable_if<I < sizeof...(TStress), void>::type
  recursiveFold(const Vector3d& origin,
-						  const Vector3d& step,
+						  const Matrix3d& cell,
 						  const Vector3i& pbc,
 						  std::tuple<TStress&...> t)
 {
-	BoxPoints boxPoints(origin,step, std::get<I>(t).pgrid->coordinates);
+	BoxPoints boxPoints(origin,cell, std::get<I>(t).pgrid->coordinates);
 	std::cout << "Folding grid points in grid: " << std::get<I>(t).pgrid << " if necessary...."<<"\n";
 	boxPoints.fold(pbc);
 	std::cout << std::endl;
-	recursiveFold<I+1>(origin,step,pbc,t);
+	recursiveFold<I+1>(origin,cell,pbc,t);
 }
 
 // Write grid data for each requested stress field
