@@ -25,6 +25,7 @@ var typedef_8h =
       [ "Cauchy", "typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280", null ],
       [ "Piola", "typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc", null ]
     ] ],
+    [ "amuAngstromSquaredPerPicosecondSquaredToEv", "typedef_8h.html#a0acbe58426bc8c19a895a1154613ae92", null ],
     [ "DIM", "typedef_8h.html#a589b8b9bfdf714f736059845d568b597", null ],
     [ "epsilon", "typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025", null ]
 ];

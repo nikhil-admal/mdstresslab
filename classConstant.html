@@ -112,8 +112,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a478e7c170dfd9818aacb8114cf5993a0" id="r_a478e7c170dfd9818aacb8114cf5993a0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConstant.html#a478e7c170dfd9818aacb8114cf5993a0">~Constant</a> ()</td></tr>
 <tr class="separator:a478e7c170dfd9818aacb8114cf5993a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9cb37a84df15efb4f93819d3483effd" id="r_ae9cb37a84df15efb4f93819d3483effd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConstant.html#ae9cb37a84df15efb4f93819d3483effd">operator()</a> (const double &amp;t) const</td></tr>
+<tr class="memdesc:ae9cb37a84df15efb4f93819d3483effd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the one-dimensional constant LDAD shape function.  <br /></td></tr>
 <tr class="separator:ae9cb37a84df15efb4f93819d3483effd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0991b7a45cfdfa74ce2b131e47a79255" id="r_a0991b7a45cfdfa74ce2b131e47a79255"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConstant.html#a0991b7a45cfdfa74ce2b131e47a79255">integral</a> () const</td></tr>
+<tr class="memdesc:a0991b7a45cfdfa74ce2b131e47a79255"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return \(\int_{-1}^{1}\phi(t)\,dt=2\) for this shape.  <br /></td></tr>
+<tr class="separator:a0991b7a45cfdfa74ce2b131e47a79255"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aade9984be63c3edc68585af7e2d42a53" id="r_aade9984be63c3edc68585af7e2d42a53"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConstant.html#aade9984be63c3edc68585af7e2d42a53">integrate</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec1_pull_seg, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec2_pull_seg) const</td></tr>
+<tr class="memdesc:aade9984be63c3edc68585af7e2d42a53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the segment integral used by the LDAD bond function.  <br /></td></tr>
 <tr class="separator:aade9984be63c3edc68585af7e2d42a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -167,6 +172,27 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0991b7a45cfdfa74ce2b131e47a79255" name="a0991b7a45cfdfa74ce2b131e47a79255"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0991b7a45cfdfa74ce2b131e47a79255">&#9670;&#160;</a></span>integral()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Constant::integral </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return \(\int_{-1}^{1}\phi(t)\,dt=2\) for this shape. </p>
+
+<p class="definition">Definition at line <a class="el" href="Constant_8cpp_source.html#l00032">32</a> of file <a class="el" href="Constant_8cpp_source.html">Constant.cpp</a>.</p>
+
+</div>
+</div>
 <a id="aade9984be63c3edc68585af7e2d42a53" name="aade9984be63c3edc68585af7e2d42a53"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aade9984be63c3edc68585af7e2d42a53">&#9670;&#160;</a></span>integrate()</h2>
 
@@ -193,7 +219,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Constant_8cpp_source.html#l00032">32</a> of file <a class="el" href="Constant_8cpp_source.html">Constant.cpp</a>.</p>
+<p>Evaluate the segment integral used by the LDAD bond function. </p>
+
+<p class="definition">Definition at line <a class="el" href="Constant_8cpp_source.html#l00037">37</a> of file <a class="el" href="Constant_8cpp_source.html">Constant.cpp</a>.</p>
 
 </div>
 </div>
@@ -212,6 +240,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Evaluate the one-dimensional constant LDAD shape function. </p>
 
 <p class="definition">Definition at line <a class="el" href="Constant_8cpp_source.html#l00015">15</a> of file <a class="el" href="Constant_8cpp_source.html">Constant.cpp</a>.</p>
 

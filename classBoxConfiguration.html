@@ -114,7 +114,7 @@ Inheritance diagram for BoxConfiguration:</div>
 <div class="center"><img src="classBoxConfiguration__inherit__graph.png" border="0" usemap="#aBoxConfiguration_inherit__map" alt="Inheritance graph"/></div>
 <map name="aBoxConfiguration_inherit__map" id="aBoxConfiguration_inherit__map">
 <area shape="rect" title="Represents a particle configuration including simulation box information." alt="" coords="5,79,140,104"/>
-<area shape="rect" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, and species." alt="" coords="18,5,127,31"/>
+<area shape="rect" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, species, and masses." alt="" coords="18,5,127,31"/>
 <area shape="poly" title=" " alt="" coords="75,44,75,79,70,79,70,44"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -124,7 +124,7 @@ Collaboration diagram for BoxConfiguration:</div>
 <div class="center"><img src="classBoxConfiguration__coll__graph.png" border="0" usemap="#aBoxConfiguration_coll__map" alt="Collaboration graph"/></div>
 <map name="aBoxConfiguration_coll__map" id="aBoxConfiguration_coll__map">
 <area shape="rect" title="Represents a particle configuration including simulation box information." alt="" coords="133,360,267,385"/>
-<area shape="rect" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, and species." alt="" coords="145,285,255,311"/>
+<area shape="rect" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, species, and masses." alt="" coords="145,285,255,311"/>
 <area shape="poly" title=" " alt="" coords="203,325,203,360,197,360,197,325"/>
 <area shape="rect" title=" " alt="" coords="5,190,192,215"/>
 <area shape="poly" title=" " alt="" coords="123,223,189,283,186,287,120,227"/>
@@ -149,19 +149,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7098ac0270582b79837adb6f44b97708"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function to read the properties of atoms from a file in a MDStressLab format.  <br /></td></tr>
 <tr class="separator:a7098ac0270582b79837adb6f44b97708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13f482925d3ff101d11ab4e0b99dd700" id="r_a13f482925d3ff101d11ab4e0b99dd700"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#a13f482925d3ff101d11ab4e0b99dd700">readLMP</a> (const std::string &amp;, const <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9">ConfigType</a> &amp;configType)</td></tr>
-<tr class="memdesc:a13f482925d3ff101d11ab4e0b99dd700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a configuration from an LAMMPS-style dump file.  <br /></td></tr>
+<tr class="memdesc:a13f482925d3ff101d11ab4e0b99dd700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a configuration from a LAMMPS data file.  <br /></td></tr>
 <tr class="separator:a13f482925d3ff101d11ab4e0b99dd700"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2d57771e836c060be12c340eb276544" id="r_ab2d57771e836c060be12c340eb276544"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#ab2d57771e836c060be12c340eb276544">readLMP</a> (const std::string &amp;currentConfigFileName, const std::string &amp;referenceConfigFileName)</td></tr>
 <tr class="memdesc:ab2d57771e836c060be12c340eb276544"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads both current and reference configurations from LAMMPS-style dump files.  <br /></td></tr>
 <tr class="separator:ab2d57771e836c060be12c340eb276544"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9002be5dcabcff0ca381fa295b6f6f65" id="r_a9002be5dcabcff0ca381fa295b6f6f65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#a9002be5dcabcff0ca381fa295b6f6f65">lmpParser</a> (std::ifstream &amp;, const <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9">ConfigType</a> &amp;)</td></tr>
-<tr class="memdesc:a9002be5dcabcff0ca381fa295b6f6f65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a LAMMPS dump file to populate configuration data.  <br /></td></tr>
+<tr class="memdesc:a9002be5dcabcff0ca381fa295b6f6f65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a LAMMPS data file to populate configuration data.  <br /></td></tr>
 <tr class="separator:a9002be5dcabcff0ca381fa295b6f6f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a867a43698adcf9cce20afbce953411b0" id="r_a867a43698adcf9cce20afbce953411b0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#a867a43698adcf9cce20afbce953411b0">~BoxConfiguration</a> ()</td></tr>
 <tr class="separator:a867a43698adcf9cce20afbce953411b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classConfiguration"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classConfiguration')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classConfiguration.html">Configuration</a></td></tr>
 <tr class="memitem:a9968c30c5b5718680a6f0a37e9abe11e inherit pub_methods_classConfiguration" id="r_a9968c30c5b5718680a6f0a37e9abe11e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a9968c30c5b5718680a6f0a37e9abe11e">Configuration</a> (int, int)</td></tr>
-<tr class="memdesc:a9968c30c5b5718680a6f0a37e9abe11e inherit pub_methods_classConfiguration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, and species.">Configuration</a> object.  <br /></td></tr>
+<tr class="memdesc:a9968c30c5b5718680a6f0a37e9abe11e inherit pub_methods_classConfiguration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, species, and masses.">Configuration</a> object.  <br /></td></tr>
 <tr class="separator:a9968c30c5b5718680a6f0a37e9abe11e inherit pub_methods_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dd0fa189e239f4c9a036303f641441e inherit pub_methods_classConfiguration" id="r_a0dd0fa189e239f4c9a036303f641441e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a0dd0fa189e239f4c9a036303f641441e">~Configuration</a> ()</td></tr>
 <tr class="separator:a0dd0fa189e239f4c9a036303f641441e inherit pub_methods_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,12 +172,16 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aa13ffab39af119d1ea8253e236480cd2" id="r_aa13ffab39af119d1ea8253e236480cd2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#a62b42fd2ce74b4f877759c2466f17238">Matrix3d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#aa13ffab39af119d1ea8253e236480cd2">box</a></td></tr>
-<tr class="memdesc:aa13ffab39af119d1ea8253e236480cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current and reference box vectors stored as columns of respective matrices.  <br /></td></tr>
+<tr class="memdesc:aa13ffab39af119d1ea8253e236480cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current and reference box vectors stored as columns of respective matrices, and their origins.  <br /></td></tr>
 <tr class="separator:aa13ffab39af119d1ea8253e236480cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff8e04cb505591b49713d3ee7af090e8" id="r_aff8e04cb505591b49713d3ee7af090e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#a62b42fd2ce74b4f877759c2466f17238">Matrix3d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#aff8e04cb505591b49713d3ee7af090e8">reference_box</a></td></tr>
 <tr class="separator:aff8e04cb505591b49713d3ee7af090e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f86a47a51ef5ef785f15a3c90023438" id="r_a0f86a47a51ef5ef785f15a3c90023438"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#a0f86a47a51ef5ef785f15a3c90023438">box_origin</a></td></tr>
+<tr class="separator:a0f86a47a51ef5ef785f15a3c90023438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab55b07be8824e6a74227c8974e287a6e" id="r_ab55b07be8824e6a74227c8974e287a6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#ab55b07be8824e6a74227c8974e287a6e">reference_box_origin</a></td></tr>
+<tr class="separator:ab55b07be8824e6a74227c8974e287a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1988923b4618bca603e6c5b169e9d42b" id="r_a1988923b4618bca603e6c5b169e9d42b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#ab2e2a70cab71ad9e7d7cef44cf247224">Vector3i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxConfiguration.html#a1988923b4618bca603e6c5b169e9d42b">pbc</a></td></tr>
-<tr class="memdesc:a1988923b4618bca603e6c5b169e9d42b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic boundary conditions. pbc=(1,0,1) implies periodicity along the \(x\) and \(z\)-directions.  <br /></td></tr>
+<tr class="memdesc:a1988923b4618bca603e6c5b169e9d42b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Periodic boundary conditions. <code>pbc=(1,0,1)</code> implies periodicity along the \(x\) and \(z\)-directions.  <br /></td></tr>
 <tr class="separator:a1988923b4618bca603e6c5b169e9d42b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classConfiguration"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classConfiguration')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classConfiguration.html">Configuration</a></td></tr>
 <tr class="memitem:a8f9f5aa7a16dae76a09a6a127b9cb616 inherit pub_attribs_classConfiguration" id="r_a8f9f5aa7a16dae76a09a6a127b9cb616"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a8f9f5aa7a16dae76a09a6a127b9cb616">numberOfParticles</a></td></tr>
@@ -186,6 +190,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a43dffc4aba8ef2a5ec8a2dd72faf95dd inherit pub_attribs_classConfiguration" id="r_a43dffc4aba8ef2a5ec8a2dd72faf95dd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a43dffc4aba8ef2a5ec8a2dd72faf95dd">species</a></td></tr>
 <tr class="memdesc:a43dffc4aba8ef2a5ec8a2dd72faf95dd inherit pub_attribs_classConfiguration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Species names for each particle (size equals numberOfParticles).  <br /></td></tr>
 <tr class="separator:a43dffc4aba8ef2a5ec8a2dd72faf95dd inherit pub_attribs_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21367caa4c32c35e50b0eecaba910d44 inherit pub_attribs_classConfiguration" id="r_a21367caa4c32c35e50b0eecaba910d44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#a95c2aca5fc1a1ab42f573f852bda9433">VectorXd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a21367caa4c32c35e50b0eecaba910d44">masses</a></td></tr>
+<tr class="memdesc:a21367caa4c32c35e50b0eecaba910d44 inherit pub_attribs_classConfiguration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mass of each particle.  <br /></td></tr>
+<tr class="separator:a21367caa4c32c35e50b0eecaba910d44 inherit pub_attribs_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2bc09e4f8aea736e6b878dd41b09e99 inherit pub_attribs_classConfiguration" id="r_af2bc09e4f8aea736e6b878dd41b09e99"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9">ConfigType</a>, <a class="el" href="typedef_8h.html#a82264e4a8487759a15a98c90573c6bd8">MatrixXd</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#af2bc09e4f8aea736e6b878dd41b09e99">coordinates</a></td></tr>
 <tr class="memdesc:af2bc09e4f8aea736e6b878dd41b09e99 inherit pub_attribs_classConfiguration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map from configuration type (Reference or Current) to coordinate matrices.  <br /></td></tr>
 <tr class="separator:af2bc09e4f8aea736e6b878dd41b09e99 inherit pub_attribs_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,17 +202,17 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a particle configuration including simulation box information. </p>
-<p>This class extends the base <a class="el" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, and species.">Configuration</a> class by adding storage for simulation box vectors (both Current and Reference) and periodic boundary conditions. It provides functionality to read configurations from MDStressLab and LAMMPS dump-style files, manage padding due to periodicity, and access box geometry details.</p>
-<p>The box vectors are stored as columns in 3×3 matrices (<code>box</code> and <code>reference_box</code>), and periodic boundary conditions are represented as a 3D integer vector indicating periodicity along each Cartesian axis.</p>
+<p>This class extends the base <a class="el" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, species, and masses.">Configuration</a> class by adding storage for simulation box vectors (both Current and Reference) and periodic boundary conditions. It provides functionality to read configurations from MDStressLab and LAMMPS dump-style files, manage padding due to periodicity, and access box geometry details.</p>
+<p>The box vectors are stored as columns in 3×3 matrices (<code>box</code> and <code>reference_box</code>), with separate origins (<code>box_origin</code> and <code>reference_box_origin</code>). Periodic boundary conditions are represented as a 3D integer vector indicating periodicity along the box-vector directions.</p>
 <p>This class supports reading atomic configurations from two file formats:</p><ul>
 <li>MDStressLab custom format with explicit box vectors and particle data.</li>
 <li>LAMMPS dump files with box bounds, masses, and atom coordinates.</li>
 </ul>
-<p>It also allows extracting padded configurations to accommodate atoms near periodic boundaries, facilitating simulations requiring extended neighbor lists or replicas. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#_a2">crack/main.cpp</a>, <a class="el" href="testLDADLJ_8cpp-example.html#_a1">testLDADLJ.cpp</a>, <a class="el" href="testLJ_8cpp-example.html#_a1">testLJ.cpp</a>, and <a class="el" href="testMls_8cpp-example.html#_a1">testMls.cpp</a>.</dd>
+<p>It also allows extracting padded configurations to accommodate atoms near periodic boundaries, facilitating simulations requiring extended neighbor lists or replicas. Padding creates periodic images as needed but does not fold the original atoms or grid points back into the primary cell; preserving the supplied atom identity and reference/current correspondence is the caller's responsibility. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#_a2">crack/main.cpp</a>, <a class="el" href="testIdealGas_8cpp-example.html#_a9">testIdealGas.cpp</a>, <a class="el" href="testLDADLJ_8cpp-example.html#_a1">testLDADLJ.cpp</a>, <a class="el" href="testLDADSWTriclinic_8cpp-example.html#_a5">testLDADSWTriclinic.cpp</a>, <a class="el" href="testLJ_8cpp-example.html#_a1">testLJ.cpp</a>, and <a class="el" href="testMls_8cpp-example.html#_a1">testMls.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00033">33</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00037">37</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a16dcbf9a58f025390d097d1d4940aee9" name="a16dcbf9a58f025390d097d1d4940aee9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a16dcbf9a58f025390d097d1d4940aee9">&#9670;&#160;</a></span>BoxConfiguration()</h2>
@@ -246,7 +253,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00016">16</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00019">19</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
 
 </div>
 </div>
@@ -273,7 +280,7 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00322">322</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00457">457</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
 
 </div>
 </div>
@@ -303,7 +310,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- a pointer to an allocated padded configuration </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00275">275</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00396">396</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
 
 </div>
 </div>
@@ -333,17 +340,17 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Parses a LAMMPS dump file to populate configuration data. </p>
+<p>Parses a LAMMPS data file to populate configuration data. </p>
 <p>This function reads atomic configuration data, box dimensions, masses, and species information from a LAMMPS-style dump file stream, filling the relevant members of the <a class="el" href="classBoxConfiguration.html" title="Represents a particle configuration including simulation box information.">BoxConfiguration</a> object according to the specified configuration type.</p>
 <p>The expected file format includes sections for:</p><ul>
 <li>Number of atoms</li>
 <li>Number of atom types</li>
 <li>Box bounds (xlo xhi, ylo yhi, zlo zhi)</li>
-<li>Optional tilt factors (not currently handled explicitly)</li>
+<li>Optional tilt factors (<code>xy xz yz</code>) for triclinic cells</li>
 <li>Masses section mapping atom types to species names</li>
 <li>Atoms section with atomic coordinates and optional image flags for periodicity</li>
 </ul>
-<p>Coordinates are adjusted for periodic boundary conditions using image flags. The function ensures species consistency between reference and current configurations.</p>
+<p>Coordinates are adjusted for periodic boundary conditions using image flags. Atoms are not folded into the primary MDStressLab box after reading. The function ensures species consistency between reference and current configurations.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in,out]</td><td class="paramname">file</td><td>Input file stream positioned at the beginning of the LAMMPS dump file. </td></tr>
@@ -358,7 +365,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00125">125</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00195">195</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
 
 </div>
 </div>
@@ -403,10 +410,13 @@ Public Attributes</h2></td></tr>
 <p>The MDStressLab format of the configuration file is described below</p>
 <ul>
 <li><b>Line 1</b>: Number of particles (integer)</li>
-<li><b>Lines 2–4</b>: Reference box vectors as columns of a 3×3 matrix</li>
-<li><b>Lines 5–7</b>: Current box vectors as columns of a 3×3 matrix</li>
-<li><b>Line 8</b>: Periodic boundary conditions (3 integers, typically 0 or 1)</li>
-<li><b>Line 9 onward</b>: Per-particle data in 10 columns:<ul>
+<li><b>Optional Line 2</b>: Box origin, tagged as <code>origin ox oy oz</code>. If absent, both reference and current origins default to <code>(0,0,0)</code>.</li>
+<li><b>Next 3 lines</b>: Reference box vectors as columns of a 3×3 matrix</li>
+<li><b>Next 3 lines</b>: Current box vectors as columns of a 3×3 matrix</li>
+<li><b>Next line</b>: Periodic boundary conditions (3 integers, typically 0 or 1)</li>
+<li><b>Next line</b>: Species-mass pairs: <pre class="fragment">*   &lt;species_1&gt; &lt;mass_1&gt; &lt;species_2&gt; &lt;mass_2&gt; ...
+*   </pre></li>
+<li><b>Line 10 onward</b>: Per-particle data in 10 columns:<ul>
 <li>Column 1: Species code (e.g., <code>Ar</code>)</li>
 <li>Columns 2–4: Current coordinates (x, y, z)</li>
 <li>Columns 5–7: Velocities (vx, vy, vz)</li>
@@ -414,9 +424,10 @@ Public Attributes</h2></td></tr>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md4"></a>
+<h3><a class="anchor" id="autotoc_md5"></a>
 📄 Example:</h3>
 <pre class="fragment">   2
+   origin 0.0 0.0 0.0
    52.9216036151419047 0.0 0.0
    0.0  52.9216036151419047 0.0
    0.0  0.0 52.9216036151419047
@@ -424,12 +435,13 @@ Public Attributes</h2></td></tr>
    0.0  53.4508196512933154 0.0
    0.0  0.0 52.9216036151419047
    1 1 1
+   Ar 39.948
    Ar  0.0000000000000000 0.0000000000000000 0.0000000000000000  0.0000000000000000 0.0000000000000000 0.0000000000000000  0.0000000000000000 0.0000000000000000 0.0000000000000000
    Ar  0.0000000000000000 2.6725409825646658 2.6460801807570951  0.0000000000000000 0.0000000000000000 0.0000000000000000  0.0000000000000000 2.6460801807570951 2.6460801807570951
-* </pre> <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#a3">crack/main.cpp</a>, <a class="el" href="testLDADLJ_8cpp-example.html#a2">testLDADLJ.cpp</a>, <a class="el" href="testLJ_8cpp-example.html#a2">testLJ.cpp</a>, and <a class="el" href="testMls_8cpp-example.html#a2">testMls.cpp</a>.</dd>
+* </pre> <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#a3">crack/main.cpp</a>, <a class="el" href="testLDADLJ_8cpp-example.html#a2">testLDADLJ.cpp</a>, <a class="el" href="testLDADSWTriclinic_8cpp-example.html#a6">testLDADSWTriclinic.cpp</a>, <a class="el" href="testLJ_8cpp-example.html#a2">testLJ.cpp</a>, and <a class="el" href="testMls_8cpp-example.html#a2">testMls.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00033">33</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00038">38</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
 
 </div>
 </div>
@@ -459,25 +471,25 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Reads a configuration from an LAMMPS-style dump file. </p>
+<p>Reads a configuration from a LAMMPS data file. </p>
 <p>Opens the specified file and reads the atomic configuration data for the given configuration type (e.g., Reference or Current). This function supports only files with the <code>.lmp</code> extension and delegates detailed parsing to the private method <code>lmpParser</code>.</p>
 <p>On failure to open the file or if the file extension is not <code>.lmp</code>, this function prints an error message and terminates the program.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>The name of the LAMMPS dump file. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">configFileName</td><td>The name of the LAMMPS data file. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">configType</td><td>Specifies which configuration type to read (e.g., Reference or Current).</td></tr>
   </table>
   </dd>
 </dl>
-<p>The expected file format is a LAMMPS dump file with the following structure:</p>
+<p>The expected file format is a LAMMPS data file with the following structure:</p>
 <ul>
 <li>A header line with an optional comment (e.g., crystal orientation)</li>
 <li>Line indicating the number of atoms (e.g., <code>24480 atoms</code>)</li>
 <li>Line indicating the number of atom types (e.g., <code>3 atom types</code>)</li>
-<li>Box bounds: <div class="fragment"><div class="line">xlo xhi</div>
+<li>Orthogonal or triclinic box bounds: <div class="fragment"><div class="line">xlo xhi</div>
 <div class="line">ylo yhi</div>
 <div class="line">zlo zhi</div>
-</div><!-- fragment --> Optionally followed by <code>xy xz yz</code> tilt factors (for triclinic cells)</li>
+</div><!-- fragment --> Optionally followed by <code>xy xz yz</code> tilt factors for triclinic cells. The parser stores the corresponding lower corner as the box origin and builds the box vectors from the LAMMPS bounds and tilt factors.</li>
 <li>A <code>Masses</code> section listing: <div class="fragment"><div class="line">&lt;atom type&gt; &lt;mass&gt; #&lt;element symbol&gt;</div>
 </div><!-- fragment --></li>
 <li>An <code>Atoms</code> section: <div class="fragment"><div class="line">Atoms # atomic</div>
@@ -502,8 +514,10 @@ Public Attributes</h2></td></tr>
 <div class="line">24003 3 -35.46 -2.29 5.25 0 0 0</div>
 <div class="line">3 1 -94.28 -45.69 -6.59 0 0 0</div>
 <div class="line">...</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00088">88</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
+</div><!-- fragment --> <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testIdealGas_8cpp-example.html#a10">testIdealGas.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00158">158</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
 
 </div>
 </div>
@@ -542,7 +556,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00116">116</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8cpp_source.html#l00186">186</a> of file <a class="el" href="BoxConfiguration_8cpp_source.html">BoxConfiguration.cpp</a>.</p>
 
 </div>
 </div>
@@ -559,9 +573,25 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The current and reference box vectors stored as columns of respective matrices. </p>
+<p>The current and reference box vectors stored as columns of respective matrices, and their origins. </p>
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00038">38</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00042">42</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
+
+</div>
+</div>
+<a id="a0f86a47a51ef5ef785f15a3c90023438" name="a0f86a47a51ef5ef785f15a3c90023438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f86a47a51ef5ef785f15a3c90023438">&#9670;&#160;</a></span>box_origin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> BoxConfiguration::box_origin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00043">43</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
 
 </div>
 </div>
@@ -577,9 +607,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Periodic boundary conditions. pbc=(1,0,1) implies periodicity along the \(x\) and \(z\)-directions. </p>
+<p>Periodic boundary conditions. <code>pbc=(1,0,1)</code> implies periodicity along the \(x\) and \(z\)-directions. </p>
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00043">43</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00048">48</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
 
 </div>
 </div>
@@ -595,7 +625,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00038">38</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00042">42</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
+
+</div>
+</div>
+<a id="ab55b07be8824e6a74227c8974e287a6e" name="ab55b07be8824e6a74227c8974e287a6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab55b07be8824e6a74227c8974e287a6e">&#9670;&#160;</a></span>reference_box_origin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> BoxConfiguration::reference_box_origin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="BoxConfiguration_8h_source.html#l00043">43</a> of file <a class="el" href="BoxConfiguration_8h_source.html">BoxConfiguration.h</a>.</p>
 
 </div>
 </div>

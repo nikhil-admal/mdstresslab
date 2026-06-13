@@ -183,8 +183,8 @@ Classes</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a031d584449b86e93c9041a43ce55e075" id="r_a031d584449b86e93c9041a43ce55e075"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neighbor__list_8h.html#a031d584449b86e93c9041a43ce55e075">nbl_initialize</a> (<a class="el" href="structNeighList.html">NeighList</a> **const nl)</td></tr>
 <tr class="separator:a031d584449b86e93c9041a43ce55e075"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a737458cf62a9c8e0a333f4348856d625" id="r_a737458cf62a9c8e0a333f4348856d625"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neighbor__list_8h.html#a737458cf62a9c8e0a333f4348856d625">nbl_create_paddings</a> (const int numberOfParticles, const double cutoff, double const *reference_cell, double const *cell, int const *PBC, double const *reference_coordinates, double const *coordinates, const std::vector&lt; std::string &gt; &amp;speciesCode, int &amp;numberOfPaddings, std::vector&lt; double &gt; &amp;reference_coordinatesOfPaddings, std::vector&lt; double &gt; &amp;coordinatesOfPaddings, std::vector&lt; std::string &gt; &amp;speciesCodeOfPaddings, std::vector&lt; int &gt; &amp;masterOfPaddings, int referenceAndFinal)</td></tr>
-<tr class="separator:a737458cf62a9c8e0a333f4348856d625"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a094dc357a49bb943f4e1ace6402871d8" id="r_a094dc357a49bb943f4e1ace6402871d8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neighbor__list_8h.html#a094dc357a49bb943f4e1ace6402871d8">nbl_create_paddings</a> (const int numberOfParticles, const double cutoff, double const *reference_origin, double const *origin, double const *reference_cell, double const *cell, int const *PBC, double const *reference_coordinates, double const *coordinates, const std::vector&lt; std::string &gt; &amp;speciesCode, int &amp;numberOfPaddings, std::vector&lt; double &gt; &amp;reference_coordinatesOfPaddings, std::vector&lt; double &gt; &amp;coordinatesOfPaddings, std::vector&lt; std::string &gt; &amp;speciesCodeOfPaddings, std::vector&lt; int &gt; &amp;masterOfPaddings, int referenceAndFinal)</td></tr>
+<tr class="separator:a094dc357a49bb943f4e1ace6402871d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91d162473453a7bd8f342516ebda9187" id="r_a91d162473453a7bd8f342516ebda9187"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neighbor__list_8h.html#a91d162473453a7bd8f342516ebda9187">nbl_build</a> (<a class="el" href="structNeighList.html">NeighList</a> *const nl, int const numberOfParticles, double const *coordinates, double const influenceDistance, int const numberOfCutoffs, double const *cutoffs, int const *needNeighbors)</td></tr>
 <tr class="separator:a91d162473453a7bd8f342516ebda9187"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac44c57ec131cd21cf3e4c57f71e82476" id="r_ac44c57ec131cd21cf3e4c57f71e82476"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neighbor__list_8h.html#ac44c57ec131cd21cf3e4c57f71e82476">nbl_get_neigh</a> (void const *const nl, int const numberOfCutoffs, double const *const cutoffs, int const neighborListIndex, int const particleNumber, int *const numberOfNeighbors, int const **const neighborsOfParticle)</td></tr>
@@ -273,8 +273,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a737458cf62a9c8e0a333f4348856d625" name="a737458cf62a9c8e0a333f4348856d625"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a737458cf62a9c8e0a333f4348856d625">&#9670;&#160;</a></span>nbl_create_paddings()</h2>
+<a id="a094dc357a49bb943f4e1ace6402871d8" name="a094dc357a49bb943f4e1ace6402871d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a094dc357a49bb943f4e1ace6402871d8">&#9670;&#160;</a></span>nbl_create_paddings()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -290,6 +290,18 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">const double&#160;</td>
           <td class="paramname"><em>cutoff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const *&#160;</td>
+          <td class="paramname"><em>reference_origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const *&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

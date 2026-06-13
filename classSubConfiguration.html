@@ -111,7 +111,7 @@ Inheritance diagram for SubConfiguration:</div>
 <div class="center"><img src="classSubConfiguration__inherit__graph.png" border="0" usemap="#aSubConfiguration_inherit__map" alt="Inheritance graph"/></div>
 <map name="aSubConfiguration_inherit__map" id="aSubConfiguration_inherit__map">
 <area shape="rect" title=" " alt="" coords="5,79,139,104"/>
-<area shape="rect" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, and species." alt="" coords="17,5,127,31"/>
+<area shape="rect" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, species, and masses." alt="" coords="17,5,127,31"/>
 <area shape="poly" title=" " alt="" coords="75,44,75,79,69,79,69,44"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
@@ -121,7 +121,7 @@ Collaboration diagram for SubConfiguration:</div>
 <div class="center"><img src="classSubConfiguration__coll__graph.png" border="0" usemap="#aSubConfiguration_coll__map" alt="Collaboration graph"/></div>
 <map name="aSubConfiguration_coll__map" id="aSubConfiguration_coll__map">
 <area shape="rect" title=" " alt="" coords="177,388,311,413"/>
-<area shape="rect" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, and species." alt="" coords="145,285,255,311"/>
+<area shape="rect" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, species, and masses." alt="" coords="145,285,255,311"/>
 <area shape="poly" title=" " alt="" coords="207,323,221,363,236,386,232,389,216,365,202,325"/>
 <area shape="poly" title=" " alt="" coords="213,322,241,387,237,389,208,325"/>
 <area shape="rect" title=" " alt="" coords="5,190,192,215"/>
@@ -145,7 +145,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac3b177a17abb777d46624db692be4f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classConfiguration"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classConfiguration')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classConfiguration.html">Configuration</a></td></tr>
 <tr class="memitem:a9968c30c5b5718680a6f0a37e9abe11e inherit pub_methods_classConfiguration" id="r_a9968c30c5b5718680a6f0a37e9abe11e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a9968c30c5b5718680a6f0a37e9abe11e">Configuration</a> (int, int)</td></tr>
-<tr class="memdesc:a9968c30c5b5718680a6f0a37e9abe11e inherit pub_methods_classConfiguration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, and species.">Configuration</a> object.  <br /></td></tr>
+<tr class="memdesc:a9968c30c5b5718680a6f0a37e9abe11e inherit pub_methods_classConfiguration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, species, and masses.">Configuration</a> object.  <br /></td></tr>
 <tr class="separator:a9968c30c5b5718680a6f0a37e9abe11e inherit pub_methods_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dd0fa189e239f4c9a036303f641441e inherit pub_methods_classConfiguration" id="r_a0dd0fa189e239f4c9a036303f641441e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a0dd0fa189e239f4c9a036303f641441e">~Configuration</a> ()</td></tr>
 <tr class="separator:a0dd0fa189e239f4c9a036303f641441e inherit pub_methods_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,6 +170,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a43dffc4aba8ef2a5ec8a2dd72faf95dd inherit pub_attribs_classConfiguration" id="r_a43dffc4aba8ef2a5ec8a2dd72faf95dd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a43dffc4aba8ef2a5ec8a2dd72faf95dd">species</a></td></tr>
 <tr class="memdesc:a43dffc4aba8ef2a5ec8a2dd72faf95dd inherit pub_attribs_classConfiguration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Species names for each particle (size equals numberOfParticles).  <br /></td></tr>
 <tr class="separator:a43dffc4aba8ef2a5ec8a2dd72faf95dd inherit pub_attribs_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21367caa4c32c35e50b0eecaba910d44 inherit pub_attribs_classConfiguration" id="r_a21367caa4c32c35e50b0eecaba910d44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="typedef_8h.html#a95c2aca5fc1a1ab42f573f852bda9433">VectorXd</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#a21367caa4c32c35e50b0eecaba910d44">masses</a></td></tr>
+<tr class="memdesc:a21367caa4c32c35e50b0eecaba910d44 inherit pub_attribs_classConfiguration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mass of each particle.  <br /></td></tr>
+<tr class="separator:a21367caa4c32c35e50b0eecaba910d44 inherit pub_attribs_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2bc09e4f8aea736e6b878dd41b09e99 inherit pub_attribs_classConfiguration" id="r_af2bc09e4f8aea736e6b878dd41b09e99"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9">ConfigType</a>, <a class="el" href="typedef_8h.html#a82264e4a8487759a15a98c90573c6bd8">MatrixXd</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfiguration.html#af2bc09e4f8aea736e6b878dd41b09e99">coordinates</a></td></tr>
 <tr class="memdesc:af2bc09e4f8aea736e6b878dd41b09e99 inherit pub_attribs_classConfiguration"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map from configuration type (Reference or Current) to coordinate matrices.  <br /></td></tr>
 <tr class="separator:af2bc09e4f8aea736e6b878dd41b09e99 inherit pub_attribs_classConfiguration"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -216,7 +219,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="SubConfiguration_8cpp_source.html#l00043">43</a> of file <a class="el" href="SubConfiguration_8cpp_source.html">SubConfiguration.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SubConfiguration_8cpp_source.html#l00044">44</a> of file <a class="el" href="SubConfiguration_8cpp_source.html">SubConfiguration.cpp</a>.</p>
 
 </div>
 </div>

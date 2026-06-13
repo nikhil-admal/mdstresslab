@@ -392,189 +392,195 @@ $(document).ready(function(){initNavTree('neighbor__list_8cpp_source.html',''); 
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
 <div class="foldopen" id="foldopen00276" data-start="{" data-end="}">
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="neighbor__list_8cpp.html#aef4606586b1a5b1344d6fb5fb84c49e1">  276</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="neighbor__list_8cpp.html#aef4606586b1a5b1344d6fb5fb84c49e1">nbl_create_paddings</a>(<span class="keywordtype">int</span> <span class="keyword">const</span> numberOfParticles,</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="neighbor__list_8cpp.html#aea899ce67e2739e377eece6004e398f0">  276</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="neighbor__list_8cpp.html#aea899ce67e2739e377eece6004e398f0">nbl_create_paddings</a>(<span class="keywordtype">int</span> <span class="keyword">const</span> numberOfParticles,</div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> cutoff,</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> * reference_cell,</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> * cell,</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                        <span class="keywordtype">int</span> <span class="keyword">const</span> * PBC,</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> * reference_coordinates,</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> * coordinates,</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                        <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; speciesCode,</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>                        <span class="keywordtype">int</span> &amp; numberOfPaddings,</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                        std::vector&lt;double&gt; &amp; reference_coordinatesOfPaddings,</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                        std::vector&lt;double&gt; &amp; coordinatesOfPaddings,</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                        std::vector&lt;std::string&gt; &amp; speciesCodeOfPaddings,</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                        std::vector&lt;int&gt; &amp; masterOfPaddings,</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                        <span class="keywordtype">int</span> referenceAndFinal)</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>{</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>  <span class="comment">// transform coordinates into fractional coordinates</span></div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  <span class="keywordtype">double</span> tcell[9];</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  <span class="keywordtype">double</span> fcell[9];</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  <a class="code hl_function" href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">transpose</a>(cell, tcell);</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  {</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  <span class="keywordtype">int</span> error = <a class="code hl_function" href="helper_8hpp.html#a8435564e24a9afef7ad8490534891360">inverse</a>(tcell, fcell);</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  <span class="keywordflow">if</span> (error) { <span class="keywordflow">return</span> error; }</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  }</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  <span class="keywordtype">double</span> reference_tcell[9];</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>  <span class="keywordtype">double</span> reference_fcell[9];</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  <span class="keywordflow">if</span> (referenceAndFinal)</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  {</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>      <a class="code hl_function" href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">transpose</a>(reference_cell, reference_tcell);</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>      {</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>      <span class="keywordtype">int</span> error = <a class="code hl_function" href="helper_8hpp.html#a8435564e24a9afef7ad8490534891360">inverse</a>(reference_tcell, reference_fcell);</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>      <span class="keywordflow">if</span> (error) { <span class="keywordflow">return</span> error; }</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      }</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  }</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  <span class="keywordtype">double</span>* frac_coords= <span class="keyword">new</span> <span class="keywordtype">double</span>[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * numberOfParticles];</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>  <span class="keywordtype">double</span>* reference_frac_coords= <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  <span class="keywordflow">if</span> (referenceAndFinal) reference_frac_coords= <span class="keyword">new</span> <span class="keywordtype">double</span>[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * numberOfParticles];</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  <span class="keywordtype">double</span> min[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>] = {1e10, 1e10, 1e10};</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  <span class="keywordtype">double</span> max[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>] = {-1e10, -1e10, -1e10};</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numberOfParticles; i++)</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  {</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> * atom_coords = coordinates + (<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i);</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> * reference_atom_coords = reference_coordinates + (<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i);</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keywordtype">double</span> x = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(fcell, atom_coords);</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordtype">double</span> y = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(fcell + 3, atom_coords);</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordtype">double</span> z = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(fcell + 6, atom_coords);</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 0] = x;</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 1] = y;</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 2] = z;</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="keywordflow">if</span> (x &lt; min[0]) { min[0] = x; }</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <span class="keywordflow">if</span> (y &lt; min[1]) { min[1] = y; }</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    <span class="keywordflow">if</span> (z &lt; min[2]) { min[2] = z; }</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="keywordflow">if</span> (x &gt; max[0]) { max[0] = x; }</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="keywordflow">if</span> (y &gt; max[1]) { max[1] = y; }</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="keywordflow">if</span> (z &gt; max[2]) { max[2] = z; }</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <span class="keywordflow">if</span>(referenceAndFinal)</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    {</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        <span class="keywordtype">double</span> reference_x = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_fcell,     reference_atom_coords);</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        <span class="keywordtype">double</span> reference_y = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_fcell + 3, reference_atom_coords);</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keywordtype">double</span> reference_z = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_fcell + 6, reference_atom_coords);</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>        reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 0]= reference_x;</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 1]= reference_y;</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 2]= reference_z;</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    }</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  }</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>  <span class="comment">// add some extra value to deal with edge case</span></div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>; i++)</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  {</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    min[i] -= 1e-10;</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    max[i] += 1e-10;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> * reference_origin,</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> * origin,</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> * reference_cell,</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> * cell,</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                        <span class="keywordtype">int</span> <span class="keyword">const</span> * PBC,</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> * reference_coordinates,</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>                        <span class="keywordtype">double</span> <span class="keyword">const</span> * coordinates,</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                        <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; speciesCode,</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                        <span class="keywordtype">int</span> &amp; numberOfPaddings,</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>                        std::vector&lt;double&gt; &amp; reference_coordinatesOfPaddings,</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                        std::vector&lt;double&gt; &amp; coordinatesOfPaddings,</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                        std::vector&lt;std::string&gt; &amp; speciesCodeOfPaddings,</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                        std::vector&lt;int&gt; &amp; masterOfPaddings,</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>                        <span class="keywordtype">int</span> referenceAndFinal)</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>{</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  <span class="comment">// transform coordinates into fractional coordinates</span></div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  <span class="keywordtype">double</span> tcell[9];</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  <span class="keywordtype">double</span> fcell[9];</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  <a class="code hl_function" href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">transpose</a>(cell, tcell);</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  {</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  <span class="keywordtype">int</span> error = <a class="code hl_function" href="helper_8hpp.html#a8435564e24a9afef7ad8490534891360">inverse</a>(tcell, fcell);</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  <span class="keywordflow">if</span> (error) { <span class="keywordflow">return</span> error; }</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  }</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  <span class="keywordtype">double</span> reference_tcell[9];</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="keywordtype">double</span> reference_fcell[9];</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  <span class="keywordflow">if</span> (referenceAndFinal)</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>  {</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>      <a class="code hl_function" href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">transpose</a>(reference_cell, reference_tcell);</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>      {</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>      <span class="keywordtype">int</span> error = <a class="code hl_function" href="helper_8hpp.html#a8435564e24a9afef7ad8490534891360">inverse</a>(reference_tcell, reference_fcell);</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>      <span class="keywordflow">if</span> (error) { <span class="keywordflow">return</span> error; }</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>      }</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  }</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>  <span class="keywordtype">double</span>* frac_coords= <span class="keyword">new</span> <span class="keywordtype">double</span>[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * numberOfParticles];</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>  <span class="keywordtype">double</span>* reference_frac_coords= <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  <span class="keywordflow">if</span> (referenceAndFinal) reference_frac_coords= <span class="keyword">new</span> <span class="keywordtype">double</span>[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * numberOfParticles];</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  <span class="keywordtype">double</span> min[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>] = {1e10, 1e10, 1e10};</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  <span class="keywordtype">double</span> max[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>] = {-1e10, -1e10, -1e10};</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numberOfParticles; i++)</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>  {</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> * atom_coords = coordinates + (<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i);</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keyword">const</span> <span class="keywordtype">double</span> * reference_atom_coords = reference_coordinates + (<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i);</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordtype">double</span> atom_coords_relative[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>];</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>; ++j) atom_coords_relative[j]= atom_coords[j] - origin[j];</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    <span class="keywordtype">double</span> x = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(fcell, atom_coords_relative);</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    <span class="keywordtype">double</span> y = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(fcell + 3, atom_coords_relative);</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="keywordtype">double</span> z = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(fcell + 6, atom_coords_relative);</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 0] = x;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 1] = y;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 2] = z;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <span class="keywordflow">if</span> (x &lt; min[0]) { min[0] = x; }</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="keywordflow">if</span> (y &lt; min[1]) { min[1] = y; }</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <span class="keywordflow">if</span> (z &lt; min[2]) { min[2] = z; }</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    <span class="keywordflow">if</span> (x &gt; max[0]) { max[0] = x; }</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    <span class="keywordflow">if</span> (y &gt; max[1]) { max[1] = y; }</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    <span class="keywordflow">if</span> (z &gt; max[2]) { max[2] = z; }</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <span class="keywordflow">if</span>(referenceAndFinal)</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    {</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        <span class="keywordtype">double</span> reference_atom_coords_relative[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>];</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>; ++j) reference_atom_coords_relative[j]= reference_atom_coords[j] - reference_origin[j];</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <span class="keywordtype">double</span> reference_x = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_fcell,     reference_atom_coords_relative);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        <span class="keywordtype">double</span> reference_y = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_fcell + 3, reference_atom_coords_relative);</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="keywordtype">double</span> reference_z = <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_fcell + 6, reference_atom_coords_relative);</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 0]= reference_x;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 1]= reference_y;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * i + 2]= reference_z;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    }</div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>  }</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span> </div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  <span class="comment">// volume of cell</span></div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>  <span class="keywordtype">double</span> xprod[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>];</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>  <a class="code hl_function" href="helper_8hpp.html#a3d938526246194fbe4b81e75eeae9575">cross</a>(cell + 3, cell + 6, xprod);</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>  <span class="keywordtype">double</span> volume = std::abs(<a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(cell, xprod));</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span> </div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>  <span class="comment">// distance between parallelpiped cell faces</span></div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>  <span class="keywordtype">double</span> dist[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>];</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>  <a class="code hl_function" href="helper_8hpp.html#a3d938526246194fbe4b81e75eeae9575">cross</a>(cell + 3, cell + 6, xprod);</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>  dist[0] = volume / <a class="code hl_function" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">norm</a>(xprod);</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>  <a class="code hl_function" href="helper_8hpp.html#a3d938526246194fbe4b81e75eeae9575">cross</a>(cell + 6, cell + 0, xprod);</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  dist[1] = volume / <a class="code hl_function" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">norm</a>(xprod);</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>  <a class="code hl_function" href="helper_8hpp.html#a3d938526246194fbe4b81e75eeae9575">cross</a>(cell, cell + 3, xprod);</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  dist[2] = volume / <a class="code hl_function" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">norm</a>(xprod);</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>  <span class="comment">// number of cells in each direction</span></div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  <span class="keywordtype">double</span> ratio[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>];</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  <span class="keywordtype">double</span> size[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>];</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>; i++)</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  {</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    ratio[i] = cutoff / dist[i];</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    size[i] = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(std::ceil(ratio[i]));</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>  }</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>  <span class="comment">// creating padding atoms</span></div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = -size[0]; i &lt;= size[0]; i++)</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  <span class="comment">// add some extra value to deal with edge case</span></div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>; i++)</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>  {</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    min[i] -= 1e-10;</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    max[i] += 1e-10;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>  }</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>  <span class="comment">// volume of cell. Matrix3d is row-major in this project, so cell + 3*i is</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>  <span class="comment">// the i-th box vector row.</span></div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>  <span class="keywordtype">double</span> xprod[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>];</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>  <a class="code hl_function" href="helper_8hpp.html#a3d938526246194fbe4b81e75eeae9575">cross</a>(cell + 3, cell + 6, xprod);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>  <span class="keywordtype">double</span> volume = std::abs(<a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(cell, xprod));</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  <span class="comment">// distance between parallelpiped cell faces</span></div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  <span class="keywordtype">double</span> dist[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>];</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>  <a class="code hl_function" href="helper_8hpp.html#a3d938526246194fbe4b81e75eeae9575">cross</a>(cell + 3, cell + 6, xprod);</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>  dist[0] = volume / <a class="code hl_function" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">norm</a>(xprod);</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>  <a class="code hl_function" href="helper_8hpp.html#a3d938526246194fbe4b81e75eeae9575">cross</a>(cell + 6, cell + 0, xprod);</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>  dist[1] = volume / <a class="code hl_function" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">norm</a>(xprod);</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>  <a class="code hl_function" href="helper_8hpp.html#a3d938526246194fbe4b81e75eeae9575">cross</a>(cell, cell + 3, xprod);</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>  dist[2] = volume / <a class="code hl_function" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">norm</a>(xprod);</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>  <span class="comment">// number of cells in each direction</span></div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>  <span class="keywordtype">double</span> ratio[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>];</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>  <span class="keywordtype">double</span> size[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>];</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a>; i++)</div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>  {</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = -size[1]; j &lt;= size[1]; j++)</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    {</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = -size[2]; k &lt;= size[2]; k++)</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>      {</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        <span class="comment">// skip contributing atoms</span></div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>        <span class="keywordflow">if</span> (i == 0 &amp;&amp; j == 0 &amp;&amp; k == 0) { <span class="keywordflow">continue</span>; }</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        <span class="comment">// apply BC</span></div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>        <span class="keywordflow">if</span> (PBC[0] == 0 &amp;&amp; i != 0) { <span class="keywordflow">continue</span>; }</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>        <span class="keywordflow">if</span> (PBC[1] == 0 &amp;&amp; j != 0) { <span class="keywordflow">continue</span>; }</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>        <span class="keywordflow">if</span> (PBC[2] == 0 &amp;&amp; k != 0) { <span class="keywordflow">continue</span>; }</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> at = 0; at &lt; numberOfParticles; at++)</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>        {</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>          <span class="keywordtype">double</span> x = frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 0];</div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>          <span class="keywordtype">double</span> y = frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 1];</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>          <span class="keywordtype">double</span> z = frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 2];</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>          <span class="keywordtype">double</span> reference_x, reference_y, reference_z;</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>          <span class="keywordflow">if</span>(referenceAndFinal)</div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>          {</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>              reference_x= reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 0];</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>              reference_y= reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 1];</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>              reference_z= reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 2];</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>          }</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>          <span class="comment">// select the necessary atoms to repeate for the most outside bins</span></div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>          <span class="comment">// the follwing few lines can be easily understood when assuming</span></div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>          <span class="comment">// size=1</span></div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>          <span class="keywordflow">if</span> (i == -size[0]</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>              &amp;&amp; x - min[0] &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[0]) - ratio[0])</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>          { <span class="keywordflow">continue</span>; }</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>          <span class="keywordflow">if</span> (i == size[0]</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>              &amp;&amp; max[0] - x &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[0]) - ratio[0])</div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>          { <span class="keywordflow">continue</span>; }</div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>          <span class="keywordflow">if</span> (j == -size[1]</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>              &amp;&amp; y - min[1] &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[1]) - ratio[1])</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>          { <span class="keywordflow">continue</span>; }</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>          <span class="keywordflow">if</span> (j == size[1]</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>              &amp;&amp; max[1] - y &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[1]) - ratio[1])</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>          { <span class="keywordflow">continue</span>; }</div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>          <span class="keywordflow">if</span> (k == -size[2]</div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>              &amp;&amp; z - min[2] &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[2]) - ratio[2])</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>          { <span class="keywordflow">continue</span>; }</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>          <span class="keywordflow">if</span> (k == size[2]</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>              &amp;&amp; max[2] - z &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[2]) - ratio[2])</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>          { <span class="keywordflow">continue</span>; }</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span> </div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>          <span class="comment">// fractional coordinates of padding atom at</span></div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>          <span class="keywordtype">double</span> atom_coords[3] = {i + x, j + y, k + z};</div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>          <span class="keywordtype">double</span> reference_atom_coords[3];</div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>          <span class="keywordflow">if</span> (referenceAndFinal)</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>          {</div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>              reference_atom_coords[0]= i + reference_x;</div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>              reference_atom_coords[1]= j + reference_y;</div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>              reference_atom_coords[2]= k + reference_z;</div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>          }</div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>          <span class="comment">// absolute coordinates of padding atoms</span></div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>          coordinatesOfPaddings.push_back(<a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(tcell, atom_coords));</div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>          coordinatesOfPaddings.push_back(<a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(tcell + 3, atom_coords));</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>          coordinatesOfPaddings.push_back(<a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(tcell + 6, atom_coords));</div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>          <span class="keywordflow">if</span> (referenceAndFinal)</div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>          {</div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>              reference_coordinatesOfPaddings.push_back(<a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_tcell, reference_atom_coords));</div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>              reference_coordinatesOfPaddings.push_back(<a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_tcell + 3, reference_atom_coords));</div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>              reference_coordinatesOfPaddings.push_back(<a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_tcell + 6, reference_atom_coords));</div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>          }</div>
-<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span> </div>
-<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>          <span class="comment">// padding speciesCode code and image</span></div>
-<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>          speciesCodeOfPaddings.push_back(speciesCode[at]);</div>
-<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>          masterOfPaddings.push_back(at);</div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>        }</div>
-<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>      }</div>
-<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>    }</div>
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>  }</div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>  <span class="keyword">delete</span>[] frac_coords;</div>
-<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>  <span class="keywordflow">if</span>(reference_frac_coords!= <span class="keyword">nullptr</span>) <span class="keyword">delete</span>[] reference_frac_coords;</div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span> </div>
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>  numberOfPaddings = masterOfPaddings.size();</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span> </div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>}</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    ratio[i] = cutoff / dist[i];</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    size[i] = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(std::ceil(ratio[i]));</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>  }</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>  <span class="comment">// creating padding atoms</span></div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = -size[0]; i &lt;= size[0]; i++)</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  {</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = -size[1]; j &lt;= size[1]; j++)</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    {</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = -size[2]; k &lt;= size[2]; k++)</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>      {</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>        <span class="comment">// skip contributing atoms</span></div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>        <span class="keywordflow">if</span> (i == 0 &amp;&amp; j == 0 &amp;&amp; k == 0) { <span class="keywordflow">continue</span>; }</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        <span class="comment">// apply BC</span></div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>        <span class="keywordflow">if</span> (PBC[0] == 0 &amp;&amp; i != 0) { <span class="keywordflow">continue</span>; }</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>        <span class="keywordflow">if</span> (PBC[1] == 0 &amp;&amp; j != 0) { <span class="keywordflow">continue</span>; }</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        <span class="keywordflow">if</span> (PBC[2] == 0 &amp;&amp; k != 0) { <span class="keywordflow">continue</span>; }</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span> </div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> at = 0; at &lt; numberOfParticles; at++)</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>        {</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>          <span class="keywordtype">double</span> x = frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 0];</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>          <span class="keywordtype">double</span> y = frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 1];</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>          <span class="keywordtype">double</span> z = frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 2];</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>          <span class="keywordtype">double</span> reference_x, reference_y, reference_z;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>          <span class="keywordflow">if</span>(referenceAndFinal)</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>          {</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>              reference_x= reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 0];</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>              reference_y= reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 1];</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>              reference_z= reference_frac_coords[<a class="code hl_define" href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a> * at + 2];</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>          }</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>          <span class="comment">// select the necessary atoms to repeate for the most outside bins</span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>          <span class="comment">// the follwing few lines can be easily understood when assuming</span></div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>          <span class="comment">// size=1</span></div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>          <span class="keywordflow">if</span> (i == -size[0]</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>              &amp;&amp; x - min[0] &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[0]) - ratio[0])</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>          { <span class="keywordflow">continue</span>; }</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>          <span class="keywordflow">if</span> (i == size[0]</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>              &amp;&amp; max[0] - x &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[0]) - ratio[0])</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>          { <span class="keywordflow">continue</span>; }</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>          <span class="keywordflow">if</span> (j == -size[1]</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>              &amp;&amp; y - min[1] &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[1]) - ratio[1])</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>          { <span class="keywordflow">continue</span>; }</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>          <span class="keywordflow">if</span> (j == size[1]</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>              &amp;&amp; max[1] - y &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[1]) - ratio[1])</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>          { <span class="keywordflow">continue</span>; }</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>          <span class="keywordflow">if</span> (k == -size[2]</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>              &amp;&amp; z - min[2] &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[2]) - ratio[2])</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>          { <span class="keywordflow">continue</span>; }</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>          <span class="keywordflow">if</span> (k == size[2]</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>              &amp;&amp; max[2] - z &lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(size[2]) - ratio[2])</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>          { <span class="keywordflow">continue</span>; }</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span> </div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>          <span class="comment">// fractional coordinates of padding atom at</span></div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>          <span class="keywordtype">double</span> atom_coords[3] = {i + x, j + y, k + z};</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>          <span class="keywordtype">double</span> reference_atom_coords[3];</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>          <span class="keywordflow">if</span> (referenceAndFinal)</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>          {</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>              reference_atom_coords[0]= i + reference_x;</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>              reference_atom_coords[1]= j + reference_y;</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>              reference_atom_coords[2]= k + reference_z;</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>          }</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span> </div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>          <span class="comment">// absolute coordinates of padding atoms</span></div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>          coordinatesOfPaddings.push_back(origin[0] + <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(tcell, atom_coords));</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>          coordinatesOfPaddings.push_back(origin[1] + <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(tcell + 3, atom_coords));</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>          coordinatesOfPaddings.push_back(origin[2] + <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(tcell + 6, atom_coords));</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>          <span class="keywordflow">if</span> (referenceAndFinal)</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>          {</div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>              reference_coordinatesOfPaddings.push_back(reference_origin[0] + <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_tcell, reference_atom_coords));</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>              reference_coordinatesOfPaddings.push_back(reference_origin[1] + <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_tcell + 3, reference_atom_coords));</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>              reference_coordinatesOfPaddings.push_back(reference_origin[2] + <a class="code hl_function" href="helper_8hpp.html#a46f0cce7ff234c334af76e26d8841a36">dot</a>(reference_tcell + 6, reference_atom_coords));</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>          }</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span> </div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>          <span class="comment">// padding speciesCode code and image</span></div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>          speciesCodeOfPaddings.push_back(speciesCode[at]);</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>          masterOfPaddings.push_back(at);</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>        }</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>      }</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>    }</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>  }</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>  <span class="keyword">delete</span>[] frac_coords;</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>  <span class="keywordflow">if</span>(reference_frac_coords!= <span class="keyword">nullptr</span>) <span class="keyword">delete</span>[] reference_frac_coords;</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span> </div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>  numberOfPaddings = masterOfPaddings.size();</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span> </div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>}</div>
 </div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span> </div>
 <div class="ttc" id="ahelper_8hpp_html"><div class="ttname"><a href="helper_8hpp.html">helper.hpp</a></div></div>
 <div class="ttc" id="ahelper_8hpp_html_a09b2db82084507ee9afed97609c871e4"><div class="ttname"><a href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">transpose</a></div><div class="ttdeci">void transpose(double const *mat, double *const trans)</div><div class="ttdef"><b>Definition</b> <a href="helper_8hpp_source.html#l00059">helper.hpp:59</a></div></div>
 <div class="ttc" id="ahelper_8hpp_html_a180bffc750b53258ab21516216683541"><div class="ttname"><a href="helper_8hpp.html#a180bffc750b53258ab21516216683541">coords_to_index</a></div><div class="ttdeci">void coords_to_index(double const *x, int const *size, double const *max, double const *min, int *const index)</div><div class="ttdef"><b>Definition</b> <a href="helper_8hpp_source.html#l00092">helper.hpp:92</a></div></div>
@@ -589,7 +595,7 @@ $(document).ready(function(){initNavTree('neighbor__list_8cpp_source.html',''); 
 <div class="ttc" id="aneighbor__list_8cpp_html_ab201176d515641c033579665982aa922"><div class="ttname"><a href="neighbor__list_8cpp.html#ab201176d515641c033579665982aa922">nbl_allocate_memory</a></div><div class="ttdeci">void nbl_allocate_memory(NeighList *const nl, int const numberOfCutoffs, int const numberOfParticles)</div><div class="ttdef"><b>Definition</b> <a href="neighbor__list_8cpp_source.html#l00044">neighbor_list.cpp:44</a></div></div>
 <div class="ttc" id="aneighbor__list_8cpp_html_ac25189db92959bff3c6c2adf4c34b50a"><div class="ttname"><a href="neighbor__list_8cpp.html#ac25189db92959bff3c6c2adf4c34b50a">DIM</a></div><div class="ttdeci">#define DIM</div><div class="ttdef"><b>Definition</b> <a href="neighbor__list_8cpp_source.html#l00017">neighbor_list.cpp:17</a></div></div>
 <div class="ttc" id="aneighbor__list_8cpp_html_adee600626da22e219ed2c1dceed1da3e"><div class="ttname"><a href="neighbor__list_8cpp.html#adee600626da22e219ed2c1dceed1da3e">nbl_get_neigh</a></div><div class="ttdeci">int nbl_get_neigh(void const *const dataObject, int const numberOfCutoffs, double const *const cutoffs, int const neighborListIndex, int const particleNumber, int *const numberOfNeighbors, int const **const neighborsOfParticle)</div><div class="ttdef"><b>Definition</b> <a href="neighbor__list_8cpp_source.html#l00241">neighbor_list.cpp:241</a></div></div>
-<div class="ttc" id="aneighbor__list_8cpp_html_aef4606586b1a5b1344d6fb5fb84c49e1"><div class="ttname"><a href="neighbor__list_8cpp.html#aef4606586b1a5b1344d6fb5fb84c49e1">nbl_create_paddings</a></div><div class="ttdeci">int nbl_create_paddings(int const numberOfParticles, double const cutoff, double const *reference_cell, double const *cell, int const *PBC, double const *reference_coordinates, double const *coordinates, const std::vector&lt; std::string &gt; &amp;speciesCode, int &amp;numberOfPaddings, std::vector&lt; double &gt; &amp;reference_coordinatesOfPaddings, std::vector&lt; double &gt; &amp;coordinatesOfPaddings, std::vector&lt; std::string &gt; &amp;speciesCodeOfPaddings, std::vector&lt; int &gt; &amp;masterOfPaddings, int referenceAndFinal)</div><div class="ttdef"><b>Definition</b> <a href="neighbor__list_8cpp_source.html#l00276">neighbor_list.cpp:276</a></div></div>
+<div class="ttc" id="aneighbor__list_8cpp_html_aea899ce67e2739e377eece6004e398f0"><div class="ttname"><a href="neighbor__list_8cpp.html#aea899ce67e2739e377eece6004e398f0">nbl_create_paddings</a></div><div class="ttdeci">int nbl_create_paddings(int const numberOfParticles, double const cutoff, double const *reference_origin, double const *origin, double const *reference_cell, double const *cell, int const *PBC, double const *reference_coordinates, double const *coordinates, const std::vector&lt; std::string &gt; &amp;speciesCode, int &amp;numberOfPaddings, std::vector&lt; double &gt; &amp;reference_coordinatesOfPaddings, std::vector&lt; double &gt; &amp;coordinatesOfPaddings, std::vector&lt; std::string &gt; &amp;speciesCodeOfPaddings, std::vector&lt; int &gt; &amp;masterOfPaddings, int referenceAndFinal)</div><div class="ttdef"><b>Definition</b> <a href="neighbor__list_8cpp_source.html#l00276">neighbor_list.cpp:276</a></div></div>
 <div class="ttc" id="aneighbor__list_8cpp_html_afbf627e8a7f80caf943211b6b47173f3"><div class="ttname"><a href="neighbor__list_8cpp.html#afbf627e8a7f80caf943211b6b47173f3">nbl_clean_content</a></div><div class="ttdeci">void nbl_clean_content(NeighList *const nl)</div><div class="ttdef"><b>Definition</b> <a href="neighbor__list_8cpp_source.html#l00021">neighbor_list.cpp:21</a></div></div>
 <div class="ttc" id="aneighbor__list_8h_html"><div class="ttname"><a href="neighbor__list_8h.html">neighbor_list.h</a></div></div>
 <div class="ttc" id="astructNeighListOne_html"><div class="ttname"><a href="structNeighListOne.html">NeighListOne</a></div><div class="ttdef"><b>Definition</b> <a href="neighbor__list_8h_source.html#l00014">neighbor_list.h:15</a></div></div>

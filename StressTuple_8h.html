@@ -130,41 +130,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a3f36737661f8d56edfceda6b5be0a50c" id="r_a3f36737661f8d56edfceda6b5be0a50c"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, typename ... TStress&gt; </td></tr>
 <tr class="memitem:a3f36737661f8d56edfceda6b5be0a50c"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I==sizeof...(TStress), void &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a3f36737661f8d56edfceda6b5be0a50c">recursiveBuildStress</a> (const double &amp;fij, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;ra, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;rA, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;rb, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;rB, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;rab, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;rAB, const int &amp;i_gridPoint, const int &amp;i_stress, std::tuple&lt; TStress &amp;... &gt; t)</td></tr>
 <tr class="separator:a3f36737661f8d56edfceda6b5be0a50c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10025620a1c29cb7939ac5a671ea6ee4" id="r_a10025620a1c29cb7939ac5a671ea6ee4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a10025620a1c29cb7939ac5a671ea6ee4">averagingDomainSize_max</a> (const std::tuple&lt;&gt; t)</td></tr>
-<tr class="separator:a10025620a1c29cb7939ac5a671ea6ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae467640e778fca319d49c7d0fc252002" id="r_ae467640e778fca319d49c7d0fc252002"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, typename ... TStress&gt; </td></tr>
-<tr class="memitem:ae467640e778fca319d49c7d0fc252002"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I==sizeof...(TStress) -1, double &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#ae467640e778fca319d49c7d0fc252002">averagingDomainSize_max</a> (const std::tuple&lt; TStress &amp;... &gt; t)</td></tr>
-<tr class="separator:ae467640e778fca319d49c7d0fc252002"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add53f8052188d8280a37faa742ac3352" id="r_add53f8052188d8280a37faa742ac3352"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, typename ... TStress&gt; </td></tr>
-<tr class="memitem:add53f8052188d8280a37faa742ac3352"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I&lt; sizeof...(TStress) -1, double &gt;::type <a class="el" href="StressTuple_8h.html#a10025620a1c29cb7939ac5a671ea6ee4">averagingDomainSize_max</a>(const std::tuple&lt; TStress &amp;... &gt; t){ return std::max(std::get&lt; I &gt;(t).method.getAveragingDomainSize(), <a class="el" href="StressTuple_8h.html#a10025620a1c29cb7939ac5a671ea6ee4">averagingDomainSize_max</a>&lt; I+1 &gt;(t));}std::map&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt; double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#add53f8052188d8280a37faa742ac3352">recursiveGridMaxAveragingDomainSizeMap</a> (const std::tuple&lt;&gt; &amp;t)</td></tr>
-<tr class="separator:add53f8052188d8280a37faa742ac3352"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a497e202de54c43de020b77b2e9a019cd" id="r_a497e202de54c43de020b77b2e9a019cd"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid  = typename std::conditional&lt;stressType == Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type, typename ... BF&gt; </td></tr>
-<tr class="memitem:a497e202de54c43de020b77b2e9a019cd"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I==sizeof...(BF), std::map&lt; TGrid *, double &gt; &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a497e202de54c43de020b77b2e9a019cd">recursiveGridMaxAveragingDomainSizeMap</a> (const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t)</td></tr>
-<tr class="separator:a497e202de54c43de020b77b2e9a019cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51be74516070601c30d399c7215c3dd8" id="r_a51be74516070601c30d399c7215c3dd8"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid  = typename std::conditional&lt;stressType == Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type, typename ... BF&gt; </td></tr>
-<tr class="memitem:a51be74516070601c30d399c7215c3dd8"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I&lt; sizeof...(BF), std::map&lt; TGrid *, double &gt; &gt;::type <a class="el" href="StressTuple_8h.html#add53f8052188d8280a37faa742ac3352">recursiveGridMaxAveragingDomainSizeMap</a>(const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t){ std::map&lt; TGrid *, double &gt; map;const std::map&lt; TGrid *, double &gt; &amp;rmap=<a class="el" href="StressTuple_8h.html#add53f8052188d8280a37faa742ac3352">recursiveGridMaxAveragingDomainSizeMap</a>&lt; I+1 &gt;(t);map[std::get&lt; I &gt;(t).pgrid]=std::get&lt; I &gt;(t).method.getAveragingDomainSize();for(const auto &amp;pair :rmap) if(std::get&lt; I &gt;(t).pgrid==pair.first) { map[pair.first]=std::max(map.at(std::get&lt; I &gt;(t).pgrid), pair.second);} else { auto result=<a class="el" href="StressTuple_8h.html#a3b09030a4008d066e513010b165d0d25">map.insert</a>(pair);assert(result.second==true);} return map;}inline std::vector&lt; std::pair&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a> &gt; *, double &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a51be74516070601c30d399c7215c3dd8">getTGridDomainSizePairs</a> (const std::tuple&lt;&gt; &amp;emptyTuple)</td></tr>
-<tr class="separator:a51be74516070601c30d399c7215c3dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12a5fe9c22cee6a5e429e01b089ebd1c" id="r_a12a5fe9c22cee6a5e429e01b089ebd1c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt; *, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a12a5fe9c22cee6a5e429e01b089ebd1c">getTGridDomainSizePairs</a> (std::tuple&lt;&gt; &amp;&amp;emptyTuple)</td></tr>
-<tr class="separator:a12a5fe9c22cee6a5e429e01b089ebd1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd07ba6e065132d77a18a7ae66427d2b" id="r_acd07ba6e065132d77a18a7ae66427d2b"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid  = typename std::conditional&lt;stressType == Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type, typename ... BF&gt; </td></tr>
-<tr class="memitem:acd07ba6e065132d77a18a7ae66427d2b"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I==sizeof...(BF) -1, std::vector&lt; std::pair&lt; TGrid *, double &gt; &gt; &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#acd07ba6e065132d77a18a7ae66427d2b">getTGridDomainSizePairs</a> (const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t)</td></tr>
-<tr class="separator:acd07ba6e065132d77a18a7ae66427d2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b09030a4008d066e513010b165d0d25" id="r_a3b09030a4008d066e513010b165d0d25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="StressTuple_8h.html#a88086be08d252d8f93fecdc61b7af7dd">vectorPair</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a3b09030a4008d066e513010b165d0d25">insert</a> (vectorPair.end(), next.begin(), next.end())</td></tr>
-<tr class="separator:a3b09030a4008d066e513010b165d0d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87014e82899cbcbd6368b7208a56de6d" id="r_a87014e82899cbcbd6368b7208a56de6d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a87014e82899cbcbd6368b7208a56de6d">getBaseGridList</a> (const std::tuple&lt;&gt; t)</td></tr>
-<tr class="separator:a87014e82899cbcbd6368b7208a56de6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21586712001b69cc9b9a9e3762c758ff" id="r_a21586712001b69cc9b9a9e3762c758ff"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, typename ... TStress&gt; </td></tr>
-<tr class="memitem:a21586712001b69cc9b9a9e3762c758ff"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I==sizeof...(TStress) -1, std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt; &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a21586712001b69cc9b9a9e3762c758ff">getBaseGridList</a> (const std::tuple&lt; TStress &amp;... &gt; t)</td></tr>
-<tr class="separator:a21586712001b69cc9b9a9e3762c758ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae585c35d20ada39152ec21d158fa964b" id="r_ae585c35d20ada39152ec21d158fa964b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#ae585c35d20ada39152ec21d158fa964b">insert</a> (pgridBaseVector.end(), next.begin(), next.end())</td></tr>
 <tr class="separator:ae585c35d20ada39152ec21d158fa964b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a233e9456992775a003da56d1288515d8" id="r_a233e9456992775a003da56d1288515d8"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, typename ... TStress&gt; </td></tr>
-<tr class="memitem:a233e9456992775a003da56d1288515d8"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I==sizeof...(TStress), void &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a233e9456992775a003da56d1288515d8">recursiveFold</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;origin, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;step, const <a class="el" href="typedef_8h.html#ab2e2a70cab71ad9e7d7cef44cf247224">Vector3i</a> &amp;pbc, const std::tuple&lt; TStress &amp;... &gt; t)</td></tr>
-<tr class="separator:a233e9456992775a003da56d1288515d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcca1b6b7c0e7b00bec050773654b980" id="r_adcca1b6b7c0e7b00bec050773654b980"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, typename ... TStress&gt; </td></tr>
+<tr class="memitem:adcca1b6b7c0e7b00bec050773654b980"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I==sizeof...(TStress), void &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#adcca1b6b7c0e7b00bec050773654b980">recursiveFold</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;origin, const <a class="el" href="typedef_8h.html#a62b42fd2ce74b4f877759c2466f17238">Matrix3d</a> &amp;cell, const <a class="el" href="typedef_8h.html#ab2e2a70cab71ad9e7d7cef44cf247224">Vector3i</a> &amp;pbc, const std::tuple&lt; TStress &amp;... &gt; t)</td></tr>
+<tr class="separator:adcca1b6b7c0e7b00bec050773654b980"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c9939871078f7961a965bb0ee293b4c" id="r_a7c9939871078f7961a965bb0ee293b4c"><td class="memItemLeft" align="right" valign="top">boxPoints&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a7c9939871078f7961a965bb0ee293b4c">fold</a> (pbc)</td></tr>
 <tr class="separator:a7c9939871078f7961a965bb0ee293b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc8e724f28ec0c9a875d28fa5abde382" id="r_afc8e724f28ec0c9a875d28fa5abde382"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#afc8e724f28ec0c9a875d28fa5abde382">std::cout&lt;&lt; std::endl;recursiveFold&lt; I+1 &gt;</a> (origin, step, pbc, t)</td></tr>
-<tr class="separator:afc8e724f28ec0c9a875d28fa5abde382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acedc6ffd0384523f21680f44596181a3" id="r_acedc6ffd0384523f21680f44596181a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#acedc6ffd0384523f21680f44596181a3">std::cout&lt;&lt; std::endl;recursiveFold&lt; I+1 &gt;</a> (origin, cell, pbc, t)</td></tr>
+<tr class="separator:acedc6ffd0384523f21680f44596181a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7eada0ce2d497c84e73be4ad6c52fc9" id="r_ab7eada0ce2d497c84e73be4ad6c52fc9"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, typename ... TStress&gt; </td></tr>
 <tr class="memitem:ab7eada0ce2d497c84e73be4ad6c52fc9"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I==sizeof...(TStress), void &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#ab7eada0ce2d497c84e73be4ad6c52fc9">recursiveWriteStressAndGrid</a> (std::tuple&lt; TStress &amp;... &gt; t)</td></tr>
 <tr class="separator:ab7eada0ce2d497c84e73be4ad6c52fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,65 +150,13 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a1efcdb5a3ad3b201395a930a8cebcb05" id="r_a1efcdb5a3ad3b201395a930a8cebcb05"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid  = typename std::conditional&lt;stressType == Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type, typename ... BF&gt; </td></tr>
-<tr class="memitem:a1efcdb5a3ad3b201395a930a8cebcb05"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I&lt; sizeof...(BF) -1, std::vector&lt; std::pair&lt; TGrid *, double &gt; &gt; &gt;::type <a class="el" href="StressTuple_8h.html#a51be74516070601c30d399c7215c3dd8">getTGridDomainSizePairs</a>(const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t){ std::vector&lt; std::pair&lt; TGrid *, double &gt; &gt; <a class="el" href="StressTuple_8h.html#a88086be08d252d8f93fecdc61b7af7dd">vectorPair</a>;vectorPair.push_back({std::get&lt; I &gt;(t).pgrid, std::get&lt; I &gt;(t).method.getAveragingDomainSize()});std::vector&lt; std::pair&lt; TGrid *, double &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a1efcdb5a3ad3b201395a930a8cebcb05">next</a> = <a class="el" href="StressTuple_8h.html#a51be74516070601c30d399c7215c3dd8">getTGridDomainSizePairs</a>&lt;I+1&gt;(t)</td></tr>
-<tr class="separator:a1efcdb5a3ad3b201395a930a8cebcb05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88086be08d252d8f93fecdc61b7af7dd" id="r_a88086be08d252d8f93fecdc61b7af7dd"><td class="memItemLeft" align="right" valign="top">return&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a88086be08d252d8f93fecdc61b7af7dd">vectorPair</a></td></tr>
-<tr class="separator:a88086be08d252d8f93fecdc61b7af7dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7008e999cd5cf48c6530563a2ff3c66" id="r_ae7008e999cd5cf48c6530563a2ff3c66"><td class="memTemplParams" colspan="2">template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename ... BF&gt; </td></tr>
+<tr class="memitem:ae7008e999cd5cf48c6530563a2ff3c66"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; I&lt; sizeof...(BF), void &gt;::type <a class="el" href="StressTuple_8h.html#a3f36737661f8d56edfceda6b5be0a50c">recursiveBuildStress</a>(const double &amp;fij, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;ra, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;rA, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;rb, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;rB, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;rab, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;rAB, const int &amp;i_gridPoint, const int &amp;i_stress, std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t){ if(I==i_stress &amp;&amp;stressType==<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a>) { assert(rab.squaredNorm()&gt;<a class="el" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>);std::get&lt; I &gt;(t).field[i_gridPoint]=std::get&lt; I &gt;(t).field[i_gridPoint]+std::get&lt; I &gt;(t).method.bondFunction(ra, rb) *fij *<a class="el" href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">rab.transpose</a>() *rab/<a class="el" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">rab.norm</a>();} else if(I==i_stress &amp;&amp;stressType==<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc">Piola</a>) { assert(rab.squaredNorm()&gt;<a class="el" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>);std::get&lt; I &gt;(t).field[i_gridPoint]=std::get&lt; I &gt;(t).field[i_gridPoint]+std::get&lt; I &gt;(t).method.bondFunction(rA, rB) *fij *<a class="el" href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">rAB.transpose</a>() *rab/<a class="el" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">rab.norm</a>();} else <a class="el" href="StressTuple_8h.html#a3f36737661f8d56edfceda6b5be0a50c">recursiveBuildStress</a>&lt; I+1 &gt;(fij, ra, rA, rb, rB, rab, rAB, i_gridPoint, i_stress, t);}template&lt; std::size_t I=0, typename ...TStress &gt;inline typename std::enable_if&lt; I==sizeof...(TStress), void &gt;::typerecursiveBuildContinuumFields(const double &amp;mass, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;velocity, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;position, const int &amp;i_gridPoint, const int &amp;i_stress, std::tuple&lt; TStress &amp;... &gt; t){ if(sizeof...(TStress)!=0) assert(0);}template&lt; std::size_t I=0, typename ...BF &gt;inline typename std::enable_if&lt; I&lt; sizeof...(BF), void &gt;::typerecursiveBuildContinuumFields(const double &amp;mass, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;velocity, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;position, const int &amp;i_gridPoint, const int &amp;i_stress, std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a> &gt; &amp;... &gt; t){ if(I==i_stress) { auto &amp;stress=std::get&lt; I &gt;(t);if(<a class="el" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">position.norm</a>() &gt;=stress.method.getAveragingDomainSize()) return;double weight=stress.method(position);stress.massDensityField[i_gridPoint]+=mass *weight;stress.momentumDensityField[i_gridPoint]+=mass *weight *velocity;} else recursiveBuildContinuumFields&lt; I+1 &gt;(mass, velocity, position, i_gridPoint, i_stress, t);}template&lt; std::size_t I=0, typename ...TStress &gt;inline typename std::enable_if&lt; I==sizeof...(TStress), void &gt;::typerecursiveFinalizeContinuumVelocity(const int &amp;i_gridPoint, const int &amp;i_stress, std::tuple&lt; TStress &amp;... &gt; t){ if(sizeof...(TStress)!=0) assert(0);}template&lt; std::size_t I=0, typename ...BF &gt;inline typename std::enable_if&lt; I&lt; sizeof...(BF), void &gt;::typerecursiveFinalizeContinuumVelocity(const int &amp;i_gridPoint, const int &amp;i_stress, std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a> &gt; &amp;... &gt; t){ if(I==i_stress) { auto &amp;stress=std::get&lt; I &gt;(t);if(stress.massDensityField[i_gridPoint] &gt; <a class="el" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) stress.velocityField[i_gridPoint]=stress.momentumDensityField[i_gridPoint]/stress.massDensityField[i_gridPoint];else stress.velocityField[i_gridPoint]=Vector3d::Zero();} else recursiveFinalizeContinuumVelocity&lt; I+1 &gt;(i_gridPoint, i_stress, t);}template&lt; std::size_t I=0, typename ...TStress &gt;inline typename std::enable_if&lt; I==sizeof...(TStress), <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &gt;::typerecursiveGetContinuumVelocity(const int &amp;i_gridPoint, const int &amp;i_stress, std::tuple&lt; TStress &amp;... &gt; t){ if(sizeof...(TStress)!=0) assert(0);return Vector3d::Zero();}template&lt; std::size_t I=0, typename ...BF &gt;inline typename std::enable_if&lt; I&lt; sizeof...(BF), <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &gt;::typerecursiveGetContinuumVelocity(const int &amp;i_gridPoint, const int &amp;i_stress, std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a> &gt; &amp;... &gt; t){ if(I==i_stress) return std::get&lt; I &gt;(t).velocityField[i_gridPoint];return recursiveGetContinuumVelocity&lt; I+1 &gt;(i_gridPoint, i_stress, t);}template&lt; std::size_t I=0, typename ...TStress &gt;inline typename std::enable_if&lt; I==sizeof...(TStress), void &gt;::typerecursiveBuildKineticStress(const double &amp;mass, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;velocity, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;position, const int &amp;i_gridPoint, const int &amp;i_stress, std::tuple&lt; TStress &amp;... &gt; t){ if(sizeof...(TStress)!=0) assert(0);}template&lt; std::size_t I=0, typename ...BF &gt;inline typename std::enable_if&lt; I&lt; sizeof...(BF), void &gt;::typerecursiveBuildKineticStress(const double &amp;mass, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;velocity, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;position, const int &amp;i_gridPoint, const int &amp;i_stress, std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a> &gt; &amp;... &gt; t){ if(I==i_stress) { auto &amp;stress=std::get&lt; I &gt;(t);if(<a class="el" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">position.norm</a>() &gt;=stress.method.getAveragingDomainSize()) return;stress.field[i_gridPoint]=stress.field[i_gridPoint] - <a class="el" href="typedef_8h.html#a0acbe58426bc8c19a895a1154613ae92">amuAngstromSquaredPerPicosecondSquaredToEv</a> *stress.method(position) *mass *<a class="el" href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">velocity.transpose</a>() *velocity;} else recursiveBuildKineticStress&lt; I+1 &gt;(mass, velocity, position, i_gridPoint, i_stress, t);}template&lt; std::size_t I=0, typename ...TStress &gt;inline typename std::enable_if&lt; I==sizeof...(TStress), void &gt;::typerecursiveNullifyStress(std::tuple&lt; TStress &amp;... &gt; t){}template&lt; std::size_t I=0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename ...BF &gt;inline typename std::enable_if&lt; I&lt; sizeof...(BF), void &gt;::typerecursiveNullifyStress(std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t){ auto &amp;stress=std::get&lt; I &gt;(t);std::fill(stress.field.begin(), stress.field.end(), Matrix3d::Zero());if constexpr(stressType==<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a>) { std::fill(stress.momentumDensityField.begin(), stress.momentumDensityField.end(), Vector3d::Zero());std::fill(stress.massDensityField.begin(), stress.massDensityField.end(), 0.0);std::fill(stress.velocityField.begin(), stress.velocityField.end(), Vector3d::Zero());} recursiveNullifyStress&lt; I+1 &gt;(t);}double averagingDomainSize_max(const std::tuple&lt;&gt; t){ return 0;}template&lt; std::size_t I=0, typename ...TStress &gt;inline typename std::enable_if&lt; I==sizeof...(TStress) -1, double &gt;::type averagingDomainSize_max(const std::tuple&lt; TStress &amp;... &gt; t){ return std::get&lt; I &gt;(t).method.getAveragingDomainSize();}template&lt; std::size_t I=0, typename ...TStress &gt;inline typename std::enable_if&lt; I&lt; sizeof...(TStress) -1, double &gt;::type averagingDomainSize_max(const std::tuple&lt; TStress &amp;... &gt; t){ return std::max(std::get&lt; I &gt;(t).method.getAveragingDomainSize(), averagingDomainSize_max&lt; I+1 &gt;(t));}std::map&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt; *, double &gt; recursiveGridMaxAveragingDomainSizeMap(const std::tuple&lt;&gt; &amp;t){std::map&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt; *, double &gt; map;return map;}template&lt; std::size_t I=0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid=typename std::conditional&lt; stressType==<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc">Piola</a>, <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt;, <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a> &gt; &gt;::type, typename ...BF &gt;inline typename std::enable_if&lt; I==sizeof...(BF), std::map&lt; TGrid *, double &gt; &gt;::type recursiveGridMaxAveragingDomainSizeMap(const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t){ std::map&lt; TGrid *, double &gt; map;return map;}template&lt; std::size_t I=0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid=typename std::conditional&lt; stressType==<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc">Piola</a>, <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt;, <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a> &gt; &gt;::type, typename ...BF &gt;inline typename std::enable_if&lt; I&lt; sizeof...(BF), std::map&lt; TGrid *, double &gt; &gt;::type recursiveGridMaxAveragingDomainSizeMap(const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t){ std::map&lt; TGrid *, double &gt; map;const std::map&lt; TGrid *, double &gt; &amp;rmap=recursiveGridMaxAveragingDomainSizeMap&lt; I+1 &gt;(t);map[std::get&lt; I &gt;(t).pgrid]=std::get&lt; I &gt;(t).method.getAveragingDomainSize();for(const auto &amp;pair :rmap) if(std::get&lt; I &gt;(t).pgrid==pair.first) { map[pair.first]=std::max(map.at(std::get&lt; I &gt;(t).pgrid), pair.second);} else { auto result=<a class="el" href="StressTuple_8h.html#ae585c35d20ada39152ec21d158fa964b">map.insert</a>(pair);assert(result.second==true);} return map;}inline std::vector&lt; std::pair&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a> &gt; *, double &gt; &gt; getTGridDomainSizePairs(const std::tuple&lt;&gt; &amp;emptyTuple){ std::vector&lt; std::pair&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a> &gt; *, double &gt; &gt; emptyVectorPair;return emptyVectorPair;}inline std::vector&lt; std::pair&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt; *, double &gt; &gt; getTGridDomainSizePairs(std::tuple&lt;&gt; &amp;&amp;emptyTuple){ std::vector&lt; std::pair&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt; *, double &gt; &gt; emptyVectorPair;return emptyVectorPair;}template&lt; std::size_t I=0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid=typename std::conditional&lt; stressType==<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc">Piola</a>, <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt;, <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a> &gt; &gt;::type, typename ...BF &gt;inline typename std::enable_if&lt; I==sizeof...(BF) -1, std::vector&lt; std::pair&lt; TGrid *, double &gt; &gt; &gt;::type getTGridDomainSizePairs(const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t){ std::vector&lt; std::pair&lt; TGrid *, double &gt; &gt; vectorPair;vectorPair.push_back({std::get&lt; I &gt;(t).pgrid, std::get&lt; I &gt;(t).method.getAveragingDomainSize()});return vectorPair;}template&lt; std::size_t I=0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid=typename std::conditional&lt; stressType==<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc">Piola</a>, <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt;, <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a> &gt; &gt;::type, typename ...BF &gt;inline typename std::enable_if&lt; I&lt; sizeof...(BF) -1, std::vector&lt; std::pair&lt; TGrid *, double &gt; &gt; &gt;::type getTGridDomainSizePairs(const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t){ std::vector&lt; std::pair&lt; TGrid *, double &gt; &gt; vectorPair;vectorPair.push_back({std::get&lt; I &gt;(t).pgrid, std::get&lt; I &gt;(t).method.getAveragingDomainSize()});std::vector&lt; std::pair&lt; TGrid *, double &gt; &gt; next=getTGridDomainSizePairs&lt; I+1 &gt;(t);<a class="el" href="StressTuple_8h.html#ae585c35d20ada39152ec21d158fa964b">vectorPair.insert</a>(vectorPair.end(), next.begin(), next.end());return vectorPair;}std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt; getBaseGridList(const std::tuple&lt;&gt; t){ std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt; <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>;return <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>;}template&lt; std::size_t I=0, typename ...TStress &gt;inline typename std::enable_if&lt; I==sizeof...(TStress) -1, std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt; &gt;::type getBaseGridList(const std::tuple&lt; TStress &amp;... &gt; t){ std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt; <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>;pgridBaseVector.push_back(std::get&lt; I &gt;(t).pgrid);return <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>;}template&lt; std::size_t I=0, typename ...TStress &gt; std::enable_if&lt; I&lt; sizeof...(TStress) -1, std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt; &gt;::type getBaseGridList(const std::tuple&lt; TStress &amp;... &gt; t){ std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt; <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>;pgridBaseVector.push_back(std::get&lt; I &gt;(t).pgrid);std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#ae7008e999cd5cf48c6530563a2ff3c66">next</a> = getBaseGridList&lt;I+1&gt;(t)</td></tr>
+<tr class="separator:ae7008e999cd5cf48c6530563a2ff3c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5df22b1d6031e0ae397b429e5f4a1706" id="r_a5df22b1d6031e0ae397b429e5f4a1706"><td class="memItemLeft" align="right" valign="top">return&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a></td></tr>
 <tr class="separator:a5df22b1d6031e0ae397b429e5f4a1706"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ae467640e778fca319d49c7d0fc252002" name="ae467640e778fca319d49c7d0fc252002"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae467640e778fca319d49c7d0fc252002">&#9670;&#160;</a></span>averagingDomainSize_max() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::enable_if&lt; I==sizeof...(TStress) -1, double &gt;::type averagingDomainSize_max </td>
-          <td>(</td>
-          <td class="paramtype">const std::tuple&lt; TStress &amp;... &gt;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00078">78</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
-
-</div>
-</div>
-<a id="a10025620a1c29cb7939ac5a671ea6ee4" name="a10025620a1c29cb7939ac5a671ea6ee4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10025620a1c29cb7939ac5a671ea6ee4">&#9670;&#160;</a></span>averagingDomainSize_max() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double averagingDomainSize_max </td>
-          <td>(</td>
-          <td class="paramtype">const std::tuple&lt;&gt;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00072">72</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
-
-</div>
-</div>
 <a id="a7c9939871078f7961a965bb0ee293b4c" name="a7c9939871078f7961a965bb0ee293b4c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7c9939871078f7961a965bb0ee293b4c">&#9670;&#160;</a></span>fold()</h2>
 
@@ -253,146 +175,8 @@ template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
 
 </div>
 </div>
-<a id="a21586712001b69cc9b9a9e3762c758ff" name="a21586712001b69cc9b9a9e3762c758ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21586712001b69cc9b9a9e3762c758ff">&#9670;&#160;</a></span>getBaseGridList() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::enable_if&lt; I==sizeof...(TStress) -1, std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt; &gt;::type getBaseGridList </td>
-          <td>(</td>
-          <td class="paramtype">const std::tuple&lt; TStress &amp;... &gt;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00172">172</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
-
-</div>
-</div>
-<a id="a87014e82899cbcbd6368b7208a56de6d" name="a87014e82899cbcbd6368b7208a56de6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87014e82899cbcbd6368b7208a56de6d">&#9670;&#160;</a></span>getBaseGridList() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classGridBase.html">GridBase</a> * &gt; getBaseGridList </td>
-          <td>(</td>
-          <td class="paramtype">const std::tuple&lt;&gt;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00165">165</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
-
-</div>
-</div>
-<a id="acd07ba6e065132d77a18a7ae66427d2b" name="acd07ba6e065132d77a18a7ae66427d2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd07ba6e065132d77a18a7ae66427d2b">&#9670;&#160;</a></span>getTGridDomainSizePairs() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid  = typename std::conditional&lt;stressType == Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type, typename ... BF&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::enable_if&lt; I==sizeof...(BF) -1, std::vector&lt; std::pair&lt; TGrid *, double &gt; &gt; &gt;::type getTGridDomainSizePairs </td>
-          <td>(</td>
-          <td class="paramtype">const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00145">145</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
-
-</div>
-</div>
-<a id="a51be74516070601c30d399c7215c3dd8" name="a51be74516070601c30d399c7215c3dd8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51be74516070601c30d399c7215c3dd8">&#9670;&#160;</a></span>getTGridDomainSizePairs() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid  = typename std::conditional&lt;stressType == Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type, typename ... BF&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::enable_if&lt; I&lt; sizeof...(BF), std::map&lt; TGrid *, double &gt; &gt;::type <a class="el" href="StressTuple_8h.html#add53f8052188d8280a37faa742ac3352">recursiveGridMaxAveragingDomainSizeMap</a>(const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt; t){ std::map&lt; TGrid *, double &gt; map;const std::map&lt; TGrid *, double &gt; &amp;rmap=<a class="el" href="StressTuple_8h.html#add53f8052188d8280a37faa742ac3352">recursiveGridMaxAveragingDomainSizeMap</a>&lt; I+1 &gt;(t);map[std::get&lt; I &gt;(t).pgrid]=std::get&lt; I &gt;(t).method.getAveragingDomainSize(); for(const auto &amp;pair :rmap) if(std::get&lt; I &gt;(t).pgrid==pair.first) { map[pair.first]=std::max(map.at(std::get&lt; I &gt;(t).pgrid), pair.second); } else { auto result=<a class="el" href="StressTuple_8h.html#a3b09030a4008d066e513010b165d0d25">map.insert</a>(pair); assert(result.second==true); } return map;}inline std::vector&lt; std::pair&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a> &gt; *, double &gt; getTGridDomainSizePairs </td>
-          <td>(</td>
-          <td class="paramtype">const std::tuple&lt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>emptyTuple</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00131">131</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
-
-</div>
-</div>
-<a id="a12a5fe9c22cee6a5e429e01b089ebd1c" name="a12a5fe9c22cee6a5e429e01b089ebd1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12a5fe9c22cee6a5e429e01b089ebd1c">&#9670;&#160;</a></span>getTGridDomainSizePairs() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; std::pair&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt; *, double &gt; &gt; getTGridDomainSizePairs </td>
-          <td>(</td>
-          <td class="paramtype">std::tuple&lt;&gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>emptyTuple</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00136">136</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
-
-</div>
-</div>
 <a id="ae585c35d20ada39152ec21d158fa964b" name="ae585c35d20ada39152ec21d158fa964b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae585c35d20ada39152ec21d158fa964b">&#9670;&#160;</a></span>insert() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae585c35d20ada39152ec21d158fa964b">&#9670;&#160;</a></span>insert()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -401,40 +185,6 @@ template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0
           <td class="memname"><a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a> insert </td>
           <td>(</td>
           <td class="paramtype">pgridBaseVector.&#160;</td>
-          <td class="paramname"><em>end</em>(), </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">next.&#160;</td>
-          <td class="paramname"><em>begin</em>(), </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">next.&#160;</td>
-          <td class="paramname"><em>end</em>()&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3b09030a4008d066e513010b165d0d25" name="a3b09030a4008d066e513010b165d0d25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b09030a4008d066e513010b165d0d25">&#9670;&#160;</a></span>insert() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="StressTuple_8h.html#a88086be08d252d8f93fecdc61b7af7dd">vectorPair</a> insert </td>
-          <td>(</td>
-          <td class="paramtype">vectorPair.&#160;</td>
           <td class="paramname"><em>end</em>(), </td>
         </tr>
         <tr>
@@ -547,8 +297,8 @@ template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
 
 </div>
 </div>
-<a id="a233e9456992775a003da56d1288515d8" name="a233e9456992775a003da56d1288515d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a233e9456992775a003da56d1288515d8">&#9670;&#160;</a></span>recursiveFold()</h2>
+<a id="adcca1b6b7c0e7b00bec050773654b980" name="adcca1b6b7c0e7b00bec050773654b980"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcca1b6b7c0e7b00bec050773654b980">&#9670;&#160;</a></span>recursiveFold()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -567,8 +317,8 @@ template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;&#160;</td>
-          <td class="paramname"><em>step</em>, </td>
+          <td class="paramtype">const <a class="el" href="typedef_8h.html#a62b42fd2ce74b4f877759c2466f17238">Matrix3d</a> &amp;&#160;</td>
+          <td class="paramname"><em>cell</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -595,67 +345,7 @@ template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00194">194</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
-
-</div>
-</div>
-<a id="a497e202de54c43de020b77b2e9a019cd" name="a497e202de54c43de020b77b2e9a019cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a497e202de54c43de020b77b2e9a019cd">&#9670;&#160;</a></span>recursiveGridMaxAveragingDomainSizeMap() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid  = typename std::conditional&lt;stressType == Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type, typename ... BF&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::enable_if&lt; I==sizeof...(BF), std::map&lt; TGrid *, double &gt; &gt;::type recursiveGridMaxAveragingDomainSizeMap </td>
-          <td>(</td>
-          <td class="paramtype">const std::tuple&lt; <a class="el" href="classStress.html">Stress</a>&lt; BF, stressType &gt; &amp;... &gt;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00100">100</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
-
-</div>
-</div>
-<a id="add53f8052188d8280a37faa742ac3352" name="add53f8052188d8280a37faa742ac3352"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add53f8052188d8280a37faa742ac3352">&#9670;&#160;</a></span>recursiveGridMaxAveragingDomainSizeMap() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::enable_if&lt; I&lt; sizeof...(TStress) -1, double &gt;::type <a class="el" href="StressTuple_8h.html#a10025620a1c29cb7939ac5a671ea6ee4">averagingDomainSize_max</a>(const std::tuple&lt; TStress &amp;... &gt; t){ return std::max(std::get&lt; I &gt;(t).method.getAveragingDomainSize(), <a class="el" href="StressTuple_8h.html#a10025620a1c29cb7939ac5a671ea6ee4">averagingDomainSize_max</a>&lt; I+1 &gt;(t));}std::map&lt; <a class="el" href="classGrid.html">Grid</a>&lt; <a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a> &gt; double recursiveGridMaxAveragingDomainSizeMap </td>
-          <td>(</td>
-          <td class="paramtype">const std::tuple&lt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00091">91</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00318">318</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
 
 </div>
 </div>
@@ -685,7 +375,7 @@ template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00213">213</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00337">337</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
 
 </div>
 </div>
@@ -707,14 +397,14 @@ template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
 
 </div>
 </div>
-<a id="afc8e724f28ec0c9a875d28fa5abde382" name="afc8e724f28ec0c9a875d28fa5abde382"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc8e724f28ec0c9a875d28fa5abde382">&#9670;&#160;</a></span>std::cout&lt;&lt; std::endl;recursiveFold&lt; I+1 &gt;()</h2>
+<a id="acedc6ffd0384523f21680f44596181a3" name="acedc6ffd0384523f21680f44596181a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acedc6ffd0384523f21680f44596181a3">&#9670;&#160;</a></span>std::cout&lt;&lt; std::endl;recursiveFold&lt; I+1 &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::cout&lt;&lt; std::endl;<a class="el" href="StressTuple_8h.html#a233e9456992775a003da56d1288515d8">recursiveFold</a>&lt; I+1 &gt; </td>
+          <td class="memname">std::cout&lt;&lt; std::endl;<a class="el" href="StressTuple_8h.html#adcca1b6b7c0e7b00bec050773654b980">recursiveFold</a>&lt; I+1 &gt; </td>
           <td>(</td>
           <td class="paramtype">origin&#160;</td>
           <td class="paramname">, </td>
@@ -722,7 +412,7 @@ template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">step&#160;</td>
+          <td class="paramtype">cell&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -776,19 +466,19 @@ template&lt;std::size_t I = 0, typename ... TStress&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a1efcdb5a3ad3b201395a930a8cebcb05" name="a1efcdb5a3ad3b201395a930a8cebcb05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1efcdb5a3ad3b201395a930a8cebcb05">&#9670;&#160;</a></span>next</h2>
+<a id="ae7008e999cd5cf48c6530563a2ff3c66" name="ae7008e999cd5cf48c6530563a2ff3c66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7008e999cd5cf48c6530563a2ff3c66">&#9670;&#160;</a></span>next</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid  = typename std::conditional&lt;stressType == Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type, typename ... BF&gt; </div>
+template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename ... BF&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::enable_if&lt;I &lt; sizeof...(TStress)-1, std::vector&lt;<a class="el" href="classGridBase.html">GridBase</a>*&gt; &gt;::type <a class="el" href="StressTuple_8h.html#a87014e82899cbcbd6368b7208a56de6d">getBaseGridList</a>(const std::tuple&lt;TStress&amp;...&gt; t){ std::vector&lt;<a class="el" href="classGridBase.html">GridBase</a>*&gt; <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>; pgridBaseVector.push_back(std::get&lt;I&gt;(t).pgrid); std::vector&lt;<a class="el" href="classGridBase.html">GridBase</a>*&gt; next = <a class="el" href="StressTuple_8h.html#a51be74516070601c30d399c7215c3dd8">getTGridDomainSizePairs</a>&lt;I+1&gt;(t)</td>
+          <td class="memname">std::enable_if&lt;I &lt; sizeof...(BF), void&gt;::type <a class="el" href="StressTuple_8h.html#a3f36737661f8d56edfceda6b5be0a50c">recursiveBuildStress</a>(const double&amp; fij, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; ra, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; rA, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; rb, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; rB, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; rab, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; rAB, const int&amp; i_gridPoint, const int&amp; i_stress, std::tuple&lt;<a class="el" href="classStress.html">Stress</a>&lt;BF,stressType&gt;&amp;...&gt; t){ if (I == i_stress &amp;&amp; stressType == <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a>) { assert(rab.squaredNorm()&gt;<a class="el" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>); std::get&lt;I&gt;(t).field[i_gridPoint]= std::get&lt;I&gt;(t).field[i_gridPoint] + std::get&lt;I&gt;(t).method.bondFunction(ra,rb)*fij*<a class="el" href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">rab.transpose</a>()*rab/<a class="el" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">rab.norm</a>(); } else if (I == i_stress &amp;&amp; stressType == <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc">Piola</a>) { assert(rab.squaredNorm()&gt;<a class="el" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>); std::get&lt;I&gt;(t).field[i_gridPoint]= std::get&lt;I&gt;(t).field[i_gridPoint] + std::get&lt;I&gt;(t).method.bondFunction(rA,rB)*fij*<a class="el" href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">rAB.transpose</a>()*rab/<a class="el" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">rab.norm</a>(); } else <a class="el" href="StressTuple_8h.html#a3f36737661f8d56edfceda6b5be0a50c">recursiveBuildStress</a>&lt;I+1&gt;(fij,ra,rA,rb,rB,rab,rAB,i_gridPoint,i_stress,t);}template&lt;std::size_t I=0, typename ...TStress&gt;inline typename std::enable_if&lt;I == sizeof...(TStress), void&gt;::typerecursiveBuildContinuumFields(const double&amp; mass, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; velocity, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; position, const int&amp; i_gridPoint, const int&amp; i_stress, std::tuple&lt;TStress&amp;...&gt; t){ if (sizeof...(TStress)!=0) assert(0);}template&lt;std::size_t I=0, typename ...BF&gt;inline typename std::enable_if&lt;I &lt; sizeof...(BF), void&gt;::typerecursiveBuildContinuumFields(const double&amp; mass, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; velocity, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; position, const int&amp; i_gridPoint, const int&amp; i_stress, std::tuple&lt;<a class="el" href="classStress.html">Stress</a>&lt;BF,<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a>&gt;&amp;...&gt; t){ if (I == i_stress) { auto&amp; stress= std::get&lt;I&gt;(t); if (<a class="el" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">position.norm</a>() &gt;= stress.method.getAveragingDomainSize()) return; double weight= stress.method(position); stress.massDensityField[i_gridPoint]+= mass*weight; stress.momentumDensityField[i_gridPoint]+= mass*weight*velocity; } else recursiveBuildContinuumFields&lt;I+1&gt;(mass,velocity,position,i_gridPoint,i_stress,t);}template&lt;std::size_t I=0, typename ...TStress&gt;inline typename std::enable_if&lt;I == sizeof...(TStress), void&gt;::typerecursiveFinalizeContinuumVelocity(const int&amp; i_gridPoint, const int&amp; i_stress, std::tuple&lt;TStress&amp;...&gt; t){ if (sizeof...(TStress)!=0) assert(0);}template&lt;std::size_t I=0, typename ...BF&gt;inline typename std::enable_if&lt;I &lt; sizeof...(BF), void&gt;::typerecursiveFinalizeContinuumVelocity(const int&amp; i_gridPoint, const int&amp; i_stress, std::tuple&lt;<a class="el" href="classStress.html">Stress</a>&lt;BF,<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a>&gt;&amp;...&gt; t){ if (I == i_stress) { auto&amp; stress= std::get&lt;I&gt;(t); if (stress.massDensityField[i_gridPoint] &gt; <a class="el" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) stress.velocityField[i_gridPoint]= stress.momentumDensityField[i_gridPoint]/stress.massDensityField[i_gridPoint]; else stress.velocityField[i_gridPoint]= Vector3d::Zero(); } else recursiveFinalizeContinuumVelocity&lt;I+1&gt;(i_gridPoint,i_stress,t);}template&lt;std::size_t I=0, typename ...TStress&gt;inline typename std::enable_if&lt;I == sizeof...(TStress), <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&gt;::typerecursiveGetContinuumVelocity(const int&amp; i_gridPoint, const int&amp; i_stress, std::tuple&lt;TStress&amp;...&gt; t){ if (sizeof...(TStress)!=0) assert(0); return Vector3d::Zero();}template&lt;std::size_t I=0, typename ...BF&gt;inline typename std::enable_if&lt;I &lt; sizeof...(BF), <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&gt;::typerecursiveGetContinuumVelocity(const int&amp; i_gridPoint, const int&amp; i_stress, std::tuple&lt;<a class="el" href="classStress.html">Stress</a>&lt;BF,<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a>&gt;&amp;...&gt; t){ if (I == i_stress) return std::get&lt;I&gt;(t).velocityField[i_gridPoint]; return recursiveGetContinuumVelocity&lt;I+1&gt;(i_gridPoint,i_stress,t);}template&lt;std::size_t I=0, typename ...TStress&gt;inline typename std::enable_if&lt;I == sizeof...(TStress), void&gt;::typerecursiveBuildKineticStress(const double&amp; mass, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; velocity, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; position, const int&amp; i_gridPoint, const int&amp; i_stress, std::tuple&lt;TStress&amp;...&gt; t){ if (sizeof...(TStress)!=0) assert(0);}template&lt;std::size_t I=0, typename ...BF&gt;inline typename std::enable_if&lt;I &lt; sizeof...(BF), void&gt;::typerecursiveBuildKineticStress(const double&amp; mass, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; velocity, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; position, const int&amp; i_gridPoint, const int&amp; i_stress, std::tuple&lt;<a class="el" href="classStress.html">Stress</a>&lt;BF,<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a>&gt;&amp;...&gt; t){ if (I == i_stress) { auto&amp; stress= std::get&lt;I&gt;(t); if (<a class="el" href="helper_8hpp.html#a6820db03fe8ce66b6cdb62a8c918efad">position.norm</a>() &gt;= stress.method.getAveragingDomainSize()) return; stress.field[i_gridPoint]= stress.field[i_gridPoint] - <a class="el" href="typedef_8h.html#a0acbe58426bc8c19a895a1154613ae92">amuAngstromSquaredPerPicosecondSquaredToEv</a>* stress.method(position)*mass*<a class="el" href="helper_8hpp.html#a09b2db82084507ee9afed97609c871e4">velocity.transpose</a>()*velocity; } else recursiveBuildKineticStress&lt;I+1&gt;(mass,velocity,position,i_gridPoint,i_stress,t);}template&lt;std::size_t I=0, typename ...TStress&gt;inline typename std::enable_if&lt;I == sizeof...(TStress), void&gt;::typerecursiveNullifyStress(std::tuple&lt;TStress&amp;...&gt; t){}template&lt;std::size_t I=0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename ...BF&gt;inline typename std::enable_if&lt;I &lt; sizeof...(BF), void&gt;::typerecursiveNullifyStress(std::tuple&lt;<a class="el" href="classStress.html">Stress</a>&lt;BF,stressType&gt;&amp;...&gt; t){ auto&amp; stress= std::get&lt;I&gt;(t); std::fill(stress.field.begin(), stress.field.end(),Matrix3d::Zero()); if constexpr (stressType==<a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cab4f6f582354971e40fd63facea543280">Cauchy</a>) { std::fill(stress.momentumDensityField.begin(), stress.momentumDensityField.end(),Vector3d::Zero()); std::fill(stress.massDensityField.begin(), stress.massDensityField.end(),0.0); std::fill(stress.velocityField.begin(), stress.velocityField.end(),Vector3d::Zero()); } recursiveNullifyStress&lt;I+1&gt;(t);}double averagingDomainSize_max(const std::tuple&lt;&gt; t){ return 0;}template&lt;std::size_t I=0, typename ...TStress&gt;inline typename std::enable_if&lt;I == sizeof...(TStress)-1, double&gt;::type averagingDomainSize_max(const std::tuple&lt;TStress&amp;...&gt; t){ return std::get&lt;I&gt;(t).method.getAveragingDomainSize();}template&lt;std::size_t I=0, typename ...TStress&gt;inline typename std::enable_if&lt;I &lt; sizeof...(TStress)-1, double&gt;::type averagingDomainSize_max(const std::tuple&lt;TStress&amp;...&gt; t){ return std::max(std::get&lt;I&gt;(t).method.getAveragingDomainSize(),averagingDomainSize_max&lt;I+1&gt;(t));}std::map&lt;<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a>&gt;*,double&gt; recursiveGridMaxAveragingDomainSizeMap(const std::tuple&lt;&gt;&amp; t){std::map&lt;<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a>&gt;*,double&gt; map;return map;}template&lt;std::size_t I=0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid= typename std::conditional&lt;stressType == <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc">Piola</a>,<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a>&gt;,<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a>&gt; &gt;::type, typename ...BF&gt;inline typename std::enable_if&lt;I == sizeof...(BF), std::map&lt;TGrid*,double&gt; &gt;::type recursiveGridMaxAveragingDomainSizeMap(const std::tuple&lt;<a class="el" href="classStress.html">Stress</a>&lt;BF,stressType&gt;&amp;...&gt; t){ std::map&lt;TGrid*,double&gt; map; return map;}template&lt;std::size_t I=0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid= typename std::conditional&lt;stressType == <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc">Piola</a>,<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a>&gt;,<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a>&gt; &gt;::type, typename ...BF&gt;inline typename std::enable_if&lt;I &lt; sizeof...(BF), std::map&lt;TGrid*,double&gt; &gt;::type recursiveGridMaxAveragingDomainSizeMap(const std::tuple&lt;<a class="el" href="classStress.html">Stress</a>&lt;BF,stressType&gt;&amp;...&gt; t){ std::map&lt;TGrid*,double&gt; map; const std::map&lt;TGrid*,double&gt;&amp; rmap= recursiveGridMaxAveragingDomainSizeMap&lt;I+1&gt;(t); map[std::get&lt;I&gt;(t).pgrid]= std::get&lt;I&gt;(t).method.getAveragingDomainSize(); for (const auto&amp; pair : rmap) if (std::get&lt;I&gt;(t).pgrid == pair.first) { map[pair.first]= std::max(map.at(std::get&lt;I&gt;(t).pgrid),pair.second); } else { auto result= <a class="el" href="StressTuple_8h.html#ae585c35d20ada39152ec21d158fa964b">map.insert</a>(pair); assert(result.second==true); } return map;}inline std::vector&lt;std::pair&lt;<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a>&gt;*,double&gt; &gt; getTGridDomainSizePairs(const std::tuple&lt;&gt;&amp; emptyTuple){ std::vector&lt;std::pair&lt;<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a>&gt;*,double&gt; &gt; emptyVectorPair; return emptyVectorPair;}inline std::vector&lt;std::pair&lt;<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a>&gt;*,double&gt; &gt; getTGridDomainSizePairs(std::tuple&lt;&gt;&amp;&amp; emptyTuple){ std::vector&lt;std::pair&lt;<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a>&gt;*,double&gt; &gt; emptyVectorPair; return emptyVectorPair;}template&lt;std::size_t I=0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid= typename std::conditional&lt;stressType == <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc">Piola</a>,<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a>&gt;,<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a>&gt; &gt;::type, typename ...BF&gt;inline typename std::enable_if&lt;I == sizeof...(BF)-1, std::vector&lt;std::pair&lt;TGrid*,double&gt; &gt; &gt;::type getTGridDomainSizePairs(const std::tuple&lt;<a class="el" href="classStress.html">Stress</a>&lt;BF,stressType&gt;&amp;...&gt; t){ std::vector&lt;std::pair&lt;TGrid*,double&gt; &gt; vectorPair; vectorPair.push_back({std::get&lt;I&gt;(t).pgrid,std::get&lt;I&gt;(t).method.getAveragingDomainSize()}); return vectorPair;}template&lt;std::size_t I=0, <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid= typename std::conditional&lt;stressType == <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8cadc285e6ab8be41f3bf71853aded827cc">Piola</a>,<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9ac20c28eca40559019b136fa240da4610">Reference</a>&gt;,<a class="el" href="classGrid.html">Grid</a>&lt;<a class="el" href="typedef_8h.html#ac254e872972d56fde0b2d9b767e157a9a0650b2dde22d49f39e066ee117de1ac6">Current</a>&gt; &gt;::type, typename ...BF&gt;inline typename std::enable_if&lt; I &lt; sizeof...(BF)-1, std::vector&lt;std::pair&lt;TGrid*,double&gt; &gt; &gt;::type getTGridDomainSizePairs(const std::tuple&lt;<a class="el" href="classStress.html">Stress</a>&lt;BF,stressType&gt;&amp;...&gt; t){ std::vector&lt;std::pair&lt;TGrid*,double&gt; &gt; vectorPair; vectorPair.push_back({std::get&lt;I&gt;(t).pgrid,std::get&lt;I&gt;(t).method.getAveragingDomainSize()}); std::vector&lt;std::pair&lt;TGrid*,double&gt; &gt; next= getTGridDomainSizePairs&lt;I+1&gt;(t); <a class="el" href="StressTuple_8h.html#ae585c35d20ada39152ec21d158fa964b">vectorPair.insert</a>(vectorPair.end(),next.begin(),next.end()); return vectorPair;}std::vector&lt;<a class="el" href="classGridBase.html">GridBase</a>*&gt; getBaseGridList(const std::tuple&lt;&gt; t){ std::vector&lt;<a class="el" href="classGridBase.html">GridBase</a>*&gt; <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>; return <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>;}template&lt;std::size_t I=0, typename ...TStress&gt;inline typename std::enable_if&lt;I == sizeof...(TStress)-1, std::vector&lt;<a class="el" href="classGridBase.html">GridBase</a>*&gt; &gt;::type getBaseGridList(const std::tuple&lt;TStress&amp;...&gt; t){ std::vector&lt;<a class="el" href="classGridBase.html">GridBase</a>*&gt; <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>; pgridBaseVector.push_back(std::get&lt;I&gt;(t).pgrid); return <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>;}template&lt;std::size_t I=0,typename ...TStress&gt; std::enable_if&lt;I &lt; sizeof...(TStress)-1, std::vector&lt;<a class="el" href="classGridBase.html">GridBase</a>*&gt; &gt;::type getBaseGridList(const std::tuple&lt;TStress&amp;...&gt; t){ std::vector&lt;<a class="el" href="classGridBase.html">GridBase</a>*&gt; <a class="el" href="StressTuple_8h.html#a5df22b1d6031e0ae397b429e5f4a1706">pgridBaseVector</a>; pgridBaseVector.push_back(std::get&lt;I&gt;(t).pgrid); std::vector&lt;<a class="el" href="classGridBase.html">GridBase</a>*&gt; next = getBaseGridList&lt;I+1&gt;(t)</td>
         </tr>
       </table>
   </td>
@@ -798,7 +488,7 @@ template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00159">159</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00309">309</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
 
 </div>
 </div>
@@ -814,23 +504,7 @@ template&lt;std::size_t I = 0, <a class="el" href="typedef_8h.html#abbd654dfd1a0
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00187">187</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
-
-</div>
-</div>
-<a id="a88086be08d252d8f93fecdc61b7af7dd" name="a88086be08d252d8f93fecdc61b7af7dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88086be08d252d8f93fecdc61b7af7dd">&#9670;&#160;</a></span>vectorPair</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">return vectorPair</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00161">161</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="StressTuple_8h_source.html#l00311">311</a> of file <a class="el" href="StressTuple_8h_source.html">StressTuple.h</a>.</p>
 
 </div>
 </div>

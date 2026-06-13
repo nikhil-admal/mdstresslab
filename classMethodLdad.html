@@ -105,13 +105,16 @@ $(document).ready(function(){initNavTree('classMethodLdad.html',''); initResizab
 </div><!--header-->
 <div class="contents">
 
+<p>Lattice-dependent averaging-domain method.  
+ <a href="classMethodLdad.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="MethodLdad_8h_source.html">MethodLdad.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for MethodLdad&lt; T &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classMethodLdad__inherit__graph.png" border="0" usemap="#aMethodLdad_3_01T_01_4_inherit__map" alt="Inheritance graph"/></div>
 <map name="aMethodLdad_3_01T_01_4_inherit__map" id="aMethodLdad_3_01T_01_4_inherit__map">
-<area shape="rect" title=" " alt="" coords="19,93,159,119"/>
+<area shape="rect" title="Lattice&#45;dependent averaging&#45;domain method." alt="" coords="19,93,159,119"/>
 <area shape="rect" href="classMethod.html" title=" " alt="" coords="5,5,172,45"/>
 <area shape="poly" title=" " alt="" coords="91,59,91,93,86,93,86,59"/>
 </map>
@@ -121,7 +124,7 @@ Collaboration diagram for MethodLdad&lt; T &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classMethodLdad__coll__graph.png" border="0" usemap="#aMethodLdad_3_01T_01_4_coll__map" alt="Collaboration graph"/></div>
 <map name="aMethodLdad_3_01T_01_4_coll__map" id="aMethodLdad_3_01T_01_4_coll__map">
-<area shape="rect" title=" " alt="" coords="19,93,159,119"/>
+<area shape="rect" title="Lattice&#45;dependent averaging&#45;domain method." alt="" coords="19,93,159,119"/>
 <area shape="rect" href="classMethod.html" title=" " alt="" coords="5,5,172,45"/>
 <area shape="poly" title=" " alt="" coords="91,59,91,93,86,93,86,59"/>
 </map>
@@ -139,7 +142,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64caf481605ec1e96b6580f0af3512c5 inherit pub_methods_classMethod" id="r_a64caf481605ec1e96b6580f0af3512c5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a64caf481605ec1e96b6580f0af3512c5">~Method</a> ()</td></tr>
 <tr class="separator:a64caf481605ec1e96b6580f0af3512c5 inherit pub_methods_classMethod"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65f3ec190572e1912f2c2b6b0ffa1734 inherit pub_methods_classMethod" id="r_a65f3ec190572e1912f2c2b6b0ffa1734"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a65f3ec190572e1912f2c2b6b0ffa1734">operator()</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec) const</td></tr>
-<tr class="memdesc:a65f3ec190572e1912f2c2b6b0ffa1734 inherit pub_methods_classMethod"><td class="mdescLeft">&#160;</td><td class="mdescRight">The weighting function \(w\) used to compute stress.  <br /></td></tr>
+<tr class="memdesc:a65f3ec190572e1912f2c2b6b0ffa1734 inherit pub_methods_classMethod"><td class="mdescLeft">&#160;</td><td class="mdescRight">The pointwise weighting function \(w\).  <br /></td></tr>
 <tr class="separator:a65f3ec190572e1912f2c2b6b0ffa1734 inherit pub_methods_classMethod"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e971ada35a39ed4243540ad7dea3fa9 inherit pub_methods_classMethod" id="r_a2e971ada35a39ed4243540ad7dea3fa9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMethod.html#a2e971ada35a39ed4243540ad7dea3fa9">bondFunction</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec1, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec2) const</td></tr>
 <tr class="memdesc:a2e971ada35a39ed4243540ad7dea3fa9 inherit pub_methods_classMethod"><td class="mdescLeft">&#160;</td><td class="mdescRight">The bond function \(b(\boldsymbol v^1, \boldsymbol v^2)\) gives the weight associated to a bond formed by two atoms.  <br /></td></tr>
@@ -168,10 +171,21 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class MethodLdad&lt; T &gt;</div><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testLDADLJ_8cpp-example.html#_a5">testLDADLJ.cpp</a>, and <a class="el" href="testMls_8cpp-example.html#_a5">testMls.cpp</a>.</dd>
+class MethodLdad&lt; T &gt;</div><p>Lattice-dependent averaging-domain method. </p>
+<p><code><a class="el" href="classMethodLdad.html" title="Lattice-dependent averaging-domain method.">MethodLdad</a></code> defines a separable weighting function in the basis provided by <code>ldadVectors</code>. The pointwise weight used for Cauchy kinetic stress, momentum density, and mass density is normalized as  </p><p class="formulaDsp">
+\[
+  w(\mathbf r)=
+  \frac{\phi(\xi_1)\phi(\xi_2)\phi(\xi_3)}
+       {|\det A|\left(\int_{-1}^{1}\phi(t)\,dt\right)^3},
+  \qquad \boldsymbol\xi=A^{-1}\mathbf r,
+\]
+</p>
+<p> where \(A\) is the matrix of LDAD vectors.</p>
+<p>The potential-stress bond function uses a separate historical normalization path through <code>normalizer</code> and <code>oneDFunction.integrate()</code>. This keeps existing LDAD potential-stress results unchanged while ensuring direct pointwise weights integrate to one. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testIdealGas_8cpp-example.html#_a17">testIdealGas.cpp</a>, <a class="el" href="testLDADLJ_8cpp-example.html#_a5">testLDADLJ.cpp</a>, <a class="el" href="testLDADSWTriclinic_8cpp-example.html#_a9">testLDADSWTriclinic.cpp</a>, and <a class="el" href="testMls_8cpp-example.html#_a5">testMls.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="MethodLdad_8h_source.html#l00019">19</a> of file <a class="el" href="MethodLdad_8h_source.html">MethodLdad.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MethodLdad_8h_source.html#l00038">38</a> of file <a class="el" href="MethodLdad_8h_source.html">MethodLdad.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a55a482cb2783f90306dc2ac2c274b651" name="a55a482cb2783f90306dc2ac2c274b651"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a55a482cb2783f90306dc2ac2c274b651">&#9670;&#160;</a></span>MethodLdad() <span class="overload">[1/2]</span></h2>
@@ -240,7 +254,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MethodLdad_8cpp_source.html#l00041">41</a> of file <a class="el" href="MethodLdad_8cpp_source.html">MethodLdad.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MethodLdad_8cpp_source.html#l00042">42</a> of file <a class="el" href="MethodLdad_8cpp_source.html">MethodLdad.cpp</a>.</p>
 
 </div>
 </div>
@@ -281,7 +295,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MethodLdad_8cpp_source.html#l00055">55</a> of file <a class="el" href="MethodLdad_8cpp_source.html">MethodLdad.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MethodLdad_8cpp_source.html#l00056">56</a> of file <a class="el" href="MethodLdad_8cpp_source.html">MethodLdad.cpp</a>.</p>
 
 </div>
 </div>
@@ -311,7 +325,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MethodLdad_8cpp_source.html#l00046">46</a> of file <a class="el" href="MethodLdad_8cpp_source.html">MethodLdad.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MethodLdad_8cpp_source.html#l00047">47</a> of file <a class="el" href="MethodLdad_8cpp_source.html">MethodLdad.cpp</a>.</p>
 
 </div>
 </div>
@@ -338,7 +352,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="MethodLdad_8h_source.html#l00084">84</a> of file <a class="el" href="MethodLdad_8h_source.html">MethodLdad.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MethodLdad_8h_source.html#l00103">103</a> of file <a class="el" href="MethodLdad_8h_source.html">MethodLdad.h</a>.</p>
 
 </div>
 </div>

@@ -138,40 +138,47 @@ $(document).ready(function(){initNavTree('Constant_8cpp_source.html',''); initRe
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
 </div>
 <div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classConstant.html#aade9984be63c3edc68585af7e2d42a53">   32</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classConstant.html#aade9984be63c3edc68585af7e2d42a53">Constant::integrate</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; vec1_pull_seg, <span class="keyword">const</span> <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; vec2_pull_seg)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classConstant.html#a0991b7a45cfdfa74ce2b131e47a79255">   32</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classConstant.html#a0991b7a45cfdfa74ce2b131e47a79255">Constant::integral</a>()<span class="keyword"> const</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">double</span> result = 1.0;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> vec_mid;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    vec_mid = (vec1_pull_seg + vec2_pull_seg) / 2.0;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt;= 2; i++)</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">if</span> (vec_mid(i) &lt; -1.0 - <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a> || vec_mid(i) &gt; 1.0 + <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>)</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            <span class="keywordflow">return</span> 0.0;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        } </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((vec_mid(i) &gt;= -1.0 - <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a> &amp;&amp; vec_mid(i) &lt;= -1.0 + <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) || (vec_mid(i) &lt;= 1.0 + <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a> &amp;&amp; vec_mid(i) &gt;= 1.0 - <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>))</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            result = result * 0.5;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        } </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            result = result * 1.0;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">return</span> 2.0;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
 </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classConstant.html#aade9984be63c3edc68585af7e2d42a53">   37</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classConstant.html#aade9984be63c3edc68585af7e2d42a53">Constant::integrate</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; vec1_pull_seg, <span class="keyword">const</span> <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a>&amp; vec2_pull_seg)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">double</span> result = 1.0;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_typedef" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> vec_mid;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    vec_mid = (vec1_pull_seg + vec2_pull_seg) / 2.0;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt;= 2; i++)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">if</span> (vec_mid(i) &lt; -1.0 - <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a> || vec_mid(i) &gt; 1.0 + <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">return</span> 0.0;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        } </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((vec_mid(i) &gt;= -1.0 - <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a> &amp;&amp; vec_mid(i) &lt;= -1.0 + <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>) || (vec_mid(i) &lt;= 1.0 + <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a> &amp;&amp; vec_mid(i) &gt;= 1.0 - <a class="code hl_variable" href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a>))</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            result = result * 0.5;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        } </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            result = result * 1.0;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="ttc" id="aConstant_8h_html"><div class="ttname"><a href="Constant_8h.html">Constant.h</a></div></div>
+<div class="ttc" id="aclassConstant_html_a0991b7a45cfdfa74ce2b131e47a79255"><div class="ttname"><a href="classConstant.html#a0991b7a45cfdfa74ce2b131e47a79255">Constant::integral</a></div><div class="ttdeci">double integral() const</div><div class="ttdoc">Return  for this shape.</div><div class="ttdef"><b>Definition</b> <a href="Constant_8cpp_source.html#l00032">Constant.cpp:32</a></div></div>
 <div class="ttc" id="aclassConstant_html_a478e7c170dfd9818aacb8114cf5993a0"><div class="ttname"><a href="classConstant.html#a478e7c170dfd9818aacb8114cf5993a0">Constant::~Constant</a></div><div class="ttdeci">virtual ~Constant()</div><div class="ttdef"><b>Definition</b> <a href="Constant_8cpp_source.html#l00013">Constant.cpp:13</a></div></div>
 <div class="ttc" id="aclassConstant_html_a6d2f7d070d22aed4a3371c181da67716"><div class="ttname"><a href="classConstant.html#a6d2f7d070d22aed4a3371c181da67716">Constant::Constant</a></div><div class="ttdeci">Constant()</div><div class="ttdef"><b>Definition</b> <a href="Constant_8cpp_source.html#l00011">Constant.cpp:11</a></div></div>
-<div class="ttc" id="aclassConstant_html_aade9984be63c3edc68585af7e2d42a53"><div class="ttname"><a href="classConstant.html#aade9984be63c3edc68585af7e2d42a53">Constant::integrate</a></div><div class="ttdeci">double integrate(const Vector3d &amp;vec1_pull_seg, const Vector3d &amp;vec2_pull_seg) const</div><div class="ttdef"><b>Definition</b> <a href="Constant_8cpp_source.html#l00032">Constant.cpp:32</a></div></div>
-<div class="ttc" id="aclassConstant_html_ae9cb37a84df15efb4f93819d3483effd"><div class="ttname"><a href="classConstant.html#ae9cb37a84df15efb4f93819d3483effd">Constant::operator()</a></div><div class="ttdeci">double operator()(const double &amp;t) const</div><div class="ttdef"><b>Definition</b> <a href="Constant_8cpp_source.html#l00015">Constant.cpp:15</a></div></div>
+<div class="ttc" id="aclassConstant_html_aade9984be63c3edc68585af7e2d42a53"><div class="ttname"><a href="classConstant.html#aade9984be63c3edc68585af7e2d42a53">Constant::integrate</a></div><div class="ttdeci">double integrate(const Vector3d &amp;vec1_pull_seg, const Vector3d &amp;vec2_pull_seg) const</div><div class="ttdoc">Evaluate the segment integral used by the LDAD bond function.</div><div class="ttdef"><b>Definition</b> <a href="Constant_8cpp_source.html#l00037">Constant.cpp:37</a></div></div>
+<div class="ttc" id="aclassConstant_html_ae9cb37a84df15efb4f93819d3483effd"><div class="ttname"><a href="classConstant.html#ae9cb37a84df15efb4f93819d3483effd">Constant::operator()</a></div><div class="ttdeci">double operator()(const double &amp;t) const</div><div class="ttdoc">Evaluate the one-dimensional constant LDAD shape function.</div><div class="ttdef"><b>Definition</b> <a href="Constant_8cpp_source.html#l00015">Constant.cpp:15</a></div></div>
 <div class="ttc" id="atypedef_8h_html"><div class="ttname"><a href="typedef_8h.html">typedef.h</a></div></div>
 <div class="ttc" id="atypedef_8h_html_ab25a6f70a8d0160a3d6dc742284309a8"><div class="ttname"><a href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a></div><div class="ttdeci">Eigen::Matrix&lt; double, 1, DIM, Eigen::RowMajor &gt; Vector3d</div><div class="ttdef"><b>Definition</b> <a href="typedef_8h_source.html#l00060">typedef.h:60</a></div></div>
 <div class="ttc" id="atypedef_8h_html_ac29df3dcbefa1ce189e5990bde994025"><div class="ttname"><a href="typedef_8h.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a></div><div class="ttdeci">const double epsilon</div><div class="ttdef"><b>Definition</b> <a href="typedef_8h_source.html#l00073">typedef.h:73</a></div></div>

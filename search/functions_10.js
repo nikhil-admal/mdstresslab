@@ -1,13 +1,9 @@
 var searchData=
 [
-  ['range_0',['range',['../classrange.html#ac6da478fdf3af790d47dcb45dcf5a9b5',1,'range']]],
-  ['read_1',['read',['../classBoxConfiguration.html#a7098ac0270582b79837adb6f44b97708',1,'BoxConfiguration::read()'],['../classGrid.html#a54274c82ba3693cfd92bbc7af15ff2a2',1,'Grid::read()']]],
-  ['read_5ffile_2',['read_file',['../namespacevisualize.html#a9623ec940d438c555a4b8ce9ea4c22fe',1,'visualize']]],
-  ['readlmp_3',['readlmp',['../classBoxConfiguration.html#a13f482925d3ff101d11ab4e0b99dd700',1,'BoxConfiguration::readLMP(const std::string &amp;, const ConfigType &amp;configType)'],['../classBoxConfiguration.html#ab2d57771e836c060be12c340eb276544',1,'BoxConfiguration::readLMP(const std::string &amp;currentConfigFileName, const std::string &amp;referenceConfigFileName)']]],
-  ['recursivebuildstress_4',['recursiveBuildStress',['../StressTuple_8h.html#a3f36737661f8d56edfceda6b5be0a50c',1,'StressTuple.h']]],
-  ['recursivefold_5',['recursiveFold',['../StressTuple_8h.html#a233e9456992775a003da56d1288515d8',1,'StressTuple.h']]],
-  ['recursivegridmaxaveragingdomainsizemap_6',['recursivegridmaxaveragingdomainsizemap',['../StressTuple_8h.html#add53f8052188d8280a37faa742ac3352',1,'recursiveGridMaxAveragingDomainSizeMap(const std::tuple&lt;&gt; &amp;t):&#160;StressTuple.h'],['../StressTuple_8h.html#a497e202de54c43de020b77b2e9a019cd',1,'recursiveGridMaxAveragingDomainSizeMap(const std::tuple&lt; Stress&lt; BF, stressType &gt; &amp;... &gt; t):&#160;StressTuple.h']]],
-  ['recursivewritestressandgrid_7',['recursiveWriteStressAndGrid',['../StressTuple_8h.html#ab7eada0ce2d497c84e73be4ad6c52fc9',1,'StressTuple.h']]],
-  ['recursivewritestressandgrid_3c_20i_2b1_20_3e_8',['recursiveWriteStressAndGrid&lt; I+1 &gt;',['../StressTuple_8h.html#a8ebfedc7c56021ab7412b67abb77e549',1,'StressTuple.h']]],
-  ['rigidity_9',['Rigidity',['../classRigidity.html#a9016f16a3642f2595c8accdc98b99544',1,'Rigidity']]]
+  ['setcounter_0',['setCounter',['../classGrid.html#a0c4d364b96c9bc1fa276441c8b90afc9',1,'Grid']]],
+  ['spatialhash_1',['spatialhash',['../classSpatialHash.html#a58218cd838cbbd60d55c89ce2dfd4878',1,'SpatialHash::SpatialHash()'],['../classSpatialHash.html#ad0b5c84b0e7932a1f46186e131d62caf',1,'SpatialHash::SpatialHash(Vector3d origin, Vector3d step, A &amp;coordinates)'],['../classSpatialHash.html#a50046dd50296fc5a103aaf365c512f37',1,'SpatialHash::SpatialHash(Vector3d origin, Vector3d step, C &amp;coordinates)']]],
+  ['std_3a_3acout_3c_3c_20std_3a_3aendl_3brecursivefold_3c_20i_2b1_20_3e_2',['endl;recursiveFold&lt; I+1 &gt;',['../StressTuple_8h.html#acedc6ffd0384523f21680f44596181a3',1,'StressTuple.h']]],
+  ['stencil_3',['Stencil',['../classStencil.html#a8a1500280394def2e176c1c5c4d35d8b',1,'Stencil']]],
+  ['stress_4',['stress',['../classStress.html#a903ceb87685b3f32b403d927e75d4077',1,'Stress::Stress(std::string name, const Method&lt; TMethod &gt; &amp;method, TGrid *pgrid)'],['../classStress.html#a8a08baa3750250c812a3785bf8c7b60d',1,'Stress::Stress(const Method&lt; TMethod &gt; &amp;method, TGrid *pgrid)']]],
+  ['subconfiguration_5',['SubConfiguration',['../classSubConfiguration.html#a548c8eb2e6912ff363ebc19971cb257c',1,'SubConfiguration']]]
 ];

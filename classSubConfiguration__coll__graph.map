@@ -1,6 +1,6 @@
 <map id="SubConfiguration" name="SubConfiguration">
 <area shape="rect" id="Node000001" title=" " alt="" coords="177,388,311,413"/>
-<area shape="rect" id="Node000002" href="$classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, and species." alt="" coords="145,285,255,311"/>
+<area shape="rect" id="Node000002" href="$classConfiguration.html" title="Represents atomic configuration data including coordinates, velocities, species, and masses." alt="" coords="145,285,255,311"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,323,221,363,236,386,232,389,216,365,202,325"/>
 <area shape="poly" id="edge6_Node000001_Node000002" title=" " alt="" coords="213,322,241,387,237,389,208,325"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="5,190,192,215"/>

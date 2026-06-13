@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['vectorpair_0',['vectorPair',['../StressTuple_8h.html#a88086be08d252d8f93fecdc61b7af7dd',1,'StressTuple.h']]],
-  ['velocities_1',['velocities',['../classConfiguration.html#a6229b086177ef3a1381cc9db5cb4c466',1,'Configuration']]]
+  ['velocities_0',['velocities',['../classConfiguration.html#a6229b086177ef3a1381cc9db5cb4c466',1,'Configuration']]],
+  ['velocityfield_1',['velocityField',['../classStress.html#ac635994e36df1c0fe7f817c683f43092',1,'Stress']]]
 ];

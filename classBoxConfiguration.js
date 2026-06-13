@@ -8,6 +8,8 @@ var classBoxConfiguration =
     [ "readLMP", "classBoxConfiguration.html#a13f482925d3ff101d11ab4e0b99dd700", null ],
     [ "readLMP", "classBoxConfiguration.html#ab2d57771e836c060be12c340eb276544", null ],
     [ "box", "classBoxConfiguration.html#aa13ffab39af119d1ea8253e236480cd2", null ],
+    [ "box_origin", "classBoxConfiguration.html#a0f86a47a51ef5ef785f15a3c90023438", null ],
     [ "pbc", "classBoxConfiguration.html#a1988923b4618bca603e6c5b169e9d42b", null ],
-    [ "reference_box", "classBoxConfiguration.html#aff8e04cb505591b49713d3ee7af090e8", null ]
+    [ "reference_box", "classBoxConfiguration.html#aff8e04cb505591b49713d3ee7af090e8", null ],
+    [ "reference_box_origin", "classBoxConfiguration.html#ab55b07be8824e6a74227c8974e287a6e", null ]
 ];

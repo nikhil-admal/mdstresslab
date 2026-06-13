@@ -112,8 +112,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5a9d1a2eae517819d572b01337de63e8" id="r_a5a9d1a2eae517819d572b01337de63e8"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrigonometric.html#a5a9d1a2eae517819d572b01337de63e8">~Trigonometric</a> ()</td></tr>
 <tr class="separator:a5a9d1a2eae517819d572b01337de63e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f6cf73002a242606aedc71a3c98c1a4" id="r_a4f6cf73002a242606aedc71a3c98c1a4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrigonometric.html#a4f6cf73002a242606aedc71a3c98c1a4">operator()</a> (const double &amp;t) const</td></tr>
+<tr class="memdesc:a4f6cf73002a242606aedc71a3c98c1a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate \(\phi(t)=\frac{1}{2}(1+\cos(\pi t))\) on \((-1,1)\).  <br /></td></tr>
 <tr class="separator:a4f6cf73002a242606aedc71a3c98c1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa8ceca7a1321cb8305228a9e2b4533c" id="r_aaa8ceca7a1321cb8305228a9e2b4533c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrigonometric.html#aaa8ceca7a1321cb8305228a9e2b4533c">integral</a> () const</td></tr>
+<tr class="memdesc:aaa8ceca7a1321cb8305228a9e2b4533c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return \(\int_{-1}^{1}\phi(t)\,dt=1\) for this shape.  <br /></td></tr>
+<tr class="separator:aaa8ceca7a1321cb8305228a9e2b4533c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbe64b5b30972c95af74bc4d29d03816" id="r_afbe64b5b30972c95af74bc4d29d03816"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTrigonometric.html#afbe64b5b30972c95af74bc4d29d03816">integrate</a> (const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec1_pull_seg, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;vec2_pull_seg) const</td></tr>
+<tr class="memdesc:afbe64b5b30972c95af74bc4d29d03816"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the expanded segment integral used by the LDAD bond function.  <br /></td></tr>
 <tr class="separator:afbe64b5b30972c95af74bc4d29d03816"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -167,6 +172,27 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaa8ceca7a1321cb8305228a9e2b4533c" name="aaa8ceca7a1321cb8305228a9e2b4533c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa8ceca7a1321cb8305228a9e2b4533c">&#9670;&#160;</a></span>integral()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Trigonometric::integral </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return \(\int_{-1}^{1}\phi(t)\,dt=1\) for this shape. </p>
+
+<p class="definition">Definition at line <a class="el" href="Trigonometric_8cpp_source.html#l00029">29</a> of file <a class="el" href="Trigonometric_8cpp_source.html">Trigonometric.cpp</a>.</p>
+
+</div>
+</div>
 <a id="afbe64b5b30972c95af74bc4d29d03816" name="afbe64b5b30972c95af74bc4d29d03816"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afbe64b5b30972c95af74bc4d29d03816">&#9670;&#160;</a></span>integrate()</h2>
 
@@ -193,7 +219,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Trigonometric_8cpp_source.html#l00029">29</a> of file <a class="el" href="Trigonometric_8cpp_source.html">Trigonometric.cpp</a>.</p>
+<p>Evaluate the expanded segment integral used by the LDAD bond function. </p>
+
+<p class="definition">Definition at line <a class="el" href="Trigonometric_8cpp_source.html#l00034">34</a> of file <a class="el" href="Trigonometric_8cpp_source.html">Trigonometric.cpp</a>.</p>
 
 </div>
 </div>
@@ -212,6 +240,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Evaluate \(\phi(t)=\frac{1}{2}(1+\cos(\pi t))\) on \((-1,1)\). </p>
 
 <p class="definition">Definition at line <a class="el" href="Trigonometric_8cpp_source.html#l00016">16</a> of file <a class="el" href="Trigonometric_8cpp_source.html">Trigonometric.cpp</a>.</p>
 

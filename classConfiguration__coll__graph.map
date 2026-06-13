@@ -1,5 +1,5 @@
 <map id="Configuration" name="Configuration">
-<area shape="rect" id="Node000001" title="Represents atomic configuration data including coordinates, velocities, and species." alt="" coords="145,285,255,311"/>
+<area shape="rect" id="Node000001" title="Represents atomic configuration data including coordinates, velocities, species, and masses." alt="" coords="145,285,255,311"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,190,192,215"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,223,189,283,186,287,120,227"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="55,95,142,120"/>

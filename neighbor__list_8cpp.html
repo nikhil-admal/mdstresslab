@@ -170,8 +170,8 @@ Functions</h2></td></tr>
 <tr class="separator:a91d162473453a7bd8f342516ebda9187"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adee600626da22e219ed2c1dceed1da3e" id="r_adee600626da22e219ed2c1dceed1da3e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neighbor__list_8cpp.html#adee600626da22e219ed2c1dceed1da3e">nbl_get_neigh</a> (void const *const dataObject, int const numberOfCutoffs, double const *const cutoffs, int const neighborListIndex, int const particleNumber, int *const numberOfNeighbors, int const **const neighborsOfParticle)</td></tr>
 <tr class="separator:adee600626da22e219ed2c1dceed1da3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef4606586b1a5b1344d6fb5fb84c49e1" id="r_aef4606586b1a5b1344d6fb5fb84c49e1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neighbor__list_8cpp.html#aef4606586b1a5b1344d6fb5fb84c49e1">nbl_create_paddings</a> (int const numberOfParticles, double const cutoff, double const *reference_cell, double const *cell, int const *PBC, double const *reference_coordinates, double const *coordinates, const std::vector&lt; std::string &gt; &amp;speciesCode, int &amp;numberOfPaddings, std::vector&lt; double &gt; &amp;reference_coordinatesOfPaddings, std::vector&lt; double &gt; &amp;coordinatesOfPaddings, std::vector&lt; std::string &gt; &amp;speciesCodeOfPaddings, std::vector&lt; int &gt; &amp;masterOfPaddings, int referenceAndFinal)</td></tr>
-<tr class="separator:aef4606586b1a5b1344d6fb5fb84c49e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea899ce67e2739e377eece6004e398f0" id="r_aea899ce67e2739e377eece6004e398f0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="neighbor__list_8cpp.html#aea899ce67e2739e377eece6004e398f0">nbl_create_paddings</a> (int const numberOfParticles, double const cutoff, double const *reference_origin, double const *origin, double const *reference_cell, double const *cell, int const *PBC, double const *reference_coordinates, double const *coordinates, const std::vector&lt; std::string &gt; &amp;speciesCode, int &amp;numberOfPaddings, std::vector&lt; double &gt; &amp;reference_coordinatesOfPaddings, std::vector&lt; double &gt; &amp;coordinatesOfPaddings, std::vector&lt; std::string &gt; &amp;speciesCodeOfPaddings, std::vector&lt; int &gt; &amp;masterOfPaddings, int referenceAndFinal)</td></tr>
+<tr class="separator:aea899ce67e2739e377eece6004e398f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ac25189db92959bff3c6c2adf4c34b50a" name="ac25189db92959bff3c6c2adf4c34b50a"></a>
@@ -343,8 +343,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aef4606586b1a5b1344d6fb5fb84c49e1" name="aef4606586b1a5b1344d6fb5fb84c49e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef4606586b1a5b1344d6fb5fb84c49e1">&#9670;&#160;</a></span>nbl_create_paddings()</h2>
+<a id="aea899ce67e2739e377eece6004e398f0" name="aea899ce67e2739e377eece6004e398f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea899ce67e2739e377eece6004e398f0">&#9670;&#160;</a></span>nbl_create_paddings()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -360,6 +360,18 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">double const&#160;</td>
           <td class="paramname"><em>cutoff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const *&#160;</td>
+          <td class="paramname"><em>reference_origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double const *&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

@@ -102,24 +102,52 @@ $(document).ready(function(){initNavTree('theory.html',''); initResizable(); });
 <div class="textblock"><p>Theoretical Background.</p>
 <p>This page provides a detailed overview of the theoretical framework behind the atomistic stress tensor calculations.</p>
 <h2><a class="anchor" id="autotoc_md0"></a>
-Hardy Stress Tensor</h2>
-<p>The Hardy stress is defined as:</p>
+Hardy Cauchy Stress Tensor</h2>
+<p>The Hardy Cauchy stress is defined as:</p>
 <p class="formulaDsp">
 \[
-\boldsymbol{\sigma}(\mathbf{x},t) = -\sum_i m_i \mathbf{v}_i \otimes \mathbf{v}_i \, w(\mathbf{x}-\mathbf{x}^i(t))
+\boldsymbol{\sigma}(\mathbf{x},t) =
+     -\sum_i m_i \mathbf{v}^{\,i}_{rel}(\mathbf{x},t)
+     \otimes \mathbf{v}^{\,i}_{rel}(\mathbf{x},t)
+     w(\mathbf{x}-\mathbf{x}^i(t))
      - \frac{1}{2} \sum_{i,j \ne i} \mathbf{f}_{ij} \otimes  (\mathbf{x}^i-\mathbf{x}^j) b(\mathbf x; \mathbf x^i, \mathbf x^j)
 \]
 </p>
-<p>where \( w(\cdot) \) is the weighting function and \(b\) is the bond function defined as.</p>
+<p>where \( w(\cdot) \) is a normalized weighting function and \(b\) is the associated bond function. The kinetic part uses the relative velocity  </p><p class="formulaDsp">
+\[
+\mathbf{v}^{\,i}_{rel}(\mathbf{x},t)=\mathbf{v}^i(t)-\mathbf{v}(\mathbf{x},t),
+\]
+</p>
+<p> with continuum momentum density and mass density  </p><p class="formulaDsp">
+\[
+\mathbf{p}(\mathbf{x},t)=\sum_i m_i\mathbf{v}^i(t)w(\mathbf{x}-\mathbf{x}^i(t)),
+\qquad
+\rho(\mathbf{x},t)=\sum_i m_i w(\mathbf{x}-\mathbf{x}^i(t)).
+\]
+</p>
+<p> The continuum velocity is  </p><p class="formulaDsp">
+\[
+\mathbf{v}(\mathbf{x},t)=
+\begin{cases}
+\mathbf{p}(\mathbf{x},t)/\rho(\mathbf{x},t), &amp; \rho(\mathbf{x},t)&gt;0,\\
+\mathbf{0}, &amp; \rho(\mathbf{x},t)=0.
+\end{cases}
+\]
+</p>
+<p>MDStressLab writes \(\mathbf p\) and \(\rho\) for Cauchy stresses in separate <code>.momentum_density</code> and <code>.mass_density</code> files. These fields are not defined for Piola stress.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
-Hardy and Virial Stresses</h2>
+Piola Stress</h2>
+<p>The Piola stress implemented in MDStressLab contains only the potential contribution. Its kinetic contribution is zero.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
-Lattice Dependent Averaging Domains</h2>
+Hardy and Virial Stresses</h2>
 <h2><a class="anchor" id="autotoc_md3"></a>
+Lattice Dependent Averaging Domains</h2>
+<p>LDAD methods use a separable pointwise weight in the basis of the LDAD vectors. Direct pointwise evaluations of this weight, used by kinetic Cauchy stress and density fields, are normalized to have unit integral. The LDAD bond function used by potential stress uses its own line-integral normalization and remains independent of the pointwise operator.</p>
+<h2><a class="anchor" id="autotoc_md4"></a>
 Additional Topics</h2>
 <ul>
 <li>See <a class="el" href="visualization_intro.html">Visualization Utilities</a> for visualizing stress fields.</li>
-<li>See also stressTensor for implementation of different tensor definitions. </li>
+<li>See the <code><a class="el" href="classStress.html" title="Three-dimensional stress field on a grid.">Stress</a></code> class for implementation details of the output stress fields. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

@@ -1,9 +1,13 @@
 <map id="Stress&lt; TMethod, stressType, TGrid &gt;" name="Stress&lt; TMethod, stressType, TGrid &gt;">
-<area shape="rect" id="Node000001" title=" " alt="" coords="19,183,234,223"/>
+<area shape="rect" id="Node000001" title="Three&#45;dimensional stress field on a grid." alt="" coords="287,197,502,237"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,95,184,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,132,123,182,118,183,100,134"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="209,95,295,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,130,154,185,151,180,224,126"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="183,5,321,45"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="255,59,255,94,249,94,249,59"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,123,256,171,330,195,328,200,254,176,132,128"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="208,95,387,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="296,134,297,154,304,172,316,185,331,195,328,199,312,189,299,175,291,155,290,134"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="411,95,576,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="488,134,478,155,465,175,435,199,431,195,461,172,474,152,483,132"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="601,95,687,120"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="639,134,627,156,610,175,591,185,566,193,503,206,502,200,564,188,589,180,606,171,623,153,634,132"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="575,5,713,45"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="647,59,647,94,641,94,641,59"/>
 </map>

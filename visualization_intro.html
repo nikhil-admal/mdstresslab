@@ -101,18 +101,34 @@ $(document).ready(function(){initNavTree('visualization_intro.html',''); initRes
 <div class="contents">
 <div class="textblock"><p>Overview of visualization utilities.</p>
 <p>This page documents the Python script used for generating contour plots of atomistic stress fields from simulation output files with <code>.stress</code> format.</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 Supported Input Format</h2>
 <div class="fragment"><div class="line">125</div>
 <div class="line">Properties=pos:R:3:stress:R:6</div>
 <div class="line">x y z σ_xx σ_yy σ_zz σ_xy σ_xz σ_yz</div>
 <div class="line">...</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
 Usage</h2>
 <div class="fragment"><div class="line">python <a class="code hl_namespace" href="namespacevisualize.html">visualize</a>.py data.stress yy</div>
 <div class="ttc" id="anamespacevisualize_html"><div class="ttname"><a href="namespacevisualize.html">visualize</a></div><div class="ttdef"><b>Definition</b> <a href="visualize_8py_source.html#l00001">visualize.py:1</a></div></div>
 </div><!-- fragment --><p>This will read the stress component σ<sub>yy</sub> from <code>data.stress</code>, convert it to GPa, and generate a contour plot in <code>data_yy.pdf</code>. <b>The script assumes the units of stress are</b> eV/Å \(^3\).</p>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
+Cauchy Density Outputs</h2>
+<p>When a Cauchy stress object is written, MDStressLab also writes:</p>
+<div class="fragment"><div class="line">&lt;name&gt;.momentum_density</div>
+<div class="line">&lt;name&gt;.mass_density</div>
+</div><!-- fragment --><p>These files use the same OVITO-style header convention:</p>
+<div class="fragment"><div class="line">N</div>
+<div class="line">Properties=pos:R:3:momentum_density:R:3</div>
+<div class="line">x y z p_x p_y p_z</div>
+<div class="line">...</div>
+</div><!-- fragment --><p>and</p>
+<div class="fragment"><div class="line">N</div>
+<div class="line">Properties=pos:R:3:mass_density:R:1</div>
+<div class="line">x y z rho</div>
+<div class="line">...</div>
+</div><!-- fragment --><p>Momentum and mass density are only produced for Cauchy stress grids. Piola stress has no kinetic contribution in MDStressLab, so no density fields are written for Piola stress objects.</p>
+<h2><a class="anchor" id="autotoc_md12"></a>
 Related Scripts</h2>
 <ul>
 <li><a class="el" href="visualize_8py.html">visualize.py</a> — contour plot generator </li>
