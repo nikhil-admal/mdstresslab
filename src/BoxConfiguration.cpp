@@ -434,10 +434,14 @@ Configuration* BoxConfiguration::getConfiguration(double padding) const
 
 	if (numberOfPaddings)
 	{
-		if (referenceAndFinal) config_ptr->coordinates.at(Reference).bottomRows(numberOfPaddings)=
-		*new Eigen::Map<MatrixXd> (reference_coordinatesOfPaddings.data(),numberOfPaddings,DIM);
+		using RowMajorMatrixXd = Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor>;
+		if (referenceAndFinal)
+		{
+			config_ptr->coordinates.at(Reference).bottomRows(numberOfPaddings)=
+					Eigen::Map<const RowMajorMatrixXd> (reference_coordinatesOfPaddings.data(),numberOfPaddings,DIM);
+		}
 		config_ptr->coordinates.at(Current).bottomRows(numberOfPaddings)=
-		*new Eigen::Map<MatrixXd> (coordinatesOfPaddings.data(),numberOfPaddings,DIM);
+				Eigen::Map<const RowMajorMatrixXd> (coordinatesOfPaddings.data(),numberOfPaddings,DIM);
 		for (int i_padding=0; i_padding<numberOfPaddings; ++i_padding)
 		{
 			int master= masterOfPaddings[i_padding];

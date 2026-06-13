@@ -114,10 +114,7 @@ public:
         //Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
         Eigen::IOFormat fmt(Eigen::FullPrecision, 0, "      ", "\n", "", "", "");
         file << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10);
-		if constexpr (stressType==Cauchy)
-			file << "Properties=pos:R:3:stress:R:6:momentum_density:R:3:mass_density:R:1:velocity:R:3" << std::endl;
-		else
-			file << "Properties=pos:R:3:stress:R:6" << std::endl;
+        file << "Properties=pos:R:3:stress:R:6" << std::endl;
         for (auto& stress : field)
 		{
 			//Eigen::Map<Eigen::Matrix<double,1,DIM*DIM>> stressRow(stress.data(), stress.size());
@@ -128,17 +125,32 @@ public:
                 << std::setw(25) << stress(2,2)
                 << std::setw(25) << stress(0,1)
                 << std::setw(25) << stress(0,2)
-                << std::setw(25) << stress(1,2);
-			if constexpr (stressType==Cauchy)
-				file << std::setw(25) << momentumDensityField[index](0)
-					 << std::setw(25) << momentumDensityField[index](1)
-					 << std::setw(25) << momentumDensityField[index](2)
-					 << std::setw(25) << massDensityField[index]
-					 << std::setw(25) << velocityField[index](0)
-					 << std::setw(25) << velocityField[index](1)
-					 << std::setw(25) << velocityField[index](2);
-			file << std::endl;
+                << std::setw(25) << stress(1,2)
+                << std::endl;
             index++;
+		}
+
+		if constexpr (stressType==Cauchy)
+		{
+			std::ofstream momentumDensityFile(name+".momentum_density");
+			std::ofstream massDensityFile(name+".mass_density");
+			momentumDensityFile << momentumDensityField.size() << "\n";
+			massDensityFile << massDensityField.size() << "\n";
+			momentumDensityFile << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10);
+			massDensityFile << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10);
+			momentumDensityFile << "Properties=pos:R:3:momentum_density:R:3" << std::endl;
+			massDensityFile << "Properties=pos:R:3:mass_density:R:1" << std::endl;
+			for (int i_grid=0; i_grid<pgrid->coordinates.size(); ++i_grid)
+			{
+				momentumDensityFile << pgrid->coordinates[i_grid].format(fmt)
+									<< std::setw(25) << momentumDensityField[i_grid](0)
+									<< std::setw(25) << momentumDensityField[i_grid](1)
+									<< std::setw(25) << momentumDensityField[i_grid](2)
+									<< std::endl;
+				massDensityFile << pgrid->coordinates[i_grid].format(fmt)
+								<< std::setw(25) << massDensityField[i_grid]
+								<< std::endl;
+			}
 		}
 	}
 

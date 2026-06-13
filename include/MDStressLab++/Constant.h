@@ -15,6 +15,7 @@ public:
 	Constant();
 	virtual ~Constant();
 	double operator()(const double& t) const;
+	double integral() const;
 	double integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg) const;
 };
 

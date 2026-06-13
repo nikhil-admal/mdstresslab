@@ -29,6 +29,11 @@ double Constant::operator()(const double& t) const
 	}
 
 }
+double Constant::integral() const
+{
+	return 2.0;
+}
+
 double Constant::integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg) const
 {
 	double result = 1.0;
@@ -53,7 +58,6 @@ double Constant::integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_p
 
 	return result;
 }
-
 
 
 

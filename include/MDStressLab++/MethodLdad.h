@@ -29,7 +29,7 @@ protected:
 	double bondFunction(const Vector3d& vec1, const Vector3d& vec2) const;
 
 private:
-	double normalizer;
+	double normalizer, weightNormalizer;
 	T oneDFunction;
 	Matrix3d ldadVectors, inverseLdadVectors;
 };

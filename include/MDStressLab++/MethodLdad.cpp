@@ -17,6 +17,7 @@ MethodLdad<T>::MethodLdad(const Matrix3d& ldadVectors): ldadVectors(ldadVectors)
 {
 	// initialize the normalizer here using oneDFunction.integrate(-1,1)
 	normalizer = 1.0/(8.0*fabs(ldadVectors.determinant())) ;
+	weightNormalizer = 1.0/(pow(oneDFunction.integral(),3)*fabs(ldadVectors.determinant())) ;
 
     // initialize the averagingDomainSize
     double p1, p2, p3;
@@ -48,7 +49,7 @@ double MethodLdad<T>::operator()(const Vector3d& vec) const
 	Vector3d vec_pull;
 	vec_pull = inverseLdadVectors * vec.transpose();
 	// oneDFunction -1 1 
-	return oneDFunction(vec_pull(0))*oneDFunction(vec_pull(1))*oneDFunction(vec_pull(2));
+	return weightNormalizer * oneDFunction(vec_pull(0))*oneDFunction(vec_pull(1))*oneDFunction(vec_pull(2));
 }
 
 template<typename T>

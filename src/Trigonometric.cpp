@@ -26,6 +26,11 @@ double Trigonometric::operator()(const double& t)  const
 	}
 }
 
+double Trigonometric::integral() const
+{
+	return 1.0;
+}
+
 double Trigonometric::integrate(const Vector3d& vec1_pull_seg, const Vector3d& vec2_pull_seg) const
 {
     Vector3d a, b;
@@ -144,7 +149,6 @@ double Trigonometric::integrate(const Vector3d& vec1_pull_seg, const Vector3d& v
 	
 	return result;
 }
-
 
 
 

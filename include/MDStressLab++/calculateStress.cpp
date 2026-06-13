@@ -408,12 +408,15 @@ int calculateStress(const Configuration* pconfig,
 
 	NeighList* nlForBonds;
 	nbl_initialize(&nlForBonds);
-	nbl_build(nlForBonds,numberOfParticles,
+	if (nbl_build(nlForBonds,numberOfParticles,
 				 subconfig.coordinates.at(Current).data(),
 				 bondCutoff,
 				 1,
 				 &bondCutoff,
-				 subconfig.particleContributing.data());
+				 subconfig.particleContributing.data()))
+	{
+		MY_ERROR("Failed to build bond neighbor list.");
+	}
 	InteratomicForces bonds(nlForBonds);
 
     //	------------------------------------------------------------------
@@ -426,12 +429,15 @@ int calculateStress(const Configuration* pconfig,
     // TODO: assert whenever the subconfiguration is empty
     NeighList* nl;
     nbl_initialize(&nl);
-    nbl_build(nl,numberOfParticles,
+    if (nbl_build(nl,numberOfParticles,
               subconfig.coordinates.at(Current).data(),
               influenceDistance,
               numberOfNeighborLists,
               cutoffs,
-              subconfig.particleContributing.data());
+              subconfig.particleContributing.data()))
+    {
+        MY_ERROR("Failed to build particle neighbor list.");
+    }
 
     int neighborListSize= 0;
     for (int i_particle=0; i_particle<numberOfParticles; i_particle++)
@@ -520,12 +526,15 @@ int calculateStress(const Configuration* pconfig,
                 // TODO: assert whenever the subconfiguration is empty
                 NeighList *nlOfParticle;
                 nbl_initialize(&nlOfParticle);
-                nbl_build(nlOfParticle, subconfigOfParticle.numberOfParticles,
+                if (nbl_build(nlOfParticle, subconfigOfParticle.numberOfParticles,
                           subconfigOfParticle.coordinates.at(Current).data(),
                           influenceDistance,
                           numberOfNeighborLists,
                           cutoffs,
-                          subconfigOfParticle.particleContributing.data());
+                          subconfigOfParticle.particleContributing.data()))
+                {
+                    MY_ERROR("Failed to build projected-force neighbor list.");
+                }
 
                 MatrixXd localForces(subconfigOfParticle.numberOfParticles, DIM);
                 localForces.setZero();

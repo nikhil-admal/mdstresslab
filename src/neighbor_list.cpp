@@ -353,7 +353,8 @@ int nbl_create_paddings(int const numberOfParticles,
     max[i] += 1e-10;
   }
 
-  // volume of cell
+  // volume of cell. Matrix3d is row-major in this project, so cell + 3*i is
+  // the i-th box vector row.
   double xprod[DIM];
   cross(cell + 3, cell + 6, xprod);
   double volume = std::abs(dot(cell, xprod));
