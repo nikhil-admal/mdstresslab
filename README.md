@@ -26,3 +26,15 @@ $ ctest all
 Documentation
 -------------
 https://nikhil-admal.github.io/mdstresslab
+
+Notes
+-----
+For Cauchy stress calculations, MDStressLab writes the stress tensor to
+`<name>.stress` and the associated continuum fields to `<name>.momentum_density`
+and `<name>.mass_density`.  The kinetic Cauchy stress uses atom velocities
+relative to the local continuum velocity `p/rho`; Piola stress has no kinetic
+contribution.
+
+Periodic configurations may use non-orthogonal simulation boxes.  MDStressLab
+creates periodic padding atoms as needed, but it does not fold the input atoms
+or grid points into the primary box.

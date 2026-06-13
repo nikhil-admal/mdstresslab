@@ -82,6 +82,16 @@ int calculateKineticStress(const BoxConfiguration& body,
     return 1;
 }
 
+/*!
+ * \brief Compute only the kinetic contribution to Cauchy stress.
+ *
+ * This routine is defined only for Cauchy stress objects.  It first computes
+ * continuum mass density and momentum density on each Cauchy grid, then forms
+ * the continuum velocity \f$\mathbf v=\mathbf p/\rho\f$ where \f$\rho>0\f$
+ * and zero otherwise.  The kinetic stress is accumulated using relative atom
+ * velocities \f$\mathbf v_i-\mathbf v(\mathbf x)\f$.
+ *
+ */
 template<typename ...BF>
 int calculateKineticStress(const Configuration* pconfig,
                            std::tuple<Stress<BF,Cauchy>&...> cauchyStress)
@@ -162,6 +172,13 @@ int calculateKineticStress(const Configuration* pconfig,
     return 1;
 }
 
+/*!
+ * \brief Compute only kinetic Cauchy stress for a boxed configuration.
+ *
+ * If periodic boundary conditions are enabled, a padded configuration is
+ * created before calling the `Configuration*` overload.  The original atoms and
+ * grid points are not folded into the primary cell.
+ */
 template<typename ...BF>
 int calculateKineticStress(const BoxConfiguration& body,
                            std::tuple<Stress<BF,Cauchy>&...> cauchyStress)

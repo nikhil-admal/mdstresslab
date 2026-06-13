@@ -13,6 +13,8 @@
 /**
  * This class provides a polymorphic interface for defining a `method`, which constitutes a
  * weighting function and its associated bond function, to compute atomistic stress.
+ * The pointwise weighting function is also used for Cauchy mass density,
+ * momentum density, and kinetic stress.
  *
  * It is intended to be used as a CRTP (Curiously Recurring Template Pattern) base class:
  * the actual implementation of the method should be provided in the derived class
@@ -28,8 +30,14 @@ public:
 	virtual ~Method();
 
     /**
-     * @brief The weighting function \f$w\f$ used to compute stress. @see `bondFunction()` and
-     * `calculateStress` to see its usage in stress calculation.
+     * @brief The pointwise weighting function \f$w\f$.
+     *
+     * The pointwise weight is used directly for kinetic Cauchy stress and for
+     * the continuum fields
+     * \f$\rho(\mathbf x)=\sum_i m_i w(\mathbf x-\mathbf x_i)\f$ and
+     * \f$\mathbf p(\mathbf x)=\sum_i m_i\mathbf v_i w(\mathbf x-\mathbf x_i)\f$.
+     * It must therefore be normalized so that \f$\int w(\mathbf r)d\mathbf r=1\f$.
+     * Potential stress uses `bondFunction()`.
      *
      * This weighting function operator delegates the implementation to the derived `TMethod` class.
      *

@@ -17,8 +17,15 @@
 #include <fstream>
 #include <iostream>
 
-/*!Stress class template describes a three dimensional stress field
- * on a grid, computed using a prescribed averaging domain.
+/*! \brief Three-dimensional stress field on a grid.
+ *
+ * The stress field is computed using a prescribed averaging method.  For
+ * `Cauchy` stresses, the object also stores continuum momentum density,
+ * mass density, and the internal continuum velocity used to form the kinetic
+ * stress from relative velocities.  These continuum fields are not defined for
+ * `Piola` stresses; the kinetic contribution to Piola stress is taken to be
+ * zero.
+ *
  * @tparam TMethod - Method template parameter. For example,
  *                   TMethod=MethodSphere for a spherical averaging domain
  *                   and TMethod=MethodLDAD for LDAD. For a user-defined averaging
@@ -37,8 +44,28 @@ public:
  * \brief A three-dimensional stress field
  */
 	std::vector<Matrix3d> field;
+
+	/*! \brief Cauchy-grid momentum density \f$\mathbf p(\mathbf x)\f$.
+	 *
+	 * Computed as \f$\sum_i m_i \mathbf v_i w(\mathbf x-\mathbf x_i)\f$ by
+	 * `calculateKineticStress()`. Empty for Piola stress objects.
+	 */
 	std::vector<Vector3d> momentumDensityField;
+
+	/*! \brief Cauchy-grid mass density \f$\rho(\mathbf x)\f$.
+	 *
+	 * Computed as \f$\sum_i m_i w(\mathbf x-\mathbf x_i)\f$ by
+	 * `calculateKineticStress()`. Empty for Piola stress objects.
+	 */
 	std::vector<double> massDensityField;
+
+	/*! \brief Internal Cauchy-grid continuum velocity.
+	 *
+	 * This is \f$\mathbf v(\mathbf x)=\mathbf p(\mathbf x)/\rho(\mathbf x)\f$
+	 * where \f$\rho>0\f$, and zero otherwise.  It is used internally to form
+	 * the kinetic Cauchy stress from relative velocities and is not written by
+	 * `write()`.
+	 */
 	std::vector<Vector3d> velocityField;
 
     /*!
@@ -95,12 +122,22 @@ public:
 	}
 
     /*!
-     * This function writes the stress field to a filename with extension
-     * .stress and prefix [name]. The output file is in a OVITO-readable format
-     * with nine columns. The first three columns represent the three coordinates of
-     * the grid points, and the last six columns are the six components of the stress
-     * field - \f$\sigma_{xx}\f$, \f$\sigma_{yy}\f$, \f$\sigma_{zz}\f$,
-     * \f$\sigma_{xy}\f$, \f$\sigma_{xz}\f$, and \f$\sigma_{yz}\f$
+     * \brief Write stress and, for Cauchy stress, density fields.
+     *
+     * This function writes the stress field to `[name].stress`. The stress file
+     * is OVITO-readable and contains nine columns: grid coordinates followed by
+     * \f$\sigma_{xx}\f$, \f$\sigma_{yy}\f$, \f$\sigma_{zz}\f$,
+     * \f$\sigma_{xy}\f$, \f$\sigma_{xz}\f$, and \f$\sigma_{yz}\f$.
+     *
+     * For `Cauchy` stress objects, two additional OVITO-readable files are
+     * written:
+     * - `[name].momentum_density`, with grid coordinates and
+     *   \f$\mathbf p(\mathbf x)\f$.
+     * - `[name].mass_density`, with grid coordinates and
+     *   \f$\rho(\mathbf x)\f$.
+     *
+     * The continuum velocity field is an internal intermediate and is not
+     * written.
      */
 	void write()
 	{

@@ -20,8 +20,9 @@
  * padding due to periodicity, and access box geometry details.
  *
  * The box vectors are stored as columns in 3×3 matrices (`box` and `reference_box`),
- * and periodic boundary conditions are represented as a 3D integer vector indicating
- * periodicity along each Cartesian axis.
+ * with separate origins (`box_origin` and `reference_box_origin`). Periodic boundary
+ * conditions are represented as a 3D integer vector indicating periodicity along
+ * the box-vector directions.
  *
  * This class supports reading atomic configurations from two file formats:
  * - MDStressLab custom format with explicit box vectors and particle data.
@@ -29,6 +30,9 @@
  *
  * It also allows extracting padded configurations to accommodate atoms near periodic
  * boundaries, facilitating simulations requiring extended neighbor lists or replicas.
+ * Padding creates periodic images as needed but does not fold the original atoms or
+ * grid points back into the primary cell; preserving the supplied atom identity and
+ * reference/current correspondence is the caller's responsibility.
  */
 class BoxConfiguration : public Configuration{
 public:
@@ -38,7 +42,7 @@ public:
     Matrix3d box, reference_box;
     Vector3d box_origin, reference_box_origin;
 
-    /*! \brief Periodic boundary conditions. \ref pbc=(1,0,1) implies periodicity along the \f$x\f$
+    /*! \brief Periodic boundary conditions. `pbc=(1,0,1)` implies periodicity along the \f$x\f$
      * and \f$z\f$-directions.
      */
 	Vector3i pbc;
@@ -78,9 +82,9 @@ public:
      * - **Next 3 lines**: Current box vectors as columns of a 3×3 matrix
      * - **Next line**: Periodic boundary conditions (3 integers, typically 0 or 1)
      * - **Next line**: Species-mass pairs:
-     *   ```
+     *   \verbatim
      *   <species_1> <mass_1> <species_2> <mass_2> ...
-     *   ```
+     *   \endverbatim
      * - **Line 10 onward**: Per-particle data in 10 columns:
      *   - Column 1: Species code (e.g., `Ar`)
      *   - Columns 2–4: Current coordinates (x, y, z)
@@ -106,7 +110,7 @@ public:
     void read(std::string configFileName,int referenceAndFinal);
 
     /**
-     * @brief Reads a configuration from an LAMMPS-style dump file.
+     * @brief Reads a configuration from a LAMMPS data file.
      *
      * Opens the specified file and reads the atomic configuration data for the given configuration type
      * (e.g., Reference or Current). This function supports only files with the `.lmp` extension and
@@ -115,22 +119,24 @@ public:
      * On failure to open the file or if the file extension is not `.lmp`, this function prints an error
      * message and terminates the program.
      *
-     * @param[in] filename The name of the LAMMPS dump file.
+     * @param[in] configFileName The name of the LAMMPS data file.
      * @param[in] configType Specifies which configuration type to read
      *                       (e.g., Reference or Current).
      *
-     * The expected file format is a LAMMPS dump file with the following structure:
+     * The expected file format is a LAMMPS data file with the following structure:
      *
      * - A header line with an optional comment (e.g., crystal orientation)
      * - Line indicating the number of atoms (e.g., `24480 atoms`)
      * - Line indicating the number of atom types (e.g., `3 atom types`)
-     * - Box bounds:
+     * - Orthogonal or triclinic box bounds:
      *   ```
      *   xlo xhi
      *   ylo yhi
      *   zlo zhi
      *   ```
-     *   Optionally followed by `xy xz yz` tilt factors (for triclinic cells)
+     *   Optionally followed by `xy xz yz` tilt factors for triclinic cells. The
+     *   parser stores the corresponding lower corner as the box origin and builds
+     *   the box vectors from the LAMMPS bounds and tilt factors.
      * - A `Masses` section listing:
      *   ```
      *   <atom type> <mass> #<element symbol>
@@ -177,7 +183,7 @@ public:
                  const std::string& referenceConfigFileName);
 
     /**
-     * @brief Parses a LAMMPS dump file to populate configuration data.
+     * @brief Parses a LAMMPS data file to populate configuration data.
      *
      * This function reads atomic configuration data, box dimensions, masses,
      * and species information from a LAMMPS-style dump file stream, filling
@@ -188,11 +194,12 @@ public:
      * - Number of atoms
      * - Number of atom types
      * - Box bounds (xlo xhi, ylo yhi, zlo zhi)
-     * - Optional tilt factors (not currently handled explicitly)
+     * - Optional tilt factors (`xy xz yz`) for triclinic cells
      * - Masses section mapping atom types to species names
      * - Atoms section with atomic coordinates and optional image flags for periodicity
      *
      * Coordinates are adjusted for periodic boundary conditions using image flags.
+     * Atoms are not folded into the primary MDStressLab box after reading.
      * The function ensures species consistency between reference and current configurations.
      *
      * @param[in,out] file       Input file stream positioned at the beginning of the LAMMPS dump file.

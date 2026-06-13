@@ -87,5 +87,28 @@ int process_DEDr(const void* dataObject, const double de, const double r, const 
  * Full code:
  */
 
+/*!
+ * \example{lineno} testIdealGas.cpp
+ * Demonstrates kinetic Cauchy stress for an ideal gas with nonzero bulk
+ * velocity.  The test verifies that MDStressLab subtracts the continuum
+ * velocity before forming the kinetic stress and writes the Cauchy-only
+ * momentum and mass density fields.  It compares MethodSphere,
+ * MethodLdadConstant, and MethodLdadTrigonometric to the instantaneous
+ * ideal-gas pressure and to the expected mean mass density.
+ *
+ * Full code:
+ */
+
+/*!
+ * \example{lineno} testLDADSWTriclinic.cpp
+ * Regression test for LDAD stress under non-orthogonal periodic boundary
+ * conditions.  The test uses a skew representation of the same crystal as
+ * `testLDADSW`, computes Piola and Cauchy LDAD stresses, and compares stress
+ * components against the orthogonal reference results while allowing the grid
+ * coordinates to differ by the periodic representation.
+ *
+ * Full code:
+ */
+
 
 #endif /* CALCULATESTRESS_H_ */

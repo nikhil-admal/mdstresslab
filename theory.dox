@@ -4,16 +4,46 @@
 
  * This page provides a detailed overview of the theoretical framework behind the atomistic stress tensor calculations.
 
- * ## Hardy Stress Tensor
+ * ## Hardy Cauchy Stress Tensor
 
- * The Hardy stress is defined as:
+ * The Hardy Cauchy stress is defined as:
 
  * \f[
- * \boldsymbol{\sigma}(\mathbf{x},t) = -\sum_i m_i \mathbf{v}_i \otimes \mathbf{v}_i \, w(\mathbf{x}-\mathbf{x}^i(t))
+ * \boldsymbol{\sigma}(\mathbf{x},t) =
+ *      -\sum_i m_i \mathbf{v}^{\,i}_{rel}(\mathbf{x},t)
+ *      \otimes \mathbf{v}^{\,i}_{rel}(\mathbf{x},t)
+ *      w(\mathbf{x}-\mathbf{x}^i(t))
  *      - \frac{1}{2} \sum_{i,j \ne i} \mathbf{f}_{ij} \otimes  (\mathbf{x}^i-\mathbf{x}^j) b(\mathbf x; \mathbf x^i, \mathbf x^j)
  * \f]
 
- * where \f$ w(\cdot) \f$ is the weighting function and \f$b\f$ is the bond function defined as.
+ * where \f$ w(\cdot) \f$ is a normalized weighting function and \f$b\f$ is
+ * the associated bond function.  The kinetic part uses the relative velocity
+ * \f[
+ * \mathbf{v}^{\,i}_{rel}(\mathbf{x},t)=\mathbf{v}^i(t)-\mathbf{v}(\mathbf{x},t),
+ * \f]
+ * with continuum momentum density and mass density
+ * \f[
+ * \mathbf{p}(\mathbf{x},t)=\sum_i m_i\mathbf{v}^i(t)w(\mathbf{x}-\mathbf{x}^i(t)),
+ * \qquad
+ * \rho(\mathbf{x},t)=\sum_i m_i w(\mathbf{x}-\mathbf{x}^i(t)).
+ * \f]
+ * The continuum velocity is
+ * \f[
+ * \mathbf{v}(\mathbf{x},t)=
+ * \begin{cases}
+ * \mathbf{p}(\mathbf{x},t)/\rho(\mathbf{x},t), & \rho(\mathbf{x},t)>0,\\
+ * \mathbf{0}, & \rho(\mathbf{x},t)=0.
+ * \end{cases}
+ * \f]
+ *
+ * MDStressLab writes \f$\mathbf p\f$ and \f$\rho\f$ for Cauchy stresses in
+ * separate `.momentum_density` and `.mass_density` files.  These fields are
+ * not defined for Piola stress.
+
+ * ## Piola Stress
+
+ * The Piola stress implemented in MDStressLab contains only the potential
+ * contribution.  Its kinetic contribution is zero.
 
  * ## Hardy and Virial Stresses
 
@@ -21,11 +51,14 @@
 
  * ## Lattice Dependent Averaging Domains
 
- * 
+ * LDAD methods use a separable pointwise weight in the basis of the LDAD
+ * vectors.  Direct pointwise evaluations of this weight, used by kinetic
+ * Cauchy stress and density fields, are normalized to have unit integral.
+ * The LDAD bond function used by potential stress uses its own line-integral
+ * normalization and remains independent of the pointwise operator.
 
  * ## Additional Topics
 
  * - See @ref visualization_intro for visualizing stress fields.
- * - See also @ref stressTensor for implementation of different tensor definitions.
+ * - See the `Stress` class for implementation details of the output stress fields.
  */
-

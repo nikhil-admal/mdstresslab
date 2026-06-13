@@ -15,6 +15,25 @@
 #include "Constant.h"
 #include <map>
 
+/*!
+ * \brief Lattice-dependent averaging-domain method.
+ *
+ * `MethodLdad` defines a separable weighting function in the basis provided by
+ * `ldadVectors`.  The pointwise weight used for Cauchy kinetic stress,
+ * momentum density, and mass density is normalized as
+ * \f[
+ *   w(\mathbf r)=
+ *   \frac{\phi(\xi_1)\phi(\xi_2)\phi(\xi_3)}
+ *        {|\det A|\left(\int_{-1}^{1}\phi(t)\,dt\right)^3},
+ *   \qquad \boldsymbol\xi=A^{-1}\mathbf r,
+ * \f]
+ * where \f$A\f$ is the matrix of LDAD vectors.
+ *
+ * The potential-stress bond function uses a separate historical normalization
+ * path through `normalizer` and `oneDFunction.integrate()`.  This keeps existing
+ * LDAD potential-stress results unchanged while ensuring direct pointwise
+ * weights integrate to one.
+ */
 template<typename T>
 class MethodLdad : public Method<MethodLdad<T>>
 {
