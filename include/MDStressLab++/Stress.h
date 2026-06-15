@@ -16,6 +16,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <utility>
 
 /*! \brief Three-dimensional stress field on a grid.
  *
@@ -304,15 +305,41 @@ private:
 		file << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10);
 		file << "ITEM: TIMESTEP\n";
 		file << "0\n";
+		const auto xBounds= voxelGridBounds(nx,lowerLimit(0),upperLimit(0));
+		const auto yBounds= voxelGridBounds(ny,lowerLimit(1),upperLimit(1));
+		const auto zBounds= voxelGridBounds(nz,lowerLimit(2),upperLimit(2));
 		file << "ITEM: BOX BOUNDS pp pp pp\n";
-		file << lowerLimit(0) << " " << upperLimit(0) << "\n";
-		file << lowerLimit(1) << " " << upperLimit(1) << "\n";
-		file << lowerLimit(2) << " " << upperLimit(2) << "\n";
+		file << xBounds.first << " " << xBounds.second << "\n";
+		file << yBounds.first << " " << yBounds.second << "\n";
+		file << zBounds.first << " " << zBounds.second << "\n";
 		file << "ITEM: DIMENSION\n";
-		file << "3\n";
+		file << voxelGridDimension(nx,ny,nz) << "\n";
 		file << "ITEM: GRID SIZE nx ny nz\n";
 		file << nx << " " << ny << " " << nz << "\n";
 		file << "ITEM: GRID CELLS " << columns << "\n";
+	}
+
+	int voxelGridDimension(const int nx,
+	                       const int ny,
+	                       const int nz) const
+	{
+		int dimension= 0;
+		if (nx>1) ++dimension;
+		if (ny>1) ++dimension;
+		if (nz>1) ++dimension;
+		return std::max(1,dimension);
+	}
+
+	std::pair<double,double> voxelGridBounds(const int n,
+	                                        const double lowerLimit,
+	                                        const double upperLimit) const
+	{
+		if (n>1)
+		{
+			const double spacing= (upperLimit-lowerLimit)/static_cast<double>(n);
+			return {lowerLimit-0.5*spacing,upperLimit-0.5*spacing};
+		}
+		return {lowerLimit,lowerLimit};
 	}
 
 

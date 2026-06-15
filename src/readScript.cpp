@@ -256,6 +256,7 @@ int main()
                                 std::tie(),
                                 std::tie(hardyStress), project);
                 hardyStress.write(outPrefix);
+                hardyStress.write_voxel_grid(outPrefix,ngridx,ngridy,ngridz,lowerLimit,upperLimit);
             }
             catch (const std::runtime_error &e) {
                 std::cout << e.what() << std::endl;
