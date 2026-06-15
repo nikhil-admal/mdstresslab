@@ -129,6 +129,19 @@ Cauchy Density Outputs</h2>
 <div class="line">...</div>
 </div><!-- fragment --><p>Momentum and mass density are only produced for Cauchy stress grids. Piola stress has no kinetic contribution in MDStressLab, so no density fields are written for Piola stress objects.</p>
 <h2><a class="anchor" id="autotoc_md12"></a>
+Structured Voxel/Grid Output</h2>
+<p>Structured grids can also be written in a LAMMPS <code>dump grid</code>-style format using <code><a class="el" href="classStress.html#abc88ed895bb55df6427dcea3cc9c34b7" title="Write structured grid fields in LAMMPS dump-grid format.">Stress::write_voxel_grid()</a></code>. This format is intended for direct grid visualization in OVITO and avoids treating grid points as particles. The caller supplies the structured grid dimensions and orthogonal bounds used to generate the grid; MDStressLab verifies that <code>nx*ny*nz</code> matches the number of stress grid points.</p>
+<p>The script driver <code>MDStressLab++_in</code> writes these voxel-grid files for Cauchy <code>sphere</code> calculations in addition to the legacy <code>.stress</code>, <code>.momentum_density</code>, and <code>.mass_density</code> outputs.</p>
+<p>The <code>DIMENSION</code> field is inferred from the number of active grid directions: <code>nx x ny x 1</code> is written as a two-dimensional grid, while <code>nx x ny x nz</code> with all counts greater than one is written as a three-dimensional grid. The dump-grid bounds are shifted by half a grid spacing along active directions so that OVITO/LAMMPS cell centers coincide with the MDStressLab grid-point coordinates. In inactive directions, the lower and upper bounds collapse to the plane coordinate of the grid.</p>
+<p>The stress tensor is written to:</p>
+<div class="fragment"><div class="line">&lt;name&gt;.voxel_grid_stress</div>
+</div><!-- fragment --><p>with grid-cell columns:</p>
+<div class="fragment"><div class="line">SXX SYY SZZ SYZ SXZ SXY</div>
+</div><!-- fragment --><p>For Cauchy stress objects, the same call also writes:</p>
+<div class="fragment"><div class="line">&lt;name&gt;.voxel_grid_momentum_density</div>
+<div class="line">&lt;name&gt;.voxel_grid_mass_density</div>
+</div><!-- fragment --><p>with grid-cell columns <code>PX PY PZ</code> and <code>RHO</code>, respectively. The legacy <code>.stress</code>, <code>.momentum_density</code>, and <code>.mass_density</code> files are still written by <code><a class="el" href="classStress.html#a7147873b0ecb1699346f2d738f49ffd9" title="Write stress and, for Cauchy stress, density fields.">Stress::write()</a></code> for regression testing and simple post-processing.</p>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Related Scripts</h2>
 <ul>
 <li><a class="el" href="visualize_8py.html">visualize.py</a> — contour plot generator </li>

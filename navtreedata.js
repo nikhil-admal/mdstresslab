@@ -72,7 +72,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "BoxConfiguration_8cpp.html",
-"classStress.html#abd1c80099ad8deb57756cdbacfdb3c42"
+"classStress.html#abc88ed895bb55df6427dcea3cc9c34b7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

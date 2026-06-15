@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['scripts_0',['Related Scripts',['../visualization_intro.html#autotoc_md12',1,'']]],
+  ['scripts_0',['Related Scripts',['../visualization_intro.html#autotoc_md13',1,'']]],
   ['select_1',['Select',['../structSelect.html',1,'']]],
   ['select_3c_20false_2c_20t_2c_20u_20_3e_2',['Select&lt; false, T, U &gt;',['../structSelect_3_01false_00_01T_00_01U_01_4.html',1,'']]],
   ['setcounter_3',['setCounter',['../classGrid.html#a0c4d364b96c9bc1fa276441c8b90afc9',1,'Grid']]],
@@ -23,8 +23,9 @@ var searchData=
   ['stresses_20',['Hardy and Virial Stresses',['../theory.html#autotoc_md2',1,'']]],
   ['stresstuple_2eh_21',['StressTuple.h',['../StressTuple_8h.html',1,'']]],
   ['stresstype_22',['StressType',['../typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c',1,'typedef.h']]],
-  ['subconfiguration_23',['subconfiguration',['../classSubConfiguration.html',1,'SubConfiguration'],['../classSubConfiguration.html#a548c8eb2e6912ff363ebc19971cb257c',1,'SubConfiguration::SubConfiguration()']]],
-  ['subconfiguration_2ecpp_24',['SubConfiguration.cpp',['../SubConfiguration_8cpp.html',1,'']]],
-  ['subconfiguration_2eh_25',['SubConfiguration.h',['../SubConfiguration_8h.html',1,'']]],
-  ['supported_20input_20format_26',['Supported Input Format',['../visualization_intro.html#autotoc_md9',1,'']]]
+  ['structured_20voxel_20grid_20output_23',['Structured Voxel/Grid Output',['../visualization_intro.html#autotoc_md12',1,'']]],
+  ['subconfiguration_24',['subconfiguration',['../classSubConfiguration.html',1,'SubConfiguration'],['../classSubConfiguration.html#a548c8eb2e6912ff363ebc19971cb257c',1,'SubConfiguration::SubConfiguration()']]],
+  ['subconfiguration_2ecpp_25',['SubConfiguration.cpp',['../SubConfiguration_8cpp.html',1,'']]],
+  ['subconfiguration_2eh_26',['SubConfiguration.h',['../SubConfiguration_8h.html',1,'']]],
+  ['supported_20input_20format_27',['Supported Input Format',['../visualization_intro.html#autotoc_md9',1,'']]]
 ];

@@ -10,7 +10,7 @@ var searchData=
   ['cauchy_20stress_20tensor_7',['Hardy Cauchy Stress Tensor',['../theory.html#autotoc_md0',1,'']]],
   ['cite_20mdstresslab_8',['How to Cite MDStressLab++',['../index.html#cite',1,'']]],
   ['coefficients_9',['coefficients',['../classPolynomial.html#a2a896703294406aa645bd77188d735c4',1,'Polynomial']]],
-  ['command_20line_20usage_10',['Command-Line Usage',['../visualize_8py.html#autotoc_md14',1,'']]],
+  ['command_20line_20usage_10',['Command-Line Usage',['../visualize_8py.html#autotoc_md15',1,'']]],
   ['comparison_11',['comparison',['..//home/runner/work/mdstresslab/mdstresslab/include/MDStressLab++/MethodSphere.h#autotoc_md8',1,'Visual comparison'],['..//home/runner/work/mdstresslab/mdstresslab/include/MDStressLab++/calculateStress.h#autotoc_md7',1,'Visual comparison']]],
   ['component_5findex_12',['component_index',['../namespacevisualize.html#a19756b47566494400efd0870aca39035',1,'visualize']]],
   ['component_5fkey_13',['component_key',['../namespacevisualize.html#ac6edcff50c6302869148334cc36d76da',1,'visualize']]],

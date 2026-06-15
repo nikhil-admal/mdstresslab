@@ -5,6 +5,8 @@ var classStress =
     [ "~Stress", "classStress.html#ada74d50a69e99a43143558ddb7aebf6f", null ],
     [ "write", "classStress.html#a7147873b0ecb1699346f2d738f49ffd9", null ],
     [ "write", "classStress.html#abd1c80099ad8deb57756cdbacfdb3c42", null ],
+    [ "write_voxel_grid", "classStress.html#abc88ed895bb55df6427dcea3cc9c34b7", null ],
+    [ "write_voxel_grid", "classStress.html#adfcc25e7cf49a37e995fda0d6d974c96", null ],
     [ "field", "classStress.html#a1ab3e9545c4350082e5bcc7222610e35", null ],
     [ "massDensityField", "classStress.html#afea49e5a9390308a4c5c6a33a58e50c0", null ],
     [ "method", "classStress.html#ae7089a73f87fb0fe3f6615dcf35ccf2e", null ],

@@ -140,6 +140,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7147873b0ecb1699346f2d738f49ffd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd1c80099ad8deb57756cdbacfdb3c42" id="r_abd1c80099ad8deb57756cdbacfdb3c42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStress.html#abd1c80099ad8deb57756cdbacfdb3c42">write</a> (const std::string &amp;filename)</td></tr>
 <tr class="separator:abd1c80099ad8deb57756cdbacfdb3c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc88ed895bb55df6427dcea3cc9c34b7" id="r_abc88ed895bb55df6427dcea3cc9c34b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStress.html#abc88ed895bb55df6427dcea3cc9c34b7">write_voxel_grid</a> (const int nx, const int ny, const int nz, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;lowerLimit, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;upperLimit)</td></tr>
+<tr class="memdesc:abc88ed895bb55df6427dcea3cc9c34b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write structured grid fields in LAMMPS dump-grid format.  <br /></td></tr>
+<tr class="separator:abc88ed895bb55df6427dcea3cc9c34b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfcc25e7cf49a37e995fda0d6d974c96" id="r_adfcc25e7cf49a37e995fda0d6d974c96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStress.html#adfcc25e7cf49a37e995fda0d6d974c96">write_voxel_grid</a> (const std::string &amp;filename, const int nx, const int ny, const int nz, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;lowerLimit, const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;upperLimit)</td></tr>
+<tr class="separator:adfcc25e7cf49a37e995fda0d6d974c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada74d50a69e99a43143558ddb7aebf6f" id="r_ada74d50a69e99a43143558ddb7aebf6f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStress.html#ada74d50a69e99a43143558ddb7aebf6f">~Stress</a> ()</td></tr>
 <tr class="separator:ada74d50a69e99a43143558ddb7aebf6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -179,10 +184,10 @@ class Stress&lt; TMethod, stressType, TGrid &gt;</div><p>Three-dimensional stres
   </table>
   </dd>
 </dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#_a7">crack/main.cpp</a>, <a class="el" href="testIdealGas_8cpp-example.html#_a0">testIdealGas.cpp</a>, <a class="el" href="testLDADLJ_8cpp-example.html#_a6">testLDADLJ.cpp</a>, <a class="el" href="testLDADSWTriclinic_8cpp-example.html#_a2">testLDADSWTriclinic.cpp</a>, <a class="el" href="testLJ_8cpp-example.html#_a7">testLJ.cpp</a>, and <a class="el" href="testMls_8cpp-example.html#_a6">testMls.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#_a7">crack/main.cpp</a>, <a class="el" href="testIdealGas_8cpp-example.html#_a1">testIdealGas.cpp</a>, <a class="el" href="testLDADLJ_8cpp-example.html#_a6">testLDADLJ.cpp</a>, <a class="el" href="testLDADSWTriclinic_8cpp-example.html#_a2">testLDADSWTriclinic.cpp</a>, <a class="el" href="testLJ_8cpp-example.html#_a7">testLJ.cpp</a>, and <a class="el" href="testMls_8cpp-example.html#_a6">testMls.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00041">41</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00042">42</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a903ceb87685b3f32b403d927e75d4077" name="a903ceb87685b3f32b403d927e75d4077"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a903ceb87685b3f32b403d927e75d4077">&#9670;&#160;</a></span>Stress() <span class="overload">[1/2]</span></h2>
@@ -228,7 +233,7 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 
 <p>Constructs a <a class="el" href="classStress.html" title="Three-dimensional stress field on a grid.">Stress</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00092">92</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00093">93</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -270,7 +275,7 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 
 <p>Constructs a <a class="el" href="classStress.html" title="Three-dimensional stress field on a grid.">Stress</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00110">110</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00111">111</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -299,7 +304,7 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00203">203</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00283">283</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -335,11 +340,12 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 <li><code>[name].momentum_density</code>, with grid coordinates and \(\mathbf p(\mathbf x)\).</li>
 <li><code>[name].mass_density</code>, with grid coordinates and \(\rho(\mathbf x)\).</li>
 </ul>
-<p>The continuum velocity field is an internal intermediate and is not written. </p>
+<p>The continuum velocity field is an internal intermediate and is not written.</p>
+<p>Use <code><a class="el" href="classStress.html#abc88ed895bb55df6427dcea3cc9c34b7" title="Write structured grid fields in LAMMPS dump-grid format.">write_voxel_grid()</a></code> for optional structured-grid output in LAMMPS dump-grid format. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="crack_2main_8cpp-example.html#a11">crack/main.cpp</a>, <a class="el" href="testLDADLJ_8cpp-example.html#a10">testLDADLJ.cpp</a>, and <a class="el" href="testLJ_8cpp-example.html#a10">testLJ.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00142">142</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00146">146</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -369,7 +375,135 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00194">194</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00198">198</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+
+</div>
+</div>
+<a id="abc88ed895bb55df6427dcea3cc9c34b7" name="abc88ed895bb55df6427dcea3cc9c34b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc88ed895bb55df6427dcea3cc9c34b7">&#9670;&#160;</a></span>write_voxel_grid() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid  = typename std::conditional&lt;stressType==Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classStress.html">Stress</a>&lt; TMethod, stressType, TGrid &gt;::write_voxel_grid </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>nz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;&#160;</td>
+          <td class="paramname"><em>lowerLimit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;&#160;</td>
+          <td class="paramname"><em>upperLimit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write structured grid fields in LAMMPS dump-grid format. </p>
+<p>This output is intended for direct visualization of structured stress grids in OVITO. The caller must provide the grid dimensions and orthogonal bounding box used to create the grid. The grid dimensions are checked against <code>field.size()</code> before writing.</p>
+<p>The dump-grid <code>DIMENSION</code> is inferred from the number of grid counts greater than one. Bounds are shifted by half a grid spacing along active directions so that voxel cell centers coincide with the MDStressLab grid coordinates; inactive directions are written as a collapsed plane.</p>
+<p>The stress tensor is written to <code>[name].voxel_grid_stress</code> with component order <code>SXX SYY SZZ SYZ SXZ SXY</code>, matching LAMMPS/OVITO dump-grid conventions. For <code>Cauchy</code> stress objects, this function also writes <code>[name].voxel_grid_momentum_density</code> and <code>[name].voxel_grid_mass_density</code>.</p>
+<p>The values are written in the same order as <code>pgrid-&gt;coordinates</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00227">227</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+
+</div>
+</div>
+<a id="adfcc25e7cf49a37e995fda0d6d974c96" name="adfcc25e7cf49a37e995fda0d6d974c96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfcc25e7cf49a37e995fda0d6d974c96">&#9670;&#160;</a></span>write_voxel_grid() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0a2ffc3ef5b05caf8bf8c">StressType</a> stressType, typename TGrid  = typename std::conditional&lt;stressType==Piola,Grid&lt;Reference&gt;,Grid&lt;Current&gt;&gt;::type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classStress.html">Stress</a>&lt; TMethod, stressType, TGrid &gt;::write_voxel_grid </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>nz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;&#160;</td>
+          <td class="paramname"><em>lowerLimit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="typedef_8h.html#ab25a6f70a8d0160a3d6dc742284309a8">Vector3d</a> &amp;&#160;</td>
+          <td class="paramname"><em>upperLimit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00269">269</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -389,10 +523,10 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 </div><div class="memdoc">
 
 <p>A three-dimensional stress field. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testIdealGas_8cpp-example.html#a1">testIdealGas.cpp</a>, <a class="el" href="testLDADSWTriclinic_8cpp-example.html#a3">testLDADSWTriclinic.cpp</a>, and <a class="el" href="testMls_8cpp-example.html#a12">testMls.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testIdealGas_8cpp-example.html#a2">testIdealGas.cpp</a>, <a class="el" href="testLDADSWTriclinic_8cpp-example.html#a3">testLDADSWTriclinic.cpp</a>, and <a class="el" href="testMls_8cpp-example.html#a12">testMls.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00046">46</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00047">47</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -412,10 +546,10 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 
 <p>Cauchy-grid mass density \(\rho(\mathbf x)\). </p>
 <p>Computed as \(\sum_i m_i w(\mathbf x-\mathbf x_i)\) by <code><a class="el" href="calculateStress_8cpp.html#a4f2f2c0d11aef11d626618e89de0a2ea">calculateKineticStress()</a></code>. Empty for Piola stress objects. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testIdealGas_8cpp-example.html#a2">testIdealGas.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testIdealGas_8cpp-example.html#a3">testIdealGas.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00060">60</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00061">61</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -435,7 +569,7 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 
 <p>The method used to compute the stress field. The <a class="el" href="classMethod.html">Method</a> object provides details about the weighting function and its support (averaging domain) and includes the bond function to compute the stress field. </p>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00081">81</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00082">82</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -458,7 +592,7 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testIdealGas_8cpp-example.html#a5">testIdealGas.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00053">53</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00054">54</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -480,7 +614,7 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testIdealGas_8cpp-example.html#a7">testIdealGas.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00087">87</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00088">88</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -500,7 +634,7 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 
 <p>Pointer to the <a class="el" href="classGrid.html">Grid</a> on which the stress field is defined. </p>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00074">74</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00075">75</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
@@ -523,7 +657,7 @@ template&lt;typename TMethod , <a class="el" href="typedef_8h.html#abbd654dfd1a0
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="testIdealGas_8cpp-example.html#a6">testIdealGas.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00069">69</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Stress_8h_source.html#l00070">70</a> of file <a class="el" href="Stress_8h_source.html">Stress.h</a>.</p>
 
 </div>
 </div>
