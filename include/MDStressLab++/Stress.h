@@ -212,6 +212,11 @@ public:
 	 * orthogonal bounding box used to create the grid. The grid dimensions are
 	 * checked against `field.size()` before writing.
 	 *
+	 * The dump-grid `DIMENSION` is inferred from the number of grid counts
+	 * greater than one. Bounds are shifted by half a grid spacing along active
+	 * directions so that voxel cell centers coincide with the MDStressLab grid
+	 * coordinates; inactive directions are written as a collapsed plane.
+	 *
 	 * The stress tensor is written to `[name].voxel_grid_stress` with component
 	 * order `SXX SYY SZZ SYZ SXZ SXY`, matching LAMMPS/OVITO dump-grid
 	 * conventions. For `Cauchy` stress objects, this function also writes

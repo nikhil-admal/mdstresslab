@@ -36,7 +36,10 @@ relative to the local continuum velocity `p/rho`; Piola stress has no kinetic
 contribution.  Structured grids can also be written in LAMMPS dump-grid style
 with `Stress::write_voxel_grid()`, producing voxel-grid stress and, for Cauchy
 stress, voxel-grid momentum and mass density files for direct OVITO
-visualization.
+visualization.  The `MDStressLab++_in` script driver writes these voxel-grid
+files for Cauchy `sphere` calculations in addition to the legacy text outputs.
+Voxel dimensions are inferred from the active grid axes; for example, a
+`nx x ny x 1` grid is written as a two-dimensional voxel grid.
 
 Periodic configurations may use non-orthogonal simulation boxes.  MDStressLab
 creates periodic padding atoms as needed, but it does not fold the input atoms

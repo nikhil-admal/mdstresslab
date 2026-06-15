@@ -61,6 +61,18 @@
  * generate the grid; MDStressLab verifies that `nx*ny*nz` matches the number of
  * stress grid points.
  *
+ * The script driver `MDStressLab++_in` writes these voxel-grid files for Cauchy
+ * `sphere` calculations in addition to the legacy `.stress`,
+ * `.momentum_density`, and `.mass_density` outputs.
+ *
+ * The `DIMENSION` field is inferred from the number of active grid directions:
+ * `nx x ny x 1` is written as a two-dimensional grid, while `nx x ny x nz`
+ * with all counts greater than one is written as a three-dimensional grid.
+ * The dump-grid bounds are shifted by half a grid spacing along active
+ * directions so that OVITO/LAMMPS cell centers coincide with the MDStressLab
+ * grid-point coordinates.  In inactive directions, the lower and upper bounds
+ * collapse to the plane coordinate of the grid.
+ *
  * The stress tensor is written to:
  *
  * ```
