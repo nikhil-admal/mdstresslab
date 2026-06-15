@@ -11,6 +11,49 @@
 #include <tuple>
 
 namespace {
+void validateVoxelGridFile(const std::string& filename,
+                           const std::string& expectedGridCellsHeader,
+                           const int expectedNumberOfGridPoints)
+{
+    std::ifstream file(filename);
+    if (!file) MY_ERROR("ERROR: " + filename + " could not be opened for reading.");
+
+    std::string line;
+    bool foundGridSize= false;
+    bool foundGridCells= false;
+    int dataLineCount= 0;
+    while (std::getline(file,line))
+    {
+        if (line == "ITEM: GRID SIZE nx ny nz")
+        {
+            int nx,ny,nz;
+            if (!(file >> nx >> ny >> nz))
+                MY_ERROR("ERROR: Could not read voxel grid dimensions from " + filename);
+            file.ignore(32767,'\n');
+            if (nx*ny*nz != expectedNumberOfGridPoints)
+                MY_ERROR("ERROR: Voxel grid dimensions do not match expected grid size in " + filename);
+            foundGridSize= true;
+        }
+        else if (line == expectedGridCellsHeader)
+        {
+            foundGridCells= true;
+            break;
+        }
+    }
+
+    if (!foundGridSize)
+        MY_ERROR("ERROR: Missing voxel grid size header in " + filename);
+    if (!foundGridCells)
+        MY_ERROR("ERROR: Missing expected voxel grid cells header in " + filename);
+
+    while (std::getline(file,line))
+        if (!line.empty())
+            ++dataLineCount;
+
+    if (dataLineCount != expectedNumberOfGridPoints)
+        MY_ERROR("ERROR: Voxel grid data line count does not match grid size in " + filename);
+}
+
 template<typename TMethod>
 void validateIdealGasStress(const Stress<TMethod,Cauchy>& kineticStress,
                             const Matrix3d& expectedStress,
@@ -132,7 +175,12 @@ int main()
             amuAngstromSquaredPerPicosecondSquaredToEv*thermalKineticEnergyFactor/
             (3.0*body.numberOfParticles*boltzmannConstantEvPerK);
 
-    Grid<Current> grid(Vector3d(0.0,0.0,30.0),Vector3d(60.0,60.0,31.0),12,12);
+    const int nx= 12;
+    const int ny= 12;
+    const int nz= 1;
+    const Vector3d lowerLimit(0.0,0.0,30.0);
+    const Vector3d upperLimit(60.0,60.0,31.0);
+    Grid<Current> grid(lowerLimit,upperLimit,nx,ny,nz);
     MethodSphere virial(20.0,"virial");
     Matrix3d ldadVectors;
     ldadVectors << 20.0, 0.0, 0.0,
@@ -151,6 +199,38 @@ int main()
     kineticStressSphere.write();
     kineticStressLdadConstant.write();
     kineticStressLdadTrigonometric.write();
+    kineticStressSphere.write_voxel_grid(nx,ny,nz,lowerLimit,upperLimit);
+    kineticStressLdadConstant.write_voxel_grid(nx,ny,nz,lowerLimit,upperLimit);
+    kineticStressLdadTrigonometric.write_voxel_grid(nx,ny,nz,lowerLimit,upperLimit);
+
+    const int numberOfGridPoints= nx*ny*nz;
+    validateVoxelGridFile("idealGasKineticSphere.voxel_grid_stress",
+                          "ITEM: GRID CELLS SXX SYY SZZ SYZ SXZ SXY",
+                          numberOfGridPoints);
+    validateVoxelGridFile("idealGasKineticSphere.voxel_grid_momentum_density",
+                          "ITEM: GRID CELLS PX PY PZ",
+                          numberOfGridPoints);
+    validateVoxelGridFile("idealGasKineticSphere.voxel_grid_mass_density",
+                          "ITEM: GRID CELLS RHO",
+                          numberOfGridPoints);
+    validateVoxelGridFile("idealGasKineticLdadConstant.voxel_grid_stress",
+                          "ITEM: GRID CELLS SXX SYY SZZ SYZ SXZ SXY",
+                          numberOfGridPoints);
+    validateVoxelGridFile("idealGasKineticLdadConstant.voxel_grid_momentum_density",
+                          "ITEM: GRID CELLS PX PY PZ",
+                          numberOfGridPoints);
+    validateVoxelGridFile("idealGasKineticLdadConstant.voxel_grid_mass_density",
+                          "ITEM: GRID CELLS RHO",
+                          numberOfGridPoints);
+    validateVoxelGridFile("idealGasKineticLdadTrigonometric.voxel_grid_stress",
+                          "ITEM: GRID CELLS SXX SYY SZZ SYZ SXZ SXY",
+                          numberOfGridPoints);
+    validateVoxelGridFile("idealGasKineticLdadTrigonometric.voxel_grid_momentum_density",
+                          "ITEM: GRID CELLS PX PY PZ",
+                          numberOfGridPoints);
+    validateVoxelGridFile("idealGasKineticLdadTrigonometric.voxel_grid_mass_density",
+                          "ITEM: GRID CELLS RHO",
+                          numberOfGridPoints);
 
     const double pressure= -expectedStress.trace()/3.0;
     const double analyticalPressure=

@@ -138,6 +138,9 @@ public:
      *
      * The continuum velocity field is an internal intermediate and is not
      * written.
+     *
+     * Use `write_voxel_grid()` for optional structured-grid output in
+     * LAMMPS dump-grid format.
      */
 	void write()
 	{
@@ -200,9 +203,116 @@ public:
         write();
     }
 
+	/*!
+	 * \brief Write structured grid fields in LAMMPS dump-grid format.
+	 *
+	 * This output is intended for direct visualization of structured stress
+	 * grids in OVITO. The caller must provide the grid dimensions and
+	 * orthogonal bounding box used to create the grid. The grid dimensions are
+	 * checked against `field.size()` before writing.
+	 *
+	 * The stress tensor is written to `[name].voxel_grid_stress` with component
+	 * order `SXX SYY SZZ SYZ SXZ SXY`, matching LAMMPS/OVITO dump-grid
+	 * conventions. For `Cauchy` stress objects, this function also writes
+	 * `[name].voxel_grid_momentum_density` and `[name].voxel_grid_mass_density`.
+	 *
+	 * The values are written in the same order as `pgrid->coordinates`.
+	 */
+	void write_voxel_grid(const int nx,
+	                      const int ny,
+	                      const int nz,
+	                      const Vector3d& lowerLimit,
+	                      const Vector3d& upperLimit)
+	{
+        if (name.empty())
+            MY_ERROR("Stress object created without specifying a name. Use write_voxel_grid(filename,...) instead of write_voxel_grid(...)");
+		validateVoxelGridDimensions(nx,ny,nz);
+
+		std::ofstream stressFile(name+".voxel_grid_stress");
+		writeVoxelGridHeader(stressFile,nx,ny,nz,lowerLimit,upperLimit,"SXX SYY SZZ SYZ SXZ SXY");
+		for (const auto& stress : field)
+		{
+			stressFile << std::setw(25) << stress(0,0)
+			           << std::setw(25) << stress(1,1)
+			           << std::setw(25) << stress(2,2)
+			           << std::setw(25) << stress(1,2)
+			           << std::setw(25) << stress(0,2)
+			           << std::setw(25) << stress(0,1)
+			           << std::endl;
+		}
+
+		if constexpr (stressType==Cauchy)
+		{
+			std::ofstream momentumDensityFile(name+".voxel_grid_momentum_density");
+			writeVoxelGridHeader(momentumDensityFile,nx,ny,nz,lowerLimit,upperLimit,"PX PY PZ");
+			for (const auto& momentumDensity : momentumDensityField)
+			{
+				momentumDensityFile << std::setw(25) << momentumDensity(0)
+				                    << std::setw(25) << momentumDensity(1)
+				                    << std::setw(25) << momentumDensity(2)
+				                    << std::endl;
+			}
+
+			std::ofstream massDensityFile(name+".voxel_grid_mass_density");
+			writeVoxelGridHeader(massDensityFile,nx,ny,nz,lowerLimit,upperLimit,"RHO");
+			for (const auto& massDensity : massDensityField)
+				massDensityFile << std::setw(25) << massDensity << std::endl;
+		}
+	}
+
+	void write_voxel_grid(const std::string& filename,
+	                      const int nx,
+	                      const int ny,
+	                      const int nz,
+	                      const Vector3d& lowerLimit,
+	                      const Vector3d& upperLimit)
+	{
+        if (name.empty())
+            name= filename;
+        else
+            std::cout << "Stress object created with name " << name << ". Ignoring the filename: " << filename << "." << std::endl;
+        write_voxel_grid(nx,ny,nz,lowerLimit,upperLimit);
+	}
+
 	~Stress()
 	{
 		// TODO Auto-generated destructor stub
+	}
+
+private:
+	void validateVoxelGridDimensions(const int nx,
+	                                 const int ny,
+	                                 const int nz) const
+	{
+		if (nx<=0 || ny<=0 || nz<=0)
+			MY_ERROR("Voxel grid dimensions must be positive.");
+		const auto numberOfGridPoints= static_cast<std::size_t>(nx)*
+		                               static_cast<std::size_t>(ny)*
+		                               static_cast<std::size_t>(nz);
+		if (numberOfGridPoints != field.size())
+			MY_ERROR("Voxel grid dimensions do not match the number of stress grid points.");
+	}
+
+	void writeVoxelGridHeader(std::ofstream& file,
+	                          const int nx,
+	                          const int ny,
+	                          const int nz,
+	                          const Vector3d& lowerLimit,
+	                          const Vector3d& upperLimit,
+	                          const std::string& columns) const
+	{
+		file << std::fixed << std::setprecision(std::numeric_limits<double>::max_digits10);
+		file << "ITEM: TIMESTEP\n";
+		file << "0\n";
+		file << "ITEM: BOX BOUNDS pp pp pp\n";
+		file << lowerLimit(0) << " " << upperLimit(0) << "\n";
+		file << lowerLimit(1) << " " << upperLimit(1) << "\n";
+		file << lowerLimit(2) << " " << upperLimit(2) << "\n";
+		file << "ITEM: DIMENSION\n";
+		file << "3\n";
+		file << "ITEM: GRID SIZE nx ny nz\n";
+		file << nx << " " << ny << " " << nz << "\n";
+		file << "ITEM: GRID CELLS " << columns << "\n";
 	}
 
 

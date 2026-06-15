@@ -52,6 +52,38 @@
  * stress has no kinetic contribution in MDStressLab, so no density fields are
  * written for Piola stress objects.
  *
+ * ## Structured Voxel/Grid Output
+ *
+ * Structured grids can also be written in a LAMMPS `dump grid`-style format
+ * using `Stress::write_voxel_grid()`.  This format is intended for direct grid
+ * visualization in OVITO and avoids treating grid points as particles.  The
+ * caller supplies the structured grid dimensions and orthogonal bounds used to
+ * generate the grid; MDStressLab verifies that `nx*ny*nz` matches the number of
+ * stress grid points.
+ *
+ * The stress tensor is written to:
+ *
+ * ```
+ * <name>.voxel_grid_stress
+ * ```
+ *
+ * with grid-cell columns:
+ *
+ * ```
+ * SXX SYY SZZ SYZ SXZ SXY
+ * ```
+ *
+ * For Cauchy stress objects, the same call also writes:
+ *
+ * ```
+ * <name>.voxel_grid_momentum_density
+ * <name>.voxel_grid_mass_density
+ * ```
+ *
+ * with grid-cell columns `PX PY PZ` and `RHO`, respectively.  The legacy
+ * `.stress`, `.momentum_density`, and `.mass_density` files are still written
+ * by `Stress::write()` for regression testing and simple post-processing.
+ *
  * ## Related Scripts
  * - \ref visualize.py "visualize.py" — contour plot generator
  */

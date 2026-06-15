@@ -33,7 +33,10 @@ For Cauchy stress calculations, MDStressLab writes the stress tensor to
 `<name>.stress` and the associated continuum fields to `<name>.momentum_density`
 and `<name>.mass_density`.  The kinetic Cauchy stress uses atom velocities
 relative to the local continuum velocity `p/rho`; Piola stress has no kinetic
-contribution.
+contribution.  Structured grids can also be written in LAMMPS dump-grid style
+with `Stress::write_voxel_grid()`, producing voxel-grid stress and, for Cauchy
+stress, voxel-grid momentum and mass density files for direct OVITO
+visualization.
 
 Periodic configurations may use non-orthogonal simulation boxes.  MDStressLab
 creates periodic padding atoms as needed, but it does not fold the input atoms
